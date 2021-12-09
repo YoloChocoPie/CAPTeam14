@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace CAPTeam14.Models
@@ -8,6 +9,13 @@ namespace CAPTeam14.Models
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
+        public string UserName { get; set; }
+        public string maGV { get; set; }
+        public bool loaiGV { get; set; }
+        public string khoa { get; set; }
+        public string gioiTinh { get; set; }
+        public Nullable<int> role { get; set; }
+        public Nullable<int> sdt { get; set; }
     }
 
     public class ExternalLoginListViewModel
