@@ -59,11 +59,11 @@ namespace CAPTeam14
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "1041841167063-plh3o2th4kqniqi3gvkk8j0qqahmtneb.apps.googleusercontent.com",
+                ClientSecret = "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"
+            });
 
             app.UseVanLangAuthentication("https://fitlogin.vanlanguni.edu.vn/LoginManagement");
         }
