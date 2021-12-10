@@ -6,6 +6,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using CAPTeam14.Models;
+using Microsoft.Owin.Security.VanLang;
 
 namespace CAPTeam14
 {
@@ -63,6 +64,8 @@ namespace CAPTeam14
             //    ClientId = "",
             //    ClientSecret = ""
             //});
+
+            app.UseVanLangAuthentication("https://fitlogin.vanlanguni.edu.vn/LoginManagement");
         }
     }
 }
