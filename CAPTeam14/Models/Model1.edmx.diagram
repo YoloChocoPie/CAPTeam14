@@ -4,7 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b8c5609bd9c3431a905098a594bf6a31" Name="Diagram1" />
+      <Diagram DiagramId="b8c5609bd9c3431a905098a594bf6a31" Name="Diagram1" >
+        <EntityTypeShape EntityType="CapDemoModel.C__MigrationHistory" Width="1.5" PointX="5.75" PointY="6.75" />
+        <EntityTypeShape EntityType="CapDemoModel.AspNetRole" Width="1.5" PointX="0.75" PointY="2.75" />
+        <EntityTypeShape EntityType="CapDemoModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="1.375" />
+        <EntityTypeShape EntityType="CapDemoModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="4.125" />
+        <EntityTypeShape EntityType="CapDemoModel.AspNetUser" Width="1.5" PointX="3" PointY="1.125" />
+        <AssociationConnector Association="CapDemoModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="CapDemoModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="CapDemoModel.AspNetUserRoles" />
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

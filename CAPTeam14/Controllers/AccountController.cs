@@ -330,10 +330,11 @@ namespace CAPTeam14.Controllers
 
             // Sign in the user with this external login provider if the user already has a login
             var result = await SignInManager.ExternalSignInAsync(loginInfo, isPersistent: false);
+            ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToAction("Index", "Home");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -342,8 +343,8 @@ namespace CAPTeam14.Controllers
                 default:
                     // If the user does not have an account, then prompt the user to create an account
                     ViewBag.ReturnUrl = returnUrl;
-                    ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
+                   // Khi truong email thông tin chưa tồn tại , chuyển người dùng đến trang đăng ký, và lưu thông tin vào bảng AspNetUser
+                    return View("ExternalLoginConfirmation", new AspNetUser { Email = loginInfo.Email });
             }
         }
 
@@ -352,22 +353,29 @@ namespace CAPTeam14.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
+        public async Task<ActionResult> ExternalLoginConfirmation(AspNetUser model)
         {
             if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Index", "Manage");
+                return RedirectToAction("Index", "Home");
             }
 
             if (ModelState.IsValid)
             {
                 // Get the information about the user from the external login provider
                 var info = await AuthenticationManager.GetExternalLoginInfoAsync();
-                if (info == null)
-                {
-                    return View("ExternalLoginFailure");
-                }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+
+               //lưu thông tin vào database
+                var user = new ApplicationUser 
+                { UserName = model.UserName,
+                    Email = model.Email,
+                    maGV = model.maGV,
+                    loaiGV = model.loaiGV,
+                    khoa = model.khoa,
+                    gioiTinh = model.gioiTinh,
+                    role = model.role,
+                    sdt = model.sdt
+                };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
@@ -375,13 +383,14 @@ namespace CAPTeam14.Controllers
                     if (result.Succeeded)
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                        return RedirectToLocal(returnUrl);
+                        return RedirectToAction("Index", "Home");
+
                     }
                 }
                 AddErrors(result);
             }
-
-            ViewBag.ReturnUrl = returnUrl;
+             
+            
             return View(model);
         }
 
