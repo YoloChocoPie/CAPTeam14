@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using CAPTeam14.Models;
+using System.Text.RegularExpressions;
 
 namespace CAPTeam14.Controllers
 {
@@ -359,39 +360,184 @@ namespace CAPTeam14.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-
-            if (ModelState.IsValid)
+            xacThuc(model);
+            try
             {
-                // Get the information about the user from the external login provider
-                var info = await AuthenticationManager.GetExternalLoginInfoAsync();
-                //luu thong tin vo database
-                var user = new ApplicationUser 
-                { 
-                  UserName = model.Email, 
-                  Email = model.Email,
-                  maGV = model.maGV,
-                  loaiGV = model.loaiGV,
-                  khoa = model.khoa,
-                  gioiTinh = model.gioiTinh,
-                  role = model.role,
-                  sdt = model.sdt,
-                };
-                var result = await UserManager.CreateAsync(user);
-                if (result.Succeeded)
+                if (ModelState.IsValid)
                 {
-                    result = await UserManager.AddLoginAsync(user.Id, info.Login);
+                    // Get the information about the user from the external login provider
+                    var info = await AuthenticationManager.GetExternalLoginInfoAsync();
+                    //luu thong tin vo database
+                    var user = new ApplicationUser
+                    {
+                        UserName = model.Email,
+                        Email = model.Email,
+                        maGV = model.maGV,
+                        loaiGV = model.loaiGV,
+                        khoa = "Khoa công nghệ thông tin",
+                        gioiTinh = model.gioiTinh,
+                        role = model.role,
+                        sdt = model.sdt,
+                    };
+                    var result = await UserManager.CreateAsync(user);
                     if (result.Succeeded)
                     {
-                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                        return RedirectToAction("Index", "Home");
+                        result = await UserManager.AddLoginAsync(user.Id, info.Login);
+                        if (result.Succeeded)
+                        {
+                            await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                            return RedirectToAction("Index", "Home");
+                        }
                     }
+                    AddErrors(result);
                 }
-                AddErrors(result);
+                else
+                {
+                    string messages = string.Join("; ", ModelState.Values
+                                        .SelectMany(x => x.Errors)
+                                        .Select(x => x.ErrorMessage));
+                    ModelState.AddModelError("", messages);
+                }
             }
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "Vui lòng kiểm tra lại các trường thông tin");
+            }
+            
 
             
             return View(model);
         }
+        //Hàm kiểm tra kí tự đặc biệt
+        public static bool Kytudacbiet(string str)
+        {
+            //khai báo các ký tự đặc biệt
+            string kytudacbiet = @"%!@#$%^&*()?/><:'\|}]{[_~`+=-" + "\"";
+            //chuyển các ký tự đặc biệt sang dạng chuỗi
+            char[] chuoikytudacbiet = kytudacbiet.ToCharArray();
+            //kiểm tra trường thông tin người dugnf nhập vào có chứa ký tự đặc biệt hay không
+            int index = str.IndexOfAny(chuoikytudacbiet);
+            //index = -1 => không có ký tự đặc biệt
+            if (index == -1)
+                return false;
+            else
+                return true;
+        }
+        //Hàm kiểm tra định dạng email
+        public bool kiemtraEmail(string email)
+        {
+            //khai báo các regex
+            string pattern = @"^(?!\.)(""([^""\r\\]|\\[""\r\\])*""|" + @"([-a-z0-9!#$%&'*+/=?^_`{|}~]|(?<!\.)\.)*)(?<!\.)" + @"@[a-z0-9][\w\.-]*[a-z0-9]\.[a-z][a-z\.]*[a-z]$";
+            //xác định chuỗi được viết ra có phải là 1 email hay không
+            var regex = new Regex(pattern, RegexOptions.IgnoreCase);
+            return regex.IsMatch(email);
+        }
+
+        //Validate dữ liệu
+        private void xacThuc(AspNetUser acc)
+        {
+            //Testcase bỏ trống trường thông tin Username
+            if(acc.UserName == null)
+            {
+                ModelState.AddModelError("Username", "Vui lòng nhập họ tên!!!");
+            }
+            else
+            {
+                //Testcase nhập khoảng trắng
+                if(acc.UserName.Trim() == "")
+                {
+                    ModelState.AddModelError("Username", "Vui lòng nhập họ tên!!!");
+                }
+                else
+                {
+                    //Testcase nhập quá 30 ký tự
+                    if(acc.UserName.Length > 30)
+                    {
+                        ModelState.AddModelError("Username", "Họ Tên không được vượt quá 30 ký tự!!!");
+                    }
+                    if(acc.UserName.Length < 2)
+                    {
+                        ModelState.AddModelError("Username", "Họ tên không được nhỏ hơn 2 ký tự!!!");
+                    }
+                    else
+                    {
+                        //Testcase sử dụng ký tự đặc biệt
+                        if(Kytudacbiet(acc.UserName.Trim()) == true)
+                        {
+                            ModelState.AddModelError("Username", "Họ Tên không được chứa ký tự đặc biệt!!!");
+                        }
+                    }
+                }
+            }
+            //Testcase bỏ trống trường thông tin maGV
+            if (acc.maGV == null)
+            {
+                ModelState.AddModelError("maGV", "Vui lòng nhập mã giảng viên!!!");
+            }
+            else
+            {
+                //Testcase nhập khoảng trắng
+                if (acc.maGV.Trim() == "")
+                {
+                    ModelState.AddModelError("maGV", "Vui lòng nhập mã giảng viên!!!");
+                }
+                else
+                {
+                    //Testcase nhập quá 10 ký tự
+                    if (acc.maGV.Length > 10)
+                    {
+                        ModelState.AddModelError("maGV", "Mã giảng viên không được vượt quá 30 ký tự!!!");
+                    }
+                    if (acc.maGV.Length < 10)
+                    {
+                        ModelState.AddModelError("maGV", "Mã giảng viên không được nhỏ hơn 10 ký tự!!!");
+                    }
+                    else
+                    {
+                        //Testcase sử dụng ký tự đặc biệt
+                        if (Kytudacbiet(acc.maGV.Trim()) == true)
+                        {
+                            ModelState.AddModelError("maGV", "Mã giảng viên không được chứa ký tự đặc biệt!!!");
+                        }
+                    }
+                }
+            }
+            //Testcase bỏ trống trường thông tin maGV
+            if (acc.sdt == null)
+            {
+                ModelState.AddModelError("SDT", "Vui lòng nhập số điện thoại!!!");
+            }
+            else
+            {
+                //Testcase nhập khoảng trắng
+                if (acc.sdt.ToString().Trim() == "")
+                {
+                    ModelState.AddModelError("SDT", "Vui lòng nhập số điện thoại!!!");
+                }
+                else
+                {
+                    //Testcase nhập quá 10 ký tự
+                    if (acc.sdt.ToString().Length > 10)
+                    {
+                        ModelState.AddModelError("SDT", "Số điện thoại không được vượt quá 30 ký tự!!!");
+                    }
+                    if (acc.sdt.ToString().Length < 10)
+                    {
+                        ModelState.AddModelError("SDT", "Số điện thoại không được nhỏ hơn 10 ký tự!!!");
+                    }
+                    else
+                    {
+                        //Testcase sử dụng ký tự đặc biệt
+                        if (Kytudacbiet(acc.sdt.ToString().Trim()) == true)
+                        {
+                            ModelState.AddModelError("SDT", "Số điện thoại không được chứa ký tự đặc biệt!!!");
+                        }
+                    }
+                }
+            }
+        }
+
+
 
         //
         // POST: /Account/LogOff
