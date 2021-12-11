@@ -21,35 +21,31 @@
         @Html.HiddenFor(model =>model.Email);    
     </div> 
     <div class="form-group">
-        @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.UserName,"Họ tên", new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
             @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.maGV, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.maGV,"Mã giảng viên", new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.TextBoxFor(m => m.maGV, new { @class = "form-control" })
             @Html.ValidationMessageFor(m => m.maGV, "", new { @class = "text-danger" })
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.khoa, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.khoa, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.khoa, "", new { @class = "text-danger" })
-        </div>
+        @Html.HiddenFor(model => model.khoa)
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.sdt, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.sdt,"Số điện thoại", new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.TextBoxFor(m => m.sdt, new { @class = "form-control" })
             @Html.ValidationMessageFor(m => m.sdt, "", new { @class = "text-danger" })
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.gioiTinh, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.gioiTinh,"Giới tính", new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
           
             @Html.ValidationMessageFor(m => m.gioiTinh, "", new { @class = "text-danger" })
@@ -61,7 +57,7 @@
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.loaiGV, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.loaiGV,"Loại giảng viên", new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
 
             @Html.ValidationMessageFor(m => m.loaiGV, "", new { @class = "text-danger" })
@@ -73,8 +69,7 @@
         </div>
     </div>
     <div class="form-group">
-        @Html.HiddenFor(model => model.role);
-
+        @Html.HiddenFor(model => model.role)
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
