@@ -16,6 +16,7 @@ namespace CAPTeam14.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        CAPTeam14Entities model = new CAPTeam14Entities();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -321,7 +322,7 @@ namespace CAPTeam14.Controllers
         //
         // GET: /Account/ExternalLoginCallback
         [AllowAnonymous]
-        public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
+        public async Task<object> ExternalLoginCallback(string returnUrl)
         {
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
             if (loginInfo == null)
@@ -332,9 +333,11 @@ namespace CAPTeam14.Controllers
             // Sign in the user with this external login provider if the user already has a login
             var result = await SignInManager.ExternalSignInAsync(loginInfo, isPersistent: false);
             ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
+            var user = model.AspNetUsers.FirstOrDefault(u => u.Email.Equals(loginInfo.Email));
             switch (result)
             {
                 case SignInStatus.Success:
+                    Session["user-id"] = loginInfo.Email;
                     return RedirectToAction("Index", "Home");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -374,7 +377,7 @@ namespace CAPTeam14.Controllers
                         Email = model.Email,
                         maGV = model.maGV,
                         loaiGV = model.loaiGV,
-                        khoa = model.khoa,
+                        khoa = "Khoa CNTT",
                         gioiTinh = model.gioiTinh,
                         role = model.role,
                         sdt = model.sdt
@@ -533,7 +536,7 @@ namespace CAPTeam14.Controllers
                         ModelState.AddModelError("sdt", "Số điện thoại không vượt quá 10 kí tự");
                     }
                     //Nhập ít hơn 10 kí tự
-                    if (acc.sdt.ToString().Length < 10)
+                    if (acc.sdt.ToString().Length < 9)
                     {
                         ModelState.AddModelError("sdt", "Số điện thoại không được ít hơn 10 kí tự");
                     }
@@ -558,7 +561,8 @@ namespace CAPTeam14.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            Session["user-id"] = null;
+            return RedirectToAction("Login", "Account");
         }
 
         //
