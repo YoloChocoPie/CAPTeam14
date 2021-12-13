@@ -16,6 +16,7 @@ namespace CAPTeam14.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        CapDemoEntities model = new CapDemoEntities();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -332,9 +333,11 @@ namespace CAPTeam14.Controllers
             // Sign in the user with this external login provider if the user already has a login
             var result = await SignInManager.ExternalSignInAsync(loginInfo, isPersistent: false);
             ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
+            var user = model.AspNetUsers.FirstOrDefault(u => u.Email.Equals(loginInfo.Email));
             switch (result)
             {
                 case SignInStatus.Success:
+                    Session["user-id"] = loginInfo.Email;
                     return RedirectToAction("Index", "Home");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -449,8 +452,10 @@ namespace CAPTeam14.Controllers
         //Validate dữ liệu
         private void xacThuc(AspNetUser acc)
         {
+            var code = model.AspNetUsers.FirstOrDefault(d => d.maGV == acc.maGV); 
+
             //Test case bỏ trống họ tên
-            if(acc.UserName == null)
+            if (acc.UserName == null)
             {
                 ModelState.AddModelError("UserName", "Vui lòng nhập họ tên");
             }
@@ -469,10 +474,10 @@ namespace CAPTeam14.Controllers
                         ModelState.AddModelError("UserName", "Họ tên không vượt quá 30 kí tự");
                     }
                     //Test case nhập ít hơn 2 kí tự
-                    if (acc.UserName.Length < 2)
+                    /*if (acc.UserName.Length < 2)
                     {
                         ModelState.AddModelError("UserName", "Họ tên không được ít hơn 2 kí tự");
-                    }
+                    }*/
                     else
                     {
                         //Test case kiểm tra kí tự đặc biệt
@@ -504,10 +509,10 @@ namespace CAPTeam14.Controllers
                     {
                         ModelState.AddModelError("maGV", "Mã Giảng viên không vượt quá 10 kí tự");
                     }
-                    //Test case nhập ít hơn 2 kí tự
-                    if (acc.maGV.Length < 2)
+                    //Test case nhập ít hơn 10 kí tự
+                    if (acc.maGV.Length < 10)
                     {
-                        ModelState.AddModelError("maGV", "Mã Giảng viên không được ít hơn 2 kí tự");
+                        ModelState.AddModelError("maGV", "Mã Giảng viên không được ít hơn 10 kí tự");
                     }
                     else
                     {
@@ -518,6 +523,12 @@ namespace CAPTeam14.Controllers
 
                         }
                     }
+
+                    if (code != null)
+                    {
+                        ModelState.AddModelError("maGV", "Mã giảng viên đã tồn tại");
+                    }
+                    
                 }
             }
 
@@ -536,14 +547,14 @@ namespace CAPTeam14.Controllers
                 else
                 {
                     //Test case nhập quá 10 kí tự
-                    if (acc.sdt.ToString().Length > 10)
+                    if (acc.sdt.ToString().Length >= 11)
                     {
                         ModelState.AddModelError("sdt", "Số điện thoại không vượt quá 10 kí tự");
                     }
-                    //Test case nhập ít hơn 2 kí tự
-                    if (acc.sdt.ToString().Length < 2)
+                    //Test case nhập ít hơn 9 kí tự
+                    if (acc.sdt.ToString().Length <= 9)
                     {
-                        ModelState.AddModelError("sdt", "Số điện thoại không được ít hơn 2 kí tự");
+                        ModelState.AddModelError("sdt", "Số điện thoại không được ít hơn 9 kí tự");
                     }
                     else
                     {
@@ -565,7 +576,8 @@ namespace CAPTeam14.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            Session["user-id"] = null;
+            return RedirectToAction("Login", "Account");
         }
 
         //
