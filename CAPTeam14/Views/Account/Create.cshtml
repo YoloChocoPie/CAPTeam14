@@ -1,92 +1,134 @@
 ﻿@model CAPTeam14.Models.nguoiDung
-
 @{
-    ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = null;
+    ViewBag.Title = "Register";
 }
 
-<h2>Create</h2>
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>nguoiDung</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.HiddenFor(model => model.userID)
-        </div>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.maGV, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.maGV, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.maGV, "", new { @class = "text-danger" })
-            </div>
-        </div>
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="@Url.Content("~/Reg/Sstyle.css")">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.tenGV, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.tenGV, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.tenGV, "", new { @class = "text-danger" })
-            </div>
-        </div>
+<body>
+    <div class="background">
+        <div class="container">
+            <div class="title">Registration</div>
+            <div class="content">
+                <div class="form-group">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.loaiGV, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.loaiGV)
-                    @Html.ValidationMessageFor(model => model.loaiGV, "", new { @class = "text-danger" })
+
+                    @using (Html.BeginForm("ExternalLoginConfirmation", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        @*  <h4>Association Form</h4>*@
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @*<p class="text-info">
+                                You've successfully authenticated with <strong>@ViewBag.LoginProvider</strong>.
+                                Please enter a user name for this site below and click the Register button to finish
+                                logging in.
+                            </p>*@
+                        <div class="user-details">
+
+                            <div class="input-box">
+                                @Html.LabelFor(m => m.tenGV, "Họ tên", new { @class = "details" })
+                                <div class="input-box">
+                                    @Html.EditorFor(m => m.tenGV, new { htmlAttributes = new { placeholder = "Nhập họ và tên ", required = "required" } })
+                                    @Html.ValidationMessageFor(m => m.tenGV, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="input-box">
+                                @Html.LabelFor(m => m.maGV, "Mã giảng viên", new { @class = "details" })
+                                <div class="input-box">
+                                    @Html.EditorFor(m => m.maGV, new { htmlAttributes = new { placeholder = "Nhập mã giảng viên ", required = "required" } })
+                                    @Html.ValidationMessageFor(m => m.maGV, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="input-box">
+                                @Html.LabelFor(m => m.khoa, "Khoa", new { @class = "details" })
+                                <div class="input-box">
+                                    @Html.EditorFor(m => m.khoa, new { htmlAttributes = new { placeholder = " Khoa Công Nghệ Thông Tin ", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(m => m.khoa, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="input-box">
+                                @Html.LabelFor(m => m.sdt, "Số điện thoại", new { @class = "details" })
+                                <div class="input-box">
+                                    @Html.EditorFor(m => m.sdt, new { htmlAttributes = new { placeholder = "Nhập số điện thoại ", required = "required" } })
+                                    @Html.ValidationMessageFor(m => m.sdt, "", new { @class = "text-danger", require = "require" })
+                                </div>
+                            </div>
+                            <div class="input-box">
+                                @Html.LabelFor(m => m.gioiTinh, "Giới tính", new { @class = "details" })
+                                <div class="input-box">
+
+                                    @Html.ValidationMessageFor(m => m.gioiTinh, "", new { @class = "text-danger" })
+                                    <select class="custom-select" name="gioiTinh" id="gioiTinh">
+                                        <option value="True" selected>Nam</option>
+                                        <option value="False">Nữ</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="input-box">
+                                @Html.LabelFor(m => m.loaiGV, "Loại giảng viên", new { @class = "details" })
+                                <div class="input-box">
+
+                                    @Html.ValidationMessageFor(m => m.loaiGV, "", new { @class = "text-danger" })
+
+                                    <select class="custom-select" name="loaiGV" id="loaiGV">
+                                        <option value="True" selected>Cơ hữu</option>
+                                        <option value="False">Thỉnh Giảng</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="gender-details">
+                            @Html.HiddenFor(model => model.role)
+                        </div>
+                        <div class="gender-details">
+                            @Html.HiddenFor(model => model.userID)
+                        </div>
+
+                        <div class="button">
+
+                            <input type="submit" value="Register" />
+
+                        </div>
+                    }
                 </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.khoa, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.khoa, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.khoa, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.gioiTinh, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.gioiTinh)
-                    @Html.ValidationMessageFor(model => model.gioiTinh, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.role, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.role, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.role, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.sdt, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.sdt, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.sdt, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
     </div>
+
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+
+
+
+
+
