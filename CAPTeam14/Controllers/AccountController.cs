@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using CAPTeam14.Models;
+using System.Text.RegularExpressions;
 
 namespace CAPTeam14.Controllers
 {
@@ -17,6 +18,7 @@ namespace CAPTeam14.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        CapTeam14Entities model = new CapTeam14Entities();
 
         public AccountController()
         {
@@ -330,10 +332,12 @@ namespace CAPTeam14.Controllers
 
             // Sign in the user with this external login provider if the user already has a login
             var result = await SignInManager.ExternalSignInAsync(loginInfo, isPersistent: false);
+            ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
+            var user = model.AspNetUsers.FirstOrDefault(u => u.Email.Equals(loginInfo.Email));
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                  
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -342,8 +346,8 @@ namespace CAPTeam14.Controllers
                 default:
                     // If the user does not have an account, then prompt the user to create an account
                     ViewBag.ReturnUrl = returnUrl;
-                    ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
+                    // Khi trường thông tin email chưa tồn tại, chuyển người dùng đến trang đăng kí, và lưu thông tin vào trong bảng AspNetUser
+                    return View("ExternalLoginConfirmation", new AspNetUser { Email = loginInfo.Email });
             }
         }
 
@@ -352,22 +356,25 @@ namespace CAPTeam14.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
+        public async Task<ActionResult> ExternalLoginConfirmation(AspNetUser model)
         {
             if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Index", "Manage");
+                return RedirectToAction("Index", "Home");
             }
 
             if (ModelState.IsValid)
             {
                 // Get the information about the user from the external login provider
                 var info = await AuthenticationManager.GetExternalLoginInfoAsync();
-                if (info == null)
+                // Lưu thông tin vô database
+                var user = new ApplicationUser
                 {
-                    return View("ExternalLoginFailure");
-                }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                    UserName = model.Email,
+                    Email = model.Email,
+
+                };
+
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
@@ -375,16 +382,212 @@ namespace CAPTeam14.Controllers
                     if (result.Succeeded)
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                        return RedirectToLocal(returnUrl);
+                        
+                        
+                        return RedirectToAction("Create");
                     }
                 }
                 AddErrors(result);
+               
             }
 
-            ViewBag.ReturnUrl = returnUrl;
+
+
+
             return View(model);
         }
+        //Đăng kí
+        [HttpGet]
+        public ActionResult Create() 
+        {
+            return View();
+        }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create( nguoiDung acc)
+        {
+            string checkID = User.Identity.GetUserId();
+
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var taikhoan = new nguoiDung();
+                    taikhoan.userID = checkID;
+                    taikhoan.tenGV = acc.tenGV;
+                    taikhoan.maGV = acc.maGV;
+                    taikhoan.loaiGV = acc.loaiGV;
+                    taikhoan.khoa = "Khoa Công Nghệ Thông Tin";
+                    taikhoan.gioiTinh = acc.gioiTinh;
+                    taikhoan.role = acc.role;
+                    taikhoan.sdt = acc.sdt;
+
+                    model.nguoiDungs.Add(taikhoan);
+                    model.SaveChanges();
+                }
+
+
+                else
+                {
+                    string messages = string.Join("; ", ModelState.Values
+                                        .SelectMany(x => x.Errors)
+                                        .Select(x => x.ErrorMessage));
+                    ModelState.AddModelError("", messages);
+                }
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "Không thể thực hiện hành động này, vui lòng kiểm tra lại các trường thông tin");
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        //Hàm kiểm tra ký tự đặc biệt
+        public static bool Kytudacbiet(string str)
+        {
+            //khai báo các ký tự đặc biệt
+            string kytudacbiet = @"%!@#$%^&*()?/><:'\|}]{[_~`+=-" + "\"";
+            //chuyển các ký tự đặc biệt sang dạng chuỗi
+            char[] chuoikytudacbiet = kytudacbiet.ToCharArray();
+            //kiểm tra trường thông tin người dùng nhập vào có chứa ký tự đặc biệt hay không
+            int index = str.IndexOfAny(chuoikytudacbiet);
+            // nếu index == -1 thì trả về false => không có ký tự đặc biệt
+            if (index == -1)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        //Hàm kiểm tra định dạng Email
+        public bool kiemtraEmail(string email)
+        {
+            // khai báo các regex
+            // abc@gmail.com
+            string pattern = @"^(?!\.)(""([^""\r\\]|\\[""\r\\])*""|" + @"([-a-z0-9!#$%&'*+/=?^_`{|}~]|(?<!\.)\.)*)(?<!\.)" + @"@[a-z0-9][\w\.-]*[a-z0-9]\.[a-z][a-z\.]*[a-z]$";
+            // đưa các regex để chuyển đổi và bỏ qua ký tự viết in hoa hay viết thường
+            var regex = new Regex(pattern, RegexOptions.IgnoreCase);
+            return regex.IsMatch(email);
+        }
+
+        //Validate dữ liệu
+        private void xacThuc(nguoiDung acc)
+        {
+            var code = model.nguoiDungs.FirstOrDefault(d => d.maGV == acc.maGV);
+            //Test case bỏ trống họ tên
+            if (acc.tenGV == null)
+            {
+                ModelState.AddModelError("UserName", "Vui lòng nhập họ tên");
+            }
+            else
+            {
+                // Test case nhập khoảng trắng
+                if (acc.tenGV.Trim() == "")
+                {
+                    ModelState.AddModelError("UserName", "Không được nhập khoảng trắng");
+                }
+                else
+                {
+                    //Test Case nhập quá 30 kí tự
+                    if (acc.tenGV.Length > 30)
+                    {
+                        ModelState.AddModelError("UserName", "Họ tên không vượt quá 30 kí tự");
+                    }
+
+                    else
+                    {
+                        //Test case kiểm tra kí tự đặc biệt
+                        if (Kytudacbiet(acc.tenGV.Trim()) == true)
+                        {
+                            ModelState.AddModelError("UserName", "Họ tên không được có ký tự đặc biệt");
+                        }
+                    }
+
+                }
+            }
+
+
+            //
+            //Test case bỏ trống mã giảng viên
+            if (acc.maGV == null)
+            {
+                ModelState.AddModelError("maGV", "Vui lòng nhập mã giảng viên");
+            }
+            else
+            {
+                // Test case nhập khoảng trắng
+                if (acc.maGV.Trim() == "")
+                {
+                    ModelState.AddModelError("maGV", "Không được nhập khoảng trắng");
+                }
+                else
+                {
+                    //Test Case nhập quá 10 kí tự
+                    if (acc.maGV.Length > 10)
+                    {
+                        ModelState.AddModelError("maGV", "Mã Giảng viên không vượt quá 10 kí tự");
+                    }
+                    //Test case nhập ít hơn 10 kí tự
+                    if (acc.maGV.Length < 10)
+                    {
+                        ModelState.AddModelError("maGV", "Mã Giảng viên không được ít hơn 10 kí tự");
+                    }
+                    else
+                    {
+                        //Test case kiểm tra kí tự đặc biệt
+                        if (Kytudacbiet(acc.maGV.Trim()) == true)
+                        {
+                            ModelState.AddModelError("maGV", "Mã Giảng viên không được có ký tự đặc biệt");
+                        }
+                    }
+                    if (code != null)
+                    {
+                        ModelState.AddModelError("maGV", "Mã giảng viên đã tồn tại");
+                    }
+
+                }
+            }
+
+            ////
+            //Test case bỏ trống sdt
+            if (acc.sdt == null)
+            {
+                ModelState.AddModelError("sdt", "Vui lòng nhập số điện thoại");
+            }
+            else
+            {
+                // Test case nhập khoảng trắng
+                if (acc.sdt.ToString().Trim() == "")
+                {
+                    ModelState.AddModelError("sdt", "Không được nhập khoảng trắng");
+                }
+                else
+                {
+                    //Test Case nhập quá 10 kí tự
+                    if (acc.sdt.ToString().Length > 10)
+                    {
+                        ModelState.AddModelError("sdt", "Số điện thoại không vượt quá 10 kí tự");
+                    }
+                    //Test case nhập ít hơn 09 kí tự
+                    if (acc.sdt.ToString().Length <= 9)
+                    {
+                        ModelState.AddModelError("sdt", "Số điện thoại không được ít hơn 10 kí tự");
+                    }
+                    else
+                    {
+                        //Test case kiểm tra kí tự đặc biệt
+                        if (Kytudacbiet(acc.sdt.ToString().Trim()) == true)
+                        {
+                            ModelState.AddModelError("sdt", "Số điện thoại không được có ký tự đặc biệt");
+                        }
+                    }
+                }
+            }
+        }
         //
         // POST: /Account/LogOff
         [HttpPost]

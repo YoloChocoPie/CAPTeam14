@@ -15,7 +15,7 @@ namespace CAPTeam14.Models
     public partial class nguoiDung
     {
         public int ID { get; set; }
-        public string email_ID { get; set; }
+        public string userID { get; set; }
         public string maGV { get; set; }
         public string tenGV { get; set; }
         public Nullable<bool> loaiGV { get; set; }
