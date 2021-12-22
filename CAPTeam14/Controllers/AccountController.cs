@@ -337,11 +337,10 @@ namespace CAPTeam14.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                  
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = false });
+                    Session["user-id"] = User.Identity.GetUserId();
+                    return RedirectToAction("Index", "Home");
+              
+               
                 case SignInStatus.Failure:
                 default:
                     // If the user does not have an account, then prompt the user to create an account
@@ -408,7 +407,7 @@ namespace CAPTeam14.Controllers
         public ActionResult Create( nguoiDung acc)
         {
             string checkID = User.Identity.GetUserId();
-
+            xacThuc(acc);
             try
             {
                 if (ModelState.IsValid)
@@ -425,9 +424,9 @@ namespace CAPTeam14.Controllers
 
                     model.nguoiDungs.Add(taikhoan);
                     model.SaveChanges();
+
+                    return RedirectToAction("Index", "Home");
                 }
-
-
                 else
                 {
                     string messages = string.Join("; ", ModelState.Values
@@ -440,7 +439,8 @@ namespace CAPTeam14.Controllers
             {
                 ModelState.AddModelError("", "Không thể thực hiện hành động này, vui lòng kiểm tra lại các trường thông tin");
             }
-            return RedirectToAction("Index", "Home");
+            return View(acc);
+            
         }
 
         //Hàm kiểm tra ký tự đặc biệt
@@ -481,21 +481,21 @@ namespace CAPTeam14.Controllers
             //Test case bỏ trống họ tên
             if (acc.tenGV == null)
             {
-                ModelState.AddModelError("UserName", "Vui lòng nhập họ tên");
+                ModelState.AddModelError("tenGV", "Vui lòng nhập họ tên");
             }
             else
             {
                 // Test case nhập khoảng trắng
                 if (acc.tenGV.Trim() == "")
                 {
-                    ModelState.AddModelError("UserName", "Không được nhập khoảng trắng");
+                    ModelState.AddModelError("tenGV", "Không được nhập khoảng trắng");
                 }
                 else
                 {
                     //Test Case nhập quá 30 kí tự
                     if (acc.tenGV.Length > 30)
                     {
-                        ModelState.AddModelError("UserName", "Họ tên không vượt quá 30 kí tự");
+                        ModelState.AddModelError("tenGV", "Họ tên không vượt quá 30 kí tự");
                     }
 
                     else
@@ -503,7 +503,7 @@ namespace CAPTeam14.Controllers
                         //Test case kiểm tra kí tự đặc biệt
                         if (Kytudacbiet(acc.tenGV.Trim()) == true)
                         {
-                            ModelState.AddModelError("UserName", "Họ tên không được có ký tự đặc biệt");
+                            ModelState.AddModelError("tenGV", "Họ tên không được có ký tự đặc biệt");
                         }
                     }
 
@@ -573,7 +573,7 @@ namespace CAPTeam14.Controllers
                         ModelState.AddModelError("sdt", "Số điện thoại không vượt quá 10 kí tự");
                     }
                     //Test case nhập ít hơn 09 kí tự
-                    if (acc.sdt.ToString().Length <= 9)
+                    if (acc.sdt.ToString().Length < 9)
                     {
                         ModelState.AddModelError("sdt", "Số điện thoại không được ít hơn 10 kí tự");
                     }
@@ -595,7 +595,8 @@ namespace CAPTeam14.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            Session["user-id"] = null;
+            return RedirectToAction("Login", "Account");
         }
 
         //

@@ -19,7 +19,7 @@
 <body>
     <div class="background">
         <div class="container">
-            <div class="title">Registration</div>
+            <div class="title">Xác thực</div>
             <div class="content">
                 <div class="form-group">
                     <div class="user-details">
@@ -27,15 +27,15 @@
                         {
                             @Html.AntiForgeryToken()
 
-                            <h4>Association Form</h4>
+                         
                             <hr />
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                            <h2>@ViewBag.Title.</h2>
-                            <h3>Associate your @ViewBag.LoginProvider account.</h3>
-
+                          
+                            <h4 class="xacnhan">Vui lòng xác nhận tài khoản @ViewBag.LoginProvider của bạn.</h4>
+                            <br/>
                             <div class="input-box">
-                                @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                                @Html.LabelFor(m => m.Email, new { @class = "details" })
                                 <div class="input-box">
                                     @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @readonly ="readonly"} })
                                     @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
@@ -43,7 +43,7 @@
                             </div>
                             <div class="button">
 
-                                <input type="submit" value="Register" />
+                                <input type="submit" value="Tiếp tục" />
 
                             </div>
                         }
