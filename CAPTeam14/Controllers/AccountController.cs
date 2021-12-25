@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using CAPTeam14.Models;
 using System.Text.RegularExpressions;
+using CAPTeam14.Middleware;
 
 namespace CAPTeam14.Controllers
 {
@@ -322,7 +323,7 @@ namespace CAPTeam14.Controllers
         //
         // GET: /Account/ExternalLoginCallback
         [AllowAnonymous]
-        public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
+        public async Task<ActionResult> ExternalLoginCallback(string returnUrl, string email)
         {
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
             if (loginInfo == null)
@@ -334,11 +335,25 @@ namespace CAPTeam14.Controllers
             var result = await SignInManager.ExternalSignInAsync(loginInfo, isPersistent: false);
             ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
             var user = model.AspNetUsers.FirstOrDefault(u => u.Email.Equals(loginInfo.Email));
+            var giangVien = model.nguoiDungs.FirstOrDefault(u => u.AspNetUser.Email.Equals(loginInfo.Email));
             switch (result)
             {
                 case SignInStatus.Success:
-                    Session["user-id"] = User.Identity.GetUserId();
-                    return RedirectToAction("Index", "Home");
+                    Session["user-id"] = User.Identity.GetUserId();                   
+                    Session["hoten"] = giangVien.tenGV;
+                    Session["role"] = giangVien.role;
+                    if ((Session["role"] == null)) 
+                    {
+                        ModelState.AddModelError("kichhoat", "Tài khoản của bạn chưa được kích hoạt !");
+                        return View("Login");
+                    }
+                    else
+
+                    {
+                        TempData["dangnhap"] = 1;
+                        return RedirectToAction("Index", "Home");
+                    }
+                        
               
                
                 case SignInStatus.Failure:
@@ -382,7 +397,7 @@ namespace CAPTeam14.Controllers
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                         
-                        
+                        // Nếu lưu thành công, thì chuyển người dùng tới Action Create - Tạo tài khoản
                         return RedirectToAction("Create");
                     }
                 }
@@ -406,6 +421,7 @@ namespace CAPTeam14.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create( nguoiDung acc)
         {
+            // khởi tạo hàm string lấy ID của người dùng hiện tại
             string checkID = User.Identity.GetUserId();
             xacThuc(acc);
             try
@@ -442,6 +458,8 @@ namespace CAPTeam14.Controllers
             return View(acc);
             
         }
+
+        
 
         //Hàm kiểm tra ký tự đặc biệt
         public static bool Kytudacbiet(string str)
@@ -596,6 +614,8 @@ namespace CAPTeam14.Controllers
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             Session["user-id"] = null;
+            Request.Cookies.Clear();
+            Session.RemoveAll();        
             return RedirectToAction("Login", "Account");
         }
 

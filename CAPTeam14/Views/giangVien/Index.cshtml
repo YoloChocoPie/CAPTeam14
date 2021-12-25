@@ -1,0 +1,359 @@
+﻿@model IEnumerable<CAPTeam14.Models.nguoiDung>
+
+@{
+    ViewBag.Title = "phanQuyen";
+    Layout = "~/Views/Shared/_LayoutTemplate.cshtml";
+}
+
+
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>DataTables</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">DataTables</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">DataTable with default features</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Mã Giảng Viên
+                                        </th>
+                                        <th>
+                                            Tên Giảng Viên
+                                        </th>
+                                        <th>
+                                            Email
+                                        </th>
+                                        <th>
+                                            Vai Trò
+                                        </th>
+
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                    <tr>
+
+                                        @if (item.role == 0)
+                                        {
+                                            <td style="color:red">
+                                                @Html.DisplayFor(modelItem => item.maGV)
+                                            </td>
+                                            <td style="color:red">
+
+                                                @Html.DisplayFor(modelItem => item.tenGV)
+                                            </td>
+
+                                            <td style="color:red">
+                                                @Html.DisplayFor(modelItem => item.AspNetUser.Email)
+                                            </td>
+
+                                            if (item.role == 0)
+                                            {
+                                                <td style="color:red">
+                                                    Chưa Kích Hoạt
+                                                </td>
+                                            }
+                                            else if (item.role == 1)
+                                            {
+                                                <td style="color:red">
+                                                    Admin
+                                                </td>
+                                            }
+                                            else if (item.role == 2)
+                                            {
+                                                <td style="color:red">
+                                                    Ban chủ nhiệm khoa
+                                                </td>
+                                            }
+                                            else if (item.role == 3)
+                                            {
+                                                <td style="color:red">
+                                                    Bộ môn
+                                                </td>
+                                            }
+                                            else if (item.role == 4)
+                                            {
+                                                <td style="color:red">
+                                                    Giảng viên
+                                                </td>
+                                            }
+
+
+                                        }
+                                        else
+                                        {
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.maGV)
+                                            </td>
+                                            <td>
+
+                                                @Html.DisplayFor(modelItem => item.tenGV)
+                                            </td>
+
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.AspNetUser.Email)
+                                            </td>
+                                            if (item.role == 0)
+                                            {
+                                                <td>
+                                                    Chưa Kích Hoạt
+                                                </td>
+                                            }
+                                            else if (item.role == 1)
+                                            {
+                                                <td>
+                                                    Admin
+                                                </td>
+                                            }
+                                            else if (item.role == 2)
+                                            {
+                                                <td>
+                                                    Ban chủ nhiệm khoa
+                                                </td>
+                                            }
+                                            else if (item.role == 3)
+                                            {
+                                                <td>
+                                                    Bộ môn
+                                                </td>
+                                            }
+                                            else if (item.role == 4)
+                                            {
+                                                <td>
+                                                    Giảng viên
+                                                </td>
+                                            }
+                                        }
+
+                                        <td>
+
+
+                                            <a class="btn btn-file detailBtn btn btn-danger" title="Xem chi tiết" data-model-id="@Url.Action("Edit", "giangVien", new { id = item.ID })" data-id="@Url.Action("Details", "giangVien", new { id = item.ID })"><i class="fas fa-eye"></i></a>
+
+                                        </td>
+                                    </tr>
+                                    }
+
+                                </tbody>
+                                @*<tfoot>
+                                        <tr>
+                                            <th>Rendering engine</th>
+                                            <th>Browser</th>
+                                            <th>Platform(s)</th>
+                                            <th>Engine version</th>
+                                            <th>CSS grade</th>
+                                        </tr>
+                                    </tfoot>*@
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+@if (TempData["phanquyen"] != null)
+{
+    <script type="text/javascript">
+        $(function () {
+            Swal.fire({
+                title: 'Thông báo',
+                text: 'Bạn đã phân quyền tài khoản thành công !!!',
+                icon: 'success',
+                showConfirmButton: true,
+                timer: 1500,
+            });
+        });
+    </script>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            
+            $('.deleteBtn').click(function (e) {
+                e.preventDefault();
+                debugger;
+                var button = $(this);
+                var url = $(this).data("model-id");
+                $.confirm({
+                    title: 'Thông báo!',
+                    content: 'Bạn có muốn xóa chuyên ngành này không ???',
+                    buttons: {
+                        confirm: {
+                            text: 'Có',
+                            btnClass: 'btn-green',
+                            action: function () {
+                                $.ajax({
+                                    url: url,
+                                    type: "POST",
+                                    contentType: "application/json;charset=UTF-8",
+                                    dataType: "json",
+                                    success: function (r) {
+                                        if (r.success) {
+                                            button.parents("tr").remove();
+                                            window.location.replace("/Admin/Specialized");
+                                        }
+                                        else {
+                                            toastr.warning('Không thể xóa data bị ràng buộc !!!');
+                                        }
+                                    },
+                                    error: function () {
+                                        $.alert("Lỗi !!!");
+                                    }
+                                });
+                            }
+                        },
+                        cancel: {
+                            text: 'Không',
+                            btnClass: 'btn-red',
+                            action: function () {
+                                $.alert('Bạn đã hủy thao tác !!!');
+                            }
+                        },
+                    }
+                });
+            });
+            $('.detailBtn').click(function () {
+                var button = $(this);
+                var s_id = button.data("id");
+                var url = button.data("model-id");
+                $.ajax({
+                    url: s_id,
+                    typr: "GET",
+                    contentType: "application/json;charset=UTF-8",
+                    dataType: "json",
+                    success: function (result) {
+                        $.confirm({
+                            columnClass: 'col-md-5',
+                            title: '<div class="text-center container"><p>Thông tin của ' + result.a + '</p></div>',
+                            content: '' +
+                                '<form action="" class="formName container">' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Họ Tên</label>' +
+                                '<input type="text" class="form-control" value="' + result.a + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Mã Giảng Viên</label>' +
+                                '<input type="text" class="form-control" value="' + result.b + '" readonly />' +
+                               
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Loại Giảng Viên</label>' +
+                                '<input type="text" class="form-control" value="' + result.c + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Vai trò</label>' +
+                                '<input type="text" class="form-control" value="' + result.d + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Khoa</label>' +
+                                '<input type="text" class="form-control" value="' + result.e + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Số điện thoại</label>' +
+                                '<input type="text" class="form-control" value="' + result.f + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Giới Tính</label>' +
+                                '<input type="text" class="form-control" value="' + result.g + '" readonly />' +
+                              
+                               
+                                 
+                                
+                                '</form>',
+                            buttons: {
+                                confirm: {
+                                    text: 'Phân Quyền',
+                                    btnClass: 'btn-green',
+                                    action: function () {
+                                        window.location.assign(url);
+                                    }
+                                },
+                                cancel: {
+                                    text: 'Thoát',
+                                    btnClass: 'btn-red',
+                                    action: function () { }
+                                },
+                            },
+                        });
+                    },
+                    error: function (errormessage) {
+                        $.alert(errormessage.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+
+}

@@ -23,8 +23,12 @@
 
                         @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
                     </section>
+
                 </div>
+                </br>
+                @Html.ValidationMessage("kichhoat", new { @class = "text-danger" })
             </div>
+       
         </div>
     </div>
     <script type="text/javascript" src="@Url.Content("~/Login/vanilla-tilt.js")"></script>
