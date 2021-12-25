@@ -62,7 +62,7 @@
                                     {
                                         <tr>
 
-                                            @if (item.role == 0)
+                                            @if (item.role == null)
                                             {
                                                 <td style="color:red">
                                                     @Html.DisplayFor(modelItem => item.maGV)
@@ -76,7 +76,7 @@
                                                     @Html.DisplayFor(modelItem => item.AspNetUser.Email)
                                                 </td>
 
-                                                if (item.role == 0)
+                                                if (item.role == null)
                                                 {
                                                     <td style="color:red">
                                                         Chưa Kích Hoạt
@@ -122,7 +122,7 @@
                                                 <td>
                                                     @Html.DisplayFor(modelItem => item.AspNetUser.Email)
                                                 </td>
-                                                if (item.role == 0)
+                                                if (item.role == null)
                                                 {
                                                     <td>
                                                         Chưa Kích Hoạt
@@ -153,7 +153,7 @@
                                                     </td>
                                                 }
                                             }
-
+                                         
                                             <td>
 
 
