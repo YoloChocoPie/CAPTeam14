@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CapTeam14Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CapTeam14Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -65,6 +65,20 @@
           <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="monHoc">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="maMon" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="tenMon" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="tinChi" Type="int" />
+          <Property Name="tengoiKhac" Type="nvarchar" MaxLength="256" />
+          <Property Name="ID_nguoiDung" Type="int" />
+          <Property Name="ID_Nganh" Type="int" />
+          <Property Name="ID_phongHoc" Type="int" />
+          <Property Name="ID_hocPhan" Type="int" />
         </EntityType>
         <EntityType Name="nguoiDung">
           <Key>
@@ -158,6 +172,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_nguoiDung">
+          <End Role="nguoiDung" Type="Self.nguoiDung" Multiplicity="0..1" />
+          <End Role="monHoc" Type="Self.monHoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nguoiDung">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="monHoc">
+              <PropertyRef Name="ID_nguoiDung" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="CapTeam14ModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
@@ -165,6 +191,7 @@
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="monHoc" EntityType="Self.monHoc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="nguoiDung" EntityType="Self.nguoiDung" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_AspNetUser" Association="Self.FK_AspNetUser">
@@ -187,9 +214,12 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
+          <AssociationSet Name="FK_nguoiDung" Association="Self.FK_nguoiDung">
+            <End Role="nguoiDung" EntitySet="nguoiDung" />
+            <End Role="monHoc" EntitySet="monHoc" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CapTeam14Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -267,6 +297,7 @@
           <Property Name="role" Type="Int32" />
           <Property Name="sdt" Type="Int32" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK_AspNetUser" FromRole="nguoiDung" ToRole="AspNetUsers" />
+          <NavigationProperty Name="monHocs" Relationship="CapTeam14Model.FK_nguoiDung" FromRole="nguoiDung" ToRole="monHoc" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -346,7 +377,39 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <EntitySet Name="monHocs" EntityType="CapTeam14Model.monHoc" />
+          <AssociationSet Name="FK_nguoiDung" Association="CapTeam14Model.FK_nguoiDung">
+            <End Role="nguoiDung" EntitySet="nguoiDungs" />
+            <End Role="monHoc" EntitySet="monHocs" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="monHoc">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="maMon" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="tenMon" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="tinChi" Type="Int32" />
+          <Property Name="tengoiKhac" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="ID_nguoiDung" Type="Int32" />
+          <Property Name="ID_Nganh" Type="Int32" />
+          <Property Name="ID_phongHoc" Type="Int32" />
+          <Property Name="ID_hocPhan" Type="Int32" />
+          <NavigationProperty Name="nguoiDung" Relationship="CapTeam14Model.FK_nguoiDung" FromRole="monHoc" ToRole="nguoiDung" />
+        </EntityType>
+        <Association Name="FK_nguoiDung">
+          <End Type="CapTeam14Model.nguoiDung" Role="nguoiDung" Multiplicity="0..1" />
+          <End Type="CapTeam14Model.monHoc" Role="monHoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nguoiDung">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="monHoc">
+              <PropertyRef Name="ID_nguoiDung" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -442,6 +505,21 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="monHocs">
+            <EntityTypeMapping TypeName="CapTeam14Model.monHoc">
+              <MappingFragment StoreEntitySet="monHoc">
+                <ScalarProperty Name="ID_hocPhan" ColumnName="ID_hocPhan" />
+                <ScalarProperty Name="ID_phongHoc" ColumnName="ID_phongHoc" />
+                <ScalarProperty Name="ID_Nganh" ColumnName="ID_Nganh" />
+                <ScalarProperty Name="ID_nguoiDung" ColumnName="ID_nguoiDung" />
+                <ScalarProperty Name="tengoiKhac" ColumnName="tengoiKhac" />
+                <ScalarProperty Name="tinChi" ColumnName="tinChi" />
+                <ScalarProperty Name="tenMon" ColumnName="tenMon" />
+                <ScalarProperty Name="maMon" ColumnName="maMon" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

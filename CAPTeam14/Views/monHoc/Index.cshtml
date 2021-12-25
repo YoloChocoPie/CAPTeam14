@@ -1,11 +1,9 @@
-﻿@model IEnumerable<CAPTeam14.Models.nguoiDung>
+﻿@model IEnumerable<CAPTeam14.Models.monHoc>
 
 @{
-    ViewBag.Title = "phanQuyen";
+    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutTemplate.cshtml";
 }
-
-
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -14,12 +12,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                
+               
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="~/Home/Index">Trang Chủ</a></li>
-                        <li class="breadcrumb-item active">Phân Quyền</li>
+                        <li class="breadcrumb-item"><a href="~/Home/Index">Trang chủ</a></li>
+                        <li class="breadcrumb-item active">Môn học</li>
                     </ol>
                 </div>
             </div>
@@ -34,7 +32,7 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Danh sách giảng viên</h3>
+                            <h3 class="card-title">Danh sách môn học</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -42,17 +40,18 @@
                                 <thead>
                                     <tr>
                                         <th>
-                                            Mã Giảng Viên
+                                            Mã môn học
                                         </th>
                                         <th>
-                                            Tên Giảng Viên
+                                            Tên môn học
                                         </th>
                                         <th>
-                                            Email
+                                            Tín chỉ
                                         </th>
                                         <th>
-                                            Vai Trò
+                                            Tên gọi khác
                                         </th>
+
 
                                         <th></th>
                                     </tr>
@@ -62,102 +61,28 @@
                                     {
                                         <tr>
 
-                                            @if (item.role == 0)
-                                            {
-                                                <td style="color:red">
-                                                    @Html.DisplayFor(modelItem => item.maGV)
-                                                </td>
-                                                <td style="color:red">
-
-                                                    @Html.DisplayFor(modelItem => item.tenGV)
-                                                </td>
-
-                                                <td style="color:red">
-                                                    @Html.DisplayFor(modelItem => item.AspNetUser.Email)
-                                                </td>
-
-                                                if (item.role == 0)
-                                                {
-                                                    <td style="color:red">
-                                                        Chưa Kích Hoạt
-                                                    </td>
-                                                }
-                                                else if (item.role == 1)
-                                                {
-                                                    <td style="color:red">
-                                                        Admin
-                                                    </td>
-                                                }
-                                                else if (item.role == 2)
-                                                {
-                                                    <td style="color:red">
-                                                        Ban chủ nhiệm khoa
-                                                    </td>
-                                                }
-                                                else if (item.role == 3)
-                                                {
-                                                    <td style="color:red">
-                                                        Bộ môn
-                                                    </td>
-                                                }
-                                                else if (item.role == 4)
-                                                {
-                                                    <td style="color:red">
-                                                        Giảng viên
-                                                    </td>
-                                                }
-
-
-                                            }
-                                            else
-                                            {
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.maGV)
-                                                </td>
-                                                <td>
-
-                                                    @Html.DisplayFor(modelItem => item.tenGV)
-                                                </td>
-
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.AspNetUser.Email)
-                                                </td>
-                                                if (item.role == 0)
-                                                {
-                                                    <td>
-                                                        Chưa Kích Hoạt
-                                                    </td>
-                                                }
-                                                else if (item.role == 1)
-                                                {
-                                                    <td>
-                                                        Admin
-                                                    </td>
-                                                }
-                                                else if (item.role == 2)
-                                                {
-                                                    <td>
-                                                        Ban chủ nhiệm khoa
-                                                    </td>
-                                                }
-                                                else if (item.role == 3)
-                                                {
-                                                    <td>
-                                                        Bộ môn
-                                                    </td>
-                                                }
-                                                else if (item.role == 4)
-                                                {
-                                                    <td>
-                                                        Giảng viên
-                                                    </td>
-                                                }
-                                            }
 
                                             <td>
+                                                @Html.DisplayFor(modelItem => item.maMon)
+                                            </td>
+                                            <td>
+
+                                                @Html.DisplayFor(modelItem => item.tenMon)
+                                            </td>
+
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.tinChi)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.tengoiKhac)
+                                            </td>
 
 
-                                                <a class="btn btn-file detailBtn btn btn-danger" title="Xem chi tiết" data-model-id="@Url.Action("Edit", "giangVien", new { id = item.ID })" data-id="@Url.Action("Details", "giangVien", new { id = item.ID })"><i class="fas fa-eye"></i></a>
+
+                                            <td>
+                                                <a class="btn btn-file createBtn1 btn btn-info fas fa-eye" title="Tạo môn học"  href="@Url.Action("Create", "monHoc")"> </a>
+
+                                                <a class="btn btn-file detailBtn1 btn btn-danger" title="Xem chi tiết" data-model-id1="@Url.Action("Edit", "monHoc", new { id = item.ID })" data-id1="@Url.Action("Details", "monHoc", new { id = item.ID })"><i class="fas fa-eye"></i></a>
 
                                             </td>
                                         </tr>
@@ -189,15 +114,17 @@
 </div>
 <!-- /.content-wrapper -->
 
+
+
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 
-@if (TempData["phanquyen"] != null)
+@if (TempData["taoMon"] != null)
 {
     <script type="text/javascript">
         $(function () {
             Swal.fire({
                 title: 'Thông báo',
-                text: 'Bạn đã phân quyền tài khoản thành công !!!',
+                text: 'Bạn đã tạo môn thành công !!!',
                 icon: 'success',
                 showConfirmButton: true,
                 timer: 1500,
@@ -205,30 +132,39 @@
         });
     </script>
 }
-@if (TempData["phanquyen1"] != null )
+
+@if (TempData["monHoc"] != null)
 {
     <script type="text/javascript">
         $(function () {
             Swal.fire({
-                
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Bạn không thể tự thay đổi vai trò của bản thân !!',
-                   
-      
+                title: 'Thông báo',
+                text: 'Bạn đã chỉnh sửa môn học thành công !!!',
+                icon: 'success',
+                showConfirmButton: true,
+                timer: 1500,
             });
         });
     </script>
 }
 
 
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+   
+
 
 
     <script type="text/javascript">
         $(document).ready(function () {
+
+           
+
+
+
+
+
 
             $('.deleteBtn').click(function (e) {
                 e.preventDefault();
@@ -273,10 +209,10 @@
                     }
                 });
             });
-            $('.detailBtn').click(function () {
+            $('.detailBtn1').click(function () {
                 var button = $(this);
-                var s_id = button.data("id");
-                var url = button.data("model-id");
+                var s_id = button.data("id1");
+                var url = button.data("model-id1");
                 $.ajax({
                     url: s_id,
                     typr: "GET",
@@ -285,13 +221,13 @@
                     success: function (result) {
                         $.confirm({
                             columnClass: 'col-md-5',
-                            title: '<div class="text-center container"><p>Thông tin của ' + result.a + '</p></div>',
+                            title: '<div class="text-center container"><p>Thông tin của môn  ' + result.a + '</p></div>',
                             content: '' +
                                 '<form action="" class="formName container">' +
                                 '<div class="form-group">' +
                                 '<div class="row">' +
                                 '<div class="col-md-12">' +
-                                '<label>Họ Tên</label>' +
+                                '<label>Tên môn học</label>' +
                                 '<input type="text" class="form-control" value="' + result.a + '" readonly />' +
                                 '</div>' +
                                 '</div>' +
@@ -300,7 +236,7 @@
                                 '<div class="form-group">' +
                                 '<div class="row">' +
                                 '<div class="col-md-12">' +
-                                '<label>Mã Giảng Viên</label>' +
+                                '<label>Mã môn học</label>' +
                                 '<input type="text" class="form-control" value="' + result.b + '" readonly />' +
 
                                 '</div>' +
@@ -309,7 +245,7 @@
                                 '<div class="form-group">' +
                                 '<div class="row">' +
                                 '<div class="col-md-12">' +
-                                '<label>Loại Giảng Viên</label>' +
+                                '<label>Số tín chỉ</label>' +
                                 '<input type="text" class="form-control" value="' + result.c + '" readonly />' +
                                 '</div>' +
                                 '</div>' +
@@ -317,40 +253,13 @@
                                 '<div class="form-group">' +
                                 '<div class="row">' +
                                 '<div class="col-md-12">' +
-                                '<label>Vai trò</label>' +
+                                '<label>Tên gọi khác</label>' +
                                 '<input type="text" class="form-control" value="' + result.d + '" readonly />' +
-                                '</div>' +
-                                '</div>' +
-                                '</div>' +
-                                '<div class="form-group">' +
-                                '<div class="row">' +
-                                '<div class="col-md-12">' +
-                                '<label>Khoa</label>' +
-                                '<input type="text" class="form-control" value="' + result.e + '" readonly />' +
-                                '</div>' +
-                                '</div>' +
-                                '</div>' +
-                                '<div class="form-group">' +
-                                '<div class="row">' +
-                                '<div class="col-md-12">' +
-                                '<label>Số điện thoại</label>' +
-                                '<input type="text" class="form-control" value="' + result.f + '" readonly />' +
-                                '</div>' +
-                                '</div>' +
-                                '</div>' +
-                                '<div class="form-group">' +
-                                '<div class="row">' +
-                                '<div class="col-md-12">' +
-                                '<label>Giới Tính</label>' +
-                                '<input type="text" class="form-control" value="' + result.g + '" readonly />' +
-
-
-
 
                                 '</form>',
                             buttons: {
                                 confirm: {
-                                    text: 'Phân Quyền',
+                                    text: 'Tùy chỉnh',
                                     btnClass: 'btn-green',
                                     action: function () {
                                         window.location.assign(url);

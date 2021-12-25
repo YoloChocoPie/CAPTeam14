@@ -16,6 +16,8 @@
         <AssociationConnector Association="CapTeam14Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="CapTeam14Model.FK_AspNetUser" ManuallyRouted="false" />
         <AssociationConnector Association="CapTeam14Model.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="CapTeam14Model.monHoc" Width="1.5" PointX="7.5" PointY="6.625" />
+        <AssociationConnector Association="CapTeam14Model.FK_nguoiDung" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

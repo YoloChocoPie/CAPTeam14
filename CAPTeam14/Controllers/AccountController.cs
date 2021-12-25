@@ -342,6 +342,9 @@ namespace CAPTeam14.Controllers
                     Session["user-id"] = User.Identity.GetUserId();                   
                     Session["hoten"] = giangVien.tenGV;
                     Session["role"] = giangVien.role;
+                    Session["id"] = giangVien.ID;
+                   
+
                     if ((Session["role"] == null)) 
                     {
                         ModelState.AddModelError("kichhoat", "Tài khoản của bạn chưa được kích hoạt !");
@@ -353,9 +356,9 @@ namespace CAPTeam14.Controllers
                         TempData["dangnhap"] = 1;
                         return RedirectToAction("Index", "Home");
                     }
-                        
-              
-               
+                    
+
+
                 case SignInStatus.Failure:
                 default:
                     // If the user does not have an account, then prompt the user to create an account

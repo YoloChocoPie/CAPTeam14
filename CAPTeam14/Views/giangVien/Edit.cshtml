@@ -23,7 +23,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                     
+
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -63,7 +63,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-envelope"></i></span>
                                             </div>
-                                           
+
                                             @Html.EditorFor(model => model.maGV, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                                             @Html.ValidationMessageFor(model => model.maGV, "", new { @class = "text-danger" })
                                         </div>
@@ -126,12 +126,7 @@
                                             </div>
                                             @{
                                                 List<SelectListItem> listItems = new List<SelectListItem>();
-                                                listItems.Add(new SelectListItem
-                                                {
-                                                    Text = "Chưa kích hoạt",
-                                                    Value = "0",
-                                                    Selected = true
-                                                });
+                                                
                                                 listItems.Add(new SelectListItem
                                                 {
                                                     Text = "Admin",
@@ -174,22 +169,25 @@
                             </form>
 
 
-                               
 
 
-                               
-                                </div>
+
+
                         </div>
                     </div>
                 </div>
-            
+            </div>
+
         </section>
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-                            }
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+
+}
 
 

@@ -176,6 +176,7 @@
     <Compile Include="Controllers\giangVienController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\monHocController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -212,6 +213,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\monHoc.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\nguoiDung.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -4609,6 +4613,9 @@
     <Content Include="Views\giangVien\Index.cshtml" />
     <Content Include="Views\giangVien\Edit.cshtml" />
     <Content Include="Views\giangVien\Details.cshtml" />
+    <Content Include="Views\monHoc\Index.cshtml" />
+    <Content Include="Views\monHoc\Create.cshtml" />
+    <Content Include="Views\monHoc\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

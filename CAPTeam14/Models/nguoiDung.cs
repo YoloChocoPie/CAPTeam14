@@ -15,8 +15,16 @@ namespace CAPTeam14.Models
 
     public partial class nguoiDung
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public nguoiDung()
+        {
+            this.monHocs = new HashSet<monHoc>();
+        }
+    
         public int ID { get; set; }
+        
         public string userID { get; set; }
+       
         [RegularExpression(@"^\S+(?:\s\S+)*$", ErrorMessage = "Mã giảng viên không chứa khoảng trắng")]
         public string maGV { get; set; }
         [RegularExpression(@"^\S+(?:\s\S+)*$", ErrorMessage = "Họ tên không chứa khoảng trắng")]
@@ -28,5 +36,7 @@ namespace CAPTeam14.Models
         public Nullable<int> sdt { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<monHoc> monHocs { get; set; }
     }
 }

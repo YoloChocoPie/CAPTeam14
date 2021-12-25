@@ -32,5 +32,6 @@ namespace CAPTeam14.Models
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<nguoiDung> nguoiDungs { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<monHoc> monHocs { get; set; }
     }
 }

@@ -74,7 +74,7 @@ namespace CAPTeam14.Controllers
 
         [HttpGet]
         
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? id, string email)
         {
             ViewBag.active = 11;
             ViewBag.tt = "Edit";
@@ -105,6 +105,12 @@ namespace CAPTeam14.Controllers
                     giangvien.sdt = acc.sdt;
                     giangvien.userID = acc.userID;
                     giangvien.gioiTinh = acc.gioiTinh;
+
+                    if ((int)Session["id"] == acc.ID)
+                    {
+                        TempData["phanquyen1"] = 1;
+                        return RedirectToAction("Index");
+                    }
                     model.SaveChanges();
                     TempData["phanquyen"] = 1;
                     return RedirectToAction("Index");
