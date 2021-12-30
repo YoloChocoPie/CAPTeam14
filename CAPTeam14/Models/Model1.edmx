@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="CapTeam14Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="CP24Team14Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -184,7 +184,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="CapTeam14ModelStoreContainer">
+        <EntityContainer Name="CP24Team14ModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
@@ -219,10 +219,11 @@
             <End Role="monHoc" EntitySet="monHoc" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="CapTeam14Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="CP24Team14Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="C__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -283,6 +284,21 @@
           <NavigationProperty Name="nguoiDungs" Relationship="Self.FK_AspNetUser" FromRole="AspNetUsers" ToRole="nguoiDung" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
         </EntityType>
+        <EntityType Name="monHoc">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="maMon" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="tenMon" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="tinChi" Type="Int32" />
+          <Property Name="tengoiKhac" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="ID_nguoiDung" Type="Int32" />
+          <Property Name="ID_Nganh" Type="Int32" />
+          <Property Name="ID_phongHoc" Type="Int32" />
+          <Property Name="ID_hocPhan" Type="Int32" />
+          <NavigationProperty Name="nguoiDung" Relationship="Self.FK_nguoiDung" FromRole="monHoc" ToRole="nguoiDung" />
+        </EntityType>
         <EntityType Name="nguoiDung">
           <Key>
             <PropertyRef Name="ID" />
@@ -297,7 +313,7 @@
           <Property Name="role" Type="Int32" />
           <Property Name="sdt" Type="Int32" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK_AspNetUser" FromRole="nguoiDung" ToRole="AspNetUsers" />
-          <NavigationProperty Name="monHocs" Relationship="CapTeam14Model.FK_nguoiDung" FromRole="nguoiDung" ToRole="monHoc" />
+          <NavigationProperty Name="monHocs" Relationship="Self.FK_nguoiDung" FromRole="nguoiDung" ToRole="monHoc" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -349,16 +365,29 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_nguoiDung">
+          <End Role="nguoiDung" Type="Self.nguoiDung" Multiplicity="0..1" />
+          <End Role="monHoc" Type="Self.monHoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nguoiDung">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="monHoc">
+              <PropertyRef Name="ID_nguoiDung" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="AspNetUserRoles">
           <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="CapTeam14Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="CP24Team14Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+          <EntitySet Name="monHocs" EntityType="Self.monHoc" />
           <EntitySet Name="nguoiDungs" EntityType="Self.nguoiDung" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
@@ -373,51 +402,23 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="nguoiDung" EntitySet="nguoiDungs" />
           </AssociationSet>
+          <AssociationSet Name="FK_nguoiDung" Association="Self.FK_nguoiDung">
+            <End Role="nguoiDung" EntitySet="nguoiDungs" />
+            <End Role="monHoc" EntitySet="monHocs" />
+          </AssociationSet>
           <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
-          <EntitySet Name="monHocs" EntityType="CapTeam14Model.monHoc" />
-          <AssociationSet Name="FK_nguoiDung" Association="CapTeam14Model.FK_nguoiDung">
-            <End Role="nguoiDung" EntitySet="nguoiDungs" />
-            <End Role="monHoc" EntitySet="monHocs" />
-          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="monHoc">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="maMon" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="tenMon" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="tinChi" Type="Int32" />
-          <Property Name="tengoiKhac" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="ID_nguoiDung" Type="Int32" />
-          <Property Name="ID_Nganh" Type="Int32" />
-          <Property Name="ID_phongHoc" Type="Int32" />
-          <Property Name="ID_hocPhan" Type="Int32" />
-          <NavigationProperty Name="nguoiDung" Relationship="CapTeam14Model.FK_nguoiDung" FromRole="monHoc" ToRole="nguoiDung" />
-        </EntityType>
-        <Association Name="FK_nguoiDung">
-          <End Type="CapTeam14Model.nguoiDung" Role="nguoiDung" Multiplicity="0..1" />
-          <End Type="CapTeam14Model.monHoc" Role="monHoc" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="nguoiDung">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="monHoc">
-              <PropertyRef Name="ID_nguoiDung" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="CapTeam14ModelStoreContainer" CdmEntityContainer="CapTeam14Entities">
+        <EntityContainerMapping StorageEntityContainer="CP24Team14ModelStoreContainer" CdmEntityContainer="CP24Team14Entities">
           <EntitySetMapping Name="C__MigrationHistory">
-            <EntityTypeMapping TypeName="CapTeam14Model.C__MigrationHistory">
+            <EntityTypeMapping TypeName="CP24Team14Model.C__MigrationHistory">
               <MappingFragment StoreEntitySet="__MigrationHistory">
                 <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
                 <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
@@ -427,7 +428,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetRoles">
-            <EntityTypeMapping TypeName="CapTeam14Model.AspNetRole">
+            <EntityTypeMapping TypeName="CP24Team14Model.AspNetRole">
               <MappingFragment StoreEntitySet="AspNetRoles">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -435,7 +436,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserClaims">
-            <EntityTypeMapping TypeName="CapTeam14Model.AspNetUserClaim">
+            <EntityTypeMapping TypeName="CP24Team14Model.AspNetUserClaim">
               <MappingFragment StoreEntitySet="AspNetUserClaims">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -445,7 +446,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserLogins">
-            <EntityTypeMapping TypeName="CapTeam14Model.AspNetUserLogin">
+            <EntityTypeMapping TypeName="CP24Team14Model.AspNetUserLogin">
               <MappingFragment StoreEntitySet="AspNetUserLogins">
                 <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
                 <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
@@ -454,7 +455,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUsers">
-            <EntityTypeMapping TypeName="CapTeam14Model.AspNetUser">
+            <EntityTypeMapping TypeName="CP24Team14Model.AspNetUser">
               <MappingFragment StoreEntitySet="AspNetUsers">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
@@ -471,8 +472,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="monHocs">
+            <EntityTypeMapping TypeName="CP24Team14Model.monHoc">
+              <MappingFragment StoreEntitySet="monHoc">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="maMon" ColumnName="maMon" />
+                <ScalarProperty Name="tenMon" ColumnName="tenMon" />
+                <ScalarProperty Name="tinChi" ColumnName="tinChi" />
+                <ScalarProperty Name="tengoiKhac" ColumnName="tengoiKhac" />
+                <ScalarProperty Name="ID_nguoiDung" ColumnName="ID_nguoiDung" />
+                <ScalarProperty Name="ID_Nganh" ColumnName="ID_Nganh" />
+                <ScalarProperty Name="ID_phongHoc" ColumnName="ID_phongHoc" />
+                <ScalarProperty Name="ID_hocPhan" ColumnName="ID_hocPhan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="nguoiDungs">
-            <EntityTypeMapping TypeName="CapTeam14Model.nguoiDung">
+            <EntityTypeMapping TypeName="CP24Team14Model.nguoiDung">
               <MappingFragment StoreEntitySet="nguoiDung">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="userID" ColumnName="userID" />
@@ -487,7 +503,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="CapTeam14Model.sysdiagram">
+            <EntityTypeMapping TypeName="CP24Team14Model.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -497,7 +513,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="AspNetUserRoles" TypeName="CapTeam14Model.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="CP24Team14Model.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
             <EndProperty Name="AspNetRoles">
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
@@ -505,21 +521,6 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="monHocs">
-            <EntityTypeMapping TypeName="CapTeam14Model.monHoc">
-              <MappingFragment StoreEntitySet="monHoc">
-                <ScalarProperty Name="ID_hocPhan" ColumnName="ID_hocPhan" />
-                <ScalarProperty Name="ID_phongHoc" ColumnName="ID_phongHoc" />
-                <ScalarProperty Name="ID_Nganh" ColumnName="ID_Nganh" />
-                <ScalarProperty Name="ID_nguoiDung" ColumnName="ID_nguoiDung" />
-                <ScalarProperty Name="tengoiKhac" ColumnName="tengoiKhac" />
-                <ScalarProperty Name="tinChi" ColumnName="tinChi" />
-                <ScalarProperty Name="tenMon" ColumnName="tenMon" />
-                <ScalarProperty Name="maMon" ColumnName="maMon" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

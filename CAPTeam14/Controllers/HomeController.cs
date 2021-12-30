@@ -11,8 +11,8 @@ namespace CAPTeam14.Controllers
     [LoginVerification]
     public class HomeController : Controller
     {
-        CapTeam14Entities model = new CapTeam14Entities();
-        
+        CP24Team14Entities model = new CP24Team14Entities();
+
         public ActionResult Index()
         {
             return View();

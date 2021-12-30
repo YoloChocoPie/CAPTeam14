@@ -12,9 +12,9 @@ namespace CAPTeam14.Controllers
     [LoginVerification]
     public class giangVienController : Controller
     {
-        CapTeam14Entities model = new CapTeam14Entities();
+        CP24Team14Entities model = new CP24Team14Entities();
         // GET: giangVien
-        
+
         public ActionResult Index()
         {
             var giangvien = model.nguoiDungs.OrderByDescending(x => x.ID).ToList();

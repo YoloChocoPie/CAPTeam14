@@ -11,6 +11,7 @@ using Microsoft.Owin.Security;
 using CAPTeam14.Models;
 using System.Text.RegularExpressions;
 using CAPTeam14.Middleware;
+using Microsoft.Owin.Security.VanLang;
 
 namespace CAPTeam14.Controllers
 {
@@ -19,7 +20,7 @@ namespace CAPTeam14.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        CapTeam14Entities model = new CapTeam14Entities();
+        CP24Team14Entities model = new CP24Team14Entities();
 
         public AccountController()
         {
@@ -61,6 +62,8 @@ namespace CAPTeam14.Controllers
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
+           
+            
             return View();
         }
 
@@ -82,6 +85,7 @@ namespace CAPTeam14.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -325,38 +329,59 @@ namespace CAPTeam14.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl, string email)
         {
-            var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
+            var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync2();
             if (loginInfo == null)
             {
                 return RedirectToAction("Login");
             }
 
             // Sign in the user with this external login provider if the user already has a login
-            var result = await SignInManager.ExternalSignInAsync(loginInfo, isPersistent: false);
+            var result = await SignInManager.ExternalSignInAsync2(loginInfo, UserManager);
             ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
             var user = model.AspNetUsers.FirstOrDefault(u => u.Email.Equals(loginInfo.Email));
             var giangVien = model.nguoiDungs.FirstOrDefault(u => u.AspNetUser.Email.Equals(loginInfo.Email));
             switch (result)
             {
                 case SignInStatus.Success:
-                    Session["user-id"] = User.Identity.GetUserId();                   
-                    Session["hoten"] = giangVien.tenGV;
-                    Session["role"] = giangVien.role;
-                    Session["id"] = giangVien.ID;
-                   
-
-                    if ((Session["role"] == null)) 
+                    if (giangVien == null)
                     {
-                        ModelState.AddModelError("kichhoat", "Tài khoản của bạn chưa được kích hoạt !");
-                        return View("Login");
+                        return RedirectToAction("Create");
                     }
                     else
-
                     {
-                        TempData["dangnhap"] = 1;
-                        return RedirectToAction("Index", "Home");
+                        Session["user-id"] = User.Identity.GetUserId();
+                        Session["hoten"] = giangVien.tenGV;
+                        Session["role"] = giangVien.role;
+                        Session["id"] = giangVien.ID;
+
+
+                        if ((Session["role"] == null))
+                        {
+                            ModelState.AddModelError("kichhoat", "Tài khoản của bạn chưa được kích hoạt !");
+                            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                            Session["user-id"] = null;
+                            Request.Cookies.Clear();
+                            Session.RemoveAll();
+                            return View("Login");
+                        }
+                        else if ((int)Session["role"] == 0)
+                        {
+                            ModelState.AddModelError("kichhoat", "Tài khoản của bạn chưa được kích hoạt !");
+                            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                            Session["user-id"] = null;
+                            Request.Cookies.Clear();
+                            Session.RemoveAll();
+                            return View("Login");
+                        }
+                        else
+
+                        {
+                            TempData["dangnhap"] = 1;
+                            return RedirectToAction("Index", "Home");
+                        }
+
+
                     }
-                    
 
 
                 case SignInStatus.Failure:

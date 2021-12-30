@@ -13,10 +13,10 @@ namespace CAPTeam14.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class CapTeam14Entities : DbContext
+    public partial class CP24Team14Entities : DbContext
     {
-        public CapTeam14Entities()
-            : base("name=CapTeam14Entities")
+        public CP24Team14Entities()
+            : base("name=CP24Team14Entities")
         {
         }
     
@@ -30,8 +30,8 @@ namespace CAPTeam14.Models
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
+        public virtual DbSet<monHoc> monHocs { get; set; }
         public virtual DbSet<nguoiDung> nguoiDungs { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<monHoc> monHocs { get; set; }
     }
 }

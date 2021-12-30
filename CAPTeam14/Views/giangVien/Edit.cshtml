@@ -126,7 +126,13 @@
                                             </div>
                                             @{
                                                 List<SelectListItem> listItems = new List<SelectListItem>();
-                                                
+
+                                                listItems.Add(new SelectListItem
+                                                {
+                                                    Text = "Chưa kích hoạt",
+                                                    Value = "0",
+                                                });
+
                                                 listItems.Add(new SelectListItem
                                                 {
                                                     Text = "Admin",

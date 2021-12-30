@@ -70,6 +70,7 @@ namespace CAPTeam14
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
                 ClientId = "565010767552-qtc4scff1mvv5ao6ereujnsb42l74k46.apps.googleusercontent.com",
+
                 ClientSecret = "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"
             });
         }
