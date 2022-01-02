@@ -10,7 +10,7 @@ namespace CAPTeam14.Middleware
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            if (filterContext.HttpContext.Session["user-id"] == null)
+            if (filterContext.HttpContext.Session["id"] == null)
             {
                 filterContext.Result = new RedirectResult("~/Account/Login");
                 return;

@@ -15,7 +15,7 @@ using Microsoft.Owin.Security.VanLang;
 
 namespace CAPTeam14.Controllers
 {
-    [Authorize]
+   
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -61,9 +61,12 @@ namespace CAPTeam14.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            // xóa hết những Session, Cookies và đăng xuất nếu đã đăng nhập từ trước
+            Session.Abandon();
+            Request.Cookies.Clear();
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+
             ViewBag.ReturnUrl = returnUrl;
-           
-            
             return View();
         }
 
@@ -286,6 +289,11 @@ namespace CAPTeam14.Controllers
         public ActionResult ExternalLogin(string provider, string returnUrl)
         {
             // Request a redirect to the external login provider
+            // Vào trang đăng kí bên thứ ba và xóa bỏ, loại hết những Session, Cookies đang tồn tại
+            Session.Abandon();
+            Request.Cookies.Clear();
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+
             return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
         }
 
@@ -329,72 +337,80 @@ namespace CAPTeam14.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl, string email)
         {
+           
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync2();
-            if (loginInfo == null)
-            {
-                return RedirectToAction("Login");
-            }
+          
 
             // Sign in the user with this external login provider if the user already has a login
             var result = await SignInManager.ExternalSignInAsync2(loginInfo, UserManager);
             ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
             var user = model.AspNetUsers.FirstOrDefault(u => u.Email.Equals(loginInfo.Email));
             var giangVien = model.nguoiDungs.FirstOrDefault(u => u.AspNetUser.Email.Equals(loginInfo.Email));
+           
             switch (result)
             {
                 case SignInStatus.Success:
-                    if (giangVien == null)
-                    {
-                        return RedirectToAction("Create");
-                    }
-                    else
+                    // nếu biến giangVien không có null, thì khởi tạo các Session
+                    if (giangVien != null)
                     {
                         Session["user-id"] = User.Identity.GetUserId();
                         Session["hoten"] = giangVien.tenGV;
                         Session["role"] = giangVien.role;
                         Session["id"] = giangVien.ID;
-
-
+                        // nếu session role là null ~ chưa có kích hoạt
                         if ((Session["role"] == null))
                         {
-                            ModelState.AddModelError("kichhoat", "Tài khoản của bạn chưa được kích hoạt !");
-                            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-                            Session["user-id"] = null;
+                            //loại bỏ hết những hoạt động của người dùng hiện tại
+                            Session.Abandon();
                             Request.Cookies.Clear();
-                            Session.RemoveAll();
-                            return View("Login");
-                        }
-                        else if ((int)Session["role"] == 0)
-                        {
-                            ModelState.AddModelError("kichhoat", "Tài khoản của bạn chưa được kích hoạt !");
                             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-                            Session["user-id"] = null;
-                            Request.Cookies.Clear();
-                            Session.RemoveAll();
-                            return View("Login");
-                        }
-                        else
 
+                            TempData["kichhoat"] = 1;
+                            return RedirectToAction("Login");
+                        }
+                        // nếu session role là 0 ~ trạng thái đã bị admin chuyển thành chưa kích hoạt
+                        if ((int)Session["role"] == 0)
                         {
-                            TempData["dangnhap"] = 1;
-                            return RedirectToAction("Index", "Home");
+                            // loại bỏ hết những hoạt động của người dùng hiện tại
+                            Session.Abandon();
+                            Request.Cookies.Clear();
+                            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+
+                            TempData["kichhoat"] = 1;
+                            return RedirectToAction("Login");
                         }
-
-
+                        TempData["dangnhap"] = 1;
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else 
+                    {
+                        return RedirectToAction("Create");
                     }
 
 
-                case SignInStatus.Failure:
+
+
+                    
+
+
+                
                 default:
                     // If the user does not have an account, then prompt the user to create an account
                     ViewBag.ReturnUrl = returnUrl;
                     // Khi trường thông tin email chưa tồn tại, chuyển người dùng đến trang đăng kí, và lưu thông tin vào trong bảng AspNetUser
+
+                    //Update 02/01/2022
+                    // tự động đăng kí và lưu thông tin email. Người dùng không cần phải qua bước này
+
                     return View("ExternalLoginConfirmation", new AspNetUser { Email = loginInfo.Email });
             }
         }
 
         //
         // POST: /Account/ExternalLoginConfirmation
+
+        //Update 02/01/2022
+        // tự động đăng kí và lưu thông tin email. Người dùng không cần phải qua bước này
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -438,7 +454,10 @@ namespace CAPTeam14.Controllers
 
             return View(model);
         }
+
+
         //Đăng kí
+        // khởi tạo view
         [HttpGet]
         public ActionResult Create() 
         {
@@ -469,7 +488,15 @@ namespace CAPTeam14.Controllers
                     model.nguoiDungs.Add(taikhoan);
                     model.SaveChanges();
 
-                    return RedirectToAction("Index", "Home");
+
+                    // sau khi xác nhận thông tin thành công. Trước khi quay về trang chủ phải xóa hết mọi hoạt động
+                    Session.Abandon();
+                    Request.Cookies.Clear();
+                    AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                    //
+
+
+                    return RedirectToAction("Login");
                 }
                 else
                 {
@@ -640,10 +667,13 @@ namespace CAPTeam14.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
-            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            Session["user-id"] = null;
+            Session.Abandon();
             Request.Cookies.Clear();
-            Session.RemoveAll();        
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            
+           
+            
+             
             return RedirectToAction("Login", "Account");
         }
 
