@@ -6,11 +6,13 @@
 }
 
 <!DOCTYPE html>
-<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <Title>Login</Title>
     <link rel="stylesheet" href="@Url.Content("~/Login/LoginStyle.css")">
+    <script src="@Url.Content("~/PluginTemplate/sweetalert2/sweetalert2.min.js")"></script>
+    <link rel="stylesheet" href="@Url.Content("~/PluginTemplate/sweetalert2/sweetalert2.min.css")">
 </head>
 <body>
     <div class="container">
@@ -26,20 +28,48 @@
 
                 </div>
                 </br>
-                @Html.ValidationMessage("kichhoat", new { @class = "text-danger" })
+
             </div>
-       
+
         </div>
     </div>
+    <script src="@Url.Content("~/plugins/jquery/jquery.min.js")"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="@Url.Content("~/plugins/jquery-ui/jquery-ui.min.js")"></script>
+
+
+
+
     <script type="text/javascript" src="@Url.Content("~/Login/vanilla-tilt.js")"></script>
     <script>
-            VanillaTilt.init(document.querySelectorAll(".card"), {max: 10,speed: 400,glare: true,"max-glare":1});
+        VanillaTilt.init(document.querySelectorAll(".card"), { max: 10, speed: 400, glare: true, "max-glare": 1 });
     </script>
 </body>
-</html>
 
 
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+
+
+@if (TempData["kichhoat"] != null)
+{
+    <script type="text/javascript">
+        $(function () {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast.fire({
+                icon: 'error',
+                title: 'Tài khoản của bạn chưa được kích hoạt !'
+            })
+        });
+    </script>
 }

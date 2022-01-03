@@ -62,11 +62,10 @@ namespace CAPTeam14.Controllers
         public ActionResult Login(string returnUrl)
         {
             // xóa hết những Session, Cookies và đăng xuất nếu đã đăng nhập từ trước
-            Session.Abandon();
-            Request.Cookies.Clear();
-            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
 
+            
             ViewBag.ReturnUrl = returnUrl;
+          
             return View();
         }
 
@@ -366,7 +365,7 @@ namespace CAPTeam14.Controllers
                             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
 
                             TempData["kichhoat"] = 1;
-                            return RedirectToAction("Login");
+                            return View("Login");
                         }
                         // nếu session role là 0 ~ trạng thái đã bị admin chuyển thành chưa kích hoạt
                         if ((int)Session["role"] == 0)
@@ -377,7 +376,8 @@ namespace CAPTeam14.Controllers
                             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
 
                             TempData["kichhoat"] = 1;
-                            return RedirectToAction("Login");
+
+                            return View("Login");
                         }
                         TempData["dangnhap"] = 1;
                         return RedirectToAction("Index", "Home");
