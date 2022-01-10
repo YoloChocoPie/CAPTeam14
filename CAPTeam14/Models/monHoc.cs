@@ -14,16 +14,19 @@ namespace CAPTeam14.Models
     
     public partial class monHoc
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public monHoc()
+        {
+            this.TKBs = new HashSet<TKB>();
+        }
+    
         public int ID { get; set; }
         public string maMon { get; set; }
         public string tenMon { get; set; }
         public Nullable<int> tinChi { get; set; }
         public string tengoiKhac { get; set; }
-        public Nullable<int> ID_nguoiDung { get; set; }
-        public Nullable<int> ID_Nganh { get; set; }
-        public Nullable<int> ID_phongHoc { get; set; }
-        public Nullable<int> ID_hocPhan { get; set; }
     
-        public virtual nguoiDung nguoiDung { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TKB> TKBs { get; set; }
     }
 }

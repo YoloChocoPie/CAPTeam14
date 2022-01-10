@@ -12,25 +12,22 @@ namespace CAPTeam14.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class nguoiDung
+    public partial class phongHoc
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public nguoiDung()
+        public phongHoc()
         {
             this.TKBs = new HashSet<TKB>();
         }
     
         public int ID { get; set; }
-        public string userID { get; set; }
-        public string maGV { get; set; }
-        public string tenGV { get; set; }
-        public Nullable<bool> loaiGV { get; set; }
-        public string khoa { get; set; }
-        public Nullable<bool> gioiTinh { get; set; }
-        public Nullable<int> role { get; set; }
-        public Nullable<int> sdt { get; set; }
+        public string loaiPhong { get; set; }
+        public Nullable<int> sucChua { get; set; }
+        public Nullable<int> siSo { get; set; }
+        public Nullable<int> trong { get; set; }
+        public Nullable<int> soSVDK { get; set; }
+        public string maPhong { get; set; }
     
-        public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TKB> TKBs { get; set; }
     }
