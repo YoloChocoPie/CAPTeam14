@@ -109,7 +109,7 @@ namespace CAPTeam14.Controllers
 
                                 //Nếu mã gốc liên học phần đã tồn tại, thì bỏ qua 
                                 
-                                if (model.hocPhans.ToList().Any(o => o.maGocLHP == a.maGocLHP || o.maLHP == a.maLHP ))
+                                if (model.hocPhans.ToList().Any(o => o.maGocLHP == a.maGocLHP && o.maLHP == a.maLHP ))
                                 {
 
                                 }
@@ -180,7 +180,7 @@ namespace CAPTeam14.Controllers
                             }
                         }
                     }
-                    /*// MÔN HỌC
+                    // MÔN HỌC
                     //
                     //
 
@@ -200,10 +200,11 @@ namespace CAPTeam14.Controllers
 
                                 
 
-                                // Nếu mã môn HOẶC tên môn tồn tại tồn tại thì skip
+                                // Nếu mã môn VÀ tên môn tồn tại tồn tại thì skip
+                                // Hoặc nếu mã môn hoặc tên môn khác nhau thì add vô
                                 // bây giờ là 00:24 ngày 11/01/2022. LTC vừa mất 4 tiếng cuộc đời
                                 // Chỉ đê viết ra 14 dòng lệnh thỏa test case
-                                if (model.monHocs.ToList().Any(o => o.maMon == a.maMon || o.tenMon == a.tenMon ))
+                                if (model.monHocs.ToList().Any(o => o.maMon == a.maMon && o.tenMon == a.tenMon ))
                                 {
                                     
                                 }
@@ -317,12 +318,13 @@ namespace CAPTeam14.Controllers
                             if (a.tongTiet.ToString() != "" && a.soTiet.ToString() != "" && a.tietHoc1.ToString() != "" && a.tietS.ToString() != "" && a.tietBD.ToString() != ""
                                 )
                             {
-                                
-                                *//*if (model.tietHocs.ToList().Any(o => o.tongTiet == a.tongTiet || o.soTiet == a.soTiet || o.tietHoc1 == a.tietHoc1 || o.tietS == a.tietS || o.tietBD == a.tietBD))
+                                // Nếu các trường thông tin của Tiết Học đã tồn tại thì skip qua
+                                // Còn thiếu 1 trong các trường thông tin dưới mà thay đổi thì add vô
+                                if (model.tietHocs.ToList().Any(o => o.tongTiet == a.tongTiet && o.soTiet == a.soTiet && o.tietHoc1 == a.tietHoc1 && o.tietS == a.tietS && o.tietBD == a.tietBD))
                                 {
 
                                 }
-                                else*//*
+                                else
                                 {
                                     tietHoc TU = new tietHoc();
                                     TU.tongTiet = a.tongTiet;
@@ -371,11 +373,13 @@ namespace CAPTeam14.Controllers
                             if (a.loaiPhong != "" && a.sucChua.ToString() != "" && a.siSo.ToString() != "" && a.trong.ToString() != "" && a.soSVDK.ToString() != "" && a.maPhong != ""
                                 )
                             {
-                                *//*if (model.phongHocs.ToList().Any(o => o.loaiPhong == a.loaiPhong || o.siSo == a.siSo || o.trong == a.trong || o.soSVDK == a.soSVDK || o.maPhong == a.maPhong))
+                                // Nếu những trường thông tin ở Phòng Học giống nhau thì skip qua
+                                // Nếu 1 trong những thông tin của Phòng Học thay đổi thì add vào
+                                if (model.phongHocs.ToList().Any(o => o.loaiPhong == a.loaiPhong && o.siSo == a.siSo && o.trong == a.trong && o.soSVDK == a.soSVDK && o.maPhong == a.maPhong))
                                 {
 
                                 }
-                                else*//*
+                                else
                                 {
                                     phongHoc TU = new phongHoc();
 
@@ -433,9 +437,10 @@ namespace CAPTeam14.Controllers
                             if (a.maNganh.ToString() != "" && a.tenNganh != ""
                                 )
                             {
+                                // Nếu mã ngành và tên ngành đã tồn tại thì skip qua
+                                // Nếu mã ngành hoặc tên ngành thay đổi thì add vào
 
-
-                                if (model.Nganhs.ToList().Any(o => o.maNganh == a.maNganh || o.tenNganh == a.tenNganh ))
+                                if (model.Nganhs.ToList().Any(o => o.maNganh == a.maNganh && o.tenNganh == a.tenNganh ))
                                 {
 
                                 }
@@ -486,12 +491,12 @@ namespace CAPTeam14.Controllers
                             if (a.thuS.ToString() != "" && a.tuanBD.ToString() != "" && a.tuanHoc1.ToString() != "" && a.tuanKT.ToString() != "" && a.thu != ""
                                 )
                             {
-
-                                *//*if (model.tuanHocs.ToList().Any(o => o.thuS == a.thuS || o.tuanBD == a.tuanBD || o.tuanHoc1 == a.tuanHoc1 || o.tuanKT == a.tuanKT || o.thu == a.thu))
+                                // Nếu các thông tin trong tuần học đã tồn tại thì skip qua 
+                                if (model.tuanHocs.ToList().Any(o => o.thuS == a.thuS && o.tuanBD == a.tuanBD && o.tuanHoc1 == a.tuanHoc1 && o.tuanKT == a.tuanKT && o.thu == a.thu))
                                 {
 
                                 }
-                                else*//*
+                                else
                                 {
                                     tuanHoc TU = new tuanHoc();
 
@@ -531,7 +536,7 @@ namespace CAPTeam14.Controllers
                                 }
                             }
                         }
-                    }*/
+                    }
 
                     // Giảng viên
                     //
