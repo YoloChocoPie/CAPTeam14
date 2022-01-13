@@ -191,6 +191,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\monHocController.cs" />
+    <Compile Include="Controllers\NganhController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -4655,6 +4656,9 @@
     <Content Include="Views\monHoc\Create.cshtml" />
     <Content Include="Views\monHoc\Edit.cshtml" />
     <Content Include="Views\Home\Catalog.cshtml" />
+    <Content Include="Views\Nganh\Index.cshtml" />
+    <Content Include="Views\Nganh\Create.cshtml" />
+    <Content Include="Views\Nganh\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

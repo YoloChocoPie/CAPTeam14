@@ -1,12 +1,9 @@
-﻿@model CAPTeam14.Models.monHoc
+﻿@model CAPTeam14.Models.Nganh
 
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_LayoutTemplate.cshtml";
 }
-
-
-
 
 
 @using (Html.BeginForm())
@@ -45,69 +42,49 @@
                                 @Html.AntiForgeryToken()
 
                                 <div class="card-body">
-                                    <label>Thêm môn học</label>
+                                    <label>Thêm Ngành Học</label>
                                     <hr />
                                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                                   
+
 
 
 
 
                                     <div class="form-group">
-                                        <label>Tên môn học</label>
+                                        <label>Mã Ngành</label>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-envelope"></i></span>
                                             </div>
 
-                                            @Html.EditorFor(model => model.tenMon, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.EditorFor(model => model.maNganh, new { htmlAttributes = new { @class = "form-control" } })
 
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label>Mã môn học</label>
+                                        <label>Tên Ngành Học</label>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-user"></i></span>
                                             </div>
-                                            @Html.EditorFor(model => model.maMon, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.EditorFor(model => model.tenNganh, new { htmlAttributes = new { @class = "form-control" } })
 
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label>Số tín chỉ</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="far fa-envelope"></i></span>
-                                            </div>
-                                            @Html.EditorFor(model => model.tinChi, new { htmlAttributes = new { @class = "form-control" } })
 
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Tên gọi khác</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="far fa-envelope"></i></span>
-                                            </div>
-                                            @Html.EditorFor(model => model.tengoiKhac, new { htmlAttributes = new { @class = "form-control" } })
-
-                                        </div>
-                                    </div>
 
 
 
 
                                     <div class="row">
                                         <div class="col-6">
-                                            <a class="btn btn-danger btn-block" href="@Url.Action("Index", "monHoc")">Quay lại</a>
+                                            <a class="btn btn-danger btn-block" href="@Url.Action("Index", "Nganh")">Quay lại</a>
                                         </div>
                                         <div class="col-6">
-                                            <button type="submit" value="Create" class="btn btn-success btn-block">Tạo môn</button>
+                                            <button type="submit" value="Create" class="btn btn-success btn-block">Tạo Ngành</button>
                                         </div>
                                     </div>
 
@@ -115,7 +92,7 @@
 
                                 </div>
                             </form>
-                           
+
 
 
 
@@ -132,11 +109,11 @@
     </div>
     <!-- /.content-wrapper -->
 }
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
-    
 
-   
+
+
 }
-

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CAPTeam14.Models.monHoc>
+﻿@model IEnumerable<CAPTeam14.Models.Nganh>
 
 @{
     ViewBag.Title = "Index";
@@ -12,12 +12,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-               
+
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="~/Home/Index">Trang chủ</a></li>
-                        <li class="breadcrumb-item active">Môn học</li>
+                        <li class="breadcrumb-item active">Ngành</li>
                     </ol>
                 </div>
             </div>
@@ -29,65 +29,66 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    
 
                     <div class="card">
-
                         <div class="card-header">
-
-                            <h3 class="card-title">Danh sách môn học</h3>
+                            <h3 class="card-title">Danh sách ngành</h3>
                             </br>
-                            <a class="btn btn-file createBtn1 btn btn-info fas fa-eye" title="Tạo môn học" href="@Url.Action("Create", "monHoc")"> </a>
+                            <a class="btn btn-file createBtn1 btn btn-info fas fa-eye" title="Tạo ngành mới" href="@Url.Action("Create", "Nganh")"> </a>
                         </div>
                         <!-- /.card-header -->
-
                         <div class="card-body">
-                            
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>
-                                            Mã môn học
+                                            Mã ngành
                                         </th>
                                         <th>
-                                            Tên môn học
+                                            Tên ngành
                                         </th>
-                                        <th>
-                                            Tín chỉ
-                                        </th>
-                                        <th>
-                                            Tên gọi khác
-                                        </th>
+                                        
+
+
                                         <th></th>
                                     </tr>
                                 </thead>
-
                                 <tbody>
-
                                     @foreach (var item in Model)
                                     {
                                         <tr>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.maMon)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.tenMon)
-                                            </td>
+
 
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.tinChi)
+                                                @Html.DisplayFor(modelItem => item.maNganh)
                                             </td>
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.tengoiKhac)
+
+                                                @Html.DisplayFor(modelItem => item.tenNganh)
                                             </td>
+
+                                            
+
+
+
                                             <td>
-                                                <a class="btn btn-file detailBtn1 btn btn-danger" title="Xem chi tiết" data-model-id1="@Url.Action("Edit", "monHoc", new { id = item.ID })" data-id1="@Url.Action("Details", "monHoc", new { id = item.ID })"><i class="fas fa-eye"></i></a>
+                                                
+                                                <a class="btn btn-file detailBtn1 btn btn-danger" title="Xem chi tiết" data-model-id1="@Url.Action("Edit", "Nganh", new { id = item.ID })" data-id1="@Url.Action("Details", "Nganh", new { id = item.ID })"><i class="fas fa-eye"></i></a>
+
                                             </td>
                                         </tr>
                                     }
 
                                 </tbody>
-                              
+                                @*<tfoot>
+                                        <tr>
+                                            <th>Rendering engine</th>
+                                            <th>Browser</th>
+                                            <th>Platform(s)</th>
+                                            <th>Engine version</th>
+                                            <th>CSS grade</th>
+                                        </tr>
+                                    </tfoot>*@
                             </table>
                         </div>
                         <!-- /.card-body -->
@@ -108,13 +109,13 @@
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 
-@if (TempData["taoMon"] != null)
+@if (TempData["taoNganh"] != null)
 {
     <script type="text/javascript">
         $(function () {
             Swal.fire({
                 title: 'Thông báo',
-                text: 'Bạn đã tạo môn thành công !!!',
+                text: 'Bạn đã tạo ngành thành công !!!',
                 icon: 'success',
                 showConfirmButton: true,
                 timer: 1500,
@@ -123,13 +124,13 @@
     </script>
 }
 
-@if (TempData["monHoc"] != null)
+@if (TempData["nganhHoc"] != null)
 {
     <script type="text/javascript">
         $(function () {
             Swal.fire({
                 title: 'Thông báo',
-                text: 'Bạn đã chỉnh sửa môn học thành công !!!',
+                text: 'Bạn đã chỉnh sửa ngành học thành công !!!',
                 icon: 'success',
                 showConfirmButton: true,
                 timer: 1500,
@@ -142,19 +143,12 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
-   
+
 
 
 
     <script type="text/javascript">
         $(document).ready(function () {
-
-           
-
-
-
-
-
 
             $('.deleteBtn').click(function (e) {
                 e.preventDefault();
@@ -211,7 +205,7 @@
                     success: function (result) {
                         $.confirm({
                             columnClass: 'col-md-5',
-                            title: '<div class="text-center container"><p>Thông tin của môn  ' + result.a + '</p></div>',
+                            title: '<div class="text-center container"><p>Thông tin của ngành  ' + result.a + '</p></div>',
                             content: '' +
                                 '<form action="" class="formName container">' +
                                 '<div class="form-group">' +
@@ -229,22 +223,6 @@
                                 '<label>Mã môn học</label>' +
                                 '<input type="text" class="form-control" value="' + result.b + '" readonly />' +
 
-                                '</div>' +
-                                '</div>' +
-                                '</div>' +
-                                '<div class="form-group">' +
-                                '<div class="row">' +
-                                '<div class="col-md-12">' +
-                                '<label>Số tín chỉ</label>' +
-                                '<input type="text" class="form-control" value="' + result.c + '" readonly />' +
-                                '</div>' +
-                                '</div>' +
-                                '</div>' +
-                                '<div class="form-group">' +
-                                '<div class="row">' +
-                                '<div class="col-md-12">' +
-                                '<label>Tên gọi khác</label>' +
-                                '<input type="text" class="form-control" value="' + result.d + '" readonly />' +
 
                                 '</form>',
                             buttons: {
