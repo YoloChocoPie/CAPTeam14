@@ -17,21 +17,21 @@
         <EntityTypeShape EntityType="CP24Team14Model.phongHoc" Width="1.5" PointX="5.25" PointY="25.5" IsExpanded="true" />
         <EntityTypeShape EntityType="CP24Team14Model.sysdiagram" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CP24Team14Model.tietHoc" Width="1.5" PointX="5.25" PointY="28.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CP24Team14Model.TKB" Width="1.5" PointX="7.5" PointY="6.625" IsExpanded="true" />
         <EntityTypeShape EntityType="CP24Team14Model.tuanHoc" Width="1.5" PointX="5.25" PointY="31.875" IsExpanded="true" />
         <AssociationConnector Association="CP24Team14Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="CP24Team14Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="CP24Team14Model.FK_AspNetUser" ManuallyRouted="false" />
-        <AssociationConnector Association="CP24Team14Model.FK_TKB_lopHoc" ManuallyRouted="false" />
-        <AssociationConnector Association="CP24Team14Model.FK_TKB_monHoc" ManuallyRouted="false" />
-        <AssociationConnector Association="CP24Team14Model.FK_TKB_Nganh" ManuallyRouted="false" />
-        <AssociationConnector Association="CP24Team14Model.FK_TKB_nguoiDung" ManuallyRouted="false" />
-        <AssociationConnector Association="CP24Team14Model.FK_TKB_phongHoc" ManuallyRouted="false" />
-        <AssociationConnector Association="CP24Team14Model.FK_TKB_tietHoc" ManuallyRouted="false" />
-        <AssociationConnector Association="CP24Team14Model.FK_TKB_tuanHoc" ManuallyRouted="false" />
         <AssociationConnector Association="CP24Team14Model.AspNetUserRoles" ManuallyRouted="false" />
         <EntityTypeShape EntityType="CP24Team14Model.hocPhan" Width="1.5" PointX="0.75" PointY="10" />
+        <EntityTypeShape EntityType="CP24Team14Model.TKB" Width="1.5" PointX="7.5" PointY="18.5" />
         <AssociationConnector Association="CP24Team14Model.FK_hocPhan" />
+        <AssociationConnector Association="CP24Team14Model.FK_TKB_lopHoc" />
+        <AssociationConnector Association="CP24Team14Model.FK_TKB_monHoc" />
+        <AssociationConnector Association="CP24Team14Model.FK_TKB_Nganh" />
+        <AssociationConnector Association="CP24Team14Model.FK_TKB_nguoiDung" />
+        <AssociationConnector Association="CP24Team14Model.FK_TKB_phongHoc" />
+        <AssociationConnector Association="CP24Team14Model.FK_TKB_tietHoc" />
+        <AssociationConnector Association="CP24Team14Model.FK_TKB_tuanHoc" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

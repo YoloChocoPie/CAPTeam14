@@ -188,10 +188,15 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\giangVienController.cs" />
+    <Compile Include="Controllers\hocPhanController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\lopHocController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\monHocController.cs" />
     <Compile Include="Controllers\NganhController.cs" />
+    <Compile Include="Controllers\phongHocController.cs" />
+    <Compile Include="Controllers\tietHocController.cs" />
+    <Compile Include="Controllers\tuanHocController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -4659,6 +4664,21 @@
     <Content Include="Views\Nganh\Index.cshtml" />
     <Content Include="Views\Nganh\Create.cshtml" />
     <Content Include="Views\Nganh\Edit.cshtml" />
+    <Content Include="Views\hocPhan\Index.cshtml" />
+    <Content Include="Views\hocPhan\Create.cshtml" />
+    <Content Include="Views\hocPhan\Edit.cshtml" />
+    <Content Include="Views\tuanHoc\Index.cshtml" />
+    <Content Include="Views\tuanHoc\Create.cshtml" />
+    <Content Include="Views\tuanHoc\Edit.cshtml" />
+    <Content Include="Views\lopHoc\Index.cshtml" />
+    <Content Include="Views\lopHoc\Create.cshtml" />
+    <Content Include="Views\lopHoc\Edit.cshtml" />
+    <Content Include="Views\phongHoc\Index.cshtml" />
+    <Content Include="Views\phongHoc\Create.cshtml" />
+    <Content Include="Views\phongHoc\Edit.cshtml" />
+    <Content Include="Views\tietHoc\Index.cshtml" />
+    <Content Include="Views\tietHoc\Create.cshtml" />
+    <Content Include="Views\tietHoc\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

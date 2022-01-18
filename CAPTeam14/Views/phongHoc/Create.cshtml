@@ -1,0 +1,173 @@
+﻿@model CAPTeam14.Models.phongHoc
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutTemplate.cshtml";
+}
+
+
+@using (Html.BeginForm())
+{
+
+
+
+
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="~/Home/Index">Trang chủ</a></li>
+                            <li class="breadcrumb-item active">Thêm phòng học</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-5">
+                        <div class="card">
+                            <form role="form">
+                                @Html.AntiForgeryToken()
+
+                                <div class="card-body">
+                                    <label>Thêm phòng học</label>
+                                    <hr />
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+
+
+
+                                    <div class="form-group">
+                                        <label>Mã phòng</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-envelope"></i></span>
+                                            </div>
+
+                                            @Html.EditorFor(model => model.maPhong, new { htmlAttributes = new { @class = "form-control" } })
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Loại phòng học</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-user"></i></span>
+                                            </div>
+                                            @Html.ValidationMessageFor(model => model.loaiPhong, "", new { @class = "text-danger" })
+
+                                            <select class="custom-select" name="loaiPhong" id="loaiPhong">
+                                                <option value="PLT" selected>Phòng lý thuyết</option>
+                                                <option value="PMT">Phòng máy tính</option>
+                                                <option value="ONL">Học online</option>
+                                            </select>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Sức chứa</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-envelope"></i></span>
+                                            </div>
+
+                                            @Html.EditorFor(model => model.sucChua, new { htmlAttributes = new { @class = "form-control" } })
+
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label>Sỉ số</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-envelope"></i></span>
+                                            </div>
+
+                                            @Html.EditorFor(model => model.siSo, new { htmlAttributes = new { @class = "form-control" } })
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Trống</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-envelope"></i></span>
+                                            </div>
+
+                                            @Html.EditorFor(model => model.trong, new { htmlAttributes = new { @class = "form-control" } })
+
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label>Số sinh viên đăng kí</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-envelope"></i></span>
+                                            </div>
+
+                                            @Html.EditorFor(model => model.soSVDK, new { htmlAttributes = new { @class = "form-control" } })
+
+                                        </div>
+                                    </div>
+
+
+
+
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <a class="btn btn-danger btn-block" href="@Url.Action("Index", "phongHoc")">Quay lại</a>
+                                        </div>
+                                        <div class="col-6">
+                                            <button type="submit" value="Create" class="btn btn-success btn-block">Thêm phòng học</button>
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+                            </form>
+
+
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+
+
+}

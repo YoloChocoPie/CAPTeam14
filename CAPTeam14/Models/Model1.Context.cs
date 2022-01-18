@@ -37,8 +37,8 @@ namespace CAPTeam14.Models
         public virtual DbSet<phongHoc> phongHocs { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<tietHoc> tietHocs { get; set; }
-        public virtual DbSet<TKB> TKBs { get; set; }
         public virtual DbSet<tuanHoc> tuanHocs { get; set; }
         public virtual DbSet<hocPhan> hocPhans { get; set; }
+        public virtual DbSet<TKB> TKBs { get; set; }
     }
 }

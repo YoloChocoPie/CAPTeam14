@@ -1,0 +1,157 @@
+﻿@model CAPTeam14.Models.hocPhan
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutTemplate.cshtml";
+}
+
+
+
+
+@using (Html.BeginForm())
+{
+
+
+
+
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="~/Home/Index">Trang chủ</a></li>
+                            <li class="breadcrumb-item active">Cập nhập học phần</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-5">
+                        <div class="card">
+                            <form role="form">
+                                @Html.AntiForgeryToken()
+
+                                <div class="card-body">
+                                    <label>Cập nhập học phần</label>
+                                    <hr />
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+
+
+
+                                    <div class="form-group">
+                                        <label>Mã gốc liên học phần</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-envelope"></i></span>
+                                            </div>
+
+                                            @Html.EditorFor(model => model.maGocLHP, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Mã liên học phần</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-user"></i></span>
+                                            </div>
+                                            @Html.EditorFor(model => model.maLHP, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Loại học phần</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-user"></i></span>
+                                            </div>
+                                            <select class="custom-select" name="loaiHP" id="loaiHP">
+                                                <option value="Lý Thuyết" selected>Lý Thuyết</option>
+                                                <option value="Thực Hành">Thực Hành</option>
+                                            </select>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Tình trạng liên học phần</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-user"></i></span>
+                                            </div>
+                                            <select class="custom-select" name="tinhtrangLHP" id="tinhtrangLHP">
+                                                <option value="Được chấp nhận" selected>Được chấp nhận</option>
+                                                <option value="Đang lập kế hoạch">Đang lập kế hoạch</option>
+                                            </select>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Tổng số môn học</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-user"></i></span>
+                                            </div>
+                                            @Html.EditorFor(model => model.TSMH, new { htmlAttributes = new { @class = "form-control" } })
+
+                                        </div>
+                                    </div>
+
+
+
+
+
+
+
+
+
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <a class="btn btn-danger btn-block" href="@Url.Action("Index", "hocPhan")">Quay lại</a>
+                                        </div>
+                                        <div class="col-6">
+                                            <button type="submit" value="Save" class="btn btn-success btn-block">Cập nhập</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+
+}

@@ -24,6 +24,7 @@ namespace CAPTeam14.Models
         public Nullable<int> ID_Tiet { get; set; }
         public Nullable<int> ID_GV { get; set; }
     
+        public virtual hocPhan hocPhan { get; set; }
         public virtual lopHoc lopHoc { get; set; }
         public virtual monHoc monHoc { get; set; }
         public virtual Nganh Nganh { get; set; }
@@ -31,6 +32,5 @@ namespace CAPTeam14.Models
         public virtual phongHoc phongHoc { get; set; }
         public virtual tietHoc tietHoc { get; set; }
         public virtual tuanHoc tuanHoc { get; set; }
-        public virtual hocPhan hocPhan { get; set; }
     }
 }
