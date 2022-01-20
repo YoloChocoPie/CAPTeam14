@@ -1,0 +1,13 @@
+﻿
+#bg-sidebar {
+    background-color: #007bff;
+}
+
+#icon-text {
+    color: white;
+    font-weight: bolder;
+}
+
+.nav-sidebar > .nav-item:hover > .nav-link {
+    background-color: rgb(0 98 204);
+}

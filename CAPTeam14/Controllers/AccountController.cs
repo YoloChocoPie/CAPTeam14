@@ -65,7 +65,7 @@ namespace CAPTeam14.Controllers
 
             
             ViewBag.ReturnUrl = returnUrl;
-          
+            Logout();
             return View();
         }
 
@@ -674,6 +674,12 @@ namespace CAPTeam14.Controllers
            
             
              
+            return RedirectToAction("Login", "Account");
+        }
+
+        public ActionResult Logout()
+        {
+            LogOff();
             return RedirectToAction("Login", "Account");
         }
 

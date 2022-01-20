@@ -1,0 +1,32 @@
+.steps {
+  margin-top: 6%;
+  margin-left: 1%;
+  width: 99%;
+  font-size: 15px;
+}
+.step {
+  border-radius: 20px;
+  padding: 10px 20px;
+}
+
+.color1 {
+  background-color: #8792f6;
+}
+.color2 {
+  background-color: #87f692;
+}
+.color3 {
+  background-color: #f6879b;
+}
+
+.color4 {
+  background-color: #9296b8;
+}
+
+.color5 {
+  background-color: #b7b5ae;
+}
+
+.step:hover {
+  opacity: 0.8;
+}

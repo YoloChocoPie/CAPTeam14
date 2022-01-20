@@ -1,16 +1,31 @@
-﻿<!-- Content Wrapper. Contains page content -->
+﻿<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="@Url.Content("~/assets/style.css")" />
+
+</head>
+
+
+
+
+
+<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Blank Page</h1>
+                   
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Blank Page</li>
+                        <li class="breadcrumb-item"><a href="~/Home/Index">Trang chủ</a></li>
+                        <li class="breadcrumb-item active">Nhập File Excel</li>
                     </ol>
                 </div>
             </div>
@@ -24,15 +39,15 @@
             ViewBag.Title = "Index";
         }
 
-        <h4>Add Users via Excel</h4>
+        <h4>Nhập File Excel</h4>
         <hr />
         @using (Html.BeginForm("UploadExcel", "Home", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "return myFunction()" }))
         {
             <div class="form-horizontal">
                 <div class="form-group">
-                    <div class="control-label col-md-2">Download Format:</div>
+                    <div class="control-label col-md-2">Tải File Template:</div>
                     <div class="col-md-10">
-                        <a href="/Home/DownloadExcel/"><img src="~/Doc/excel.jpg" width="25" height="25" title="Download Excel format" alt="excel" /></a>
+                        <a href="/Home/DownloadExcel/"><img src="~/Doc/excel.jpg" width="25" height="25" title="Tải Template" alt="excel" /></a>
 
                     </div>
                 </div>
@@ -45,14 +60,130 @@
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
                         <input type="submit" value="Upload" id="btnSubmit" class="btn btn-primary" />
+                        <a class="btn btn-file detailBtn1 btn btn-danger" title="Hướng dẫn sử dụng" data-model-id1="@Url.Action("Test", "Home")" data-id1="@Url.Action("Test", "Home")"><i class="fas fa-question"></i></a>
                     </div>
                 </div>
             </div>
         }
+
+      
 
     </section>
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
 
+
+
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('.deleteBtn').click(function (e) {
+                e.preventDefault();
+                debugger;
+                var button = $(this);
+                var url = $(this).data("model-id");
+                $.confirm({
+                    title: 'Thông báo!',
+                    content: 'Bạn có muốn xóa chuyên ngành này không ???',
+                    buttons: {
+                        confirm: {
+                            text: 'Có',
+                            btnClass: 'btn-green',
+                            action: function () {
+                                $.ajax({
+                                    url: url,
+                                    type: "POST",
+                                    contentType: "application/json;charset=UTF-8",
+                                    dataType: "json",
+                                    success: function (r) {
+                                        if (r.success) {
+                                            button.parents("tr").remove();
+                                            window.location.replace("/Admin/Specialized");
+                                        }
+                                        else {
+                                            toastr.warning('Không thể xóa data bị ràng buộc !!!');
+                                        }
+                                    },
+                                    error: function () {
+                                        $.alert("Lỗi !!!");
+                                    }
+                                });
+                            }
+                        },
+                        cancel: {
+                            text: 'Không',
+                            btnClass: 'btn-red',
+                            action: function () {
+                                $.alert('Bạn đã hủy thao tác !!!');
+                            }
+                        },
+                    }
+                });
+            });
+            $('.detailBtn1').click(function () {
+                var button = $(this);
+                var s_id = button.data("id1");
+                var url = button.data("model-id1");
+                $.ajax({
+                    url: s_id,
+                    typr: "GET",
+                    contentType: "application/json;charset=UTF-8",
+                    dataType: "json",
+                    success: function (result) {
+                        $.confirm({
+                          
+                            title: '<div class="text-center container"><p>Thông tin của ngành  ' + result.a + '</p></div>',
+                            content: '' +
+                                '<form action="" class="formName container">' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Tên môn học</label>' +
+                                '<input type="text" class="form-control" value="' + result.a + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Mã môn học</label>' +
+                                '<input type="text" class="form-control" value="' + result.b + '" readonly />' +
+
+
+                                '</form>',
+                            buttons: {
+                                confirm: {
+                                    text: 'Tùy chỉnh',
+                                    btnClass: 'btn-green',
+                                    action: function () {
+                                        window.location.assign(url);
+                                    }
+                                },
+                                cancel: {
+                                    text: 'Thoát',
+                                    btnClass: 'btn-red',
+                                    action: function () { }
+                                },
+                            },
+                        });
+                    },
+                    error: function (errormessage) {
+                        $.alert(errormessage.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+
+}

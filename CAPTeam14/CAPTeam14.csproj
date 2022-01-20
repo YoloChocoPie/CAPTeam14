@@ -60,6 +60,9 @@
     <Reference Include="Microsoft.Owin.Security.VanLang, Version=2.0.0.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Capstone.Owin.Security.VanLang.2.0.0.1\lib\net452\Microsoft.Owin.Security.VanLang.dll</HintPath>
     </Reference>
+    <Reference Include="NotFoundMvc, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NotFoundMvc.1.5.0\lib\net40\NotFoundMvc.dll</HintPath>
+    </Reference>
     <Reference Include="Remotion, Version=1.13.52.2, Culture=neutral, PublicKeyToken=0669cf0452175907, processorArchitecture=MSIL">
       <HintPath>..\packages\LinqToExcel.1.11.0\lib\Remotion.dll</HintPath>
     </Reference>
@@ -268,6 +271,12 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\4041.gif" />
+    <Content Include="assets\404style.css" />
+    <Content Include="assets\logo_vanLang.png" />
+    <Content Include="assets\Mainpage.css" />
+    <Content Include="assets\style.css" />
+    <Content Include="assets\VanLang-Logo.png" />
     <Content Include="ContentTemplate\adminlte.min.css" />
     <Content Include="ContentTemplate\alertifyjs\alertify.js" />
     <Content Include="ContentTemplate\alertifyjs\alertify.min.js" />
@@ -4679,6 +4688,8 @@
     <Content Include="Views\tietHoc\Index.cshtml" />
     <Content Include="Views\tietHoc\Create.cshtml" />
     <Content Include="Views\tietHoc\Edit.cshtml" />
+    <Content Include="Views\Home\Test.cshtml" />
+    <Content Include="Views\Shared\NotFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

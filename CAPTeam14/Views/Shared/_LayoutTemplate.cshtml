@@ -3,7 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Team14</title>
+    <link rel="icon" href="~/assets/VanLang-Logo.png">
+    <title>Quản Lý Giảng Dạy và Phân Công</title>
+   
 
     <!--Plugin cũ -->
     <!-- Google Font: Source Sans Pro -->
@@ -47,16 +49,11 @@
         }
     </style>
 
-   
+
     <!-- Tempusdominus Bootstrap 4 -->
     @*  <link rel="stylesheet" href="@Url.Content("~/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css")">*@
     <!-- iCheck -->
     @*<link rel="stylesheet" href="@Url.Content("~/plugins/icheck-bootstrap/icheck-bootstrap.min.css")">*@
-
-
-
-
-
 
     <!-- fullCalendar -->
     <link rel="stylesheet" href="@Url.Content("~/plugins/fullcalendar/main.css")">
@@ -66,7 +63,8 @@
     <!-- -->
     <!-- -->
     <!-- -->
-
+    <!--new css fỏ mainpage-->
+    <link href="@Url.Content("~/assets/Mainpage.css")" rel="stylesheet" />
 
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -80,64 +78,49 @@
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
             <!-- Left navbar links -->
-            
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link"> <b>QUẢN LÝ PHÂN CÔNG GIẢNG DẠY VÀ KHỐI LƯỢNG GIẢNG DẠY CỦA GIẢNG VIÊN KHOA CNTT</b></a>
+                </li>
+            </ul>
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
-                <!-- Navbar Search -->
-                @*<li class="nav-item">
-                        <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-                            <i class="fas fa-search"></i>
-                        </a>
-                        <div class="navbar-search-block">
-                            <form class="form-inline">
-                                <div class="input-group input-group-sm">
-                                    <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-navbar" type="submit">
-                                            <i class="fas fa-search"></i>
-                                        </button>
-                                        <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                                            <i class="fas fa-times"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </li>*@
+                <li class="nav-item">
+                    <b class="nav-link"> @Session["hoten"]</b>
+                </li>
 
-                <!-- Messages Dropdown Menu -->
-                
-                <!-- Notifications Dropdown Menu -->
-                
                 <li class="nav-item">
                     <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                         <i class="fas fa-expand-arrows-alt"></i>
                     </a>
                 </li>
-                
+
             </ul>
         </nav>
         <!-- /.navbar -->
         <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <aside class="main-sidebar sidebar-dark-primary elevation-4" id="bg-sidebar">
             <!-- Brand Logo -->
-            <a href="index3.html" class="brand-link">
-                <img src="@Url.Content("~/dist/img/AdminLTELogo.png")" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">Team 14</span>
+            <a href="~/Home/Index" class="brand-link">
+                <img src="@Url.Content("~/assets/logo_vanLang.png")" alt="vanLang-Logo" width="200px"; height="100px"> </br>
+                @*<span class="brand-text font-weight-light">Team 14</span>*@
             </a>
 
             <!-- Sidebar -->
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
-                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <!--<div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
                         <img src="@Url.Content("~/dist/img/user2-160x160.jpg")" class="img-circle elevation-2" alt="User Image">
-                    </div>
-                    <div class="info">
+                    </div>-->
+                    @*<div class="info">
                         <a href="#" class="d-block">@Session["hoten"]</a>
-                    </div>
-                </div>
+                    </div>*@
+                <!--</div>-->
 
                 <!-- SidebarSearch Form -->
                 @*<div class="form-inline">
@@ -160,24 +143,21 @@
                         @if ((int)Session["role"] == 1)
                         {
                             <li class="nav-item">
-                                <a href="~/Home/Index" class="nav-link">
-
+                                <a href="~/Home/Index" class="nav-link" id="icon-text">
                                     <i class="nav-icon fas fa-calendar-alt"></i>
                                     <p>Trang chủ</p>
                                 </a>
                             </li>
 
                             <li class="nav-item">
-                                <a href="~/giangVien/Index" class="nav-link">
-
-                                    <i class="far fa-circle nav-icon"></i>
+                                <a href="~/giangVien/Index" class="nav-link" id="icon-text">
+                                    <i class="fas fa-user-cog nav-icon"></i>
                                     <p>Phân Quyền</p>
                                 </a>
 
                             </li>
 
                             @*Hiển thị Tree List*@
-
                             @*<li class="nav-item">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-table"></i>
@@ -190,20 +170,15 @@
 
                     <li class="nav-item">
                         <a href="~/giangVien/Index" class="nav-link">
-
-
                             <i class="far fa-circle nav-icon"></i>
                             <p>Phân quyền</p>
                         </a>
                     </li>
-
-
-
                 </ul>
             </li>*@
 
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
+                            @*<li class="nav-item">
+                                <a href="#" class="nav-link" id="icon-text">
                                     <i class="nav-icon fas fa-table"></i>
                                     <p>
                                         Quản Lý Danh Mục
@@ -213,80 +188,88 @@
                                 <ul class="nav nav-treeview">
 
                                     <li class="nav-item">
-                                        <a href="~/Home/Catalog" class="nav-link">
-
-
+                                        <a href="~/Home/Catalog" class="nav-link" id="icon-text">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Nhập File Excel</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
-                                        <a href="~/Nganh/Index" class="nav-link">
+                                        <a href="~/Nganh/Index" class="nav-link" id="icon-text">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Ngành Học</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
-                                        <a href="~/monHoc/Index" class="nav-link">
+                                        <a href="~/monHoc/Index" class="nav-link" id="icon-text">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Môn Học</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
-                                        <a href="~/hocPhan/Index" class="nav-link">
+                                        <a href="~/hocPhan/Index" class="nav-link" id="icon-text">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Học Phần</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
-                                        <a href="~/tuanHoc/Index" class="nav-link">
+                                        <a href="~/tuanHoc/Index" class="nav-link" id="icon-text">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Tuần Học</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
-                                        <a href="~/lopHoc/Index" class="nav-link">
+                                        <a href="~/lopHoc/Index" class="nav-link" id="icon-text">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Lớp Học</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
-                                        <a href="~/phongHoc/Index" class="nav-link">
+                                        <a href="~/phongHoc/Index" class="nav-link" id="icon-text">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Phòng Học</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
-                                        <a href="~/tietHoc/Index" class="nav-link">
+                                        <a href="~/tietHoc/Index" class="nav-link" id="icon-text">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Tiết Học</p>
                                         </a>
                                     </li>
                                 </ul>
-                            </li>
+                            </li>*@
 
 
 
                             <li class="nav-header">-----------------------</li>
 
-                            <li class="nav-item">
-                                <a href="~/Home/Search" class="nav-link">
-
-                                    <i class="far fa-circle nav-icon"></i>
+                            @*<li class="nav-item">
+                                <a href="~/Home/Search" class="nav-link" id="icon-text">
+                                    <i class="nav-icon fas fa-search"></i>
                                     <p>Tìm kiếm</p>
                                 </a>
+                            </li>*@
 
+                            <li class="nav-item">
+                                <a href="@Url.Action("Logout","Account")" class="nav-link">
+                                    <i class="nav-icon fas fa-sign-out-alt" id="icon-text"></i>
+                                    <p id="icon-text">
+                                        Đăng xuất
+                                    </p>
+                                </a>
                             </li>
-                            <li class="nav-header">
-                                @Html.Partial("_LoginPartial")
-                            </li>
+
+                            @* <li class="nav-header">
+                @Html.Partial("_LoginPartial")
+            </li>*@
+
+
                         }
 
 
@@ -294,8 +277,7 @@
                         @if ((int)Session["role"] == 2)
                         {
                             <li class="nav-item">
-                                <a href="~/Home/Index" class="nav-link">
-
+                                <a href="~/Home/Index" class="nav-link" id="icon-text">
                                     <i class="nav-icon fas fa-calendar-alt"></i>
                                     <p>Trang chủ</p>
                                 </a>
@@ -304,7 +286,6 @@
 
 
                             @*Hiển thị Tree List*@
-
                             @*<li class="nav-item">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-table"></i>
@@ -317,20 +298,15 @@
 
                     <li class="nav-item">
                         <a href="~/giangVien/Index" class="nav-link">
-
-
                             <i class="far fa-circle nav-icon"></i>
                             <p>Phân quyền</p>
                         </a>
                     </li>
-
-
-
                 </ul>
             </li>*@
 
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="#" class="nav-link" id="icon-text">
                                     <i class="nav-icon fas fa-table"></i>
                                     <p>
                                         Quản Lý Danh Mục
@@ -340,58 +316,56 @@
                                 <ul class="nav nav-treeview">
 
                                     <li class="nav-item">
-                                        <a href="~/Home/Catalog" class="nav-link">
-
-
+                                        <a href="~/Home/Catalog" class="nav-link" id="icon-text">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Nhập File Excel</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
-                                        <a href="~/Nganh/Index" class="nav-link">
+                                        <a href="~/Nganh/Index" class="nav-link" id="icon-text">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Ngành Học</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
-                                        <a href="~/monHoc/Index" class="nav-link">
+                                        <a href="~/monHoc/Index" class="nav-link" id="icon-text">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Môn Học</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
-                                        <a href="~/hocPhan/Index" class="nav-link">
+                                        <a href="~/hocPhan/Index" class="nav-link" id="icon-text">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Học Phần</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
-                                        <a href="~/tuanHoc/Index" class="nav-link">
+                                        <a href="~/tuanHoc/Index" class="nav-link" id="icon-text">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Tuần Học</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
-                                        <a href="~/lopHoc/Index" class="nav-link">
+                                        <a href="~/lopHoc/Index" class="nav-link" id="icon-text">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Lớp Học</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
-                                        <a href="~/phongHoc/Index" class="nav-link">
+                                        <a href="~/phongHoc/Index" class="nav-link" id="icon-text">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Phòng Học</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
-                                        <a href="~/tietHoc/Index" class="nav-link">
+                                        <a href="~/tietHoc/Index" class="nav-link" id="icon-text">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Tiết Học</p>
                                         </a>
@@ -403,34 +377,42 @@
 
                             <li class="nav-header">-----------------------</li>
 
-                            <li class="nav-item">
-                                <a href="~/Home/Search" class="nav-link">
-
-                                    <i class="far fa-circle nav-icon"></i>
+                            @*<li class="nav-item">
+                                <a href="~/Home/Search" class="nav-link" id="icon-text">
+                                    <i class="nav-icon fas fa-search"></i>
                                     <p>Tìm kiếm</p>
                                 </a>
+                            </li>*@
 
+                            <li class="nav-item">
+                                <a href="@Url.Action("Logout","Account")" class="nav-link">
+                                    <i class="nav-icon fas fa-sign-out-alt" id="icon-text"></i>
+                                    <p id="icon-text">
+                                        Đăng xuất
+                                    </p>
+                                </a>
                             </li>
-                            <li class="nav-header">
-                                @Html.Partial("_LoginPartial")
-                            </li>
+
+                            @* <li class="nav-header">
+                @Html.Partial("_LoginPartial")
+            </li>*@
+
+
                         }
 
                         <!-- Quyền Bộ môn-->
                         @if ((int)Session["role"] == 3)
                         {
                             <li class="nav-item">
-                                <a href="~/Home/Index" class="nav-link">
-
+                                <a href="~/Home/Index" class="nav-link" id="icon-text">
                                     <i class="nav-icon fas fa-calendar-alt"></i>
                                     <p>Trang chủ</p>
                                 </a>
                             </li>
 
-
+                           
 
                             @*Hiển thị Tree List*@
-
                             @*<li class="nav-item">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-table"></i>
@@ -443,20 +425,15 @@
 
                     <li class="nav-item">
                         <a href="~/giangVien/Index" class="nav-link">
-
-
                             <i class="far fa-circle nav-icon"></i>
                             <p>Phân quyền</p>
                         </a>
                     </li>
-
-
-
                 </ul>
             </li>*@
 
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="#" class="nav-link" id="icon-text">
                                     <i class="nav-icon fas fa-table"></i>
                                     <p>
                                         Quản Lý Danh Mục
@@ -465,52 +442,52 @@
                                 </a>
                                 <ul class="nav nav-treeview">
 
-
+                                   
 
                                     <li class="nav-item">
-                                        <a href="~/Nganh/Index" class="nav-link">
+                                        <a href="~/Nganh/Index" class="nav-link" id="icon-text">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Ngành Học</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
-                                        <a href="~/monHoc/Index" class="nav-link">
+                                        <a href="~/monHoc/Index" class="nav-link" id="icon-text">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Môn Học</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
-                                        <a href="~/hocPhan/Index" class="nav-link">
+                                        <a href="~/hocPhan/Index" class="nav-link" id="icon-text">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Học Phần</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
-                                        <a href="~/tuanHoc/Index" class="nav-link">
+                                        <a href="~/tuanHoc/Index" class="nav-link" id="icon-text">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Tuần Học</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
-                                        <a href="~/lopHoc/Index" class="nav-link">
+                                        <a href="~/lopHoc/Index" class="nav-link" id="icon-text">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Lớp Học</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
-                                        <a href="~/phongHoc/Index" class="nav-link">
+                                        <a href="~/phongHoc/Index" class="nav-link" id="icon-text">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Phòng Học</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
-                                        <a href="~/tietHoc/Index" class="nav-link">
+                                        <a href="~/tietHoc/Index" class="nav-link" id="icon-text">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Tiết Học</p>
                                         </a>
@@ -522,24 +499,34 @@
 
                             <li class="nav-header">-----------------------</li>
 
-                            <li class="nav-item">
-                                <a href="~/Home/Search" class="nav-link">
-
-                                    <i class="far fa-circle nav-icon"></i>
+                            @*<li class="nav-item">
+                                <a href="~/Home/Search" class="nav-link" id="icon-text">
+                                    <i class="nav-icon fas fa-search"></i>
                                     <p>Tìm kiếm</p>
                                 </a>
+                            </li>*@
 
+                            <li class="nav-item">
+                                <a href="@Url.Action("Logout","Account")" class="nav-link">
+                                    <i class="nav-icon fas fa-sign-out-alt" id="icon-text"></i>
+                                    <p id="icon-text">
+                                        Đăng xuất
+                                    </p>
+                                </a>
                             </li>
-                            <li class="nav-header">
-                                @Html.Partial("_LoginPartial")
-                            </li>
+
+                            @* <li class="nav-header">
+                @Html.Partial("_LoginPartial")
+            </li>*@
+
+
                         }
 
                         <!-- Quyền Giảng viên-->
                         @if ((int)Session["role"] == 4)
                         {
                             <li class="nav-item">
-                                <a href="~/Home/Index" class="nav-link">
+                                <a href="~/Home/Index" class="nav-link" id="icon-text">
 
                                     <i class="nav-icon fas fa-calendar-alt"></i>
                                     <p>Trang chủ</p>
@@ -549,16 +536,22 @@
 
                             <li class="nav-header">-----------------------</li>
 
-                            <li class="nav-item">
-                                <a href="~/Home/Search" class="nav-link">
+                            @*<li class="nav-item">
+                                <a href="~/Home/Search" class="nav-link" id="icon-text">
 
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Tìm kiếm</p>
                                 </a>
 
-                            </li>
-                            <li class="nav-header">
-                                @Html.Partial("_LoginPartial")
+                            </li>*@
+
+                            <li class="nav-item">
+                                <a href="@Url.Action("Logout","Account")" class="nav-link">
+                                    <i class="nav-icon fas fa-table" id="icon-text"></i>
+                                    <p id="icon-text">
+                                        Đăng xuất
+                                    </p>
+                                </a>
                             </li>
                         }
 
@@ -577,10 +570,10 @@
         @RenderBody()
         <!-- /.content-wrapper -->
         <footer class="main-footer">
-            <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
-            All rights reserved.
+            <strong>Copyright &copy; 2020-2021 - TEAM 14.</strong>
+            
             <div class="float-right d-none d-sm-inline-block">
-                <b>Version</b> 3.1.0
+                <b>CAPSTONE PROJECT.</b>
             </div>
         </footer>
 
