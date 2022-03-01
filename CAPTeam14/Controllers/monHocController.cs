@@ -238,7 +238,7 @@ namespace CAPTeam14.Controllers
             var monHoc = model.monHocs.FirstOrDefault(x => x.ID == id);
             string ten = monHoc.tenMon;
             string maMon = monHoc.maMon;
-            int? tinChi = monHoc.tinChi;
+            string tinChi = monHoc.tinChi;
             string tenKhac = monHoc.tengoiKhac;
             
 

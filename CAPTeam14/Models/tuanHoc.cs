@@ -21,10 +21,10 @@ namespace CAPTeam14.Models
         }
     
         public int ID { get; set; }
-        public Nullable<int> thuS { get; set; }
-        public Nullable<int> tuanBD { get; set; }
+        public string thuS { get; set; }
+        public string tuanBD { get; set; }
         public string tuanHoc1 { get; set; }
-        public Nullable<int> tuanKT { get; set; }
+        public string tuanKT { get; set; }
         public string thu { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -148,7 +148,7 @@ namespace CAPTeam14.Controllers
             model.Configuration.ProxyCreationEnabled = false;
             var nganh = model.Nganhs.FirstOrDefault(x => x.ID == id);
             string ten = nganh.tenNganh;
-            int? ma = nganh.maNganh;
+            string ma = nganh.maNganh;
             
             var ab = new { a = ten, b = ma};
             return Json(ab, JsonRequestBehavior.AllowGet);

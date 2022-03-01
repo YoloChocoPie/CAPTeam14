@@ -23,7 +23,7 @@ namespace CAPTeam14.Models
         public int ID { get; set; }
         public string maMon { get; set; }
         public string tenMon { get; set; }
-        public Nullable<int> tinChi { get; set; }
+        public string tinChi { get; set; }
         public string tengoiKhac { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -197,7 +197,7 @@ namespace CAPTeam14.Controllers
             string ma = hocPhan.maLHP;
             string loai = hocPhan.loaiHP;
             string tinhtrang = hocPhan.tinhtrangLHP;
-            int? tong = hocPhan.TSMH;
+            string tong = hocPhan.TSMH;
 
 
             var abcde = new { a = magoc, b = ma, c = loai, d = tinhtrang, e = tong };

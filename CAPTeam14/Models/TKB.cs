@@ -23,7 +23,9 @@ namespace CAPTeam14.Models
         public Nullable<int> ID_Tuan { get; set; }
         public Nullable<int> ID_Tiet { get; set; }
         public Nullable<int> ID_GV { get; set; }
+        public Nullable<int> ID_hocKy { get; set; }
     
+        public virtual hocKy hocKy { get; set; }
         public virtual hocPhan hocPhan { get; set; }
         public virtual lopHoc lopHoc { get; set; }
         public virtual monHoc monHoc { get; set; }

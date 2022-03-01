@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="CP24Team14Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="CP24Team14Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -66,6 +66,15 @@
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
+        <EntityType Name="hocKy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tenHK" Type="nvarchar(max)" />
+          <Property Name="namBD" Type="nvarchar(max)" />
+          <Property Name="namKT" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="hocPhan">
           <Key>
             <PropertyRef Name="ID" />
@@ -75,7 +84,7 @@
           <Property Name="maLHP" Type="nvarchar(max)" />
           <Property Name="loaiHP" Type="nvarchar(max)" />
           <Property Name="tinhtrangLHP" Type="nvarchar(max)" />
-          <Property Name="TSMH" Type="int" />
+          <Property Name="TSMH" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="lopHoc">
           <Key>
@@ -91,7 +100,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="maMon" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="tenMon" Type="nvarchar" MaxLength="256" Nullable="false" />
-          <Property Name="tinChi" Type="int" />
+          <Property Name="tinChi" Type="nvarchar" MaxLength="256" />
           <Property Name="tengoiKhac" Type="nvarchar" MaxLength="256" />
         </EntityType>
         <EntityType Name="Nganh">
@@ -99,7 +108,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="maNganh" Type="int" />
+          <Property Name="maNganh" Type="nvarchar(max)" />
           <Property Name="tenNganh" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="nguoiDung">
@@ -122,10 +131,10 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="loaiPhong" Type="nvarchar(max)" />
-          <Property Name="sucChua" Type="int" />
-          <Property Name="siSo" Type="int" />
-          <Property Name="trong" Type="int" />
-          <Property Name="soSVDK" Type="int" />
+          <Property Name="sucChua" Type="nvarchar(max)" />
+          <Property Name="siSo" Type="nvarchar(max)" />
+          <Property Name="trong" Type="nvarchar(max)" />
+          <Property Name="soSVDK" Type="nvarchar(max)" />
           <Property Name="maPhong" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -143,11 +152,11 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="tongTiet" Type="int" />
-          <Property Name="soTiet" Type="int" />
+          <Property Name="tongTiet" Type="nvarchar" MaxLength="128" />
+          <Property Name="soTiet" Type="nvarchar" MaxLength="128" />
           <Property Name="tietHoc" Type="nvarchar" MaxLength="128" />
-          <Property Name="tietS" Type="int" />
-          <Property Name="tietBD" Type="int" />
+          <Property Name="tietS" Type="nvarchar" MaxLength="128" />
+          <Property Name="tietBD" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="TKB">
           <Key>
@@ -162,16 +171,17 @@
           <Property Name="ID_Tuan" Type="int" />
           <Property Name="ID_Tiet" Type="int" />
           <Property Name="ID_GV" Type="int" />
+          <Property Name="ID_hocKy" Type="int" />
         </EntityType>
         <EntityType Name="tuanHoc">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="thuS" Type="int" />
-          <Property Name="tuanBD" Type="int" />
+          <Property Name="thuS" Type="nvarchar(max)" />
+          <Property Name="tuanBD" Type="nvarchar(max)" />
           <Property Name="tuanHoc" Type="nvarchar(max)" />
-          <Property Name="tuanKT" Type="int" />
+          <Property Name="tuanKT" Type="nvarchar(max)" />
           <Property Name="thu" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <Association Name="FK_AspNetUser">
@@ -239,6 +249,443 @@
             </Principal>
             <Dependent Role="AspNetUserRoles">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_hocPhan">
+          <End Role="hocPhan" Type="Self.hocPhan" Multiplicity="0..1" />
+          <End Role="TKB" Type="Self.TKB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hocPhan">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TKB">
+              <PropertyRef Name="ID_hocPhan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TKB_hocKy">
+          <End Role="hocKy" Type="Self.hocKy" Multiplicity="0..1" />
+          <End Role="TKB" Type="Self.TKB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hocKy">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TKB">
+              <PropertyRef Name="ID_hocKy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TKB_lopHoc">
+          <End Role="lopHoc" Type="Self.lopHoc" Multiplicity="0..1" />
+          <End Role="TKB" Type="Self.TKB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lopHoc">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TKB">
+              <PropertyRef Name="ID_Lop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TKB_monHoc">
+          <End Role="monHoc" Type="Self.monHoc" Multiplicity="0..1" />
+          <End Role="TKB" Type="Self.TKB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="monHoc">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TKB">
+              <PropertyRef Name="ID_monHoc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TKB_Nganh">
+          <End Role="Nganh" Type="Self.Nganh" Multiplicity="0..1" />
+          <End Role="TKB" Type="Self.TKB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nganh">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TKB">
+              <PropertyRef Name="ID_Nganh" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TKB_nguoiDung">
+          <End Role="nguoiDung" Type="Self.nguoiDung" Multiplicity="0..1" />
+          <End Role="TKB" Type="Self.TKB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nguoiDung">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TKB">
+              <PropertyRef Name="ID_GV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TKB_phongHoc">
+          <End Role="phongHoc" Type="Self.phongHoc" Multiplicity="0..1" />
+          <End Role="TKB" Type="Self.TKB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="phongHoc">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TKB">
+              <PropertyRef Name="ID_Phong" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TKB_tietHoc">
+          <End Role="tietHoc" Type="Self.tietHoc" Multiplicity="0..1" />
+          <End Role="TKB" Type="Self.TKB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tietHoc">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TKB">
+              <PropertyRef Name="ID_Tiet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TKB_tuanHoc">
+          <End Role="tuanHoc" Type="Self.tuanHoc" Multiplicity="0..1" />
+          <End Role="TKB" Type="Self.TKB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tuanHoc">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TKB">
+              <PropertyRef Name="ID_Tuan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CP24Team14ModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="hocKy" EntityType="Self.hocKy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="hocPhan" EntityType="Self.hocPhan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="lopHoc" EntityType="Self.lopHoc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="monHoc" EntityType="Self.monHoc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Nganh" EntityType="Self.Nganh" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="nguoiDung" EntityType="Self.nguoiDung" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="phongHoc" EntityType="Self.phongHoc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tietHoc" EntityType="Self.tietHoc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TKB" EntityType="Self.TKB" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tuanHoc" EntityType="Self.tuanHoc" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AspNetUser" Association="Self.FK_AspNetUser">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="nguoiDung" EntitySet="nguoiDung" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_hocPhan" Association="Self.FK_hocPhan">
+            <End Role="hocPhan" EntitySet="hocPhan" />
+            <End Role="TKB" EntitySet="TKB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TKB_hocKy" Association="Self.FK_TKB_hocKy">
+            <End Role="hocKy" EntitySet="hocKy" />
+            <End Role="TKB" EntitySet="TKB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TKB_lopHoc" Association="Self.FK_TKB_lopHoc">
+            <End Role="lopHoc" EntitySet="lopHoc" />
+            <End Role="TKB" EntitySet="TKB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TKB_monHoc" Association="Self.FK_TKB_monHoc">
+            <End Role="monHoc" EntitySet="monHoc" />
+            <End Role="TKB" EntitySet="TKB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TKB_Nganh" Association="Self.FK_TKB_Nganh">
+            <End Role="Nganh" EntitySet="Nganh" />
+            <End Role="TKB" EntitySet="TKB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TKB_nguoiDung" Association="Self.FK_TKB_nguoiDung">
+            <End Role="nguoiDung" EntitySet="nguoiDung" />
+            <End Role="TKB" EntitySet="TKB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TKB_phongHoc" Association="Self.FK_TKB_phongHoc">
+            <End Role="phongHoc" EntitySet="phongHoc" />
+            <End Role="TKB" EntitySet="TKB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TKB_tietHoc" Association="Self.FK_TKB_tietHoc">
+            <End Role="tietHoc" EntitySet="tietHoc" />
+            <End Role="TKB" EntitySet="TKB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TKB_tuanHoc" Association="Self.FK_TKB_tuanHoc">
+            <End Role="tuanHoc" EntitySet="tuanHoc" />
+            <End Role="TKB" EntitySet="TKB" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CP24Team14Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogin">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="nguoiDungs" Relationship="Self.FK_AspNetUser" FromRole="AspNetUsers" ToRole="nguoiDung" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+        </EntityType>
+        <EntityType Name="hocKy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tenHK" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="namBD" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="namKT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TKBs" Relationship="Self.FK_TKB_hocKy" FromRole="hocKy" ToRole="TKB" />
+        </EntityType>
+        <EntityType Name="hocPhan">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="maGocLHP" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="maLHP" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="loaiHP" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="tinhtrangLHP" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TSMH" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TKBs" Relationship="Self.FK_hocPhan" FromRole="hocPhan" ToRole="TKB" />
+        </EntityType>
+        <EntityType Name="lopHoc">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="maLop" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TKBs" Relationship="Self.FK_TKB_lopHoc" FromRole="lopHoc" ToRole="TKB" />
+        </EntityType>
+        <EntityType Name="monHoc">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="maMon" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="tenMon" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="tinChi" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="tengoiKhac" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TKBs" Relationship="Self.FK_TKB_monHoc" FromRole="monHoc" ToRole="TKB" />
+        </EntityType>
+        <EntityType Name="Nganh">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="maNganh" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="tenNganh" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TKBs" Relationship="Self.FK_TKB_Nganh" FromRole="Nganh" ToRole="TKB" />
+        </EntityType>
+        <EntityType Name="nguoiDung">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="maGV" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tenGV" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="loaiGV" Type="Boolean" />
+          <Property Name="khoa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="gioiTinh" Type="Boolean" />
+          <Property Name="role" Type="Int32" />
+          <Property Name="sdt" Type="Int32" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_AspNetUser" FromRole="nguoiDung" ToRole="AspNetUsers" />
+          <NavigationProperty Name="TKBs" Relationship="Self.FK_TKB_nguoiDung" FromRole="nguoiDung" ToRole="TKB" />
+        </EntityType>
+        <EntityType Name="phongHoc">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="loaiPhong" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="sucChua" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="siSo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="trong" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="soSVDK" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="maPhong" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TKBs" Relationship="Self.FK_TKB_phongHoc" FromRole="phongHoc" ToRole="TKB" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tietHoc">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tongTiet" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="soTiet" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="tietHoc1" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="tietS" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="tietBD" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TKBs" Relationship="Self.FK_TKB_tietHoc" FromRole="tietHoc" ToRole="TKB" />
+        </EntityType>
+        <EntityType Name="TKB">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_hocPhan" Type="Int32" />
+          <Property Name="ID_monHoc" Type="Int32" />
+          <Property Name="ID_Lop" Type="Int32" />
+          <Property Name="ID_Phong" Type="Int32" />
+          <Property Name="ID_Nganh" Type="Int32" />
+          <Property Name="ID_Tuan" Type="Int32" />
+          <Property Name="ID_Tiet" Type="Int32" />
+          <Property Name="ID_GV" Type="Int32" />
+          <Property Name="ID_hocKy" Type="Int32" />
+          <NavigationProperty Name="hocKy" Relationship="Self.FK_TKB_hocKy" FromRole="TKB" ToRole="hocKy" />
+          <NavigationProperty Name="hocPhan" Relationship="Self.FK_hocPhan" FromRole="TKB" ToRole="hocPhan" />
+          <NavigationProperty Name="lopHoc" Relationship="Self.FK_TKB_lopHoc" FromRole="TKB" ToRole="lopHoc" />
+          <NavigationProperty Name="monHoc" Relationship="Self.FK_TKB_monHoc" FromRole="TKB" ToRole="monHoc" />
+          <NavigationProperty Name="Nganh" Relationship="Self.FK_TKB_Nganh" FromRole="TKB" ToRole="Nganh" />
+          <NavigationProperty Name="nguoiDung" Relationship="Self.FK_TKB_nguoiDung" FromRole="TKB" ToRole="nguoiDung" />
+          <NavigationProperty Name="phongHoc" Relationship="Self.FK_TKB_phongHoc" FromRole="TKB" ToRole="phongHoc" />
+          <NavigationProperty Name="tietHoc" Relationship="Self.FK_TKB_tietHoc" FromRole="TKB" ToRole="tietHoc" />
+          <NavigationProperty Name="tuanHoc" Relationship="Self.FK_TKB_tuanHoc" FromRole="TKB" ToRole="tuanHoc" />
+        </EntityType>
+        <EntityType Name="tuanHoc">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="thuS" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="tuanBD" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="tuanHoc1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="tuanKT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="thu" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TKBs" Relationship="Self.FK_TKB_tuanHoc" FromRole="tuanHoc" ToRole="TKB" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUser">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+          <End Role="nguoiDung" Type="Self.nguoiDung" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="nguoiDung">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TKB_hocKy">
+          <End Role="hocKy" Type="Self.hocKy" Multiplicity="0..1" />
+          <End Role="TKB" Type="Self.TKB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hocKy">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TKB">
+              <PropertyRef Name="ID_hocKy" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -338,271 +785,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="CP24Team14ModelStoreContainer">
-          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="hocPhan" EntityType="Self.hocPhan" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="lopHoc" EntityType="Self.lopHoc" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="monHoc" EntityType="Self.monHoc" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Nganh" EntityType="Self.Nganh" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="nguoiDung" EntityType="Self.nguoiDung" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="phongHoc" EntityType="Self.phongHoc" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tietHoc" EntityType="Self.tietHoc" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TKB" EntityType="Self.TKB" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tuanHoc" EntityType="Self.tuanHoc" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_AspNetUser" Association="Self.FK_AspNetUser">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="nguoiDung" EntitySet="nguoiDung" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
-            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
-          </AssociationSet>
-          <AssociationSet Name="FK_hocPhan" Association="Self.FK_hocPhan">
-            <End Role="hocPhan" EntitySet="hocPhan" />
-            <End Role="TKB" EntitySet="TKB" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TKB_lopHoc" Association="Self.FK_TKB_lopHoc">
-            <End Role="lopHoc" EntitySet="lopHoc" />
-            <End Role="TKB" EntitySet="TKB" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TKB_monHoc" Association="Self.FK_TKB_monHoc">
-            <End Role="monHoc" EntitySet="monHoc" />
-            <End Role="TKB" EntitySet="TKB" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TKB_Nganh" Association="Self.FK_TKB_Nganh">
-            <End Role="Nganh" EntitySet="Nganh" />
-            <End Role="TKB" EntitySet="TKB" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TKB_nguoiDung" Association="Self.FK_TKB_nguoiDung">
-            <End Role="nguoiDung" EntitySet="nguoiDung" />
-            <End Role="TKB" EntitySet="TKB" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TKB_phongHoc" Association="Self.FK_TKB_phongHoc">
-            <End Role="phongHoc" EntitySet="phongHoc" />
-            <End Role="TKB" EntitySet="TKB" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TKB_tietHoc" Association="Self.FK_TKB_tietHoc">
-            <End Role="tietHoc" EntitySet="tietHoc" />
-            <End Role="TKB" EntitySet="TKB" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TKB_tuanHoc" Association="Self.FK_TKB_tuanHoc">
-            <End Role="tuanHoc" EntitySet="tuanHoc" />
-            <End Role="TKB" EntitySet="TKB" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema></edmx:StorageModels>
-    <!-- CSDL content -->
-    <edmx:ConceptualModels>
-      <Schema Namespace="CP24Team14Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="C__MigrationHistory">
-          <Key>
-            <PropertyRef Name="MigrationId" />
-            <PropertyRef Name="ContextKey" />
-          </Key>
-          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
-        </EntityType>
-        <EntityType Name="AspNetRole">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
-        </EntityType>
-        <EntityType Name="AspNetUserClaim">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
-        </EntityType>
-        <EntityType Name="AspNetUserLogin">
-          <Key>
-            <PropertyRef Name="LoginProvider" />
-            <PropertyRef Name="ProviderKey" />
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
-        </EntityType>
-        <EntityType Name="AspNetUser">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
-          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
-          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
-          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
-          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
-          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
-          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
-          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
-          <NavigationProperty Name="nguoiDungs" Relationship="Self.FK_AspNetUser" FromRole="AspNetUsers" ToRole="nguoiDung" />
-          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
-        </EntityType>
-        <EntityType Name="lopHoc">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="maLop" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="TKBs" Relationship="CP24Team14Model.FK_TKB_lopHoc" FromRole="lopHoc" ToRole="TKB" />
-        </EntityType>
-        <EntityType Name="monHoc">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="maMon" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="tenMon" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="tinChi" Type="Int32" />
-          <Property Name="tengoiKhac" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="TKBs" Relationship="CP24Team14Model.FK_TKB_monHoc" FromRole="monHoc" ToRole="TKB" />
-        </EntityType>
-        <EntityType Name="Nganh">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="maNganh" Type="Int32" />
-          <Property Name="tenNganh" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="TKBs" Relationship="CP24Team14Model.FK_TKB_Nganh" FromRole="Nganh" ToRole="TKB" />
-        </EntityType>
-        <EntityType Name="nguoiDung">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="userID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="maGV" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="tenGV" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="loaiGV" Type="Boolean" />
-          <Property Name="khoa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="gioiTinh" Type="Boolean" />
-          <Property Name="role" Type="Int32" />
-          <Property Name="sdt" Type="Int32" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_AspNetUser" FromRole="nguoiDung" ToRole="AspNetUsers" />
-          <NavigationProperty Name="TKBs" Relationship="CP24Team14Model.FK_TKB_nguoiDung" FromRole="nguoiDung" ToRole="TKB" />
-        </EntityType>
-        <EntityType Name="phongHoc">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="loaiPhong" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="sucChua" Type="Int32" />
-          <Property Name="siSo" Type="Int32" />
-          <Property Name="trong" Type="Int32" />
-          <Property Name="soSVDK" Type="Int32" />
-          <Property Name="maPhong" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="TKBs" Relationship="CP24Team14Model.FK_TKB_phongHoc" FromRole="phongHoc" ToRole="TKB" />
-        </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
-        <EntityType Name="tietHoc">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="tongTiet" Type="Int32" />
-          <Property Name="soTiet" Type="Int32" />
-          <Property Name="tietHoc1" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="tietS" Type="Int32" />
-          <Property Name="tietBD" Type="Int32" />
-          <NavigationProperty Name="TKBs" Relationship="CP24Team14Model.FK_TKB_tietHoc" FromRole="tietHoc" ToRole="TKB" />
-        </EntityType>
-        <EntityType Name="tuanHoc">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="thuS" Type="Int32" />
-          <Property Name="tuanBD" Type="Int32" />
-          <Property Name="tuanHoc1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="tuanKT" Type="Int32" />
-          <Property Name="thu" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="TKBs" Relationship="CP24Team14Model.FK_TKB_tuanHoc" FromRole="tuanHoc" ToRole="TKB" />
-        </EntityType>
-        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserClaims">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserLogins">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AspNetUser">
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
-          <End Role="nguoiDung" Type="Self.nguoiDung" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="nguoiDung">
-              <PropertyRef Name="userID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="AspNetUserRoles">
           <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
@@ -613,6 +795,8 @@
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+          <EntitySet Name="hocKies" EntityType="Self.hocKy" />
+          <EntitySet Name="hocPhans" EntityType="Self.hocPhan" />
           <EntitySet Name="lopHocs" EntityType="Self.lopHoc" />
           <EntitySet Name="monHocs" EntityType="Self.monHoc" />
           <EntitySet Name="Nganhs" EntityType="Self.Nganh" />
@@ -620,6 +804,7 @@
           <EntitySet Name="phongHocs" EntityType="Self.phongHoc" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="tietHocs" EntityType="Self.tietHoc" />
+          <EntitySet Name="TKBs" EntityType="Self.TKB" />
           <EntitySet Name="tuanHocs" EntityType="Self.tuanHoc" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -633,175 +818,47 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="nguoiDung" EntitySet="nguoiDungs" />
           </AssociationSet>
+          <AssociationSet Name="FK_TKB_hocKy" Association="Self.FK_TKB_hocKy">
+            <End Role="hocKy" EntitySet="hocKies" />
+            <End Role="TKB" EntitySet="TKBs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_hocPhan" Association="Self.FK_hocPhan">
+            <End Role="hocPhan" EntitySet="hocPhans" />
+            <End Role="TKB" EntitySet="TKBs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TKB_lopHoc" Association="Self.FK_TKB_lopHoc">
+            <End Role="lopHoc" EntitySet="lopHocs" />
+            <End Role="TKB" EntitySet="TKBs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TKB_monHoc" Association="Self.FK_TKB_monHoc">
+            <End Role="monHoc" EntitySet="monHocs" />
+            <End Role="TKB" EntitySet="TKBs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TKB_Nganh" Association="Self.FK_TKB_Nganh">
+            <End Role="Nganh" EntitySet="Nganhs" />
+            <End Role="TKB" EntitySet="TKBs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TKB_nguoiDung" Association="Self.FK_TKB_nguoiDung">
+            <End Role="nguoiDung" EntitySet="nguoiDungs" />
+            <End Role="TKB" EntitySet="TKBs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TKB_phongHoc" Association="Self.FK_TKB_phongHoc">
+            <End Role="phongHoc" EntitySet="phongHocs" />
+            <End Role="TKB" EntitySet="TKBs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TKB_tietHoc" Association="Self.FK_TKB_tietHoc">
+            <End Role="tietHoc" EntitySet="tietHocs" />
+            <End Role="TKB" EntitySet="TKBs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TKB_tuanHoc" Association="Self.FK_TKB_tuanHoc">
+            <End Role="tuanHoc" EntitySet="tuanHocs" />
+            <End Role="TKB" EntitySet="TKBs" />
+          </AssociationSet>
           <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
-          <EntitySet Name="hocPhans" EntityType="CP24Team14Model.hocPhan" />
-          <EntitySet Name="TKBs" EntityType="CP24Team14Model.TKB" />
-          <AssociationSet Name="FK_hocPhan" Association="CP24Team14Model.FK_hocPhan">
-            <End Role="hocPhan" EntitySet="hocPhans" />
-            <End Role="TKB" EntitySet="TKBs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TKB_lopHoc" Association="CP24Team14Model.FK_TKB_lopHoc">
-            <End Role="lopHoc" EntitySet="lopHocs" />
-            <End Role="TKB" EntitySet="TKBs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TKB_monHoc" Association="CP24Team14Model.FK_TKB_monHoc">
-            <End Role="monHoc" EntitySet="monHocs" />
-            <End Role="TKB" EntitySet="TKBs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TKB_Nganh" Association="CP24Team14Model.FK_TKB_Nganh">
-            <End Role="Nganh" EntitySet="Nganhs" />
-            <End Role="TKB" EntitySet="TKBs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TKB_nguoiDung" Association="CP24Team14Model.FK_TKB_nguoiDung">
-            <End Role="nguoiDung" EntitySet="nguoiDungs" />
-            <End Role="TKB" EntitySet="TKBs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TKB_phongHoc" Association="CP24Team14Model.FK_TKB_phongHoc">
-            <End Role="phongHoc" EntitySet="phongHocs" />
-            <End Role="TKB" EntitySet="TKBs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TKB_tietHoc" Association="CP24Team14Model.FK_TKB_tietHoc">
-            <End Role="tietHoc" EntitySet="tietHocs" />
-            <End Role="TKB" EntitySet="TKBs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TKB_tuanHoc" Association="CP24Team14Model.FK_TKB_tuanHoc">
-            <End Role="tuanHoc" EntitySet="tuanHocs" />
-            <End Role="TKB" EntitySet="TKBs" />
-          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="hocPhan">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="maGocLHP" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="maLHP" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="loaiHP" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="tinhtrangLHP" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="TSMH" Type="Int32" />
-          <NavigationProperty Name="TKBs" Relationship="CP24Team14Model.FK_hocPhan" FromRole="hocPhan" ToRole="TKB" />
-        </EntityType>
-        <EntityType Name="TKB">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ID_hocPhan" Type="Int32" />
-          <Property Name="ID_monHoc" Type="Int32" />
-          <Property Name="ID_Lop" Type="Int32" />
-          <Property Name="ID_Phong" Type="Int32" />
-          <Property Name="ID_Nganh" Type="Int32" />
-          <Property Name="ID_Tuan" Type="Int32" />
-          <Property Name="ID_Tiet" Type="Int32" />
-          <Property Name="ID_GV" Type="Int32" />
-          <NavigationProperty Name="hocPhan" Relationship="CP24Team14Model.FK_hocPhan" FromRole="TKB" ToRole="hocPhan" />
-          <NavigationProperty Name="lopHoc" Relationship="CP24Team14Model.FK_TKB_lopHoc" FromRole="TKB" ToRole="lopHoc" />
-          <NavigationProperty Name="monHoc" Relationship="CP24Team14Model.FK_TKB_monHoc" FromRole="TKB" ToRole="monHoc" />
-          <NavigationProperty Name="Nganh" Relationship="CP24Team14Model.FK_TKB_Nganh" FromRole="TKB" ToRole="Nganh" />
-          <NavigationProperty Name="nguoiDung" Relationship="CP24Team14Model.FK_TKB_nguoiDung" FromRole="TKB" ToRole="nguoiDung" />
-          <NavigationProperty Name="phongHoc" Relationship="CP24Team14Model.FK_TKB_phongHoc" FromRole="TKB" ToRole="phongHoc" />
-          <NavigationProperty Name="tietHoc" Relationship="CP24Team14Model.FK_TKB_tietHoc" FromRole="TKB" ToRole="tietHoc" />
-          <NavigationProperty Name="tuanHoc" Relationship="CP24Team14Model.FK_TKB_tuanHoc" FromRole="TKB" ToRole="tuanHoc" />
-        </EntityType>
-        <Association Name="FK_hocPhan">
-          <End Type="CP24Team14Model.hocPhan" Role="hocPhan" Multiplicity="0..1" />
-          <End Type="CP24Team14Model.TKB" Role="TKB" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="hocPhan">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="TKB">
-              <PropertyRef Name="ID_hocPhan" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TKB_lopHoc">
-          <End Type="CP24Team14Model.lopHoc" Role="lopHoc" Multiplicity="0..1" />
-          <End Type="CP24Team14Model.TKB" Role="TKB" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="lopHoc">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="TKB">
-              <PropertyRef Name="ID_Lop" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TKB_monHoc">
-          <End Type="CP24Team14Model.monHoc" Role="monHoc" Multiplicity="0..1" />
-          <End Type="CP24Team14Model.TKB" Role="TKB" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="monHoc">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="TKB">
-              <PropertyRef Name="ID_monHoc" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TKB_Nganh">
-          <End Type="CP24Team14Model.Nganh" Role="Nganh" Multiplicity="0..1" />
-          <End Type="CP24Team14Model.TKB" Role="TKB" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Nganh">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="TKB">
-              <PropertyRef Name="ID_Nganh" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TKB_nguoiDung">
-          <End Type="CP24Team14Model.nguoiDung" Role="nguoiDung" Multiplicity="0..1" />
-          <End Type="CP24Team14Model.TKB" Role="TKB" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="nguoiDung">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="TKB">
-              <PropertyRef Name="ID_GV" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TKB_phongHoc">
-          <End Type="CP24Team14Model.phongHoc" Role="phongHoc" Multiplicity="0..1" />
-          <End Type="CP24Team14Model.TKB" Role="TKB" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="phongHoc">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="TKB">
-              <PropertyRef Name="ID_Phong" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TKB_tietHoc">
-          <End Type="CP24Team14Model.tietHoc" Role="tietHoc" Multiplicity="0..1" />
-          <End Type="CP24Team14Model.TKB" Role="TKB" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tietHoc">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="TKB">
-              <PropertyRef Name="ID_Tiet" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TKB_tuanHoc">
-          <End Type="CP24Team14Model.tuanHoc" Role="tuanHoc" Multiplicity="0..1" />
-          <End Type="CP24Team14Model.TKB" Role="TKB" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tuanHoc">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="TKB">
-              <PropertyRef Name="ID_Tuan" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -860,6 +917,28 @@
                 <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
                 <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="hocKies">
+            <EntityTypeMapping TypeName="CP24Team14Model.hocKy">
+              <MappingFragment StoreEntitySet="hocKy">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="tenHK" ColumnName="tenHK" />
+                <ScalarProperty Name="namBD" ColumnName="namBD" />
+                <ScalarProperty Name="namKT" ColumnName="namKT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="hocPhans">
+            <EntityTypeMapping TypeName="CP24Team14Model.hocPhan">
+              <MappingFragment StoreEntitySet="hocPhan">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="maGocLHP" ColumnName="maGocLHP" />
+                <ScalarProperty Name="maLHP" ColumnName="maLHP" />
+                <ScalarProperty Name="loaiHP" ColumnName="loaiHP" />
+                <ScalarProperty Name="tinhtrangLHP" ColumnName="tinhtrangLHP" />
+                <ScalarProperty Name="TSMH" ColumnName="TSMH" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -942,6 +1021,22 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="TKBs">
+            <EntityTypeMapping TypeName="CP24Team14Model.TKB">
+              <MappingFragment StoreEntitySet="TKB">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_hocPhan" ColumnName="ID_hocPhan" />
+                <ScalarProperty Name="ID_monHoc" ColumnName="ID_monHoc" />
+                <ScalarProperty Name="ID_Lop" ColumnName="ID_Lop" />
+                <ScalarProperty Name="ID_Phong" ColumnName="ID_Phong" />
+                <ScalarProperty Name="ID_Nganh" ColumnName="ID_Nganh" />
+                <ScalarProperty Name="ID_Tuan" ColumnName="ID_Tuan" />
+                <ScalarProperty Name="ID_Tiet" ColumnName="ID_Tiet" />
+                <ScalarProperty Name="ID_GV" ColumnName="ID_GV" />
+                <ScalarProperty Name="ID_hocKy" ColumnName="ID_hocKy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tuanHocs">
             <EntityTypeMapping TypeName="CP24Team14Model.tuanHoc">
               <MappingFragment StoreEntitySet="tuanHoc">
@@ -962,33 +1057,6 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="hocPhans">
-            <EntityTypeMapping TypeName="CP24Team14Model.hocPhan">
-              <MappingFragment StoreEntitySet="hocPhan">
-                <ScalarProperty Name="TSMH" ColumnName="TSMH" />
-                <ScalarProperty Name="tinhtrangLHP" ColumnName="tinhtrangLHP" />
-                <ScalarProperty Name="loaiHP" ColumnName="loaiHP" />
-                <ScalarProperty Name="maLHP" ColumnName="maLHP" />
-                <ScalarProperty Name="maGocLHP" ColumnName="maGocLHP" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TKBs">
-            <EntityTypeMapping TypeName="CP24Team14Model.TKB">
-              <MappingFragment StoreEntitySet="TKB">
-                <ScalarProperty Name="ID_GV" ColumnName="ID_GV" />
-                <ScalarProperty Name="ID_Tiet" ColumnName="ID_Tiet" />
-                <ScalarProperty Name="ID_Tuan" ColumnName="ID_Tuan" />
-                <ScalarProperty Name="ID_Nganh" ColumnName="ID_Nganh" />
-                <ScalarProperty Name="ID_Phong" ColumnName="ID_Phong" />
-                <ScalarProperty Name="ID_Lop" ColumnName="ID_Lop" />
-                <ScalarProperty Name="ID_monHoc" ColumnName="ID_monHoc" />
-                <ScalarProperty Name="ID_hocPhan" ColumnName="ID_hocPhan" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

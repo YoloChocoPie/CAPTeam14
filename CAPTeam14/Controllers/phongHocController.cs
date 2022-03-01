@@ -134,11 +134,11 @@ namespace CAPTeam14.Controllers
             var phong = model.phongHocs.FirstOrDefault(x => x.ID == id);
             string ma = phong.maPhong;
             string loai = phong.loaiPhong;
-            
-            int? suc = phong.sucChua;
-            int? siso = phong.siSo;
-            int? trong = phong.trong;
-            int? svdk = phong.soSVDK;
+
+            string suc = phong.sucChua;
+            string siso = phong.siSo;
+            string trong = phong.trong;
+            string svdk = phong.soSVDK;
 
             var abcdef = new { a = ma, b = loai, c = suc, d = siso, e = trong, f = svdk };
             return Json(abcdef, JsonRequestBehavior.AllowGet);

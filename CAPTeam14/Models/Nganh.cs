@@ -21,7 +21,7 @@ namespace CAPTeam14.Models
         }
     
         public int ID { get; set; }
-        public Nullable<int> maNganh { get; set; }
+        public string maNganh { get; set; }
         public string tenNganh { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

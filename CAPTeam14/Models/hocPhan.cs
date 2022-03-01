@@ -25,7 +25,7 @@ namespace CAPTeam14.Models
         public string maLHP { get; set; }
         public string loaiHP { get; set; }
         public string tinhtrangLHP { get; set; }
-        public Nullable<int> TSMH { get; set; }
+        public string TSMH { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TKB> TKBs { get; set; }

@@ -187,10 +187,10 @@ namespace CAPTeam14.Controllers
             ViewBag.active = 11;
             model.Configuration.ProxyCreationEnabled = false;
             var tuanHoc = model.tuanHocs.FirstOrDefault(x => x.ID == id);
-            int? thuS = tuanHoc.thuS;
-            int? tuanBD = tuanHoc.tuanBD;
+            string thuS = tuanHoc.thuS;
+            string tuanBD = tuanHoc.tuanBD;
             string th = tuanHoc.tuanHoc1;
-            int? tuanKT = tuanHoc.tuanKT;
+            string tuanKT = tuanHoc.tuanKT;
             string thu = tuanHoc.thu;
         
 

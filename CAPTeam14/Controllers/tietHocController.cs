@@ -133,13 +133,13 @@ namespace CAPTeam14.Controllers
             ViewBag.active = 11;
             model.Configuration.ProxyCreationEnabled = false;
             var tiet = model.tietHocs.FirstOrDefault(x => x.ID == id);
-            
 
-            int? tong = tiet.tongTiet;
-            int? so = tiet.soTiet;
+
+            string tong = tiet.tongTiet;
+            string so = tiet.soTiet;
             string tiethoc2 = tiet.tietHoc1;
-            int? tietS = tiet.tietS;
-            int? tietBD = tiet.tietBD;
+            string tietS = tiet.tietS;
+            string tietBD = tiet.tietBD;
 
             var abcde = new { a = tong, b = so, c = tiethoc2, d = tietS, e = tietBD };
             return Json(abcde, JsonRequestBehavior.AllowGet);

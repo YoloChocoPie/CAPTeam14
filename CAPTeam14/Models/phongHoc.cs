@@ -22,10 +22,10 @@ namespace CAPTeam14.Models
     
         public int ID { get; set; }
         public string loaiPhong { get; set; }
-        public Nullable<int> sucChua { get; set; }
-        public Nullable<int> siSo { get; set; }
-        public Nullable<int> trong { get; set; }
-        public Nullable<int> soSVDK { get; set; }
+        public string sucChua { get; set; }
+        public string siSo { get; set; }
+        public string trong { get; set; }
+        public string soSVDK { get; set; }
         public string maPhong { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

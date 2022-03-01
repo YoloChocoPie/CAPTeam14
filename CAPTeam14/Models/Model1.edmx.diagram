@@ -4,34 +4,36 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="051a28ce770b4e7e92a65d77e5e147a2" Name="Diagram1">
+      <Diagram DiagramId="082f8a7dcca34ab79b1c162bec354f76" Name="Diagram1">
         <EntityTypeShape EntityType="CP24Team14Model.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CP24Team14Model.AspNetRole" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="CP24Team14Model.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="1.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="CP24Team14Model.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="CP24Team14Model.AspNetUser" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="CP24Team14Model.lopHoc" Width="1.5" PointX="5.25" PointY="17.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="CP24Team14Model.monHoc" Width="1.5" PointX="5.25" PointY="20" IsExpanded="true" />
-        <EntityTypeShape EntityType="CP24Team14Model.Nganh" Width="1.5" PointX="5.25" PointY="22.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="CP24Team14Model.nguoiDung" Width="1.5" PointX="5.25" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="CP24Team14Model.phongHoc" Width="1.5" PointX="5.25" PointY="25.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CP24Team14Model.AspNetRole" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CP24Team14Model.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CP24Team14Model.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CP24Team14Model.AspNetUser" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CP24Team14Model.hocKy" Width="1.5" PointX="5.25" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CP24Team14Model.hocPhan" Width="1.5" PointX="5.25" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CP24Team14Model.lopHoc" Width="1.5" PointX="5.25" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CP24Team14Model.monHoc" Width="1.5" PointX="5.25" PointY="19.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CP24Team14Model.Nganh" Width="1.5" PointX="5.25" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CP24Team14Model.nguoiDung" Width="1.5" PointX="5.25" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CP24Team14Model.phongHoc" Width="1.5" PointX="5.25" PointY="25.25" IsExpanded="true" />
         <EntityTypeShape EntityType="CP24Team14Model.sysdiagram" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CP24Team14Model.tietHoc" Width="1.5" PointX="5.25" PointY="28.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CP24Team14Model.tuanHoc" Width="1.5" PointX="5.25" PointY="31.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CP24Team14Model.tietHoc" Width="1.5" PointX="5.25" PointY="28.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CP24Team14Model.TKB" Width="1.5" PointX="7.5" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CP24Team14Model.tuanHoc" Width="1.5" PointX="5.25" PointY="31.75" IsExpanded="true" />
         <AssociationConnector Association="CP24Team14Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="CP24Team14Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="CP24Team14Model.FK_AspNetUser" ManuallyRouted="false" />
+        <AssociationConnector Association="CP24Team14Model.FK_TKB_hocKy" ManuallyRouted="false" />
+        <AssociationConnector Association="CP24Team14Model.FK_hocPhan" ManuallyRouted="false" />
+        <AssociationConnector Association="CP24Team14Model.FK_TKB_lopHoc" ManuallyRouted="false" />
+        <AssociationConnector Association="CP24Team14Model.FK_TKB_monHoc" ManuallyRouted="false" />
+        <AssociationConnector Association="CP24Team14Model.FK_TKB_Nganh" ManuallyRouted="false" />
+        <AssociationConnector Association="CP24Team14Model.FK_TKB_nguoiDung" ManuallyRouted="false" />
+        <AssociationConnector Association="CP24Team14Model.FK_TKB_phongHoc" ManuallyRouted="false" />
+        <AssociationConnector Association="CP24Team14Model.FK_TKB_tietHoc" ManuallyRouted="false" />
+        <AssociationConnector Association="CP24Team14Model.FK_TKB_tuanHoc" ManuallyRouted="false" />
         <AssociationConnector Association="CP24Team14Model.AspNetUserRoles" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="CP24Team14Model.hocPhan" Width="1.5" PointX="0.75" PointY="10" />
-        <EntityTypeShape EntityType="CP24Team14Model.TKB" Width="1.5" PointX="7.5" PointY="18.5" />
-        <AssociationConnector Association="CP24Team14Model.FK_hocPhan" />
-        <AssociationConnector Association="CP24Team14Model.FK_TKB_lopHoc" />
-        <AssociationConnector Association="CP24Team14Model.FK_TKB_monHoc" />
-        <AssociationConnector Association="CP24Team14Model.FK_TKB_Nganh" />
-        <AssociationConnector Association="CP24Team14Model.FK_TKB_nguoiDung" />
-        <AssociationConnector Association="CP24Team14Model.FK_TKB_phongHoc" />
-        <AssociationConnector Association="CP24Team14Model.FK_TKB_tietHoc" />
-        <AssociationConnector Association="CP24Team14Model.FK_TKB_tuanHoc" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
