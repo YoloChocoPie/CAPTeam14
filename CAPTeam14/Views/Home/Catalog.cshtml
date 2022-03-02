@@ -1,15 +1,218 @@
-﻿<!DOCTYPE html>
+﻿@using CAPTeam14.Models;
+@using Microsoft.AspNet.Identity;
+@{ var db = new CP24Team14Entities();
+    var id = User.Identity.GetUserId();
+    var acc = db.nguoiDungs.FirstOrDefault(x => x.userID == id);
+    var hk = db.hocKies; }
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
 
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img src="@Url.Content("~/dist/img/user2-160x160.jpg")" class="img-circle elevation-2" alt="User Image">
+            </div>
+            <div class="info">
+                <a href="#" class="d-block">@acc.tenGV<i class="far fa-edit ml-2"></i></a>
+            </div>
 
-    <link rel="stylesheet" href="@Url.Content("~/assets/style.css")" />
+            <div class="info fixed-bottom">
+                <span class="brand-text font-weight-bold">
+                    <span class="text-white">Not Authorized</span>
+                </span>
+            </div>
+        </div>
 
-</head>
+        <!-- SidebarSearch Form -->
+        @*<div class="form-inline">
+                <div class="input-group" data-widget="sidebar-search">
+                    <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+                    <div class="input-group-append">
+                        <button class="btn btn-sidebar">
+                            <i class="fas fa-search fa-fw"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>*@
 
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <!-- Add icons to the links using the .nav-icon class
+                with font-awesome or any other icon font library -->
+                @if (acc.role == 4)
+                {
+    <li class="nav-item">
+        <a href="~/Home/Index" class="nav-link">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+                Dashboard Lecturer
+            </p>
+        </a>
+    </li>
 
+                    <li class="nav-item">
+                        <a href="~/Home/Search" class="nav-link active">
+                            <i class="nav-icon fas fa-search"></i>
+                            <p>
+                                Search
+                            </p>
+                        </a>
+                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="@Url.Action("LogOut","Account")">
+                                            <i class="nav-icon fas fa-sign-out-alt"></i>
+                                            <p>
+                                                Logout
+                                            </p>
+                                        </a>
+                                    </li>
+}
+                @if (acc.role == 1 || acc.role == 2 || acc.role == 3)
+                {
+    <li class="nav-item">
+        <a href="~/Home/Index" class="nav-link">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+                Dashboard
+            </p>
+        </a>
+    </li>
+    @*<li class="nav-item">
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-chart-pie"></i>
+                <p>
+                    Charts
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="pages/charts/chartjs.html" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>ChartJS</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="pages/charts/flot.html" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Flot</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="pages/charts/inline.html" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Inline</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="pages/charts/uplot.html" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>uPlot</p>
+                    </a>
+                </li>
+            </ul>
+        </li>*@
+
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-table"></i>
+                            <p>
+                                Manage
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="~/Home/Role" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Roles</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="~/Home/Course" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Courses</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="~/Home/Catalog" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Catalog</p>
+                                </a>
+                            </li>
+                            @*<li class="nav-item">
+                                    <a href="pages/tables/jsgrid.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>jsgrid</p>
+                                    </a>
+                                </li>*@
+                        </ul>
+                    </li>
+                    @*<li class="nav-item">
+                            <a href="pages/kanban.html" class="nav-link">
+                                <i class="nav-icon fas fa-columns"></i>
+                                <p>
+                                    Kanban Board
+                                </p>
+                            </a>
+                        </li>*@ @*<li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon far fa-envelope"></i>
+                                <p>
+                                    Mailbox
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="pages/mailbox/mailbox.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Inbox</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="pages/mailbox/compose.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Compose</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="pages/mailbox/read-mail.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Read</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>*@
+                                        <li class="nav-item">
+                                            <a href="~/Home/Search" class="nav-link active">
+                                                <i class="nav-icon fas fa-search"></i>
+                                                <p>
+                                                    Search
+                                                </p>
+                                            </a>
+                                        </li>
+
+                                                        <li class="nav-item">
+                                                            <a class="nav-link" href="@Url.Action("LogOut","Account")">
+                                                                <i class="nav-icon fas fa-sign-out-alt"></i>
+                                                                <p>
+                                                                    Logout
+                                                                </p>
+                                                            </a>
+                                                        </li>
+}
+
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+</aside>
 
 
 
@@ -20,12 +223,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                   
+                    <h1>Import</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="~/Home/Index">Trang chủ</a></li>
-                        <li class="breadcrumb-item active">Nhập File Excel</li>
+                        <li class="breadcrumb-item"><a href="~/Home/Index">Home</a></li>
+                        <li class="breadcrumb-item active">Import</li>
                     </ol>
                 </div>
             </div>
@@ -34,156 +237,103 @@
 
     <!-- Main content -->
     <section class="content">
+        <div class="container-fluid">
+            <div class="main-container">
+                <div class="pd-ltr-20 xs-pd-20-10">
+                    <div class="min-height-200px">
+                        <div class="pd-20 card-box mb-30">
+                            <form>
+                                <div class="form-group">
+                                    <label>Chọn học kì:</label>
+                                    <div class="dropdown">
+                                        <select id="selectBox" onclick="changeFunc();" required>
+                                            @foreach (var item in hk)
+                                            {
+                                <option value=@item.ID style="text-align:center">@item.tenHK</option>
+}
+                                            @*<option value="" style="text-align:center">HK211</option>*@
+                                            <option value="13" style="text-align:center">----- Thêm học kì -----</option>
 
-        @{
-            ViewBag.Title = "Index";
-        }
+                                        </select>
+                                        <script type="text/javascript">
+                                            function changeFunc() {
+                                            var selectBox = document.getElementById("selectBox");
+                                            var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+                                            if (selectedValue == 13) {
+                                                window.location.href = "@Url.Action()";
+                                            }
+                                            }
+                                        </script>
+                                    </div>
 
-        <h4>Nhập File Excel</h4>
-        <hr />
-        @using (Html.BeginForm("UploadExcel", "Home", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "return myFunction()" }))
-        {
-            <div class="form-horizontal">
-                <div class="form-group">
-                    <div class="control-label col-md-2">Tải File Template:</div>
-                    <div class="col-md-10">
-                        <a href="/Home/DownloadExcel/"><img src="~/Doc/excel.jpg" width="25" height="25" title="Tải Template" alt="excel" /></a>
+                                    @using (Html.BeginForm("ImportDataFromExcel", "Import", FormMethod.Post, new { enctype = "multipart/form-data", id = "UploadForm" }))
+                                    {
+                        <button id="UploadFile" class="btn btn-primary btn-lg" hidden>Import data from excel</button>
+                                        <input type="file" name="excel" accept=".xls, .xlsx" @*style="display:none;"*@ hidden>}
+                                    <br />
 
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="control-label col-md-2">Excel:</div>
-                    <div class="col-md-10">
-                        <input type="file" id="FileUpload" name="FileUpload" class="" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Upload" id="btnSubmit" class="btn btn-primary" />
-                        <a class="btn btn-file detailBtn1 btn btn-danger" title="Hướng dẫn sử dụng" data-model-id1="@Url.Action("Test", "Home")" data-id1="@Url.Action("Test", "Home")"><i class="fas fa-question"></i></a>
+                                    @using (Html.BeginForm("UploadExcel", "Home", FormMethod.Post, new { enctype = "multipart/form-data", id = "UploadForm", style = "width:30%" }))
+                                    {
+                        <label>File Thời khóa biểu</label>
+                                        <input type="file" name="excel" onchange="checkfile(this);" accept=".xls, .xlsx" class="form-control-file form-control height-auto col-md-9" required>
+                                                        <button id="UploadFile" type="submit" class="btn btn-success col-md-3 " style="float: right; margin-right:-3px; margin-top:-37px" onclick="confirmation3(this)">Import</button>
+                                                                        <br />
+                                                                                        <a href="@Url.Action("Index", "Home")" style="float: right; margin-top: -20px" ; class="btn btn-danger" onclick="return confirm('Bạn có muốn Hủy?')">Hủy</a>
+                                                                                                        <br />}
+
+                                    <script type="text/javascript" language="javascript">
+                                        function checkfile(sender) {
+                                            var validExts = new Array(".xlsx", ".xls");
+                                            var fileExt = sender.value;
+                                            fileExt = fileExt.substring(fileExt.lastIndexOf('.'));
+                                            if (validExts.indexOf(fileExt) < 0) {
+                                                alert("File bạn chọn không thuộc định dạng .xls hoặc .xlsx \nVui lòng chọn file đúng định dạng!");
+                                                return false;
+                                            }
+                                            else return true;
+                                        }
+                                        function confirmation3(button) {
+                                            var ask = confirm("Bạn đã chọn Import Thời khóa biểu \nNếu bạn đã xác định muốn Import vui lòng click OK!")
+                                            //if (ask) {
+                                            //    alert("Bạn đã chọn chức năng THAY THẾ \n*Lưu ý: Nếu bạn lưu file excel này thì kết quả sẽ THAY THẾ thời khóa biểu");
+                                            //}
+                                            //else {
+                                            //    alert("Bạn đã hủy chon chức năng THAY THẾ !");
+                                            //    radio.checked = false;
+                                            //}
+                                        }
+                                        $('#UploadFile').click(function () {
+                                            if ($(this).val().length > 1) {
+                                                $('#UploadForm').submit();
+                                                $('html').fadeTo('slow', 0);
+                                            }
+                                        });
+                                        $('#example').DataTable({
+                                            dom: 'Bfrtip',
+                                            buttons: {
+                                                dom: {
+                                                    button: {
+                                                        class: 'btn'
+                                                    }
+                                                },
+                                                buttons: [
+                                                    {
+                                                        extend: 'excel',
+                                                        text: 'Export to excel',
+                                                        excelStyles: {
+                                                            template: 'header_blue'
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        });
+                                    </script>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        }
-
-      
-
+        </div>
     </section>
-    <!-- /.content -->
 </div>
-<!-- /.content-wrapper -->
-
-
-
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-
-
-
-
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-
-            $('.deleteBtn').click(function (e) {
-                e.preventDefault();
-                debugger;
-                var button = $(this);
-                var url = $(this).data("model-id");
-                $.confirm({
-                    title: 'Thông báo!',
-                    content: 'Bạn có muốn xóa chuyên ngành này không ???',
-                    buttons: {
-                        confirm: {
-                            text: 'Có',
-                            btnClass: 'btn-green',
-                            action: function () {
-                                $.ajax({
-                                    url: url,
-                                    type: "POST",
-                                    contentType: "application/json;charset=UTF-8",
-                                    dataType: "json",
-                                    success: function (r) {
-                                        if (r.success) {
-                                            button.parents("tr").remove();
-                                            window.location.replace("/Admin/Specialized");
-                                        }
-                                        else {
-                                            toastr.warning('Không thể xóa data bị ràng buộc !!!');
-                                        }
-                                    },
-                                    error: function () {
-                                        $.alert("Lỗi !!!");
-                                    }
-                                });
-                            }
-                        },
-                        cancel: {
-                            text: 'Không',
-                            btnClass: 'btn-red',
-                            action: function () {
-                                $.alert('Bạn đã hủy thao tác !!!');
-                            }
-                        },
-                    }
-                });
-            });
-            $('.detailBtn1').click(function () {
-                var button = $(this);
-                var s_id = button.data("id1");
-                var url = button.data("model-id1");
-                $.ajax({
-                    url: s_id,
-                    typr: "GET",
-                    contentType: "application/json;charset=UTF-8",
-                    dataType: "json",
-                    success: function (result) {
-                        $.confirm({
-                          
-                            title: '<div class="text-center container"><p>Thông tin của ngành  ' + result.a + '</p></div>',
-                            content: '' +
-                                '<form action="" class="formName container">' +
-                                '<div class="form-group">' +
-                                '<div class="row">' +
-                                '<div class="col-md-12">' +
-                                '<label>Tên môn học</label>' +
-                                '<input type="text" class="form-control" value="' + result.a + '" readonly />' +
-                                '</div>' +
-                                '</div>' +
-                                '</div>' +
-                                '</div>' +
-                                '<div class="form-group">' +
-                                '<div class="row">' +
-                                '<div class="col-md-12">' +
-                                '<label>Mã môn học</label>' +
-                                '<input type="text" class="form-control" value="' + result.b + '" readonly />' +
-
-
-                                '</form>',
-                            buttons: {
-                                confirm: {
-                                    text: 'Tùy chỉnh',
-                                    btnClass: 'btn-green',
-                                    action: function () {
-                                        window.location.assign(url);
-                                    }
-                                },
-                                cancel: {
-                                    text: 'Thoát',
-                                    btnClass: 'btn-red',
-                                    action: function () { }
-                                },
-                            },
-                        });
-                    },
-                    error: function (errormessage) {
-                        $.alert(errormessage.responseText);
-                    }
-                });
-            });
-        });
-    </script>
-
-}

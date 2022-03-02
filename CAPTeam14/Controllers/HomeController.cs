@@ -14,6 +14,9 @@ using ExcelDataReader;
 
 // 02/03/2022 cập nhập lại luồng đi Import, cải thiện tốc độ performance bằng cách chuyển hết định dạng sang chuỗi
 // 02/03/22 04:42 đang dừng lại ở câu lệnh kiểm tra học phần đã tồn tại hay chưa. Đã cập nhập database và thêm table Học Kỳ
+// 03/03/22 3:59 đã hoành thiện chức năng import dữ liệu kiểu mới. Tuy nhiên cần cải thiện lại về giao diện và cần thêm/sửa học kì cũng như lấy
+// dữ liệu của học kì vào thời khóa biểu tổng
+
 
 
 
@@ -88,6 +91,11 @@ namespace CAPTeam14.Controllers
                     tuanHoc tuan = new tuanHoc(); // 7
                     TKB tkbTong = new TKB(); // 8
 
+                    // tạo biến đếm a
+                    // cứ mỗi lần có dữ liệu mới được cập nhập thì biến đếm a sẽ a++
+                    // nếu a > 0 thì sẽ lưu dữ liệu mới vào thời khóa biểu tổng
+                    int a = 0;
+
                     // Dữ liệu từng cột theo thứ tự
 
                     String magocLHP = cot[0].ToString();
@@ -99,7 +107,7 @@ namespace CAPTeam14.Controllers
                     String maLop = cot[6].ToString();
                     String TSMH = cot[7].ToString();
                     String tongTiet = cot[8].ToString();
-                    String phTrong = cot[9].ToString();
+                    String phTrong = cot[9].ToString(); // không dùng
                     String thu= cot[10].ToString();
                     String tietBD = cot[11].ToString();
                     String soTiet = cot[12].ToString();
@@ -125,7 +133,7 @@ namespace CAPTeam14.Controllers
 
                     //Kiểm Tra xem dữ liệu đã tồn tại hay chưa
 
-                    // 29 - 2 = 27 
+                    // 30 - 3 = 27 
 
                     // table hocPhans
                     var checkmagocLHP = model.hocPhans.FirstOrDefault(x => x.maGocLHP == magocLHP); // 1
@@ -142,7 +150,7 @@ namespace CAPTeam14.Controllers
                     var checktuanBD = model.tuanHocs.FirstOrDefault(x => x.tuanBD == tuanBD); // 8
                     var checktuanHoc = model.tuanHocs.FirstOrDefault(x => x.tuanHoc1 == tuanHoc); // 9
                     var checktuanKT = model.tuanHocs.FirstOrDefault(x => x.tuanKT == tuanKT); // 10
-                    var checkthu = model.tuanHocs.FirstOrDefault(x => x.tuanBD == thu); // 11
+                    var checkthu = model.tuanHocs.FirstOrDefault(x => x.thu == thu); // 11
 
                     // table Nganh
                     var checkmaNganh = model.Nganhs.FirstOrDefault(x => x.maNganh == maNganh); // 12
@@ -168,10 +176,11 @@ namespace CAPTeam14.Controllers
                     var checksoSVDK = model.phongHocs.FirstOrDefault(x => x.soSVDK == soSVDK); // 26
                     var checkmaPhong = model.phongHocs.FirstOrDefault(x => x.maPhong == phongHoc); // 27
 
+                    // Học phần
+
                     // câu lệnh kiểm tra xem học phần đã tồn tại hay chưa
                     // nếu chưa tồn tại thì tạo mới Học Phần
-                    if ( checkmagocLHP == null  || checkmaLHP == null || checkloaiHP == null  || checktinhtrangLHP == null  || checkTSMH == null )
-                                
+                    if ( checkmagocLHP == null  || checkmaLHP == null || checkloaiHP == null  || checktinhtrangLHP == null  || checkTSMH == null )                               
                     {
                         hocphan = new hocPhan
                         {
@@ -183,19 +192,178 @@ namespace CAPTeam14.Controllers
                         };
                         model.hocPhans.Add(hocphan);
                         model.SaveChanges();
-                        
+
+                        tkbTong.ID_hocPhan = hocphan.ID;
+                        a++;
+
+                       
+                    }
+                    // còn nếu đã tồn tại một trong những dữ liệu trên rồi thì lưu giữ dữ liệu đã tồn tại và tiếp tục vòng lặp để kiểm tra 
+                    // xem có dữ liệu nào khác thì
+                    else
+                    {
+                        hocphan = checkmagocLHP;
+                        hocphan = checkmaLHP;
+                        hocphan = checkloaiHP;
+                        hocphan = checktinhtrangLHP;
+                        hocphan = checkTSMH;
                     }
 
+                    // lớp học
+                    if (checklopHoc == null)
+                    {
+                        lop = new lopHoc
+                        {
+                            maLop = maLop
+                        };
+                        model.lopHocs.Add(lop);
+                        model.SaveChanges();
 
+                        tkbTong.ID_Lop = lop.ID;
+                        a++;
+                    }
+                    //
+                    else
+                    {
+                        lop = checklopHoc;
+                    }
 
+                    // tuần học
+                    if ( checkthuS == null || checktuanBD == null || checktuanHoc == null || checktuanKT == null || checkthu == null)
+                    {
+                        tuan = new tuanHoc
+                        {
+                            thuS = thuS,
+                            tuanBD = tuanBD,
+                            tuanHoc1 = tuanHoc,
+                            tuanKT = tuanKT,
+                            thu = thu,
+                        };
+                        model.tuanHocs.Add(tuan);
+                        model.SaveChanges();
 
+                        tkbTong.ID_Tuan = tuan.ID;
+                        a++;
+                    }
+                    //
+                    else
+                    {
+                        tuan = checkthuS;
+                        tuan = checktuanBD;
+                        tuan = checktuanHoc;
+                        tuan = checktuanKT;
+                        tuan = checkthu;
+                    }
 
+                    // ngành
+                    if (checkmaNganh == null || checktenNganh == null)
+                    {
+                        nganh = new Nganh
+                        {
+                            maNganh = maNganh,
+                            tenNganh = tenNganh,
+                        };
+                        model.Nganhs.Add(nganh);
+                        model.SaveChanges();
 
+                        tkbTong.ID_Nganh = nganh.ID;
+                        a++;
+                    }
+                    //
+                    else
+                    {
+                        nganh = checkmaNganh;
+                        nganh = checktenNganh;
+                    }
 
+                    // tiết học
+                    if (checktongTiet == null || checksoTiet == null || checktietHoc == null || checktietS == null || checktietBD == null)
+                    {
+                        tiet = new tietHoc
+                        {
+                            tongTiet = tongTiet,
+                            soTiet = soTiet,
+                            tietHoc1 = tietHoc,
+                            tietS = tietS,
+                            tietBD = tietBD,
+                        };
+                        model.tietHocs.Add(tiet);
+                        model.SaveChanges();
+
+                        tkbTong.ID_Tiet = tiet.ID;
+                        a++;
+                    }
+                    //
+                    else
+                    {
+                        tiet = checktongTiet;
+                        tiet = checksoTiet;
+                        tiet = checktietHoc;
+                        tiet = checktietS;
+                        tiet = checktietBD;
+                    }
+
+                    // môn học
+                    if (checkmaMon == null  || checktenMon == null || checkTC == null )
+                    {
+                        mon = new monHoc
+                        {
+                            maMon = maMon,
+                            tenMon = tenMon,
+                            tinChi = soTC,
+                        };
+                        model.monHocs.Add(mon);
+                        model.SaveChanges();
+
+                        tkbTong.ID_monHoc = mon.ID;
+                        a++;
+                    }
+                    //
+                    else
+                    {
+                        mon = checkmaMon;
+                        mon = checktenMon;
+                        mon = checkTC;
+                    }
+
+                    // phòng học
+                    if (checkloaiPhong == null || checksucChua == null || checksiSo == null || checktrong == null || checksoSVDK == null || checkmaPhong == null)
+                    {
+                        phong = new phongHoc
+                        {
+                            loaiPhong = PHX,
+                            sucChua = sucChua,
+                            siSo = siSo,
+                            trong = Trong,
+                            soSVDK = soSVDK,
+                            maPhong = phongHoc,
+                        };
+                        model.phongHocs.Add(phong);
+                        model.SaveChanges();
+
+                        tkbTong.ID_Phong = phong.ID;
+                        a++;
+                    }
+                    //
+                    else
+                    {
+                        phong = checkloaiPhong;
+                        phong = checksucChua;
+                        phong = checksiSo;
+                        phong = checktrong;
+                        phong = checksoSVDK;
+                        phong = checkmaPhong;
+                    }
+                    if (a>0)
+                    {
+                        model.TKBs.Add(tkbTong);
+                        model.SaveChanges();
+                    }                    
                 }
             }
-
-
+            // kết thúc vòng lặp và ngưng đọc dữ liệu sau 29 cột
+            IEDreader.Close();
+            return RedirectToAction("Catalog","Home");
         }
     }
 }
