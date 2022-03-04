@@ -4637,6 +4637,15 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="tkb\bootstrap-datetimepicker.css" />
+    <Content Include="tkb\bootstrap.css" />
+    <Content Include="tkb\main.css" />
+    <Content Include="tkb\menu.css" />
+    <Content Include="tkb\select2-bootstrap.css" />
+    <Content Include="tkb\select2_2.css" />
+    <Content Include="tkb\select2_2.js" />
+    <Content Include="tkb\site.css" />
+    <Content Include="tkb\Yersin.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

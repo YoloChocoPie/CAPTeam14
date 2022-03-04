@@ -30,7 +30,8 @@ namespace CAPTeam14.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            var tkb = model.TKBs.OrderByDescending(x => x.ID).ToList();
+            return View(tkb);
         }
        
         public ActionResult Courses()
@@ -91,10 +92,7 @@ namespace CAPTeam14.Controllers
                     tuanHoc tuan = new tuanHoc(); // 7
                     TKB tkbTong = new TKB(); // 8
 
-                    // tạo biến đếm a
-                    // cứ mỗi lần có dữ liệu mới được cập nhập thì biến đếm a sẽ a++
-                    // nếu a > 0 thì sẽ lưu dữ liệu mới vào thời khóa biểu tổng
-                    int a = 0;
+                    
 
                     // Dữ liệu từng cột theo thứ tự
 
@@ -194,7 +192,7 @@ namespace CAPTeam14.Controllers
                         model.SaveChanges();
 
                         tkbTong.ID_hocPhan = hocphan.ID;
-                        a++;
+                      
 
                        
                     }
@@ -207,6 +205,7 @@ namespace CAPTeam14.Controllers
                         hocphan = checkloaiHP;
                         hocphan = checktinhtrangLHP;
                         hocphan = checkTSMH;
+                        tkbTong.ID_hocPhan = hocphan.ID;
                     }
 
                     // lớp học
@@ -220,12 +219,13 @@ namespace CAPTeam14.Controllers
                         model.SaveChanges();
 
                         tkbTong.ID_Lop = lop.ID;
-                        a++;
+                     
                     }
                     //
                     else
                     {
                         lop = checklopHoc;
+                        tkbTong.ID_Lop = lop.ID;
                     }
 
                     // tuần học
@@ -243,7 +243,7 @@ namespace CAPTeam14.Controllers
                         model.SaveChanges();
 
                         tkbTong.ID_Tuan = tuan.ID;
-                        a++;
+                      
                     }
                     //
                     else
@@ -253,6 +253,8 @@ namespace CAPTeam14.Controllers
                         tuan = checktuanHoc;
                         tuan = checktuanKT;
                         tuan = checkthu;
+
+                        tkbTong.ID_Tuan = tuan.ID;
                     }
 
                     // ngành
@@ -267,13 +269,14 @@ namespace CAPTeam14.Controllers
                         model.SaveChanges();
 
                         tkbTong.ID_Nganh = nganh.ID;
-                        a++;
+                   
                     }
                     //
                     else
                     {
                         nganh = checkmaNganh;
                         nganh = checktenNganh;
+                        tkbTong.ID_Nganh = nganh.ID;
                     }
 
                     // tiết học
@@ -291,7 +294,7 @@ namespace CAPTeam14.Controllers
                         model.SaveChanges();
 
                         tkbTong.ID_Tiet = tiet.ID;
-                        a++;
+               
                     }
                     //
                     else
@@ -301,6 +304,7 @@ namespace CAPTeam14.Controllers
                         tiet = checktietHoc;
                         tiet = checktietS;
                         tiet = checktietBD;
+                        tkbTong.ID_Tiet = tiet.ID;
                     }
 
                     // môn học
@@ -316,7 +320,7 @@ namespace CAPTeam14.Controllers
                         model.SaveChanges();
 
                         tkbTong.ID_monHoc = mon.ID;
-                        a++;
+                      
                     }
                     //
                     else
@@ -324,6 +328,7 @@ namespace CAPTeam14.Controllers
                         mon = checkmaMon;
                         mon = checktenMon;
                         mon = checkTC;
+                        tkbTong.ID_monHoc = mon.ID;
                     }
 
                     // phòng học
@@ -342,7 +347,7 @@ namespace CAPTeam14.Controllers
                         model.SaveChanges();
 
                         tkbTong.ID_Phong = phong.ID;
-                        a++;
+                  
                     }
                     //
                     else
@@ -353,12 +358,12 @@ namespace CAPTeam14.Controllers
                         phong = checktrong;
                         phong = checksoSVDK;
                         phong = checkmaPhong;
+                        tkbTong.ID_Phong = phong.ID;
                     }
-                    if (a>0)
-                    {
+                   
                         model.TKBs.Add(tkbTong);
                         model.SaveChanges();
-                    }                    
+                                       
                 }
             }
             // kết thúc vòng lặp và ngưng đọc dữ liệu sau 29 cột
