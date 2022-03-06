@@ -174,6 +174,9 @@ namespace CAPTeam14.Controllers
                     var checksoSVDK = model.phongHocs.FirstOrDefault(x => x.soSVDK == soSVDK); // 26
                     var checkmaPhong = model.phongHocs.FirstOrDefault(x => x.maPhong == phongHoc); // 27
 
+                    
+
+
                     // Học phần
 
                     // câu lệnh kiểm tra xem học phần đã tồn tại hay chưa
@@ -360,9 +363,23 @@ namespace CAPTeam14.Controllers
                         phong = checkmaPhong;
                         tkbTong.ID_Phong = phong.ID;
                     }
-                   
+                    // kiểm tra dữ liệu thời khóa biểu đã tồn tại hay chưa
+                    // table tkb
+                    var checktkbhp = model.TKBs.FirstOrDefault(x => x.ID_hocPhan == tkbTong.ID_hocPhan);
+                    var checktkblop = model.TKBs.FirstOrDefault(x => x.ID_Lop == tkbTong.ID_Lop);
+                    var checktkbtuan = model.TKBs.FirstOrDefault(x => x.ID_Tuan == tkbTong.ID_Tuan);
+                    var checktkbnganh = model.TKBs.FirstOrDefault(x => x.ID_Nganh == tkbTong.ID_Nganh);
+                    var checktkbtiet = model.TKBs.FirstOrDefault(x => x.ID_Tiet == tkbTong.ID_Tiet);
+                    var checktkbmon = model.TKBs.FirstOrDefault(x => x.ID_monHoc == tkbTong.ID_monHoc);
+                    var checktkbphong = model.TKBs.FirstOrDefault(x => x.ID_Phong == tkbTong.ID_Phong);
+                    var checktkbhk = model.TKBs.FirstOrDefault(x => x.ID_hocKy == tkbTong.ID_hocKy);
+
+                    if ( checktkbhp == null || checktkblop == null || checktkbtuan == null || checktkbnganh == null || checktkbtiet == null || checktkbmon == null || checktkbphong == null || checktkbhk == null )
+                    {
                         model.TKBs.Add(tkbTong);
                         model.SaveChanges();
+                    }
+                        
                                        
                 }
             }
