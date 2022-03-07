@@ -385,6 +385,7 @@ namespace CAPTeam14.Controllers
             }
             // kết thúc vòng lặp và ngưng đọc dữ liệu sau 29 cột
             IEDreader.Close();
+            TempData["ThongBao"] = 1;
             return RedirectToAction("Catalog","Home");
         }
 

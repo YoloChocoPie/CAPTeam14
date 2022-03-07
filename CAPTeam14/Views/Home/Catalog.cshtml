@@ -5,10 +5,6 @@
     var acc = db.nguoiDungs.FirstOrDefault(x => x.userID == id);
     var hk = db.hocKies; }
 <!-- Main Sidebar Container -->
-
-
-
-
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -42,8 +38,8 @@
                                         <select id="selectBox" onclick="changeFunc();" required>
                                             @foreach (var item in hk)
                                             {
-                                              <option value=@item.ID style="text-align:center">@item.tenHK</option>
-}
+                                                <option value=@item.ID style="text-align:center">@item.tenHK</option>
+                                            }
                                             @*<option value="" style="text-align:center">HK211</option>*@
                                             <option value="13" style="text-align:center">----- Thêm học kì -----</option>
 
@@ -61,18 +57,18 @@
 
                                     @using (Html.BeginForm("ImportDataFromExcel", "Import", FormMethod.Post, new { enctype = "multipart/form-data", id = "UploadForm" }))
                                     {
-                        <button id="UploadFile" class="btn btn-primary btn-lg" hidden>Import data from excel</button>
+                                        <button id="UploadFile" class="btn btn-primary btn-lg" hidden>Import data from excel</button>
                                         <input type="file" name="excel" accept=".xls, .xlsx" @*style="display:none;"*@ hidden>}
                                     <br />
 
                                     @using (Html.BeginForm("UploadExcel", "Home", FormMethod.Post, new { enctype = "multipart/form-data", id = "UploadForm", style = "width:30%" }))
                                     {
-                        <label>File Thời khóa biểu</label>
+                                        <label>File Thời khóa biểu</label>
                                         <input type="file" name="excel" onchange="checkfile(this);" accept=".xls, .xlsx" class="form-control-file form-control height-auto col-md-9" required>
-                                                        <button id="UploadFile" type="submit" class="btn btn-success col-md-3 " style="float: right; margin-right:-3px; margin-top:-37px" onclick="confirmation3(this)">Import</button>
-                                                                        <br />
-                                                                                        <a href="@Url.Action("Index", "Home")" style="float: right; margin-top: -20px" ; class="btn btn-danger" onclick="return confirm('Bạn có muốn Hủy?')">Hủy</a>
-                                                                                                        <br />}
+                                        <button id="UploadFile" type="submit" class="btn btn-success col-md-3 " style="float: right; margin-right:-3px; margin-top:-37px" onclick="confirmation3(this)">Import</button>
+                                        <br />
+                                        <a href="@Url.Action("Index", "Home")" style="float: right; margin-top: -20px" ; class="btn btn-danger" onclick="return confirm('Bạn có muốn Hủy?')">Hủy</a>
+                                        <br />}
 
                                     <script type="text/javascript" language="javascript">
                                         function checkfile(sender) {
@@ -130,3 +126,18 @@
         </div>
     </section>
 </div>
+
+@if (TempData["ThongBao"] != null)
+{
+    <script type="text/javascript">
+        $(function () {
+            Swal.fire({
+                title: 'Thông báo',
+                text: 'Bạn đã import thành công !!!',
+                icon: 'success',
+                showConfirmButton: true,
+                timer: 1500,
+            });
+        });
+    </script>
+}
