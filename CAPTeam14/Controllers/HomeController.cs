@@ -387,5 +387,7 @@ namespace CAPTeam14.Controllers
             IEDreader.Close();
             return RedirectToAction("Catalog","Home");
         }
+
     }
+
 }

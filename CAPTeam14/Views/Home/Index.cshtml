@@ -2,6 +2,7 @@
 @using CAPTeam14.Models;
 
 @{ var db = new CP24Team14Entities();
+
 }
 
 
@@ -10,14 +11,10 @@
     <section class="content">
         <div class="bgtitle">Thời khóa biểu</div>
 
-        <div width="100%"
-             class="form-inline col-md-12 magin-bottom-5px">
+        <div width="100%" class="form-inline col-md-12 magin-bottom-5px" style="margin-bottom:10px">
             <div class="col-md-4 form-group">
                 <label>Năm học:</label>
-                <select class="form-control width-70"
-                        id="YearStudy"
-                        name="YearStudy"
-                        onchange="LoadWeek()">
+                <select class="form-control width-70" id="YearStudy" name="YearStudy" onchange="LoadWeek()">
                     <option value="2023-2024">2023-2024</option>
                     <option value="2022-2023">2022-2023</option>
                     <option selected="selected" value="2021-2022">
@@ -29,10 +26,7 @@
 
             <div class="col-md-4 form-group">
                 <label>Học kỳ:</label>
-                <select class="form-control width-70"
-                        id="TermID"
-                        name="TermID"
-                        onchange="LoadWeek()">
+                <select class="form-control width-70" id="TermID" onchange="LoadWeek()">
                     <option value="HK01">Học kỳ 1</option>
                     <option selected="selected" value="HK02">
                         Học kỳ 2
@@ -43,38 +37,63 @@
 
             <div class="col-md-4 form-group" id="cbTweek">
                 <label>Tuần:</label>
-                <select class="form-control width-70"
-                        id="Week"
-                        name="Week"
-                        onchange="TabTranferTabPerior(0)">
-                    <option value="1">17</option>
-                    <option value="2">18</option>
-                    <option value="3">19</option>
-                    <option value="4">20</option>
-                    <option value="5">21</option>
-                    <option value="6">22</option>
-                    <option value="7">23</option>
-                    <option selected="selected" value="8">24</option>
-                    <option value="9">25</option>
-                    <option value="10">26</option>
-                    <option value="11">27</option>
-                    <option value="12">28</option>
-                    <option value="13">29</option>
-                    <option value="14">30</option>
-                    <option value="15">31</option>
-                    <option value="16">32</option>
-                    <option value="17">33</option>
-                    <option value="18">34</option>
-                    <option value="19">35</option>
-                    <option value="20">36</option>
+                <select class="form-control width-70" id="Week" name="Week" onchange="TabTranferTabPerior(0)">
+
+                    @foreach (var tuan in db.tuanHocs.Select(x => x.tuanHoc1).Distinct())
+                    {
+                        string cc = tuan;
+                        string[] cl = cc.Split(',', ';', ' ');
+
+                        foreach (var clm in cl)
+                        {
+                            <option value="@clm">@clm</option>
+                        }
+
+                    }
                 </select>
             </div>
             <div class="col-md-4" id="btnPrint" style="display: none">
-                <a href="javascript:void(0)"
-                   class="btn btn-link"
-                   onclick="PrintTKB()">[In TKB]</a>
+                <a href="javascript:void(0)" class="btn btn-link" onclick="PrintTKB()">[In TKB]</a>
             </div>
         </div>
+
+        <div width="100%" class="form-inline col-md-12 magin-bottom-5px">
+            <div class="col-md-4 form-group">
+                <label>Trạng Thái:</label>
+                <select class="form-control width-70" id="YearStudy" name="YearStudy" onchange="LoadWeek()">
+                    <option value="">Chưa phân công</option>
+                    <option value="">Đã Phân công</option>
+                </select>
+            </div>
+
+            <div class="col-md-4 form-group">
+                <label>Loại HP:</label>
+                <select class="form-control width-70" onchange="FilterLoaiHP(this)">
+                    <option value="tatca">Tất cả</option>
+                    <option value="LyThuyet">Lý Thuyết</option>
+                    <option value="ThucHanh">Thực Hành</option>
+                </select>
+            </div>
+
+            <div class="col-md-4 form-group" id="cbTweek">
+                <label>Môn học:</label>
+                <select class="form-control width-70" id="Week" name="Week" onchange="Filtermonhox()">
+                    <option value="" selected="selected">Tất cả</option>
+                    @foreach (var mhx in db.monHocs.Select(x => x.tenMon).OrderBy(x => x))
+                    {
+                        //string mh0x = mhx.tenMon;
+                        //string[] dmdoi = mh0x.ToArray();
+                        //Array.Sort(dmdoi);
+                        <option value="@mhx">@mhx</option>
+                    }
+                </select>
+            </div>
+
+            <div class="col-md-4" id="btnPrint" style="display: none">
+                <a href="javascript:void(0)" class="btn btn-link" onclick="PrintTKB()">[In TKB]</a>
+            </div>
+        </div>
+
         <div>
             <ul class="nav nav-tabs" style="font-weight: bold">
                 <li class="active">
@@ -96,6 +115,7 @@
 
             </ul>
         </div>
+
         <div class="tab-content" style="background-color: #fff">
             <div id="tabWeek" class="tab-pane @*fade*@ in active">
                 <div id="divThoiKhoiBieu">
@@ -228,7 +248,7 @@
                                                 if (item.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
-                                                    <form style="background-color: blanchedalmond; border: groove; margin: 8px">
+                                                    <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -241,7 +261,7 @@
                                                 else if (item.hocPhan.loaiHP == "Thực hành")
                                                 {
 
-                                                    <form style="background-color: lightskyblue; border: groove; margin: 8px">
+                                                    <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -261,7 +281,7 @@
                                                 if (item.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
-                                                    <form style="background-color: blanchedalmond; border: groove; margin: 8px">
+                                                    <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -274,7 +294,7 @@
                                                 else if (item.hocPhan.loaiHP == "Thực hành")
                                                 {
 
-                                                    <form style="background-color: lightskyblue; border: groove; margin: 8px">
+                                                    <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -294,7 +314,7 @@
                                                 if (item.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
-                                                    <form style="background-color: blanchedalmond; border: groove; margin: 8px">
+                                                    <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -307,7 +327,7 @@
                                                 else if (item.hocPhan.loaiHP == "Thực hành")
                                                 {
 
-                                                    <form style="background-color: lightskyblue; border: groove; margin: 8px">
+                                                    <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -326,7 +346,7 @@
 
                                                 if (item.hocPhan.loaiHP == "Lý thuyết")
                                                 {
-                                                    <form style="background-color: blanchedalmond; border: groove; margin: 8px">
+                                                    <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -339,7 +359,7 @@
                                                 else if (item.hocPhan.loaiHP == "Thực hành")
                                                 {
 
-                                                    <form style="background-color: lightskyblue; border: groove; margin: 8px">
+                                                    <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -359,7 +379,7 @@
                                                 if (item.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
-                                                    <form style="background-color: blanchedalmond; border: groove; margin: 8px">
+                                                    <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -372,7 +392,7 @@
                                                 else if (item.hocPhan.loaiHP == "Thực hành")
                                                 {
 
-                                                    <form style="background-color: lightskyblue; border: groove; margin: 8px">
+                                                    <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -394,7 +414,7 @@
                                                 if (item.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
-                                                    <form style="background-color: blanchedalmond; border: groove; margin: 8px">
+                                                    <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -407,7 +427,7 @@
                                                 else if (item.hocPhan.loaiHP == "Thực hành")
                                                 {
 
-                                                    <form style="background-color: lightskyblue; border: groove; margin: 8px">
+                                                    <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -427,7 +447,7 @@
                                                 if (item.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
-                                                    <form style="background-color: blanchedalmond; border: groove; margin: 8px">
+                                                    <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -440,7 +460,7 @@
                                                 else if (item.hocPhan.loaiHP == "Thực hành")
                                                 {
 
-                                                    <form style="background-color: lightskyblue; border: groove; margin: 8px">
+                                                    <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -460,7 +480,7 @@
                                                 if (item.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
-                                                    <form style="background-color: blanchedalmond; border: groove; margin: 8px">
+                                                    <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -473,7 +493,7 @@
                                                 else if (item.hocPhan.loaiHP == "Thực hành")
                                                 {
 
-                                                    <form style="background-color: lightskyblue; border: groove; margin: 8px">
+                                                    <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -493,7 +513,7 @@
                                                 if (item.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
-                                                    <form style="background-color: blanchedalmond; border: groove; margin: 8px">
+                                                    <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -506,7 +526,7 @@
                                                 else if (item.hocPhan.loaiHP == "Thực hành")
                                                 {
 
-                                                    <form style="background-color: lightskyblue; border: groove; margin: 8px">
+                                                    <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -526,7 +546,7 @@
                                                 if (item.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
-                                                    <form style="background-color: blanchedalmond; border: groove; margin: 8px">
+                                                    <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -539,7 +559,7 @@
                                                 else if (item.hocPhan.loaiHP == "Thực hành")
                                                 {
 
-                                                    <form style="background-color: lightskyblue; border: groove; margin: 8px">
+                                                    <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -561,7 +581,7 @@
                                                 if (item.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
-                                                    <form style="background-color: blanchedalmond; border: groove; margin: 8px">
+                                                    <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -574,7 +594,7 @@
                                                 else if (item.hocPhan.loaiHP == "Thực hành")
                                                 {
 
-                                                    <form style="background-color: lightskyblue; border: groove; margin: 8px">
+                                                    <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -594,7 +614,7 @@
                                                 if (item.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
-                                                    <form style="background-color: blanchedalmond; border: groove; margin: 8px">
+                                                    <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -607,7 +627,7 @@
                                                 else if (item.hocPhan.loaiHP == "Thực hành")
                                                 {
 
-                                                    <form style="background-color: lightskyblue; border: groove; margin: 8px">
+                                                    <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -627,7 +647,7 @@
                                                 if (item.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
-                                                    <form style="background-color: blanchedalmond; border: groove; margin: 8px">
+                                                    <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -640,7 +660,7 @@
                                                 else if (item.hocPhan.loaiHP == "Thực hành")
                                                 {
 
-                                                    <form style="background-color: lightskyblue; border: groove; margin: 8px">
+                                                    <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -660,7 +680,7 @@
                                                 if (item.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
-                                                    <form style="background-color: blanchedalmond; border: groove; margin: 8px">
+                                                    <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -673,7 +693,7 @@
                                                 else if (item.hocPhan.loaiHP == "Thực hành")
                                                 {
 
-                                                    <form style="background-color: lightskyblue; border: groove; margin: 8px">
+                                                    <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -693,7 +713,7 @@
                                                 if (item.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
-                                                    <form style="background-color: blanchedalmond; border: groove; margin: 8px">
+                                                    <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -706,7 +726,7 @@
                                                 else if (item.hocPhan.loaiHP == "Thực hành")
                                                 {
 
-                                                    <form style="background-color: lightskyblue; border: groove; margin: 8px">
+                                                    <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -728,7 +748,7 @@
                                                 if (item.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
-                                                    <form style="background-color: blanchedalmond; border: groove; margin: 8px">
+                                                    <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -741,7 +761,7 @@
                                                 else if (item.hocPhan.loaiHP == "Thực hành")
                                                 {
 
-                                                    <form style="background-color: lightskyblue; border: groove; margin: 8px">
+                                                    <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -761,7 +781,7 @@
                                                 if (item.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
-                                                    <form style="background-color: blanchedalmond; border: groove; margin: 8px">
+                                                    <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -774,7 +794,7 @@
                                                 else if (item.hocPhan.loaiHP == "Thực hành")
                                                 {
 
-                                                    <form style="background-color: lightskyblue; border: groove; margin: 8px">
+                                                    <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -794,7 +814,7 @@
                                                 if (item.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
-                                                    <form style="background-color: blanchedalmond; border: groove; margin: 8px">
+                                                    <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -807,7 +827,7 @@
                                                 else if (item.hocPhan.loaiHP == "Thực hành")
                                                 {
 
-                                                    <form style="background-color: lightskyblue; border: groove; margin: 8px">
+                                                    <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -827,7 +847,7 @@
                                                 if (item.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
-                                                    <form style="background-color: blanchedalmond; border: groove; margin: 8px">
+                                                    <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -840,7 +860,7 @@
                                                 else if (item.hocPhan.loaiHP == "Thực hành")
                                                 {
 
-                                                    <form style="background-color: lightskyblue; border: groove; margin: 8px">
+                                                    <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -860,7 +880,7 @@
                                                 if (item.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
-                                                    <form style="background-color: blanchedalmond; border: groove; margin: 8px">
+                                                    <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -873,7 +893,7 @@
                                                 else if (item.hocPhan.loaiHP == "Thực hành")
                                                 {
 
-                                                    <form style="background-color: lightskyblue; border: groove; margin: 8px">
+                                                    <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -895,7 +915,7 @@
                                                 if (item.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
-                                                    <form style="background-color: blanchedalmond; border: groove; margin: 8px">
+                                                    <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -908,7 +928,7 @@
                                                 else if (item.hocPhan.loaiHP == "Thực hành")
                                                 {
 
-                                                    <form style="background-color: lightskyblue; border: groove; margin: 8px">
+                                                    <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -928,7 +948,7 @@
                                                 if (item.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
-                                                    <form style="background-color: blanchedalmond; border: groove; margin: 8px">
+                                                    <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -941,7 +961,7 @@
                                                 else if (item.hocPhan.loaiHP == "Thực hành")
                                                 {
 
-                                                    <form style="background-color: lightskyblue; border: groove; margin: 8px">
+                                                    <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -961,7 +981,7 @@
                                                 if (item.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
-                                                    <form style="background-color: blanchedalmond; border: groove; margin: 8px">
+                                                    <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -974,7 +994,7 @@
                                                 else if (item.hocPhan.loaiHP == "Thực hành")
                                                 {
 
-                                                    <form style="background-color: lightskyblue; border: groove; margin: 8px">
+                                                    <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -994,7 +1014,7 @@
                                                 if (item.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
-                                                    <form style="background-color: blanchedalmond; border: groove; margin: 8px">
+                                                    <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -1007,7 +1027,7 @@
                                                 else if (item.hocPhan.loaiHP == "Thực hành")
                                                 {
 
-                                                    <form style="background-color: lightskyblue; border: groove; margin: 8px">
+                                                    <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -1027,7 +1047,7 @@
                                                 if (item.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
-                                                    <form style="background-color: blanchedalmond; border: groove; margin: 8px">
+                                                    <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -1040,7 +1060,7 @@
                                                 else if (item.hocPhan.loaiHP == "Thực hành")
                                                 {
 
-                                                    <form style="background-color: lightskyblue; border: groove; margin: 8px">
+                                                    <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -1062,7 +1082,7 @@
                                                 if (item.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
-                                                    <form style="background-color: blanchedalmond; border: groove; margin: 8px">
+                                                    <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -1075,7 +1095,7 @@
                                                 else if (item.hocPhan.loaiHP == "Thực hành")
                                                 {
 
-                                                    <form style="background-color: lightskyblue; border: groove; margin: 8px">
+                                                    <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -1095,7 +1115,7 @@
                                                 if (item.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
-                                                    <form style="background-color: blanchedalmond; border: groove; margin: 8px">
+                                                    <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -1108,7 +1128,7 @@
                                                 else if (item.hocPhan.loaiHP == "Thực hành")
                                                 {
 
-                                                    <form style="background-color: lightskyblue; border: groove; margin: 8px">
+                                                    <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -1128,7 +1148,7 @@
                                                 if (item.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
-                                                    <form style="background-color: blanchedalmond; border: groove; margin: 8px">
+                                                    <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -1141,7 +1161,7 @@
                                                 else if (item.hocPhan.loaiHP == "Thực hành")
                                                 {
 
-                                                    <form style="background-color: lightskyblue; border: groove; margin: 8px">
+                                                    <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -1161,7 +1181,7 @@
                                                 if (item.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
-                                                    <form style="background-color: blanchedalmond; border: groove; margin: 8px">
+                                                    <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -1174,7 +1194,7 @@
                                                 else if (item.hocPhan.loaiHP == "Thực hành")
                                                 {
 
-                                                    <form style="background-color: lightskyblue; border: groove; margin: 8px">
+                                                    <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -1194,7 +1214,7 @@
                                                 if (item.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
-                                                    <form style="background-color: blanchedalmond; border: groove; margin: 8px">
+                                                    <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -1207,7 +1227,7 @@
                                                 else if (item.hocPhan.loaiHP == "Thực hành")
                                                 {
 
-                                                    <form style="background-color: lightskyblue; border: groove; margin: 8px">
+                                                    <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
                                                         <label><b>@item.monHoc.maMon</b></label> <br />
                                                         <label><b>@item.hocPhan.maLHP</b></label> <br />
                                                         <label><b>@item.monHoc.tenMon</b></label> <br />
@@ -1230,9 +1250,10 @@
                         </div>
                     </div>
                 </div>
+
     </section>
 
-
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
             TabTranferTabPerior(0);
@@ -1240,6 +1261,55 @@
 
         function PrintTKB() {
             printContent("divThoiKhoaBieuTietThu");
+        }
+
+        function FilterLoaiHP(select) {
+            //var x = document.getElementById("ChonLHP").value;
+            if (select.value == "tatca") {
+                targList = document.getElementsByClassName("formTT");
+                tarzan = document.getElementsByClassName("formLT");
+                if (targList) {
+                    for (var x = 0; x < targList.length; x++) {
+                        for (var y = 0; y < tarzan.length; y++) {
+
+                            tarzan[y].style.visibility = "visible"
+                        }
+                        targList[x].style.visibility = "visible";
+                    }
+                }
+
+            } else if (select.value == "LyThuyet") {
+                targList = document.getElementsByClassName("formTT");
+                tarzan = document.getElementsByClassName("formLT");
+                if (targList) {
+                    for (var x = 0; x < targList.length; x++) {
+                        for (var y = 0; y < tarzan.length; y++) {
+
+                            tarzan[y].style.visibility = "visible"
+                        }
+                        targList[x].style.visibility = "hidden";
+                    }
+                }
+
+                //document.getElementsByClassName("formLT").style.visibility = "visible";
+                //document.getElementsByClassName("formTT").style.visibility = "hidden";
+            } else if (select.value == "ThucHanh") {
+                targList = document.getElementsByClassName("formLT");
+                tarzan = document.getElementsByClassName("formTT");
+                if (targList) {
+                    for (var x = 0; x < targList.length; x++) {
+                        for (var y = 0; y < tarzan.length; y++) {
+
+                            tarzan[y].style.visibility = "visible"
+                        }
+                        targList[x].style.visibility = "hidden";
+                    }
+                }
+
+
+                //document.getElementsByClassName("formLT").style.visibility = "hidden";
+                //document.getElementsByClassName("formTT").style.visibility = "visible";
+            }
         }
 
         function TabTranferTabPerior(key) {
