@@ -1,132 +1,146 @@
-﻿@using CAPTeam14.Models;
-@using Microsoft.AspNet.Identity;
-@{ var db = new CP24Team14Entities();
-    var id = User.Identity.GetUserId();
-    var acc = db.nguoiDungs.FirstOrDefault(x => x.userID == id);
-    var hk = db.hocKies; }
-<!-- Main Sidebar Container -->
+﻿@model CAPTeam14.Models.TKB
 
 
-
-
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>Import</h1>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <!-- Main Sidebar Container -->
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Import</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="~/Home/Index">Home</a></li>
+                            <li class="breadcrumb-item active">Import</li>
+                        </ol>
+                    </div>
                 </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="~/Home/Index">Home</a></li>
-                        <li class="breadcrumb-item active">Import</li>
-                    </ol>
-                </div>
-            </div>
-        </div><!-- /.container-fluid -->
-    </section>
+            </div><!-- /.container-fluid -->
+        </section>
 
-    <!-- Main content -->
-    <section class="content">
-        <div class="container-fluid">
-            <div class="main-container">
-                <div class="pd-ltr-20 xs-pd-20-10">
-                    <div class="min-height-200px">
-                        <div class="pd-20 card-box mb-30">
-                            <form>
-                                <div class="form-group">
-                                    <label>Chọn học kì:</label>
-                                    <div class="dropdown">
-                                        <select id="selectBox" onclick="changeFunc();" required>
-                                            @foreach (var item in hk)
-                                            {
-                                              <option value=@item.ID style="text-align:center">@item.tenHK</option>
-}
-                                            @*<option value="" style="text-align:center">HK211</option>*@
-                                            <option value="13" style="text-align:center">----- Thêm học kì -----</option>
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="main-container">
+                    <div class="pd-ltr-20 xs-pd-20-10">
+                        <div class="min-height-200px">
+                            <div class="pd-20 card-box mb-30">
+                                <form>
+                                    <div class="form-group">
+                                        @using (Html.BeginForm("Catalog", "Home", FormMethod.Post, new { enctype = "multipart/form-data", id = "UploadForm" }))
+                                        {
 
-                                        </select>
-                                        <script type="text/javascript">
-                                            function changeFunc() {
-                                            var selectBox = document.getElementById("selectBox");
-                                            var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-                                            if (selectedValue == 13) {
-                                                window.location.href = "@Url.Action()";
+                                        }
+                                     
+                                    </div>
+                                    
+                                  
+
+                                    <div class="form-group">
+
+
+                                        @using (Html.BeginForm("Catalog", "Home", FormMethod.Post, new { enctype = "multipart/form-data", id = "UploadForm", style = "width:30%" }))
+                                        {
+                                            <label>File Thời khóa biểu</label>
+                                            <input type="file" name="excel" value="submit" onchange="checkfile(this);" accept=".xls, .xlsx" class="form-control-file form-control height-auto" required>
+                                            <button id="UploadFile" type="submit" class="btn btn-success" data-toggle="modal" data-target="#myModal3" data-backdrop="static" style="float: left" onclick="confirmation3(this)">Import</button>
+                                            <br />
+                                            <a href="@Url.Action("Index", "Home")" style="float: right; margin-top: -20px" ; class="btn btn-danger" onclick="return confirm('Bạn có muốn Hủy?')">Hủy</a>
+                                            <br />
+
+
+                                            @Html.LabelFor(model => model.ID_hocKy, "", htmlAttributes: new { @class = "control-label col-md-2" })
+                                            <label>Chọn học kì:</label>
+                                            @Html.DropDownList("ID_hocKy", new SelectList(ViewBag.hocky, "ID", "tenHK"))
+                                            @Html.ValidationMessageFor(model => model.ID_hocKy, "", new { @class = "text-danger" })
+
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="myModal3" role="dialog">
+                                                <div class="modal-dialog modal-dialog-centered">
+
+                                                    <!-- Modal content-->
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Dữ liệu đang được import vào hệ thống</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>Vui lòng đợi trong giây lát</p>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        }
+
+                                        <script type="text/javascript" language="javascript">
+                                            function checkfile(sender) {
+                                                var validExts = new Array(".xlsx", ".xls");
+                                                var fileExt = sender.value;
+                                                fileExt = fileExt.substring(fileExt.lastIndexOf('.'));
+                                                if (validExts.indexOf(fileExt) < 0) {
+                                                    alert("File bạn chọn không thuộc định dạng .xls hoặc .xlsx \nVui lòng chọn file đúng định dạng!");
+                                                    return false;
+                                                }
+                                                else return true;
                                             }
+                                            function confirmation3(button) {
+                                                var ask = confirm("Bạn đã chọn Import Thời khóa biểu \nNếu bạn đã xác định muốn Import vui lòng click OK!")
+                                                //if (ask) {
+                                                //    alert("Bạn đã chọn chức năng THAY THẾ \n*Lưu ý: Nếu bạn lưu file excel này thì kết quả sẽ THAY THẾ thời khóa biểu");
+                                                //}
+                                                //else {
+                                                //    alert("Bạn đã hủy chon chức năng THAY THẾ !");
+                                                //    radio.checked = false;
+                                                //}
                                             }
+                                            $('#UploadFile').click(function () {
+                                                if ($(this).val().length > 1) {
+                                                    $('#UploadForm').submit();
+                                                    $('html').fadeTo('slow', 0);
+                                                }
+                                            });
+                                            $('#example').DataTable({
+                                                dom: 'Bfrtip',
+                                                buttons: {
+                                                    dom: {
+                                                        button: {
+                                                            class: 'btn'
+                                                        }
+                                                    },
+                                                    buttons: [
+                                                        {
+                                                            extend: 'excel',
+                                                            text: 'Export to excel',
+                                                            excelStyles: {
+                                                                template: 'header_blue'
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            });
                                         </script>
+
                                     </div>
 
-                                    @using (Html.BeginForm("ImportDataFromExcel", "Import", FormMethod.Post, new { enctype = "multipart/form-data", id = "UploadForm" }))
-                                    {
-                        <button id="UploadFile" class="btn btn-primary btn-lg" hidden>Import data from excel</button>
-                                        <input type="file" name="excel" accept=".xls, .xlsx" @*style="display:none;"*@ hidden>}
-                                    <br />
+                                       
+                           
+                                    
 
-                                    @using (Html.BeginForm("UploadExcel", "Home", FormMethod.Post, new { enctype = "multipart/form-data", id = "UploadForm", style = "width:30%" }))
-                                    {
-                        <label>File Thời khóa biểu</label>
-                                        <input type="file" name="excel" onchange="checkfile(this);" accept=".xls, .xlsx" class="form-control-file form-control height-auto col-md-9" required>
-                                                        <button id="UploadFile" type="submit" class="btn btn-success col-md-3 " style="float: right; margin-right:-3px; margin-top:-37px" onclick="confirmation3(this)">Import</button>
-                                                                        <br />
-                                                                                        <a href="@Url.Action("Index", "Home")" style="float: right; margin-top: -20px" ; class="btn btn-danger" onclick="return confirm('Bạn có muốn Hủy?')">Hủy</a>
-                                                                                                        <br />}
+                                   
 
-                                    <script type="text/javascript" language="javascript">
-                                        function checkfile(sender) {
-                                            var validExts = new Array(".xlsx", ".xls");
-                                            var fileExt = sender.value;
-                                            fileExt = fileExt.substring(fileExt.lastIndexOf('.'));
-                                            if (validExts.indexOf(fileExt) < 0) {
-                                                alert("File bạn chọn không thuộc định dạng .xls hoặc .xlsx \nVui lòng chọn file đúng định dạng!");
-                                                return false;
-                                            }
-                                            else return true;
-                                        }
-                                        function confirmation3(button) {
-                                            var ask = confirm("Bạn đã chọn Import Thời khóa biểu \nNếu bạn đã xác định muốn Import vui lòng click OK!")
-                                            //if (ask) {
-                                            //    alert("Bạn đã chọn chức năng THAY THẾ \n*Lưu ý: Nếu bạn lưu file excel này thì kết quả sẽ THAY THẾ thời khóa biểu");
-                                            //}
-                                            //else {
-                                            //    alert("Bạn đã hủy chon chức năng THAY THẾ !");
-                                            //    radio.checked = false;
-                                            //}
-                                        }
-                                        $('#UploadFile').click(function () {
-                                            if ($(this).val().length > 1) {
-                                                $('#UploadForm').submit();
-                                                $('html').fadeTo('slow', 0);
-                                            }
-                                        });
-                                        $('#example').DataTable({
-                                            dom: 'Bfrtip',
-                                            buttons: {
-                                                dom: {
-                                                    button: {
-                                                        class: 'btn'
-                                                    }
-                                                },
-                                                buttons: [
-                                                    {
-                                                        extend: 'excel',
-                                                        text: 'Export to excel',
-                                                        excelStyles: {
-                                                            template: 'header_blue'
-                                                        }
-                                                    }
-                                                ]
-                                            }
-                                        });
-                                    </script>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-</div>
+        </section>
+    </div>
+}

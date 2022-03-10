@@ -10,6 +10,7 @@ using System.Data;
 using LinqToExcel;
 using System.Data.Entity.Validation;
 using ExcelDataReader;
+using System.Data.SqlClient;
 
 
 // 02/03/2022 cập nhập lại luồng đi Import, cải thiện tốc độ performance bằng cách chuyển hết định dạng sang chuỗi
@@ -41,12 +42,7 @@ namespace CAPTeam14.Controllers
             return View();
         }
         
-        public ActionResult Catalog()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
+       
 
         public ActionResult Search()
         {
@@ -60,11 +56,20 @@ namespace CAPTeam14.Controllers
 
             return View();
         }
-
+        [HttpGet]
         // Luồng đi mới của Import
-
-        public ActionResult UploadExcel()
+        public ActionResult Catalog()
         {
+            
+            ViewBag.hocky = model.hocKies.OrderByDescending(x => x.ID).ToList();
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Catalog(TKB tkb)
+        {
+            ViewBag.hocky = model.hocKies.OrderByDescending(x => x.ID).ToList();
+        
+
             // khai báo thư viên IEDreader
             // khai báo thư viên EDSC
             IExcelDataReader IEDreader = ExcelReaderFactory.CreateOpenXmlReader(Request.Files[0].InputStream);
@@ -90,9 +95,11 @@ namespace CAPTeam14.Controllers
                     phongHoc phong = new phongHoc(); // 5
                     tietHoc tiet = new tietHoc(); // 6
                     tuanHoc tuan = new tuanHoc(); // 7
-                    TKB tkbTong = new TKB(); // 8
+                    var tkbTong = new TKB(); // 8
+                    tkbTong.ID_hocKy = tkb.ID_hocKy;
 
-                    
+
+
 
                     // Dữ liệu từng cột theo thứ tự
 
@@ -379,12 +386,16 @@ namespace CAPTeam14.Controllers
                         model.TKBs.Add(tkbTong);
                         model.SaveChanges();
                     }
-                        
-                                       
+                
+
                 }
             }
             // kết thúc vòng lặp và ngưng đọc dữ liệu sau 29 cột
             IEDreader.Close();
+
+
+            
+           
             return RedirectToAction("Catalog","Home");
         }
     }
