@@ -198,6 +198,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\giangVienController.cs" />
+    <Compile Include="Controllers\hocKyController.cs" />
     <Compile Include="Controllers\hocPhanController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\lopHocController.cs" />
@@ -4719,6 +4720,9 @@
     <Content Include="Views\tietHoc\Edit.cshtml" />
     <Content Include="Views\Home\Test.cshtml" />
     <Content Include="Views\Shared\NotFound.cshtml" />
+    <Content Include="Views\hocKy\Index.cshtml" />
+    <Content Include="Views\hocKy\Create.cshtml" />
+    <Content Include="Views\hocKy\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
