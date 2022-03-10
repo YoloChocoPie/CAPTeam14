@@ -96,7 +96,7 @@ namespace CAPTeam14.Controllers
                     tietHoc tiet = new tietHoc(); // 6
                     tuanHoc tuan = new tuanHoc(); // 7
                     var tkbTong = new TKB(); // 8
-                    tkbTong.ID_hocKy = tkb.ID_hocKy;
+                    
 
 
 
@@ -381,8 +381,10 @@ namespace CAPTeam14.Controllers
                     var checktkbphong = model.TKBs.FirstOrDefault(x => x.ID_Phong == tkbTong.ID_Phong);
                     var checktkbhk = model.TKBs.FirstOrDefault(x => x.ID_hocKy == tkbTong.ID_hocKy);
 
-                    if ( checktkbhp == null || checktkblop == null || checktkbtuan == null || checktkbnganh == null || checktkbtiet == null || checktkbmon == null || checktkbphong == null || checktkbhk == null )
+                    if ( checktkbhp == null || checktkblop == null || checktkbtuan == null || checktkbnganh == null || 
+                         checktkbtiet == null|| checktkbmon == null || checktkbphong == null || checktkbhk == null )
                     {
+                        tkbTong.ID_hocKy = tkb.ID_hocKy;
                         model.TKBs.Add(tkbTong);
                         model.SaveChanges();
                     }

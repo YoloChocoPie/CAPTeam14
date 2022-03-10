@@ -63,9 +63,11 @@ namespace CAPTeam14.Controllers
         {
             // xóa hết những Session, Cookies và đăng xuất nếu đã đăng nhập từ trước
 
-            
+            Session.Abandon();
+            Request.Cookies.Clear();
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             ViewBag.ReturnUrl = returnUrl;
-            Logout();
+            
             return View();
         }
 
