@@ -389,6 +389,17 @@ namespace CAPTeam14.Controllers
             return RedirectToAction("Catalog","Home");
         }
 
+        [HttpGet]
+        public ActionResult LoadData(string name)
+        {
+            var m0nh0x = model.monHocs.Where(x => x.tenMon == name);
+            //return Json(new
+            //{
+            //    data = list
+            //}, JsonRequestBehavior.AllowGet);
+            return View(m0nh0x);
+        }
+
     }
 
 }

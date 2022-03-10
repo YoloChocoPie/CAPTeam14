@@ -42,7 +42,7 @@
                     @foreach (var tuan in db.tuanHocs.Select(x => x.tuanHoc1).Distinct())
                     {
                         string cc = tuan;
-                        string[] cl = cc.Split(',', ';', ' ');
+                        string[] cl = cc.Split(',', ';', ' ');                        
 
                         foreach (var clm in cl)
                         {
@@ -77,8 +77,8 @@
 
             <div class="col-md-4 form-group" id="cbTweek">
                 <label>Môn học:</label>
-                <select class="form-control width-70" id="Week" name="Week" onchange="Filtermonhox()">
-                    <option value="" selected="selected">Tất cả</option>
+                <select class="form-control width-70" id="chonmonhox" onchange="Filtermonhox(this.value)">
+                    <option value="All" selected="selected">Tất cả</option>
                     @foreach (var mhx in db.monHocs.Select(x => x.tenMon).OrderBy(x => x))
                     {
                         //string mh0x = mhx.tenMon;
@@ -125,7 +125,7 @@
                             <strong>Tuần 24: từ ngày 14/02/2022 đến ngày 20/02/2022</strong>
                         </div>
                         <div>
-                            <table border="1" align="center">
+                            <table id="TKBT14" border="1" align="center">
                                 <thead style="background-color: #003fa8;color: white;font-weight: bolder">
                                     <tr>
                                         <th align="center" style="padding: 20px 10px">Thứ
@@ -237,36 +237,38 @@
                                 </thead>
 
                                 <tbody style="background-color: rgb(255, 255, 255)">
+                                    @foreach (var item in db.monHocs.Select(x => x.tenMon).OrderBy(x => x))
+                                    {
+                                    <tr id="@item" class="test">
+                                        <td style="font-size:16px"><strong>@item</strong></td>
 
-                                    <tr>
-                                        <td align="center" style="padding: 50px 30px"></td>
                                         @*Thứ 2*@
                                         <td colspan="3">
-                                            @foreach (var item in db.TKBs.Where(d => d.tuanHoc.thuS == "2" && d.tietHoc.tietBD == "1"))
+                                            @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "2" && d.tietHoc.tietBD == "1" && d.monHoc.tenMon == item))
                                             {
 
-                                                if (item.hocPhan.loaiHP == "Lý thuyết")
+                                                if (item2.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
-                                                    <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                    <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
                                                 }
-                                                else if (item.hocPhan.loaiHP == "Thực hành")
+                                                else if (item2.hocPhan.loaiHP == "Thực hành")
                                                 {
 
-                                                    <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                    <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
@@ -275,31 +277,31 @@
                                             }
                                         </td>
                                         <td colspan="3">
-                                            @foreach (var item in db.TKBs.Where(d => d.tuanHoc.thuS == "2" && d.tietHoc.tietBD == "4"))
+                                            @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "2" && d.tietHoc.tietBD == "4" && d.monHoc.tenMon == item))
                                             {
 
-                                                if (item.hocPhan.loaiHP == "Lý thuyết")
+                                                if (item2.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
-                                                    <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                    <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
                                                 }
-                                                else if (item.hocPhan.loaiHP == "Thực hành")
+                                                else if (item2.hocPhan.loaiHP == "Thực hành")
                                                 {
 
-                                                    <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                    <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
@@ -308,31 +310,31 @@
                                             }
                                         </td>
                                         <td colspan="3">
-                                            @foreach (var item in db.TKBs.Where(d => d.tuanHoc.thuS == "2" && d.tietHoc.tietBD == "7"))
+                                            @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "2" && d.tietHoc.tietBD == "7" && d.monHoc.tenMon == item))
                                             {
 
-                                                if (item.hocPhan.loaiHP == "Lý thuyết")
+                                                if (item2.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
-                                                    <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                    <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
                                                 }
-                                                else if (item.hocPhan.loaiHP == "Thực hành")
+                                                else if (item2.hocPhan.loaiHP == "Thực hành")
                                                 {
 
-                                                    <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                    <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
@@ -341,30 +343,31 @@
                                             }
                                         </td>
                                         <td colspan="3">
-                                            @foreach (var item in db.TKBs.Where(d => d.tuanHoc.thuS == "2" && d.tietHoc.tietBD == "10"))
+                                            @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "2" && d.tietHoc.tietBD == "10" && d.monHoc.tenMon == item))
                                             {
 
-                                                if (item.hocPhan.loaiHP == "Lý thuyết")
+                                                if (item2.hocPhan.loaiHP == "Lý thuyết")
                                                 {
-                                                    <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+
+                                                    <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
                                                 }
-                                                else if (item.hocPhan.loaiHP == "Thực hành")
+                                                else if (item2.hocPhan.loaiHP == "Thực hành")
                                                 {
 
-                                                    <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                    <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
@@ -373,31 +376,31 @@
                                             }
                                         </td>
                                         <td colspan="3">
-                                            @foreach (var item in db.TKBs.Where(d => d.tuanHoc.thuS == "2" && d.tietHoc.tietBD == "13"))
+                                            @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "2" && d.tietHoc.tietBD == "13" && d.monHoc.tenMon == item))
                                             {
 
-                                                if (item.hocPhan.loaiHP == "Lý thuyết")
+                                                if (item2.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
-                                                    <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                    <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
                                                 }
-                                                else if (item.hocPhan.loaiHP == "Thực hành")
+                                                else if (item2.hocPhan.loaiHP == "Thực hành")
                                                 {
 
-                                                    <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                    <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
@@ -408,31 +411,31 @@
 
                                         @*Thứ 3*@
                                         <td colspan="3">
-                                            @foreach (var item in db.TKBs.Where(d => d.tuanHoc.thuS == "3" && d.tietHoc.tietBD == "1"))
+                                            @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "3" && d.tietHoc.tietBD == "1" && d.monHoc.tenMon == item))
                                             {
 
-                                                if (item.hocPhan.loaiHP == "Lý thuyết")
+                                                if (item2.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
-                                                    <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                    <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
                                                 }
-                                                else if (item.hocPhan.loaiHP == "Thực hành")
+                                                else if (item2.hocPhan.loaiHP == "Thực hành")
                                                 {
 
-                                                    <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                    <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
@@ -441,31 +444,31 @@
                                             }
                                         </td>
                                         <td colspan="3">
-                                            @foreach (var item in db.TKBs.Where(d => d.tuanHoc.thuS == "3" && d.tietHoc.tietBD == "4"))
+                                            @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "3" && d.tietHoc.tietBD == "4" && d.monHoc.tenMon == item))
                                             {
 
-                                                if (item.hocPhan.loaiHP == "Lý thuyết")
+                                                if (item2.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
-                                                    <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                    <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
                                                 }
-                                                else if (item.hocPhan.loaiHP == "Thực hành")
+                                                else if (item2.hocPhan.loaiHP == "Thực hành")
                                                 {
 
-                                                    <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                    <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
@@ -474,31 +477,31 @@
                                             }
                                         </td>
                                         <td colspan="3">
-                                            @foreach (var item in db.TKBs.Where(d => d.tuanHoc.thuS == "3" && d.tietHoc.tietBD == "7"))
+                                            @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "3" && d.tietHoc.tietBD == "7" && d.monHoc.tenMon == item))
                                             {
 
-                                                if (item.hocPhan.loaiHP == "Lý thuyết")
+                                                if (item2.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
-                                                    <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                    <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
                                                 }
-                                                else if (item.hocPhan.loaiHP == "Thực hành")
+                                                else if (item2.hocPhan.loaiHP == "Thực hành")
                                                 {
 
-                                                    <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                    <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
@@ -507,31 +510,31 @@
                                             }
                                         </td>
                                         <td colspan="3">
-                                            @foreach (var item in db.TKBs.Where(d => d.tuanHoc.thuS == "3" && d.tietHoc.tietBD == "10"))
+                                            @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "3" && d.tietHoc.tietBD == "10" && d.monHoc.tenMon == item))
                                             {
 
-                                                if (item.hocPhan.loaiHP == "Lý thuyết")
+                                                if (item2.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
-                                                    <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                    <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
                                                 }
-                                                else if (item.hocPhan.loaiHP == "Thực hành")
+                                                else if (item2.hocPhan.loaiHP == "Thực hành")
                                                 {
 
-                                                    <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                    <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
@@ -540,31 +543,31 @@
                                             }
                                         </td>
                                         <td colspan="3">
-                                            @foreach (var item in db.TKBs.Where(d => d.tuanHoc.thuS == "3" && d.tietHoc.tietBD == "13"))
+                                            @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "3" && d.tietHoc.tietBD == "13" && d.monHoc.tenMon == item))
                                             {
 
-                                                if (item.hocPhan.loaiHP == "Lý thuyết")
+                                                if (item2.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
-                                                    <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                    <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
                                                 }
-                                                else if (item.hocPhan.loaiHP == "Thực hành")
+                                                else if (item2.hocPhan.loaiHP == "Thực hành")
                                                 {
 
-                                                    <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                    <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
@@ -575,31 +578,31 @@
 
                                         @*Thứ 4*@
                                         <td colspan="3">
-                                            @foreach (var item in db.TKBs.Where(d => d.tuanHoc.thuS == "4" && d.tietHoc.tietBD == "1"))
+                                            @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "4" && d.tietHoc.tietBD == "1" && d.monHoc.tenMon == item))
                                             {
 
-                                                if (item.hocPhan.loaiHP == "Lý thuyết")
+                                                if (item2.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
                                                     <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
                                                 }
-                                                else if (item.hocPhan.loaiHP == "Thực hành")
+                                                else if (item2.hocPhan.loaiHP == "Thực hành")
                                                 {
 
                                                     <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
@@ -608,31 +611,31 @@
                                             }
                                         </td>
                                         <td colspan="3">
-                                            @foreach (var item in db.TKBs.Where(d => d.tuanHoc.thuS == "4" && d.tietHoc.tietBD == "4"))
+                                            @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "4" && d.tietHoc.tietBD == "4" && d.monHoc.tenMon == item))
                                             {
 
-                                                if (item.hocPhan.loaiHP == "Lý thuyết")
+                                                if (item2.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
                                                     <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
                                                 }
-                                                else if (item.hocPhan.loaiHP == "Thực hành")
+                                                else if (item2.hocPhan.loaiHP == "Thực hành")
                                                 {
 
                                                     <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
@@ -641,31 +644,31 @@
                                             }
                                         </td>
                                         <td colspan="3">
-                                            @foreach (var item in db.TKBs.Where(d => d.tuanHoc.thuS == "4" && d.tietHoc.tietBD == "7"))
+                                            @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "4" && d.tietHoc.tietBD == "7" && d.monHoc.tenMon == item))
                                             {
 
-                                                if (item.hocPhan.loaiHP == "Lý thuyết")
+                                                if (item2.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
                                                     <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
                                                 }
-                                                else if (item.hocPhan.loaiHP == "Thực hành")
+                                                else if (item2.hocPhan.loaiHP == "Thực hành")
                                                 {
 
                                                     <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
@@ -674,31 +677,31 @@
                                             }
                                         </td>
                                         <td colspan="3">
-                                            @foreach (var item in db.TKBs.Where(d => d.tuanHoc.thuS == "4" && d.tietHoc.tietBD == "10"))
+                                            @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "4" && d.tietHoc.tietBD == "10" && d.monHoc.tenMon == item))
                                             {
 
-                                                if (item.hocPhan.loaiHP == "Lý thuyết")
+                                                if (item2.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
                                                     <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
                                                 }
-                                                else if (item.hocPhan.loaiHP == "Thực hành")
+                                                else if (item2.hocPhan.loaiHP == "Thực hành")
                                                 {
 
                                                     <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
@@ -707,31 +710,31 @@
                                             }
                                         </td>
                                         <td colspan="3">
-                                            @foreach (var item in db.TKBs.Where(d => d.tuanHoc.thuS == "4" && d.tietHoc.tietBD == "13"))
+                                            @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "4" && d.tietHoc.tietBD == "13" && d.monHoc.tenMon == item))
                                             {
 
-                                                if (item.hocPhan.loaiHP == "Lý thuyết")
+                                                if (item2.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
                                                     <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
                                                 }
-                                                else if (item.hocPhan.loaiHP == "Thực hành")
+                                                else if (item2.hocPhan.loaiHP == "Thực hành")
                                                 {
 
                                                     <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
@@ -742,31 +745,31 @@
 
                                         @*Thứ 5*@
                                         <td colspan="3">
-                                            @foreach (var item in db.TKBs.Where(d => d.tuanHoc.thuS == "5" && d.tietHoc.tietBD == "1"))
+                                            @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "5" && d.tietHoc.tietBD == "1" && d.monHoc.tenMon == item))
                                             {
 
-                                                if (item.hocPhan.loaiHP == "Lý thuyết")
+                                                if (item2.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
                                                     <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
                                                 }
-                                                else if (item.hocPhan.loaiHP == "Thực hành")
+                                                else if (item2.hocPhan.loaiHP == "Thực hành")
                                                 {
 
                                                     <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
@@ -775,31 +778,31 @@
                                             }
                                         </td>
                                         <td colspan="3">
-                                            @foreach (var item in db.TKBs.Where(d => d.tuanHoc.thuS == "5" && d.tietHoc.tietBD == "4"))
+                                            @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "5" && d.tietHoc.tietBD == "4" && d.monHoc.tenMon == item))
                                             {
 
-                                                if (item.hocPhan.loaiHP == "Lý thuyết")
+                                                if (item2.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
                                                     <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
                                                 }
-                                                else if (item.hocPhan.loaiHP == "Thực hành")
+                                                else if (item2.hocPhan.loaiHP == "Thực hành")
                                                 {
 
                                                     <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
@@ -808,31 +811,31 @@
                                             }
                                         </td>
                                         <td colspan="3">
-                                            @foreach (var item in db.TKBs.Where(d => d.tuanHoc.thuS == "5" && d.tietHoc.tietBD == "7"))
+                                            @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "5" && d.tietHoc.tietBD == "7" && d.monHoc.tenMon == item))
                                             {
 
-                                                if (item.hocPhan.loaiHP == "Lý thuyết")
+                                                if (item2.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
                                                     <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
                                                 }
-                                                else if (item.hocPhan.loaiHP == "Thực hành")
+                                                else if (item2.hocPhan.loaiHP == "Thực hành")
                                                 {
 
                                                     <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
@@ -841,31 +844,31 @@
                                             }
                                         </td>
                                         <td colspan="3">
-                                            @foreach (var item in db.TKBs.Where(d => d.tuanHoc.thuS == "5" && d.tietHoc.tietBD == "10"))
+                                            @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "5" && d.tietHoc.tietBD == "10" && d.monHoc.tenMon == item))
                                             {
 
-                                                if (item.hocPhan.loaiHP == "Lý thuyết")
+                                                if (item2.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
                                                     <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
                                                 }
-                                                else if (item.hocPhan.loaiHP == "Thực hành")
+                                                else if (item2.hocPhan.loaiHP == "Thực hành")
                                                 {
 
                                                     <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
@@ -874,31 +877,31 @@
                                             }
                                         </td>
                                         <td colspan="3">
-                                            @foreach (var item in db.TKBs.Where(d => d.tuanHoc.thuS == "5" && d.tietHoc.tietBD == "13"))
+                                            @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "5" && d.tietHoc.tietBD == "13" && d.monHoc.tenMon == item))
                                             {
 
-                                                if (item.hocPhan.loaiHP == "Lý thuyết")
+                                                if (item2.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
                                                     <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
                                                 }
-                                                else if (item.hocPhan.loaiHP == "Thực hành")
+                                                else if (item2.hocPhan.loaiHP == "Thực hành")
                                                 {
 
                                                     <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
@@ -909,31 +912,31 @@
 
                                         @*Thứ 6*@
                                         <td colspan="3">
-                                            @foreach (var item in db.TKBs.Where(d => d.tuanHoc.thuS == "6" && d.tietHoc.tietBD == "1"))
+                                            @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "6" && d.tietHoc.tietBD == "1" && d.monHoc.tenMon == item))
                                             {
 
-                                                if (item.hocPhan.loaiHP == "Lý thuyết")
+                                                if (item2.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
                                                     <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
                                                 }
-                                                else if (item.hocPhan.loaiHP == "Thực hành")
+                                                else if (item2.hocPhan.loaiHP == "Thực hành")
                                                 {
 
                                                     <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
@@ -942,31 +945,31 @@
                                             }
                                         </td>
                                         <td colspan="3">
-                                            @foreach (var item in db.TKBs.Where(d => d.tuanHoc.thuS == "6" && d.tietHoc.tietBD == "4"))
+                                            @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "6" && d.tietHoc.tietBD == "4" && d.monHoc.tenMon == item))
                                             {
 
-                                                if (item.hocPhan.loaiHP == "Lý thuyết")
+                                                if (item2.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
                                                     <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
                                                 }
-                                                else if (item.hocPhan.loaiHP == "Thực hành")
+                                                else if (item2.hocPhan.loaiHP == "Thực hành")
                                                 {
 
                                                     <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
@@ -975,31 +978,31 @@
                                             }
                                         </td>
                                         <td colspan="3">
-                                            @foreach (var item in db.TKBs.Where(d => d.tuanHoc.thuS == "6" && d.tietHoc.tietBD == "7"))
+                                            @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "6" && d.tietHoc.tietBD == "7" && d.monHoc.tenMon == item))
                                             {
 
-                                                if (item.hocPhan.loaiHP == "Lý thuyết")
+                                                if (item2.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
                                                     <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
                                                 }
-                                                else if (item.hocPhan.loaiHP == "Thực hành")
+                                                else if (item2.hocPhan.loaiHP == "Thực hành")
                                                 {
 
                                                     <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
@@ -1008,31 +1011,31 @@
                                             }
                                         </td>
                                         <td colspan="3">
-                                            @foreach (var item in db.TKBs.Where(d => d.tuanHoc.thuS == "6" && d.tietHoc.tietBD == "10"))
+                                            @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "6" && d.tietHoc.tietBD == "10" && d.monHoc.tenMon == item))
                                             {
 
-                                                if (item.hocPhan.loaiHP == "Lý thuyết")
+                                                if (item2.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
                                                     <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
                                                 }
-                                                else if (item.hocPhan.loaiHP == "Thực hành")
+                                                else if (item2.hocPhan.loaiHP == "Thực hành")
                                                 {
 
                                                     <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
@@ -1041,31 +1044,31 @@
                                             }
                                         </td>
                                         <td colspan="3">
-                                            @foreach (var item in db.TKBs.Where(d => d.tuanHoc.thuS == "6" && d.tietHoc.tietBD == "13"))
+                                            @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "6" && d.tietHoc.tietBD == "13" && d.monHoc.tenMon == item))
                                             {
 
-                                                if (item.hocPhan.loaiHP == "Lý thuyết")
+                                                if (item2.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
                                                     <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
                                                 }
-                                                else if (item.hocPhan.loaiHP == "Thực hành")
+                                                else if (item2.hocPhan.loaiHP == "Thực hành")
                                                 {
 
                                                     <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
@@ -1076,31 +1079,31 @@
 
                                         @*Thứ 7*@
                                         <td colspan="3">
-                                            @foreach (var item in db.TKBs.Where(d => d.tuanHoc.thuS == "7" && d.tietHoc.tietBD == "1"))
+                                            @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "7" && d.tietHoc.tietBD == "1" && d.monHoc.tenMon == item))
                                             {
 
-                                                if (item.hocPhan.loaiHP == "Lý thuyết")
+                                                if (item2.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
                                                     <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
                                                 }
-                                                else if (item.hocPhan.loaiHP == "Thực hành")
+                                                else if (item2.hocPhan.loaiHP == "Thực hành")
                                                 {
 
                                                     <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
@@ -1109,31 +1112,31 @@
                                             }
                                         </td>
                                         <td colspan="3">
-                                            @foreach (var item in db.TKBs.Where(d => d.tuanHoc.thuS == "7" && d.tietHoc.tietBD == "4"))
+                                            @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "7" && d.tietHoc.tietBD == "4" && d.monHoc.tenMon == item))
                                             {
 
-                                                if (item.hocPhan.loaiHP == "Lý thuyết")
+                                                if (item2.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
                                                     <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
                                                 }
-                                                else if (item.hocPhan.loaiHP == "Thực hành")
+                                                else if (item2.hocPhan.loaiHP == "Thực hành")
                                                 {
 
                                                     <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
@@ -1142,31 +1145,31 @@
                                             }
                                         </td>
                                         <td colspan="3">
-                                            @foreach (var item in db.TKBs.Where(d => d.tuanHoc.thuS == "7" && d.tietHoc.tietBD == "7"))
+                                            @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "7" && d.tietHoc.tietBD == "7" && d.monHoc.tenMon == item))
                                             {
 
-                                                if (item.hocPhan.loaiHP == "Lý thuyết")
+                                                if (item2.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
                                                     <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
                                                 }
-                                                else if (item.hocPhan.loaiHP == "Thực hành")
+                                                else if (item2.hocPhan.loaiHP == "Thực hành")
                                                 {
 
                                                     <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
@@ -1175,31 +1178,31 @@
                                             }
                                         </td>
                                         <td colspan="3">
-                                            @foreach (var item in db.TKBs.Where(d => d.tuanHoc.thuS == "7" && d.tietHoc.tietBD == "10"))
+                                            @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "7" && d.tietHoc.tietBD == "10" && d.monHoc.tenMon == item))
                                             {
 
-                                                if (item.hocPhan.loaiHP == "Lý thuyết")
+                                                if (item2.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
                                                     <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
                                                 }
-                                                else if (item.hocPhan.loaiHP == "Thực hành")
+                                                else if (item2.hocPhan.loaiHP == "Thực hành")
                                                 {
 
                                                     <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
@@ -1208,31 +1211,31 @@
                                             }
                                         </td>
                                         <td colspan="3">
-                                            @foreach (var item in db.TKBs.Where(d => d.tuanHoc.thuS == "7" && d.tietHoc.tietBD == "13"))
+                                            @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "7" && d.tietHoc.tietBD == "13" && d.monHoc.tenMon == item))
                                             {
 
-                                                if (item.hocPhan.loaiHP == "Lý thuyết")
+                                                if (item2.hocPhan.loaiHP == "Lý thuyết")
                                                 {
 
                                                     <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
                                                 }
-                                                else if (item.hocPhan.loaiHP == "Thực hành")
+                                                else if (item2.hocPhan.loaiHP == "Thực hành")
                                                 {
 
                                                     <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px; visibility:visible">
-                                                        <label><b>@item.monHoc.maMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.maLHP</b></label> <br />
-                                                        <label><b>@item.monHoc.tenMon</b></label> <br />
-                                                        <label><b>@item.hocPhan.loaiHP</b></label> <br />
-                                                        <label><b>@item.phongHoc.maPhong</b></label> <br />
+                                                        <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                        <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                        <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                        <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                         <input class="form-control" type="search">
                                                     </form>
 
@@ -1241,7 +1244,8 @@
                                             }
                                         </td>
                                     </tr>
-
+                                    }
+                                                                                                              
                                 </tbody>
 
 
@@ -1250,14 +1254,16 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
 
     </section>
 
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script>
-        $(document).ready(function () {
-            TabTranferTabPerior(0);
-        });
+        //$(document).ready(function () {
+        //    TabTranferTabPerior(0);
+        //});
 
         function PrintTKB() {
             printContent("divThoiKhoaBieuTietThu");
@@ -1306,25 +1312,95 @@
                     }
                 }
 
-
                 //document.getElementsByClassName("formLT").style.visibility = "hidden";
                 //document.getElementsByClassName("formTT").style.visibility = "visible";
             }
         }
 
-        function TabTranferTabPerior(key) {
-            if (key == 0) {
-                // tab week
-                $("#cbTweek").show();
-                $("#btnPrint").hide();
-                DrawingSchedules();
-            } else if (key == 1) {
-                //tab perior
-                $("#cbTweek").hide();
-                $("#btnPrint").show();
-                DrawingSchedules2();
-            }
-        }
+        //function Filtermonhox(select) {
+        //    if (select) {
+        //        //alert(select)
+        //        var test = document.getElementById("Vật lý đại cương 1");
+        //        alert(test);
+        //    }
+        //}
+
+        $(document).ready(function () {
+            $('#chonmonhox').on('change', function () {
+                var value = $(this).val();
+                //var id = $('tr').attr('name');
+                //var id = value
+                //id = value
+                //var a = $(this).attr('id');
+                //var cc = $('tr').data('id');    
+                
+                    $('tr').each(function (z,x) {
+                        var id = $(this).attr('id');
+                        //    alert(id);         
+                        if (value == id) {
+                            //$('.test').not(this[x]).css("display", "none");
+                            $('.test').css("display", "none");
+                            $(this).css("display", "");
+                        }
+                    });
+                if (value == "All") {
+                    $('.test').css("display", "");
+                }               
+            });
+        });
+        //$(document).ready(function () {
+        //    loadTKB();
+        //});
+
+        //function loadTKB() {
+        //    $.get("LoadData","Home", { tenMH: tenMH }, function (data) {
+
+        //        $("#TKBT14").empty();
+        //        $("TKBT14").html(data);
+        //    });
+        //}
+
+        //$(document).ready(function () {
+        //    $('#chonmonhox').on('change', function () {
+        //        var value = $(this).val();
+        //        if (value) {
+        //            targList = document.getElementsByName('Vật lý đại cương 1');
+        //            if (targList) {
+        //                for (var x = 0; x < targList.length; x++) {
+        //                    targList[x].style.visibility = "hidden";
+        //                }
+        //            }
+        //        }
+                //alert(value);
+        //        $.ajax({
+        //            url: "/Home/LoadData",
+        //            type: "get",
+        //            datatype: "html",
+        //            data: {
+        //                tenMH: $('#chonmonhox').val()
+        //            },
+        //            success: function (data) {
+        //                $('#TKBT14').html(data)
+        //            }
+        //        });
+        //    });               
+        //});
+
+        //function TabTranferTabPerior(key) {
+        //    if (key == 0) {
+        //        // tab week
+        //        $("#cbTweek").show();
+        //        $("#btnPrint").hide();
+        //        DrawingSchedules();
+        //    } else if (key == 1) {
+        //        //tab perior
+        //        $("#cbTweek").hide();
+        //        $("#btnPrint").show();
+        //        DrawingSchedules2();
+        //    }
+        //}
+
+        
 
         function DrawingSchedules2() {
             $.ajax({

@@ -64,10 +64,10 @@
                                     @using (Html.BeginForm("UploadExcel", "Home", FormMethod.Post, new { enctype = "multipart/form-data", id = "UploadForm", style = "width:30%" }))
                                     {
                                         <label>File Thời khóa biểu</label>
-                                        <input type="file" name="excel" onchange="checkfile(this);" accept=".xls, .xlsx" class="form-control-file form-control height-auto col-md-9" required>
-                                        <button id="UploadFile" type="submit" class="btn btn-success col-md-3 " style="float: right; margin-right:-3px; margin-top:-37px" onclick="confirmation3(this)">Import</button>
+                                        <input type="file" id="inputexcel" name="excel" onchange="checkfile(this);" accept=".xls, .xlsx" class="form-control-file form-control height-auto col-md-9" required>
+                                        <button id="UpPort" type="submit" class="btn btn-success col-md-3 " style="float: right; margin-right:-3px; margin-top:-37px">Import</button>
                                         <br />
-                                        <a href="@Url.Action("Index", "Home")" style="float: right; margin-top: -20px" ; class="btn btn-danger" onclick="return confirm('Bạn có muốn Hủy?')">Hủy</a>
+                                        <a href="@Url.Action("Catalog", "Home")" style="float: right; margin-top: -20px" ; class="btn btn-danger" onclick="return confirm('Bạn có muốn Hủy?')">Hủy</a>
                                         <br />}
 
                                     <script type="text/javascript" language="javascript">
@@ -76,45 +76,33 @@
                                             var fileExt = sender.value;
                                             fileExt = fileExt.substring(fileExt.lastIndexOf('.'));
                                             if (validExts.indexOf(fileExt) < 0) {
-                                                alert("File bạn chọn không thuộc định dạng .xls hoặc .xlsx \nVui lòng chọn file đúng định dạng!");
+                                                //alert("File bạn chọn không thuộc định dạng .xls hoặc .xlsx \nVui lòng chọn file đúng định dạng!");
+                                                Swal.fire({
+                                                    icon: 'error',
+                                                    title: 'File bạn chọn không thuộc định dạng .xls hoặc .xlsx',
+                                                    text: 'Vui lòng chọn file đúng định dạng!',
+
+                                                })
                                                 return false;
                                             }
                                             else return true;
                                         }
-                                        function confirmation3(button) {
-                                            var ask = confirm("Bạn đã chọn Import Thời khóa biểu \nNếu bạn đã xác định muốn Import vui lòng click OK!")
-                                            //if (ask) {
-                                            //    alert("Bạn đã chọn chức năng THAY THẾ \n*Lưu ý: Nếu bạn lưu file excel này thì kết quả sẽ THAY THẾ thời khóa biểu");
-                                            //}
-                                            //else {
-                                            //    alert("Bạn đã hủy chon chức năng THAY THẾ !");
-                                            //    radio.checked = false;
-                                            //}
-                                        }
-                                        $('#UploadFile').click(function () {
-                                            if ($(this).val().length > 1) {
-                                                $('#UploadForm').submit();
-                                                $('html').fadeTo('slow', 0);
-                                            }
-                                        });
-                                        $('#example').DataTable({
-                                            dom: 'Bfrtip',
-                                            buttons: {
-                                                dom: {
-                                                    button: {
-                                                        class: 'btn'
-                                                    }
-                                                },
-                                                buttons: [
-                                                    {
-                                                        extend: 'excel',
-                                                        text: 'Export to excel',
-                                                        excelStyles: {
-                                                            template: 'header_blue'
-                                                        }
-                                                    }
-                                                ]
-                                            }
+                                        $('#UploadForm').submit(function (e) {
+                                            e.preventDefault();
+                                            Swal.fire({
+                                                title: 'Bạn có muốn import file excel này ?',
+                                                //text: "You won't be able to revert this!",
+                                                icon: 'warning',
+                                                showCancelButton: true,
+                                                confirmButtonColor: '#3085d6',
+                                                cancelButtonColor: '#d33',
+                                                confirmButtonText: 'Import',
+                                                cancelButtonText: 'Không'
+                                            }).then((result) => {
+                                                if (result.isConfirmed) {
+                                                    $(this).submit();
+                                                }
+                                            })
                                         });
                                     </script>
                                 </div>
@@ -136,7 +124,6 @@
                 text: 'Bạn đã import thành công !!!',
                 icon: 'success',
                 showConfirmButton: true,
-                timer: 1500,
             });
         });
     </script>
