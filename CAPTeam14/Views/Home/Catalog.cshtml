@@ -41,22 +41,18 @@
                                      
                                     </div>
                                     
-                                  
-
                                     <div class="form-group">
-
 
                                         @using (Html.BeginForm("Catalog", "Home", FormMethod.Post, new { enctype = "multipart/form-data", id = "UploadForm", style = "width:30%" }))
                                         {
                                             <label>File Thời khóa biểu</label>
                                             <input type="file" name="excel" value="submit" onchange="checkfile(this);" accept=".xls, .xlsx" class="form-control-file form-control height-auto" required>
-                                            <button id="UploadFile" type="submit" class="btn btn-success" data-toggle="modal" data-target="#myModal3" data-backdrop="static" style="float: left" onclick="confirmation3(this)">Import</button>
+                                            <button id="UploadFile" type="submit" class="btn btn-success" @*data-toggle="modal"*@ @*data-target="#myModal3"*@ data-backdrop="static" style="float: left">Import</button>
                                             <br />
                                             <a href="@Url.Action("Index", "Home")" style="float: right; margin-top: -20px" ; class="btn btn-danger" onclick="return confirm('Bạn có muốn Hủy?')">Hủy</a>
                                             <br />
                                             <br />
                                             <br />
-
 
                                             @Html.LabelFor(model => model.ID_hocKy, "", htmlAttributes: new { @class = "control-label col-md-2" })
                                             <label>Chọn học kì:</label>
@@ -64,11 +60,11 @@
                                             @Html.ValidationMessageFor(model => model.ID_hocKy, "", new { @class = "text-danger" })
 
                                             <!-- Modal -->
-                                            <div class="modal fade" id="myModal3" role="dialog">
-                                                <div class="modal-dialog modal-dialog-centered">
+                                            <!--<div class="modal fade" id="myModal3" role="dialog">
+                                                <div class="modal-dialog modal-dialog-centered">-->
 
                                                     <!-- Modal content-->
-                                                    <div class="modal-content">
+                                                    <!--<div class="modal-content">
                                                         <div class="modal-header">
                                                             <h4 class="modal-title">Dữ liệu đang được import vào hệ thống</h4>
                                                         </div>
@@ -78,7 +74,7 @@
                                                     </div>
 
                                                 </div>
-                                            </div>
+                                            </div>-->
                                         }
 
                                     <script type="text/javascript" language="javascript">
@@ -98,6 +94,7 @@
                                             }
                                             else return true;
                                         }
+
                                         $('#UploadForm').submit(function (e) {
                                             e.preventDefault();
                                             Swal.fire({
@@ -112,7 +109,19 @@
                                             }).then((result) => {
                                                 if (result.isConfirmed) {
                                                     $(this).submit();
-                                                }
+                                                    Swal.fire({
+                                                        title: 'Please Wait !',
+                                                        html: 'data uploading',// add html attribute if you want or remove
+                                                        showConfirmButton: false,
+                                                        allowOutsideClick: false,
+                                                        onBeforeOpen: () => {
+                                                            Swal.showLoading()
+                                                        },
+                                                        onAfterClose() {
+                                                            Swal.hideLoading()
+                                                        },
+                                                    });
+                                                }                                                
                                             })
                                         });
                                     </script>
@@ -125,6 +134,7 @@
         </div>
     </section>
 </div>
+}
 
 @if (TempData["ThongBao"] != null)
 {

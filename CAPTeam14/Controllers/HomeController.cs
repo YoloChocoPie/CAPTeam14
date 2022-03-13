@@ -40,9 +40,7 @@ namespace CAPTeam14.Controllers
             ViewBag.Message = "Your application description page.";
 
             return View();
-        }
-        
-       
+        }        
 
         public ActionResult Search()
         {
@@ -56,6 +54,7 @@ namespace CAPTeam14.Controllers
 
             return View();
         }
+        
         [HttpGet]
         // Luồng đi mới của Import
         public ActionResult Catalog()
@@ -64,6 +63,7 @@ namespace CAPTeam14.Controllers
             ViewBag.hocky = model.hocKies.OrderByDescending(x => x.ID).ToList();
             return View();
         }
+        
         [HttpPost]
         public ActionResult Catalog(TKB tkb)
         {
@@ -396,6 +396,46 @@ namespace CAPTeam14.Controllers
             IEDreader.Close();
             TempData["ThongBao"] = 1;
             return RedirectToAction("Catalog","Home");
+        }
+
+        [HttpGet]
+        // Luồng đi mới của Import
+        public ActionResult PhanCong()
+        {
+
+            ViewBag.gv = model.nguoiDungs.OrderByDescending(x => x.ID).ToList();
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult PhanCong(int? id,TKB tkb)
+        {
+            ViewBag.gv = model.nguoiDungs.OrderByDescending(x => x.ID).ToList();
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var tt = model.TKBs.FirstOrDefault(x => x.ID == id);
+
+                    tt.ID_GV = tkb.ID_GV;
+
+                    model.SaveChanges();
+                    
+                    return RedirectToAction("Index","Home");
+                }
+                else
+                {
+                    string messages = string.Join("; ", ModelState.Values
+                                        .SelectMany(x => x.Errors)
+                                        .Select(x => x.ErrorMessage));
+                    ModelState.AddModelError("", messages);
+                }
+            }
+            catch (DataException)
+            {
+                ModelState.AddModelError("", "Không thể lưu các thay đổi. Hãy thử lại và nếu sự cố vẫn tiếp diễn, hãy gặp quản trị viên hệ thống của bạn.");
+            }
+            return RedirectToAction("Index", "Home");
         }
     }
 }

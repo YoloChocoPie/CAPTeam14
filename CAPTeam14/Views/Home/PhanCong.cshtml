@@ -1,0 +1,2249 @@
+﻿@*@model IEnumerable<CAPTeam14.Models.TKB>*@
+@using CAPTeam14.Models;
+
+@{ var db = new CP24Team14Entities();
+    var query = db.hocKies.Where(x => x.ID == 1);
+    //var queryy = db.hocKies.Select(r => r.ID);
+}
+
+
+<div class="content-wrapper">
+    <!-- Main content -->
+    <section class="content">
+        <div class="bgtitle">Thời khóa biểu</div>
+
+        <div width="100%" class="form-inline col-md-12 magin-bottom-5px" style="margin-bottom:10px">
+            <div class="col-md-4 form-group">
+                <label>Năm học:</label>
+                <select class="form-control width-70" id="YearStudy" name="YearStudy" onchange="LoadWeek()">
+                    <option value="2023-2024">2023-2024</option>
+                    <option value="2022-2023">2022-2023</option>
+                    <option selected="selected" value="2021-2022">
+                        2021-2022
+                    </option>
+                    <option value="2020-2021">2020-2021</option>
+                </select>
+            </div>
+
+            <div class="col-md-4 form-group">
+                <label>Học kỳ:</label>
+                <select class="form-control width-70" id="chonhk">
+                    <option>-- Chọn Học Kỳ ---</option>
+                    @foreach (var item in db.hocKies)
+                    {
+                        <option value="@item.ID">@item.tenHK</option>
+                    }
+                </select>
+            </div>
+
+            <div class="col-md-4 form-group" id="cbTweek">
+                <label>Tuần:</label>
+                <select class="form-control width-70" id="Week" name="Week" onchange="TabTranferTabPerior(0)">
+
+                    @foreach (var tuan in db.tuanHocs.Select(x => x.tuanHoc1).Distinct())
+                    {
+                        string cc = tuan;
+                        string[] cl = cc.Split(',', ';', ' ');
+
+                        foreach (var clm in cl)
+                        {
+                            <option value="@clm">@clm</option>
+                        }
+
+                    }
+                </select>
+            </div>
+            <div class="col-md-4" id="btnPrint" style="display: none">
+                <a href="javascript:void(0)" class="btn btn-link" onclick="PrintTKB()">[In TKB]</a>
+            </div>
+        </div>
+
+        <div width="100%" class="form-inline col-md-12 magin-bottom-5px">
+            <div class="col-md-4 form-group">
+                <label>Trạng Thái:</label>
+                <select class="form-control width-70" id="YearStudy" name="YearStudy" onchange="LoadWeek()">
+                    <option value="">Chưa phân công</option>
+                    <option value="">Đã Phân công</option>
+                </select>
+            </div>
+
+            <div class="col-md-4 form-group">
+                <label>Loại HP:</label>
+                <select class="form-control width-70" onchange="FilterLoaiHP(this)">
+                    <option value="tatca">Tất cả</option>
+                    <option value="LyThuyet">Lý Thuyết</option>
+                    <option value="ThucHanh">Thực Hành</option>
+                </select>
+            </div>
+
+            <div class="col-md-4 form-group" id="cbTweek">
+                <label>Môn học:</label>
+                <select class="form-control width-70" id="chonmonhox">
+                    <option value="All" selected="selected">Tất cả</option>
+                    @foreach (var mhx in db.monHocs.Select(x => x.tenMon).OrderBy(x => x))
+                    {
+                        //string mh0x = mhx.tenMon;
+                        //string[] dmdoi = mh0x.ToArray();
+                        //Array.Sort(dmdoi);
+                        <option value="@mhx">@mhx</option>
+                    }
+                </select>
+            </div>
+
+            <div class="col-md-4" id="btnPrint" style="display: none">
+                <a href="javascript:void(0)" class="btn btn-link" onclick="PrintTKB()">[In TKB]</a>
+            </div>
+        </div>
+
+        <div>
+            <ul class="nav nav-tabs" style="font-weight: bold">
+                <li class="active">
+                    <a data-toggle="tab"
+                       href="#tabWeek"
+                       onclick="TabTranferTabPerior(0)">
+                        <span class="glyphicon glyphicon-tasks"></span> TKB Tuần
+                    </a>
+                <li>
+                    <a data-toggle="tab"
+                       href="#tabPerior"
+                       onclick="TabTranferTabPerior(1)">
+                        <span class="glyphicon glyphicon-info-sign"></span>
+                        TKB Thứ - Tiết
+                    </a>
+                </li>    
+            </ul>
+        </div>
+
+        <div class="tab-content" style="background-color: #fff">
+            <div id="tabWeek" class="tab-pane @*fade*@ in active">
+                <div id="divThoiKhoiBieu">
+                    <div>
+                        <div class="clearfix"></div>
+                        <div class="alert alert-warning smallTxt config-alert">
+                            
+                        </div>
+                        <div>
+                            <table id="TKBT14" border="1" align="center">
+                                <thead style="background-color: #003fa8;color: white;font-weight: bolder">
+                                    <tr>
+                                        <th align="center" style="padding: 20px 10px">Thứ
+                                        <th colspan="15" style="text-align: center">Thứ 2
+                                        <th colspan="15" style="text-align: center">Thứ 3
+                                        <th colspan="15" style="text-align: center">Thứ 4
+                                        <th colspan="15" style="text-align: center">Thứ 5
+                                        <th colspan="15" style="text-align: center">Thứ 6
+                                        <th colspan="15" style="text-align: center">Thứ 7
+                                    </tr>
+
+                                    <tr>
+                                        <td align="center" style="padding: 15px 15px"> Tiết
+                                        <td align="center" style="padding: 15px 15px"> 01
+                                        <td align="center" style="padding: 15px 15px"> 02
+                                        <td align="center" style="padding: 15px 15px"> 03
+                                        <td align="center" style="padding: 15px 15px"> 04
+                                        <td align="center" style="padding: 15px 15px"> 05
+                                        <td align="center" style="padding: 15px 15px"> 06
+                                        <td align="center" style="padding: 15px 15px"> 07
+                                        <td align="center" style="padding: 15px 15px"> 08
+                                        <td align="center" style="padding: 15px 15px"> 09
+                                        <td align="center" style="padding: 15px 15px"> 10
+                                        <td align="center" style="padding: 15px 15px"> 11
+                                        <td align="center" style="padding: 15px 15px"> 12
+                                        <td align="center" style="padding: 15px 15px"> 13
+                                        <td align="center" style="padding: 15px 15px"> 14
+                                        <td align="center" style="padding: 15px 15px"> 15
+
+                                        <td align="center" style="padding: 15px 15px"> 01
+                                        <td align="center" style="padding: 15px 15px"> 02
+                                        <td align="center" style="padding: 15px 15px"> 03
+                                        <td align="center" style="padding: 15px 15px"> 04
+                                        <td align="center" style="padding: 15px 15px"> 05
+                                        <td align="center" style="padding: 15px 15px"> 06
+                                        <td align="center" style="padding: 15px 15px"> 07
+                                        <td align="center" style="padding: 15px 15px"> 08
+                                        <td align="center" style="padding: 15px 15px"> 09
+                                        <td align="center" style="padding: 15px 15px"> 10
+                                        <td align="center" style="padding: 15px 15px"> 11
+                                        <td align="center" style="padding: 15px 15px"> 12
+                                        <td align="center" style="padding: 15px 15px"> 13
+                                        <td align="center" style="padding: 15px 15px"> 14
+                                        <td align="center" style="padding: 15px 15px"> 15
+
+                                        <td align="center" style="padding: 15px 15px"> 01
+                                        <td align="center" style="padding: 15px 15px"> 02
+                                        <td align="center" style="padding: 15px 15px"> 03
+                                        <td align="center" style="padding: 15px 15px"> 04
+                                        <td align="center" style="padding: 15px 15px"> 05
+                                        <td align="center" style="padding: 15px 15px"> 06
+                                        <td align="center" style="padding: 15px 15px"> 07
+                                        <td align="center" style="padding: 15px 15px"> 08
+                                        <td align="center" style="padding: 15px 15px"> 09
+                                        <td align="center" style="padding: 15px 15px"> 10
+                                        <td align="center" style="padding: 15px 15px"> 11
+                                        <td align="center" style="padding: 15px 15px"> 12
+                                        <td align="center" style="padding: 15px 15px"> 13
+                                        <td align="center" style="padding: 15px 15px"> 14
+                                        <td align="center" style="padding: 15px 15px"> 15
+
+                                        <td align="center" style="padding: 15px 15px"> 01
+                                        <td align="center" style="padding: 15px 15px"> 02
+                                        <td align="center" style="padding: 15px 15px"> 03
+                                        <td align="center" style="padding: 15px 15px"> 04
+                                        <td align="center" style="padding: 15px 15px"> 05
+                                        <td align="center" style="padding: 15px 15px"> 06
+                                        <td align="center" style="padding: 15px 15px"> 07
+                                        <td align="center" style="padding: 15px 15px"> 08
+                                        <td align="center" style="padding: 15px 15px"> 09
+                                        <td align="center" style="padding: 15px 15px"> 10
+                                        <td align="center" style="padding: 15px 15px"> 11
+                                        <td align="center" style="padding: 15px 15px"> 12
+                                        <td align="center" style="padding: 15px 15px"> 13
+                                        <td align="center" style="padding: 15px 15px"> 14
+                                        <td align="center" style="padding: 15px 15px"> 15
+
+                                        <td align="center" style="padding: 15px 15px"> 01
+                                        <td align="center" style="padding: 15px 15px"> 02
+                                        <td align="center" style="padding: 15px 15px"> 03
+                                        <td align="center" style="padding: 15px 15px"> 04
+                                        <td align="center" style="padding: 15px 15px"> 05
+                                        <td align="center" style="padding: 15px 15px"> 06
+                                        <td align="center" style="padding: 15px 15px"> 07
+                                        <td align="center" style="padding: 15px 15px"> 08
+                                        <td align="center" style="padding: 15px 15px"> 09
+                                        <td align="center" style="padding: 15px 15px"> 10
+                                        <td align="center" style="padding: 15px 15px"> 11
+                                        <td align="center" style="padding: 15px 15px"> 12
+                                        <td align="center" style="padding: 15px 15px"> 13
+                                        <td align="center" style="padding: 15px 15px"> 14
+                                        <td align="center" style="padding: 15px 15px"> 15
+
+                                        <td align="center" style="padding: 15px 15px"> 01
+                                        <td align="center" style="padding: 15px 15px"> 02
+                                        <td align="center" style="padding: 15px 15px"> 03
+                                        <td align="center" style="padding: 15px 15px"> 04
+                                        <td align="center" style="padding: 15px 15px"> 05
+                                        <td align="center" style="padding: 15px 15px"> 06
+                                        <td align="center" style="padding: 15px 15px"> 07
+                                        <td align="center" style="padding: 15px 15px"> 08
+                                        <td align="center" style="padding: 15px 15px"> 09
+                                        <td align="center" style="padding: 15px 15px"> 10
+                                        <td align="center" style="padding: 15px 15px"> 11
+                                        <td align="center" style="padding: 15px 15px"> 12
+                                        <td align="center" style="padding: 15px 15px"> 13
+                                        <td align="center" style="padding: 15px 15px"> 14
+                                        <td align="center" style="padding: 15px 15px"> 15
+                                    </tr>
+                                </thead>
+
+                                <tbody style="background-color: rgb(255, 255, 255)">
+
+                                    @foreach (var item in db.monHocs.Select(x => x.tenMon).OrderBy(x => x))
+                                    {
+
+                                        <tr id="" name="@item" class="test ">
+                                            <td style="font-size:16px"><strong>@item</strong></td>
+
+                                            @*Thứ 2*@
+                                            <td colspan="3">
+                                                @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "2" && d.tietHoc.tietBD == "1" && d.monHoc.tenMon == item))
+                                                {
+
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết")
+                                                    {
+
+                                                        <form data-model-id="@item2.ID" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />  
+                                                            @*<div class="input-group">
+                                                                <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value="@itemGV.ID"> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                            </div>*@
+                                                            @using (Html.BeginForm("PhanCong", "Home", FormMethod.Post, new { enctype = "multipart/form-data", id = "fomrGV", style = "width:30%" }))
+                                                            { 
+                                                                @*<div class="input-group">
+                                                                <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value="@itemGV.ID"> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                            </div>*@
+                                                                @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"))
+                                                                <button class="btn btn-success" id="btnSave" type="submit">Save</button>
+                                                            }                                                            
+
+                                                        </form>
+
+                                                    }
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành")
+                                                    {
+
+                                                        <form id="@item2.ID" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select id="ggv">
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value="@itemGV.userID"> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+
+                                                }
+                                            </td>
+                                            <td colspan="3">
+                                                @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "2" && d.tietHoc.tietBD == "4" && d.monHoc.tenMon == item))
+                                                {
+
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết")
+                                                    {
+
+                                                        <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành")
+                                                    {
+
+                                                        <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+
+                                                }
+                                            </td>
+                                            <td colspan="3">
+                                                @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "2" && d.tietHoc.tietBD == "7" && d.monHoc.tenMon == item))
+                                                {
+
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết")
+                                                    {
+
+                                                        <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành")
+                                                    {
+
+                                                        <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+
+                                                }
+                                            </td>
+                                            <td colspan="3">
+                                                @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "2" && d.tietHoc.tietBD == "10" && d.monHoc.tenMon == item))
+                                                {
+
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết")
+                                                    {
+
+                                                        <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành")
+                                                    {
+
+                                                        <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+
+                                                }
+                                            </td>
+                                            <td colspan="3">
+                                                @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "2" && d.tietHoc.tietBD == "13" && d.monHoc.tenMon == item))
+                                                {
+
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết")
+                                                    {
+
+                                                        <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành")
+                                                    {
+
+                                                        <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+
+                                                }
+                                            </td>
+
+                                            @*Thứ 3*@
+                                            <td colspan="3">
+                                                @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "3" && d.tietHoc.tietBD == "1" && d.monHoc.tenMon == item))
+                                                {
+
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết")
+                                                    {
+
+                                                        <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành")
+                                                    {
+
+                                                        <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+
+                                                }
+                                            </td>
+                                            <td colspan="3">
+                                                @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "3" && d.tietHoc.tietBD == "4" && d.monHoc.tenMon == item))
+                                                {
+
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết")
+                                                    {
+
+                                                        <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành")
+                                                    {
+
+                                                        <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+
+                                                }
+                                            </td>
+                                            <td colspan="3">
+                                                @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "3" && d.tietHoc.tietBD == "7" && d.monHoc.tenMon == item))
+                                                {
+
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết")
+                                                    {
+
+                                                        <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                            <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }</select>
+                                                        </form>
+
+                                                    }
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành")
+                                                    {
+
+                                                        <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+
+                                                }
+                                            </td>
+                                            <td colspan="3">
+                                                @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "3" && d.tietHoc.tietBD == "10" && d.monHoc.tenMon == item))
+                                                {
+
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết")
+                                                    {
+
+                                                        <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành")
+                                                    {
+
+                                                        <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+
+                                                }
+                                            </td>
+                                            <td colspan="3">
+                                                @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "3" && d.tietHoc.tietBD == "13" && d.monHoc.tenMon == item))
+                                                {
+
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết")
+                                                    {
+
+                                                        <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành")
+                                                    {
+
+                                                        <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                            <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+
+                                                }
+                                            </td>
+
+                                            @*Thứ 4*@
+                                            <td colspan="3">
+                                                @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "4" && d.tietHoc.tietBD == "1" && d.monHoc.tenMon == item))
+                                                {
+
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết")
+                                                    {
+
+                                                        <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành")
+                                                    {
+
+                                                        <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+
+                                                }
+                                            </td>
+                                            <td colspan="3">
+                                                @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "4" && d.tietHoc.tietBD == "4" && d.monHoc.tenMon == item))
+                                                {
+
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết")
+                                                    {
+
+                                                        <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành")
+                                                    {
+
+                                                        <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+
+                                                }
+                                            </td>
+                                            <td colspan="3">
+                                                @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "4" && d.tietHoc.tietBD == "7" && d.monHoc.tenMon == item))
+                                                {
+
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết")
+                                                    {
+
+                                                        <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành")
+                                                    {
+
+                                                        <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+
+                                                }
+                                            </td>
+                                            <td colspan="3">
+                                                @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "4" && d.tietHoc.tietBD == "10" && d.monHoc.tenMon == item))
+                                                {
+
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết")
+                                                    {
+
+                                                        <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành")
+                                                    {
+
+                                                        <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+
+                                                }
+                                            </td>
+                                            <td colspan="3">
+                                                @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "4" && d.tietHoc.tietBD == "13" && d.monHoc.tenMon == item))
+                                                {
+
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết")
+                                                    {
+
+                                                        <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành")
+                                                    {
+
+                                                        <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+
+                                                }
+                                            </td>
+
+                                            @*Thứ 5*@
+                                            <td colspan="3">
+                                                @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "5" && d.tietHoc.tietBD == "1" && d.monHoc.tenMon == item))
+                                                {
+
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết")
+                                                    {
+
+                                                        <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành")
+                                                    {
+
+                                                        <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+
+                                                }
+                                            </td>
+                                            <td colspan="3">
+                                                @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "5" && d.tietHoc.tietBD == "4" && d.monHoc.tenMon == item))
+                                                {
+
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết")
+                                                    {
+
+                                                        <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành")
+                                                    {
+
+                                                        <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+
+                                                }
+                                            </td>
+                                            <td colspan="3">
+                                                @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "5" && d.tietHoc.tietBD == "7" && d.monHoc.tenMon == item))
+                                                {
+
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết")
+                                                    {
+
+                                                        <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành")
+                                                    {
+
+                                                        <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+
+                                                }
+                                            </td>
+                                            <td colspan="3">
+                                                @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "5" && d.tietHoc.tietBD == "10" && d.monHoc.tenMon == item))
+                                                {
+
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết")
+                                                    {
+
+                                                        <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành")
+                                                    {
+
+                                                        <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+
+                                                }
+                                            </td>
+                                            <td colspan="3">
+                                                @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "5" && d.tietHoc.tietBD == "13" && d.monHoc.tenMon == item))
+                                                {
+
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết")
+                                                    {
+
+                                                        <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành")
+                                                    {
+
+                                                        <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+
+                                                }
+                                            </td>
+
+                                            @*Thứ 6*@
+                                            <td colspan="3">
+                                                @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "6" && d.tietHoc.tietBD == "1" && d.monHoc.tenMon == item))
+                                                {
+
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết")
+                                                    {
+
+                                                        <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành")
+                                                    {
+
+                                                        <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+
+                                                }
+                                            </td>
+                                            <td colspan="3">
+                                                @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "6" && d.tietHoc.tietBD == "4" && d.monHoc.tenMon == item))
+                                                {
+
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết")
+                                                    {
+
+                                                        <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành")
+                                                    {
+
+                                                        <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+
+                                                }
+                                            </td>
+                                            <td colspan="3">
+                                                @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "6" && d.tietHoc.tietBD == "7" && d.monHoc.tenMon == item))
+                                                {
+
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết")
+                                                    {
+
+                                                        <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành")
+                                                    {
+
+                                                        <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+
+                                                }
+                                            </td>
+                                            <td colspan="3">
+                                                @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "6" && d.tietHoc.tietBD == "10" && d.monHoc.tenMon == item))
+                                                {
+
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết")
+                                                    {
+
+                                                        <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành")
+                                                    {
+
+                                                        <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+
+                                                }
+                                            </td>
+                                            <td colspan="3">
+                                                @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "6" && d.tietHoc.tietBD == "13" && d.monHoc.tenMon == item))
+                                                {
+
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết")
+                                                    {
+
+                                                        <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành")
+                                                    {
+
+                                                        <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+
+                                                }
+                                            </td>
+
+                                            @*Thứ 7*@
+                                            <td colspan="3">
+                                                @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "7" && d.tietHoc.tietBD == "1" && d.monHoc.tenMon == item))
+                                                {
+
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết")
+                                                    {
+
+                                                        <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành")
+                                                    {
+
+                                                        <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+
+                                                }
+                                            </td>
+                                            <td colspan="3">
+                                                @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "7" && d.tietHoc.tietBD == "4" && d.monHoc.tenMon == item))
+                                                {
+
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết")
+                                                    {
+
+                                                        <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành")
+                                                    {
+
+                                                        <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+
+                                                }
+                                            </td>
+                                            <td colspan="3">
+                                                @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "7" && d.tietHoc.tietBD == "7" && d.monHoc.tenMon == item))
+                                                {
+
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết")
+                                                    {
+
+                                                        <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành")
+                                                    {
+
+                                                        <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+
+                                                }
+                                            </td>
+                                            <td colspan="3">
+                                                @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "7" && d.tietHoc.tietBD == "10" && d.monHoc.tenMon == item))
+                                                {
+
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết")
+                                                    {
+
+                                                        <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành")
+                                                    {
+
+                                                        <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+
+                                                }
+                                            </td>
+                                            <td colspan="3">
+                                                @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "7" && d.tietHoc.tietBD == "13" && d.monHoc.tenMon == item))
+                                                {
+
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết")
+                                                    {
+
+                                                        <form id="formLT" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành")
+                                                    {
+
+                                                        <form id="formTT" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;  ">
+                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
+                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
+                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            <select>
+                                                                <option>-- Chọn giảng viên --</option>
+                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                                {
+                                                                    String emailGV = itemGV.AspNetUser.Email;
+                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
+                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
+                                                                    {
+                                                                        <option value=""> @itemGV.tenGV</option>
+                                                                    }
+
+                                                                }
+                                                            </select>
+                                                        </form>
+
+                                                    }
+
+                                                }
+                                            </td>
+                                        </tr>
+
+                                    }
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script>
+        //$(document).ready(function () {
+        //    TabTranferTabPerior(0);
+        //});
+
+        function PrintTKB() {
+            printContent("divThoiKhoaBieuTietThu");
+        }
+
+        function FilterLoaiHP(select) {
+            //var x = document.getElementById("ChonLHP").value;
+            if (select.value == "tatca") {
+                targList = document.getElementsByClassName("formTT");
+                tarzan = document.getElementsByClassName("formLT");
+                if (targList) {
+                    for (var x = 0; x < targList.length; x++) {
+                        for (var y = 0; y < tarzan.length; y++) {
+
+                            tarzan[y].style.display = ""
+                        }
+                        targList[x].style.display = "";
+                    }
+                }
+
+            } else if (select.value == "LyThuyet") {
+                targList = document.getElementsByClassName("formTT");
+                tarzan = document.getElementsByClassName("formLT");
+                if (targList) {
+                    for (var x = 0; x < targList.length; x++) {
+                        for (var y = 0; y < tarzan.length; y++) {
+
+                            //tarzan[y].style.visibility = "visible"
+                            tarzan[y].style.display = ""
+                        }
+                        targList[x].style.display = "none";
+                    }
+                }
+
+                //document.getElementsByClassName("formLT").style.visibility = "visible";
+                //document.getElementsByClassName("formTT").style.visibility = "hidden";
+            } else if (select.value == "ThucHanh") {
+                targList = document.getElementsByClassName("formLT");
+                tarzan = document.getElementsByClassName("formTT");
+                if (targList) {
+                    for (var x = 0; x < targList.length; x++) {
+                        for (var y = 0; y < tarzan.length; y++) {
+
+                            //tarzan[y].style.visibility = "visible"
+                            tarzan[y].style.display = ""
+                        }
+                        targList[x].style.display = "none";
+                    }
+                }
+
+                //document.getElementsByClassName("formLT").style.visibility = "hidden";
+                //document.getElementsByClassName("formTT").style.visibility = "visible";
+            }
+        }
+
+        @*$(document).ready(function () {
+            $('#chonhk').on('change', function () {
+                var value = $(this).val();
+                var url = '@Url.Action("Gethocky", "Home")';
+               /*alert(value); // check xem đã lấy dc giá trị của dropdownlist hay chưa*/
+                    //$.ajax({
+                    //    url: url,
+                    //    //data: {data: sum},
+                    //    type: 'get',
+                    //    dataType: 'json',
+                    //    data: {
+                    //        ID: value,
+                    //        tenMH: $('#chonmonhox').val(),
+                    //    },
+                    //    success: function (data) {
+                    //        $('#TKBT14').html(data)
+                    //        //alert(data)
+                    //    },
+                    //    error: function (responce) {
+                    //        alert(responce)
+                    //    }
+                    //});
+                    $('tr').each(function () {
+                        var id = $(this).attr('id');
+                    });
+            });
+        });*@
+
+        $(document).ready(function () {
+            $('#chonhk').on('change', function () {
+                var value = $(this).val();
+                if (value == 1) {
+                    targList = document.getElementsByClassName("test 1");
+                    tarzan = document.getElementsByClassName("test 2");
+                    tarky = document.getElementsByClassName("test 3");
+                    if (targList) {
+                        for (var x = 0; x < targList.length; x++) {
+                            for (var y = 0; y < tarzan.length; y++) {
+                                for (var z = 0; z < tarky.length; z++) {
+                                    tarky[z].style.display = "none";
+                                }
+                                tarzan[y].style.display = "none";
+                            }
+                            targList[x].style.display = "";
+                        }
+                    }
+                } else if (value == 2) {
+
+                } else if (value == 3) {
+
+                }
+            });
+        });
+
+        $(document).ready(function () {
+            $('#btnSave').on('click', function (e) {
+                e.preventDefault();
+                //var value = $('#phanconggv').val();
+                // idgv = $('#ggv').val();
+                //alert(idgv);
+                @*$.post("@Url.Action("PhanCong","Home")", {
+                    id: $("form").attr('id').val(),
+                    id_GV: $('#ggv').val()
+                }, function (data) {
+                    alert("Suces")
+                });*@
+            });
+        });
+
+        $(document).ready(function () {
+            $('#chonmonhox').on('change', function () {
+                var value = $(this).val();
+                $('tr').each(function () {
+                    var id = $(this).attr('name');
+                    /*alert(id); // check xem đã lấy dc giá trị của dropdownlist hay chưa*/
+                    if (value == id) {
+                        //$('.test').css("display", "none");
+                        //$(this).css("display", "");
+                        $('.test').hide();
+                        $(this).show();
+                    }
+                });
+                if (value == "All") {
+                    //$('.test').css("display", "");
+                    $('.test').show();
+                }
+            });
+        });
+
+        //function TabTranferTabPerior(key) {
+        //    if (key == 0) {
+        //        // tab week
+        //        $("#cbTweek").show();
+        //        $("#btnPrint").hide();
+        //        DrawingSchedules();
+        //    } else if (key == 1) {
+        //        //tab perior
+        //        $("#cbTweek").hide();
+        //        $("#btnPrint").show();
+        //        DrawingSchedules2();
+        //    }
+        //}
+
+
+        function DrawingSchedules2() {
+            $.ajax({
+                url: "~/Home/DrawingStudentSchedule_Perior",
+                type: "GET",
+                async: true,
+                dataType: "html",
+                data: {
+                    YearStudy: $("#YearStudy").val(),
+                    TermID: $("#TermID").val(),
+                },
+                success: function (html) {
+                    $("#divThoiKhoaBieuTietThu").html(html);
+                },
+                error: function (jqXHR, textStatus, err) {
+                    ShowAlert("Lỗi kết nối", err);
+                },
+            });
+        }
+
+        $('#fomrGV').submit(function (e) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Bạn có muốn import file excel này ?',
+                //text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Import',
+                cancelButtonText: 'Không'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $(this).submit();
+                    Swal.fire({
+                        title: 'Please Wait !',
+                        html: 'data uploading',// add html attribute if you want or remove
+                        showConfirmButton: false,
+                        allowOutsideClick: false,
+                        onBeforeOpen: () => {
+                            Swal.showLoading()
+                        },
+                        onAfterClose() {
+                            Swal.hideLoading()
+                        },
+                    });
+                }
+            })
+        });
+
+    </script>
+
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+
+@if (TempData["dangnhap"] != null)
+{
+    <script type="text/javascript">
+        $(function () {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast.fire({
+                icon: 'success',
+                title: 'Đăng nhập thành công !'
+            })
+        });
+    </script>
+}
+
+
