@@ -32,6 +32,7 @@ namespace CAPTeam14.Controllers
         public ActionResult Index()
         {
             var tkb = model.TKBs.OrderByDescending(x => x.ID).ToList();
+            ViewBag.gv = model.nguoiDungs.OrderByDescending(x => x.ID).ToList();
             return View(tkb);
         }
        
@@ -396,15 +397,6 @@ namespace CAPTeam14.Controllers
             IEDreader.Close();
             TempData["ThongBao"] = 1;
             return RedirectToAction("Catalog","Home");
-        }
-
-        [HttpGet]
-        // Luồng đi mới của Import
-        public ActionResult PhanCong()
-        {
-
-            ViewBag.gv = model.nguoiDungs.OrderByDescending(x => x.ID).ToList();
-            return View();
         }
 
         [HttpPost]

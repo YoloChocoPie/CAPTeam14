@@ -2,7 +2,7 @@
 @using CAPTeam14.Models;
 
 @{ var db = new CP24Team14Entities();
-    var query = db.hocKies.Where(x => x.ID == 1);
+    //var query = db.hocKies.Where(x => x.ID == 1);
     //var queryy = db.hocKies.Select(r => r.ID);
 }
 
@@ -110,7 +110,7 @@
                         <span class="glyphicon glyphicon-info-sign"></span>
                         TKB Thứ - Tiết
                     </a>
-                </li>    
+                </li>
             </ul>
         </div>
 
@@ -120,7 +120,7 @@
                     <div>
                         <div class="clearfix"></div>
                         <div class="alert alert-warning smallTxt config-alert">
-                            
+
                         </div>
                         <div>
                             <table id="TKBT14" border="1" align="center">
@@ -256,68 +256,37 @@
                                                             <label><b>@item2.hocPhan.maLHP</b></label> <br />
                                                             <label><b>@item2.monHoc.tenMon</b></label> <br />
                                                             <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />  
-                                                            @*<div class="input-group">
-                                                                <select>
-                                                                <option>-- Chọn giảng viên --</option>
-                                                                @foreach (var itemGV in db.nguoiDungs)
+                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
+                                                            @if(item2.ID_GV == null) {
+                                                                using (Html.BeginForm())
                                                                 {
-                                                                    String emailGV = itemGV.AspNetUser.Email;
-                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
-                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
-                                                                    {
-                                                                        <option value="@itemGV.ID"> @itemGV.tenGV</option>
-                                                                    }
-
-                                                                }
-                                                            </select>
-                                                            </div>*@
-                                                            @using (Html.BeginForm("PhanCong", "Home", FormMethod.Post, new { enctype = "multipart/form-data", id = "fomrGV", style = "width:30%" }))
-                                                            { 
-                                                                @*<div class="input-group">
-                                                                <select>
-                                                                <option>-- Chọn giảng viên --</option>
-                                                                @foreach (var itemGV in db.nguoiDungs)
-                                                                {
-                                                                    String emailGV = itemGV.AspNetUser.Email;
-                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
-                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
-                                                                    {
-                                                                        <option value="@itemGV.ID"> @itemGV.tenGV</option>
-                                                                    }
-
-                                                                }
-                                                            </select>
-                                                            </div>*@
                                                                 @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"))
-                                                                <button class="btn btn-success" id="btnSave" type="submit">Save</button>
-                                                            }                                                            
+                                                                <button class="btn btn-success" type="submit">Save</button>
+                                                                }
+                                                            } else { 
+                                                                <label>@item2.nguoiDung.tenGV</label>
 
+                                                                }
+                                                            
+                                                            
                                                         </form>
 
                                                     }
                                                     else if (item2.hocPhan.loaiHP == "Thực hành")
                                                     {
 
-                                                        <form id="@item2.ID" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;  ">
+                                                        <form id="@item2.ID" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
                                                             <label><b>@item2.monHoc.maMon</b></label> <br />
                                                             <label><b>@item2.hocPhan.maLHP</b></label> <br />
                                                             <label><b>@item2.monHoc.tenMon</b></label> <br />
                                                             <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                             <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <select id="ggv">
-                                                                <option>-- Chọn giảng viên --</option>
-                                                                @foreach (var itemGV in db.nguoiDungs)
-                                                                {
-                                                                    String emailGV = itemGV.AspNetUser.Email;
-                                                                    //Boolean hassth = emailGV.Contains("@vanlang");
-                                                                    if (emailGV.Contains("@vanlang") || emailGV.Contains("@vlu"))
-                                                                    {
-                                                                        <option value="@itemGV.userID"> @itemGV.tenGV</option>
-                                                                    }
+                                                            @using (Html.BeginForm())
+                                                            {
+                                                                @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"))
+                                                                <button class="btn btn-success" type="submit">Save</button>
 
-                                                                }
-                                                            </select>
+                                                            }
                                                         </form>
 
                                                     }
@@ -682,7 +651,7 @@
                                                             <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                             <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                             <select>
-                                                            <option>-- Chọn giảng viên --</option>
+                                                                <option>-- Chọn giảng viên --</option>
                                                                 @foreach (var itemGV in db.nguoiDungs)
                                                                 {
                                                                     String emailGV = itemGV.AspNetUser.Email;
@@ -692,7 +661,8 @@
                                                                         <option value=""> @itemGV.tenGV</option>
                                                                     }
 
-                                                                }</select>
+                                                                }
+                                                            </select>
                                                         </form>
 
                                                     }
@@ -820,7 +790,7 @@
                                                             <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                             <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                             <select>
-                                                            <option>-- Chọn giảng viên --</option>
+                                                                <option>-- Chọn giảng viên --</option>
                                                                 @foreach (var itemGV in db.nguoiDungs)
                                                                 {
                                                                     String emailGV = itemGV.AspNetUser.Email;
@@ -2184,36 +2154,6 @@
                 },
             });
         }
-
-        $('#fomrGV').submit(function (e) {
-            e.preventDefault();
-            Swal.fire({
-                title: 'Bạn có muốn import file excel này ?',
-                //text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Import',
-                cancelButtonText: 'Không'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $(this).submit();
-                    Swal.fire({
-                        title: 'Please Wait !',
-                        html: 'data uploading',// add html attribute if you want or remove
-                        showConfirmButton: false,
-                        allowOutsideClick: false,
-                        onBeforeOpen: () => {
-                            Swal.showLoading()
-                        },
-                        onAfterClose() {
-                            Swal.hideLoading()
-                        },
-                    });
-                }
-            })
-        });
 
     </script>
 
