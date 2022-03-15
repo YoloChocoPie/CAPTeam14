@@ -400,34 +400,52 @@ namespace CAPTeam14.Controllers
         }
 
         [HttpPost]
-        public ActionResult PhanCong(int? id,TKB tkb)
+        public ActionResult PhanCong(int? id,TKB tkb, int? idGV)
         {
-            ViewBag.gv = model.nguoiDungs.OrderByDescending(x => x.ID).ToList();
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    var tt = model.TKBs.FirstOrDefault(x => x.ID == id);
+            //ViewBag.gv = model.nguoiDungs.OrderByDescending(x => x.ID).ToList();
+            ////var ql = model.TKBs.ToList();
+            //try
+            //{
+            //    if (ModelState.IsValid)
+            //    {
+            //        var tt = model.TKBs.FirstOrDefault(x => x.ID == id);
 
-                    tt.ID_GV = tkb.ID_GV;
+            //        tt.ID_GV = tkb.ID_GV;
 
-                    model.SaveChanges();
-                    
-                    return RedirectToAction("Index","Home");
-                }
-                else
-                {
-                    string messages = string.Join("; ", ModelState.Values
-                                        .SelectMany(x => x.Errors)
-                                        .Select(x => x.ErrorMessage));
-                    ModelState.AddModelError("", messages);
-                }
-            }
-            catch (DataException)
-            {
-                ModelState.AddModelError("", "Không thể lưu các thay đổi. Hãy thử lại và nếu sự cố vẫn tiếp diễn, hãy gặp quản trị viên hệ thống của bạn.");
-            }
-            return RedirectToAction("Index", "Home");
+            //        model.SaveChanges();
+            //        //TempData["ThongBao"] = 1;
+            //        return Json(tt,JsonRequestBehavior.AllowGet);
+            //        //return RedirectToAction("Index");
+            //    }
+            //    else
+            //    {
+            //        string messages = string.Join("; ", ModelState.Values
+            //                            .SelectMany(x => x.Errors)
+            //                            .Select(x => x.ErrorMessage));
+            //        ModelState.AddModelError("", messages);
+            //    }
+            //}
+            //catch (DataException)
+            //{
+            //    ModelState.AddModelError("", "Không thể lưu các thay đổi. Hãy thử lại và nếu sự cố vẫn tiếp diễn, hãy gặp quản trị viên hệ thống của bạn.");
+            //}
+            //return Json(JsonRequestBehavior.AllowGet);
+            ////return RedirectToAction("Index");            
+
+            //ViewBag.gv = model.nguoiDungs.OrderByDescending(x => x.ID).ToList();
+            //ViewBag.gv = new SelectList(model.nguoiDungs, "ID", "tenGV");
+            var tt = model.TKBs.FirstOrDefault(x => x.ID == id);
+            tt.ID_GV = tkb.ID_GV;
+            model.SaveChanges();
+            return Json(JsonRequestBehavior.AllowGet);
         }
+
+        //[HttpGet]
+        //public ActionResult TKBHK(int? id,TKB tkb)
+        //{
+        //    ViewBag.hk = model.TKBs.Where(x => x.ID_hocKy == id).ToList();
+        //    ViewBag.gv = model.nguoiDungs.OrderByDescending(x => x.ID).ToList();
+        //    return Json(JsonRequestBehavior.AllowGet);
+        //}
     }
 }
