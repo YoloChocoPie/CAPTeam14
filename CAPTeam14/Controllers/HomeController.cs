@@ -31,8 +31,8 @@ namespace CAPTeam14.Controllers
 
         public ActionResult Index()
         {
-            var tkb = model.TKBs.OrderByDescending(x => x.ID).ToList();
-            ViewBag.gv = model.nguoiDungs.OrderByDescending(x => x.ID).ToList();
+            var tkb = model.TKBs.Where(x => x.ID_hocKy == 1).OrderByDescending(x => x.ID).ToList();
+            ViewBag.gv = model.nguoiDungs.Where(x=> x.role == 4).OrderByDescending(x => x.ID).ToList();
             return View(tkb);
         }
        
@@ -441,11 +441,11 @@ namespace CAPTeam14.Controllers
         }
 
         //[HttpGet]
-        //public ActionResult TKBHK(int? id,TKB tkb)
+        //public ActionResult TKBHK(int? id, TKB tkb)
         //{
-        //    ViewBag.hk = model.TKBs.Where(x => x.ID_hocKy == id).ToList();
-        //    ViewBag.gv = model.nguoiDungs.OrderByDescending(x => x.ID).ToList();
-        //    return Json(JsonRequestBehavior.AllowGet);
+        //    var testhk = model.TKBs.Where(x => x.ID_hocKy == id).ToList();
+            
+        //    return View(testhk);
         //}
     }
 }
