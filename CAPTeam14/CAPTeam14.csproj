@@ -4723,6 +4723,8 @@
     <Content Include="Views\hocKy\Index.cshtml" />
     <Content Include="Views\hocKy\Create.cshtml" />
     <Content Include="Views\hocKy\Edit.cshtml" />
+    <Content Include="Views\Home\Index1.cshtml" />
+    <Content Include="Views\Home\Catalog1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

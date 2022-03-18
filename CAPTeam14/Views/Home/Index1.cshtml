@@ -1,0 +1,145 @@
+﻿@model IEnumerable<CAPTeam14.Models.hocKy>
+@using CAPTeam14.Models;
+@{ var db = new CP24Team14Entities();
+    //var query = db.hocKies.Where(x => x.ID == 1);
+    //var queryy = db.hocKies.Select(r => r.ID);
+}
+@{
+    ViewBag.Title = "Index1";
+    Layout = "~/Views/Shared/_LayoutTemplate.cshtml";
+}
+
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="~/Home/Index">Trang chủ</a></li>
+                        <li class="breadcrumb-item active">Lớp học</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Danh sách lớp học</h3>
+                            </br>
+                            <a class="btn btn-file createBtn1 btn btn-info fas fa-eye" title="TEST" href="@Url.Action("Create", "lopHoc")"> </a>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Tên Học Kì
+                                        </th>
+                                        <th>
+                                            Năm Bắt Đầu
+                                        </th>
+                                        <th>
+                                            Năm Kết thúc
+                                        </th>
+
+
+
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+
+
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.tenHK)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.namBD)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.namKT)
+                                            </td>
+                                            <td>
+
+
+                                                @Html.ActionLink("Xem thời khóa biểu", "Index", new { id = item.ID }) |
+                                                @Html.ActionLink("Import thời khóa biểu", "Catalog", new { id = item.ID }) |
+                                                @Html.ActionLink("Thay thế thời khóa biểu", "Catalog1", new { id = item.ID }) |
+                                                @Html.ActionLink("Xóa Thời khóa biểu", "DeleteTKB", new { id = item.ID }, new { style = "color:red" })
+
+
+
+
+
+                                            </td>
+
+
+
+
+
+
+
+                                        </tr>
+                                    }
+
+                                </tbody>
+                                @*<tfoot>
+                                        <tr>
+                                            <th>Rendering engine</th>
+                                            <th>Browser</th>
+                                            <th>Platform(s)</th>
+                                            <th>Engine version</th>
+                                            <th>CSS grade</th>
+                                        </tr>
+                                    </tfoot>*@
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+@if (TempData["ThongBao"] != null)
+{
+    <script type="text/javascript">
+        $(function ()
+
+        {
+            Swal.fire({
+                title: 'Thông báo',
+                text: 'Bạn đã xóa thời khóa biểu thành công !!!',
+                icon: 'success',
+                showConfirmButton: true,
+                timer: 1500,
+            });
+        });
+    </script>
+}

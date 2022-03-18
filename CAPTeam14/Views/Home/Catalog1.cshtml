@@ -13,7 +13,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Import</h1>
+                        <h1>Thay thế thời khóa biểu</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -38,7 +38,7 @@
 
 
                                     <div class="form-group">
-                                        @using (Html.BeginForm("Catalog", "Home", FormMethod.Post, new { enctype = "multipart/form-data", id = "UploadForm" }))
+                                        @using (Html.BeginForm("Catalog1", "Home", FormMethod.Post, new { enctype = "multipart/form-data", id = "UploadForm" }))
                                         {
 
                                         }
@@ -47,11 +47,11 @@
 
                                     <div class="form-group">
 
-                                        @using (Html.BeginForm("Catalog", "Home", FormMethod.Post, new { enctype = "multipart/form-data", id = "UploadForm", style = "width:30%" }))
+                                        @using (Html.BeginForm("Catalog1", "Home", FormMethod.Post, new { enctype = "multipart/form-data", id = "UploadForm", style = "width:30%" }))
                                         {
                                             @Html.LabelFor(model => model.ID_hocKy, "", htmlAttributes: new { @class = "control-label col-md-2" })
-                                            
-                                            
+
+
                                             @Html.EditorFor(model => model.ID_hocKy, new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.test1, @readonly = "readonly", style = "display:none" } })
 
                                             @Html.ValidationMessageFor(model => model.ID_hocKy, "", new { @class = "text-danger" })
@@ -76,7 +76,7 @@
 
 
 
-                                          
+                                           
                                         }
 
                                         <script type="text/javascript" language="javascript">
@@ -100,7 +100,7 @@
                                             $('#UploadForm').submit(function (e) {
                                                 e.preventDefault();
                                                 Swal.fire({
-                                                    title: 'Bạn có muốn import file excel này ?',
+                                                    title: 'Bạn có chắc chắn muốn thay thế thời khóa biểu ? Toàn bộ dữ liệu sẽ bị xóa.',
                                                     //text: "You won't be able to revert this!",
                                                     icon: 'warning',
                                                     showCancelButton: true,
@@ -131,13 +131,13 @@
 
 
                                 </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-</div>
+        </section>
+    </div>
 }
 
 @if (TempData["ThongBao"] != null)
@@ -146,7 +146,7 @@
         $(function () {
             Swal.fire({
                 title: 'Thông báo',
-                text: 'Bạn đã import thành công !!!',
+                text: 'Bạn đã thay thế thời khóa biểu thành công !!!',
                 icon: 'success',
                 showConfirmButton: true,
             });

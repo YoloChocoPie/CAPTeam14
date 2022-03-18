@@ -174,7 +174,7 @@ namespace CAPTeam14.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index1", "Home");
                 }
                 AddErrors(result);
             }
@@ -382,7 +382,7 @@ namespace CAPTeam14.Controllers
                             return View("Login");
                         }
                         TempData["dangnhap"] = 1;
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index1", "Home");
                     }
                     else 
                     {
@@ -420,7 +420,7 @@ namespace CAPTeam14.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index1", "Home");
             }
 
             if (ModelState.IsValid)
