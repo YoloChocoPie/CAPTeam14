@@ -36,7 +36,7 @@ namespace CAPTeam14.Controllers
             var tkb = model.hocKies.OrderByDescending(x => x.ID).ToList();
             var test = model.TKBs.OrderByDescending(x => x.ID).Count();
             ViewBag.test = test;
-            
+           
 
             return View(tkb);
         }
@@ -100,13 +100,13 @@ namespace CAPTeam14.Controllers
                 // vòng lặp for each đi qua từng cột có trong excel để lấy dữ liệu
                 foreach (DataRow cot in item.Rows)
                 {
-                    hocPhan hocphan = new hocPhan(); // 1
-                    lopHoc lop = new lopHoc(); // 2
-                    monHoc mon = new monHoc(); // 3 
-                    Nganh nganh = new Nganh(); // 4
-                    phongHoc phong = new phongHoc(); // 5
-                    tietHoc tiet = new tietHoc(); // 6
-                    tuanHoc tuan = new tuanHoc(); // 7
+                     var hocphan = new hocPhan(); // 1
+                    var lop = new lopHoc(); // 2
+                    var mon = new monHoc(); // 3 
+                    var nganh = new Nganh(); // 4
+                    var phong = new phongHoc(); // 5
+                    var tiet = new tietHoc(); // 6
+                    var tuan = new tuanHoc(); // 7
                     var tkbTong = new TKB(); // 8
 
 
@@ -200,7 +200,7 @@ namespace CAPTeam14.Controllers
 
                     // câu lệnh kiểm tra xem học phần đã tồn tại hay chưa
                     // nếu chưa tồn tại thì tạo mới Học Phần
-                    if (checkmagocLHP == null || checkmaLHP == null || checkloaiHP == null || checktinhtrangLHP == null || checkTSMH == null)
+                    if (checkmagocLHP == null && checkmaLHP == null)
                     {
                         hocphan = new hocPhan
                         {
@@ -227,7 +227,7 @@ namespace CAPTeam14.Controllers
                         hocphan = checkloaiHP;
                         hocphan = checktinhtrangLHP;
                         hocphan = checkTSMH;
-                        tkbTong.ID_hocPhan = hocphan.ID;
+                        tkbTong.ID_hocPhan = checkmagocLHP.ID;
                     }
 
                     // lớp học
@@ -247,7 +247,7 @@ namespace CAPTeam14.Controllers
                     else
                     {
                         lop = checklopHoc;
-                        tkbTong.ID_Lop = lop.ID;
+                        tkbTong.ID_Lop = checklopHoc.ID;
                     }
 
                     // tuần học
@@ -276,7 +276,7 @@ namespace CAPTeam14.Controllers
                         tuan = checktuanKT;
                         tuan = checkthu;
 
-                        tkbTong.ID_Tuan = tuan.ID;
+                        tkbTong.ID_Tuan = checkthu.ID;
                     }
 
                     // ngành
@@ -298,7 +298,7 @@ namespace CAPTeam14.Controllers
                     {
                         nganh = checkmaNganh;
                         nganh = checktenNganh;
-                        tkbTong.ID_Nganh = nganh.ID;
+                        tkbTong.ID_Nganh = checkmaNganh.ID;
                     }
 
                     // tiết học
@@ -326,12 +326,13 @@ namespace CAPTeam14.Controllers
                         tiet = checktietHoc;
                         tiet = checktietS;
                         tiet = checktietBD;
-                        tkbTong.ID_Tiet = tiet.ID;
+                        tkbTong.ID_Tiet = checktietBD.ID;
                     }
 
                     // môn học
-                    if (checkmaMon == null || checktenMon == null || checkTC == null)
+                    if (checkmaMon == null || checktenMon == null )
                     {
+                       
                         mon = new monHoc
                         {
                             maMon = maMon,
@@ -347,14 +348,15 @@ namespace CAPTeam14.Controllers
                     //
                     else
                     {
-                        mon = checkmaMon;
                         mon = checktenMon;
+                        mon = checkmaMon;
                         mon = checkTC;
-                        tkbTong.ID_monHoc = mon.ID;
+                        tkbTong.ID_monHoc = checktenMon.ID;
                     }
 
                     // phòng học
-                    if (checkloaiPhong == null || checksucChua == null || checksiSo == null || checktrong == null || checksoSVDK == null || checkmaPhong == null)
+                    //  checksucChua == null || checksiSo == null || checktrong == null || checksoSVDK == null ||
+                    if (checkloaiPhong == null || checkmaPhong == null || checksucChua == null || checksiSo == null || checktrong == null || checksoSVDK == null )
                     {
                         phong = new phongHoc
                         {
@@ -380,21 +382,24 @@ namespace CAPTeam14.Controllers
                         phong = checktrong;
                         phong = checksoSVDK;
                         phong = checkmaPhong;
-                        tkbTong.ID_Phong = phong.ID;
+                        tkbTong.ID_Phong = checkmaPhong.ID;
                     }
                     // kiểm tra dữ liệu thời khóa biểu đã tồn tại hay chưa
                     // table tkb
+
+                    /* var checktkblop = model.TKBs.FirstOrDefault(x => x.ID_Lop == lop.ID);
+                     var checktkbtuan = model.TKBs.FirstOrDefault(x => x.ID_Tuan == tuan.ID);
+                     var checktkbnganh = model.TKBs.FirstOrDefault(x => x.ID_Nganh == nganh.ID);
+                     var checktkbtiet = model.TKBs.FirstOrDefault(x => x.ID_Tiet == tiet.ID);
+                     var checktkbmon = model.TKBs.FirstOrDefault(x => x.ID_monHoc == mon.ID);
+                     var checktkbphong = model.TKBs.FirstOrDefault(x => x.ID_Phong == phong.ID);*/
+
+                    //checktkbhp == null || checktkblop == null || checktkbtuan == null || checktkbnganh == null ||
+                    // checktkbtiet == null || checktkbmon == null || checktkbphong == null
+
                     var checktkbhp = model.TKBs.FirstOrDefault(x => x.ID_hocPhan == hocphan.ID);
-                    var checktkblop = model.TKBs.FirstOrDefault(x => x.ID_Lop == lop.ID);
-                    var checktkbtuan = model.TKBs.FirstOrDefault(x => x.ID_Tuan == tuan.ID);
-                    var checktkbnganh = model.TKBs.FirstOrDefault(x => x.ID_Nganh == nganh.ID);
-                    var checktkbtiet = model.TKBs.FirstOrDefault(x => x.ID_Tiet == tiet.ID);
-                    var checktkbmon = model.TKBs.FirstOrDefault(x => x.ID_monHoc == mon.ID);
-                    var checktkbphong = model.TKBs.FirstOrDefault(x => x.ID_Phong == phong.ID);
 
-
-                    if (checktkbhp == null || checktkblop == null || checktkbtuan == null || checktkbnganh == null ||
-                         checktkbtiet == null || checktkbmon == null || checktkbphong == null)
+                    if (checktkbhp == null)
                     {
                         tkbTong.ID_hocKy = id;
                         model.TKBs.Add(tkbTong);
@@ -468,13 +473,13 @@ namespace CAPTeam14.Controllers
                 // vòng lặp for each đi qua từng cột có trong excel để lấy dữ liệu
                 foreach (DataRow cot in item.Rows)
                 {
-                    hocPhan hocphan = new hocPhan(); // 1
-                    lopHoc lop = new lopHoc(); // 2
-                    monHoc mon = new monHoc(); // 3 
-                    Nganh nganh = new Nganh(); // 4
-                    phongHoc phong = new phongHoc(); // 5
-                    tietHoc tiet = new tietHoc(); // 6
-                    tuanHoc tuan = new tuanHoc(); // 7
+                    var hocphan = new hocPhan(); // 1
+                    var lop = new lopHoc(); // 2
+                    var mon = new monHoc(); // 3 
+                    var nganh = new Nganh(); // 4
+                    var phong = new phongHoc(); // 5
+                    var tiet = new tietHoc(); // 6
+                    var tuan = new tuanHoc(); // 7
                     var tkbTong = new TKB(); // 8
 
 
@@ -568,7 +573,7 @@ namespace CAPTeam14.Controllers
 
                     // câu lệnh kiểm tra xem học phần đã tồn tại hay chưa
                     // nếu chưa tồn tại thì tạo mới Học Phần
-                    if (checkmagocLHP == null || checkmaLHP == null || checkloaiHP == null || checktinhtrangLHP == null || checkTSMH == null)
+                    if (checkmagocLHP == null && checkmaLHP == null )
                     {
                         hocphan = new hocPhan
                         {
@@ -619,7 +624,7 @@ namespace CAPTeam14.Controllers
                     }
 
                     // tuần học
-                    if (checkthuS == null || checktuanBD == null || checktuanHoc == null || checktuanKT == null || checkthu == null)
+                    if (checkthuS == null && checktuanBD == null && checktuanHoc == null && checktuanKT == null && checkthu == null)
                     {
                         tuan = new tuanHoc
                         {
@@ -648,7 +653,7 @@ namespace CAPTeam14.Controllers
                     }
 
                     // ngành
-                    if (checkmaNganh == null || checktenNganh == null)
+                    if (checkmaNganh == null && checktenNganh == null)
                     {
                         nganh = new Nganh
                         {
@@ -670,7 +675,7 @@ namespace CAPTeam14.Controllers
                     }
 
                     // tiết học
-                    if (checktongTiet == null || checksoTiet == null || checktietHoc == null || checktietS == null || checktietBD == null)
+                    if (checktongTiet == null && checksoTiet == null && checktietHoc == null && checktietS == null && checktietBD == null)
                     {
                         tiet = new tietHoc
                         {
@@ -698,7 +703,7 @@ namespace CAPTeam14.Controllers
                     }
 
                     // môn học
-                    if (checkmaMon == null || checktenMon == null || checkTC == null)
+                    if (checkmaMon == null && checktenMon == null )
                     {
                         mon = new monHoc
                         {
@@ -722,7 +727,8 @@ namespace CAPTeam14.Controllers
                     }
 
                     // phòng học
-                    if (checkloaiPhong == null || checksucChua == null || checksiSo == null || checktrong == null || checksoSVDK == null || checkmaPhong == null)
+                    //  checksucChua == null || checksiSo == null || checktrong == null || checksoSVDK == null ||
+                    if (checkloaiPhong == null && checkmaPhong == null)
                     {
                         phong = new phongHoc
                         {
@@ -762,7 +768,7 @@ namespace CAPTeam14.Controllers
 
 
                     if (checktkbhp == null || checktkblop == null || checktkbtuan == null || checktkbnganh == null ||
-                         checktkbtiet == null || checktkbmon == null || checktkbphong == null)
+                        checktkbtiet == null || checktkbmon == null || checktkbphong == null)
                     {
                         tkbTong.ID_hocKy = id;
                         model.TKBs.Add(tkbTong);
