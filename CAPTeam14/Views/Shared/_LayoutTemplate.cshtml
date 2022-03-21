@@ -28,11 +28,15 @@
     <link rel="stylesheet" href="@Url.Content("~/dist/css/adminlte.min.css")">
     <!-- JQVMap -->
     <link rel="stylesheet" href="@Url.Content("~/plugins/jqvmap/jqvmap.min.css")">
-   
-  
+    <!--ToastTR-->
+    <link rel="stylesheet" href="@Url.Content("~/ContentTemplate/plugins/toastr/toastr.css")">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="@Url.Content("~/plugins/daterangepicker/daterangepicker.css")">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!--jquery-confirm-css-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.css" integrity="sha512-0V10q+b1Iumz67sVDL8LPFZEEavo6H/nBSyghr7mm9JEQkOAm91HNoZQRvQdjennBb/oEuW+8oZHVpIKq+d25g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-   
+    <!-- summernote -->
+    <link rel="stylesheet" href="@Url.Content("~/plugins/summernote/summernote-bs4.min.css")">
     <style>
         .loader {
             position: fixed;
@@ -46,9 +50,13 @@
     </style>
 
 
-   
+    <!-- Tempusdominus Bootstrap 4 -->
+    @*  <link rel="stylesheet" href="@Url.Content("~/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css")">*@
+    <!-- iCheck -->
+    @*<link rel="stylesheet" href="@Url.Content("~/plugins/icheck-bootstrap/icheck-bootstrap.min.css")">*@
 
-   
+    <!-- fullCalendar -->
+    <link rel="stylesheet" href="@Url.Content("~/plugins/fullcalendar/main.css")">
 
 
 
@@ -61,12 +69,13 @@
 
     <!-- TKB css-->
     <link rel="stylesheet" href="@Url.Content("~/tkb/Yersin.css")">
-    
+    @*     <link rel="stylesheet" href="@Url.Content("~/dist/css/bootstrap.css")">*@
     <link rel="stylesheet" href="@Url.Content("~/tkb/bootstrap-datetimepicker.css")">
     <link rel="stylesheet" href="@Url.Content("~/tkb/menu.css")">
     <link rel="stylesheet" href="@Url.Content("~/tkb/select2_2.css")">
     <link rel="stylesheet" href="@Url.Content("~/tkb/select2-bootstrap.css")">
-    
+    @*<link rel="stylesheet" href="@Url.Content("~/dist/css/site.css")">
+    *@
 
     <link rel="stylesheet" href="@Url.Content("~/tkb/main.css")">
 
@@ -304,9 +313,9 @@
                             </li>
 
 
-                         
 
-                          
+
+
 
                             <li class="nav-item">
                                 <a href="@Url.Action("Logout","Account")" class="nav-link">
@@ -461,19 +470,27 @@
 
     <!-- bs-custom-file-input -->
     <script src="@Url.Content("~/ScriptsTemplate/bs-custom-file-input/bs-custom-file-input.min.js")"></script>
-   
-
+    <!--FullScreen-->
+    <script src="@Url.Content("~/ContentTemplate/build/js/Fullscreen.js")"></script>
+    <!--ToastTR-->
+    <script src="@Url.Content("~/ContentTemplate/plugins/toastr/toastr.min.js")"></script>
+    <!-- daterangepicker -->
+    <script src="@Url.Content("~/plugins/moment/moment.min.js")"></script>
+    <script src="@Url.Content("~/plugins/daterangepicker/daterangepicker.js")"></script>
     <!--Jquery-Confirm-JS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.js" integrity="sha512-zP5W8791v1A6FToy+viyoyUUyjCzx+4K8XZCKzW28AnCoepPNIXecxh9mvGuy3Rt78OzEsU+VCvcObwAMvBAww==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- AdminLTE App -->
     <script src="@Url.Content("~/dist/js/adminlte.js")"></script>
     <script src="@Url.Content("~/PluginTemplate/sweetalert2/sweetalert2.min.js")"></script>
     <link rel="stylesheet" href="@Url.Content("~/PluginTemplate/sweetalert2/sweetalert2.min.css")">
-   
+    <!--summernote-->
+    <script type="text/javascript" src="@Url.Content("~/PluginTemplate/summernote/summernote-bs4.min.js")"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="@Url.Content("~/dist/js/demo.js")"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-   
+    <!--SignalR-->
+    <script src="@Url.Content("~/ScriptsTemplate/jquery.signalR-2.4.2.js")"></script>
+    <script src="@Url.Content("~/signalr/hubs")"></script>
 
     <!-- overlayScrollbars -->
     <script src="@Url.Content("~/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js")"></script>
@@ -483,7 +500,9 @@
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="@Url.Content("~/dist/js/pages/dashboard.js")"></script>
 
- 
+    <!-- fullCalendar 2.2.5 -->
+    <script src="@Url.Content("~/plugins/moment/moment.min.js")"></script>
+    <script src="@Url.Content("~/plugins/fullcalendar/main.js")"></script>
 
     <!--SweetAlert-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
