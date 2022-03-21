@@ -14,7 +14,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                
+
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -788,11 +788,11 @@
                                                 }
                                             }
 
-                                        <td>
-                                            <a class="btn btn-file detailBtn btn btn-info" title="Xem chi tiết" data-model-id="@Url.Action("Edit", "giangVien", new { id = item.ID })" data-id="@Url.Action("Details", "giangVien", new { id = item.ID })"><i class="fas fa-eye"></i></a>
+                                            <td>
+                                                <a class="btn btn-file detailBtn btn btn-info" title="Xem chi tiết" data-model-id="@Url.Action("Edit", "giangVien", new { id = item.ID })" data-id="@Url.Action("Details", "giangVien", new { id = item.ID })"><i class="fas fa-eye"></i></a>
 
-                                            <a class="btn btn-file btn btn-warning" title="Xem thống kê" @*href="@Url.Action("DetailStatistic", "giangVien", new { id = item.ID })"*@><i class="fas fa-chart-bar"></i></a>
-                                        </td>
+                                                <a class="btn btn-file btn btn-warning" title="Xem thống kê" @*href="@Url.Action("DetailStatistic", "giangVien", new { id = item.ID })"*@><i class="fas fa-chart-bar"></i></a>
+                                            </td>
                                         </tr>
                                     }
                                 </tbody>
@@ -1025,17 +1025,17 @@
         });
     </script>
 }
-@if (TempData["phanquyen1"] != null )
+@if (TempData["phanquyen1"] != null)
 {
     <script type="text/javascript">
         $(function () {
             Swal.fire({
-                
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Bạn không thể tự thay đổi vai trò của bản thân !!',
-                   
-      
+
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Bạn không thể tự thay đổi vai trò của bản thân !!',
+
+
             });
         });
     </script>
@@ -1050,7 +1050,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
-            
+
             $('#example1').on('click', '.detailBtn', function () {
                 var button = $(this);
                 var s_id = button.data("id");
@@ -1147,7 +1147,299 @@
                     }
                 });
             });
+            $('#exampleBCN').on('click', '.detailBtn', function () {
+                var button = $(this);
+                var s_id = button.data("id");
+                var url = button.data("model-id");
+                $.ajax({
+                    url: s_id,
+                    typr: "GET",
+                    contentType: "application/json;charset=UTF-8",
+                    dataType: "json",
+                    success: function (result) {
+                        $.confirm({
+                            columnClass: 'col-md-5',
+                            title: '<div class="text-center container"><p>Thông tin của ' + result.a + '</p></div>',
+                            content: '' +
+                                '<form action="" class="formName container">' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Họ Tên</label>' +
+                                '<input type="text" class="form-control" value="' + result.a + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Mã Giảng Viên</label>' +
+                                '<input type="text" class="form-control" value="' + result.b + '" readonly />' +
+
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Loại Giảng Viên</label>' +
+                                '<input type="text" class="form-control" value="' + result.c + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Vai trò</label>' +
+                                '<input type="text" class="form-control" value="' + result.d + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Khoa</label>' +
+                                '<input type="text" class="form-control" value="' + result.e + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Số điện thoại</label>' +
+                                '<input type="text" class="form-control" value="' + result.f + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Giới Tính</label>' +
+                                '<input type="text" class="form-control" value="' + result.g + '" readonly />' +
+
+
+
+
+                                '</form>',
+                            buttons: {
+                                confirm: {
+                                    text: 'Phân Quyền',
+                                    btnClass: 'btn-green',
+                                    action: function () {
+                                        window.location.assign(url);
+                                    }
+                                },
+                                cancel: {
+                                    text: 'Thoát',
+                                    btnClass: 'btn-red',
+                                    action: function () { }
+                                },
+                            },
+                        });
+                    },
+                    error: function (errormessage) {
+                        $.alert(errormessage.responseText);
+                    }
+                });
+            });
+            $('#exampleGV').on('click', '.detailBtn', function () {
+                var button = $(this);
+                var s_id = button.data("id");
+                var url = button.data("model-id");
+                $.ajax({
+                    url: s_id,
+                    typr: "GET",
+                    contentType: "application/json;charset=UTF-8",
+                    dataType: "json",
+                    success: function (result) {
+                        $.confirm({
+                            columnClass: 'col-md-5',
+                            title: '<div class="text-center container"><p>Thông tin của ' + result.a + '</p></div>',
+                            content: '' +
+                                '<form action="" class="formName container">' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Họ Tên</label>' +
+                                '<input type="text" class="form-control" value="' + result.a + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Mã Giảng Viên</label>' +
+                                '<input type="text" class="form-control" value="' + result.b + '" readonly />' +
+
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Loại Giảng Viên</label>' +
+                                '<input type="text" class="form-control" value="' + result.c + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Vai trò</label>' +
+                                '<input type="text" class="form-control" value="' + result.d + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Khoa</label>' +
+                                '<input type="text" class="form-control" value="' + result.e + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Số điện thoại</label>' +
+                                '<input type="text" class="form-control" value="' + result.f + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Giới Tính</label>' +
+                                '<input type="text" class="form-control" value="' + result.g + '" readonly />' +
+
+
+
+
+                                '</form>',
+                            buttons: {
+                                confirm: {
+                                    text: 'Phân Quyền',
+                                    btnClass: 'btn-green',
+                                    action: function () {
+                                        window.location.assign(url);
+                                    }
+                                },
+                                cancel: {
+                                    text: 'Thoát',
+                                    btnClass: 'btn-red',
+                                    action: function () { }
+                                },
+                            },
+                        });
+                    },
+                    error: function (errormessage) {
+                        $.alert(errormessage.responseText);
+                    }
+                });
+            });
+            $('#exampleNULL').on('click', '.detailBtn', function () {
+                var button = $(this);
+                var s_id = button.data("id");
+                var url = button.data("model-id");
+                $.ajax({
+                    url: s_id,
+                    typr: "GET",
+                    contentType: "application/json;charset=UTF-8",
+                    dataType: "json",
+                    success: function (result) {
+                        $.confirm({
+                            columnClass: 'col-md-5',
+                            title: '<div class="text-center container"><p>Thông tin của ' + result.a + '</p></div>',
+                            content: '' +
+                                '<form action="" class="formName container">' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Họ Tên</label>' +
+                                '<input type="text" class="form-control" value="' + result.a + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Mã Giảng Viên</label>' +
+                                '<input type="text" class="form-control" value="' + result.b + '" readonly />' +
+
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Loại Giảng Viên</label>' +
+                                '<input type="text" class="form-control" value="' + result.c + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Vai trò</label>' +
+                                '<input type="text" class="form-control" value="' + result.d + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Khoa</label>' +
+                                '<input type="text" class="form-control" value="' + result.e + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Số điện thoại</label>' +
+                                '<input type="text" class="form-control" value="' + result.f + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Giới Tính</label>' +
+                                '<input type="text" class="form-control" value="' + result.g + '" readonly />' +
+
+
+
+
+                                '</form>',
+                            buttons: {
+                                confirm: {
+                                    text: 'Phân Quyền',
+                                    btnClass: 'btn-green',
+                                    action: function () {
+                                        window.location.assign(url);
+                                    }
+                                },
+                                cancel: {
+                                    text: 'Thoát',
+                                    btnClass: 'btn-red',
+                                    action: function () { }
+                                },
+                            },
+                        });
+                    },
+                    error: function (errormessage) {
+                        $.alert(errormessage.responseText);
+                    }
+                });
+            });
         });
+
+       
     </script>
+
+   
 
 }
