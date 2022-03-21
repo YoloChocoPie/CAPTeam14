@@ -148,58 +148,7 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-
-           
-
-
-
-
-
-
-            $('.deleteBtn').click(function (e) {
-                e.preventDefault();
-                debugger;
-                var button = $(this);
-                var url = $(this).data("model-id");
-                $.confirm({
-                    title: 'Thông báo!',
-                    content: 'Bạn có muốn xóa chuyên ngành này không ???',
-                    buttons: {
-                        confirm: {
-                            text: 'Có',
-                            btnClass: 'btn-green',
-                            action: function () {
-                                $.ajax({
-                                    url: url,
-                                    type: "POST",
-                                    contentType: "application/json;charset=UTF-8",
-                                    dataType: "json",
-                                    success: function (r) {
-                                        if (r.success) {
-                                            button.parents("tr").remove();
-                                            window.location.replace("/Admin/Specialized");
-                                        }
-                                        else {
-                                            toastr.warning('Không thể xóa data bị ràng buộc !!!');
-                                        }
-                                    },
-                                    error: function () {
-                                        $.alert("Lỗi !!!");
-                                    }
-                                });
-                            }
-                        },
-                        cancel: {
-                            text: 'Không',
-                            btnClass: 'btn-red',
-                            action: function () {
-                                $.alert('Bạn đã hủy thao tác !!!');
-                            }
-                        },
-                    }
-                });
-            });
-            $('.detailBtn1').click(function () {
+            $('#example1').on('click', '.detailBtn1', function () {
                 var button = $(this);
                 var s_id = button.data("id1");
                 var url = button.data("model-id1");

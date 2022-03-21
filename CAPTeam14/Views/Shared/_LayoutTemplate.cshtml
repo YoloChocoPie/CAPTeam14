@@ -28,15 +28,11 @@
     <link rel="stylesheet" href="@Url.Content("~/dist/css/adminlte.min.css")">
     <!-- JQVMap -->
     <link rel="stylesheet" href="@Url.Content("~/plugins/jqvmap/jqvmap.min.css")">
-    <!--ToastTR-->
-    <link rel="stylesheet" href="@Url.Content("~/ContentTemplate/plugins/toastr/toastr.css")">
-    <!-- Daterange picker -->
-    <link rel="stylesheet" href="@Url.Content("~/plugins/daterangepicker/daterangepicker.css")">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+   
+  
     <!--jquery-confirm-css-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.css" integrity="sha512-0V10q+b1Iumz67sVDL8LPFZEEavo6H/nBSyghr7mm9JEQkOAm91HNoZQRvQdjennBb/oEuW+8oZHVpIKq+d25g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- summernote -->
-    <link rel="stylesheet" href="@Url.Content("~/plugins/summernote/summernote-bs4.min.css")">
+   
     <style>
         .loader {
             position: fixed;
@@ -50,13 +46,9 @@
     </style>
 
 
-    <!-- Tempusdominus Bootstrap 4 -->
-    @*  <link rel="stylesheet" href="@Url.Content("~/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css")">*@
-    <!-- iCheck -->
-    @*<link rel="stylesheet" href="@Url.Content("~/plugins/icheck-bootstrap/icheck-bootstrap.min.css")">*@
+   
 
-    <!-- fullCalendar -->
-    <link rel="stylesheet" href="@Url.Content("~/plugins/fullcalendar/main.css")">
+   
 
 
 
@@ -69,13 +61,12 @@
 
     <!-- TKB css-->
     <link rel="stylesheet" href="@Url.Content("~/tkb/Yersin.css")">
-    @*     <link rel="stylesheet" href="@Url.Content("~/dist/css/bootstrap.css")">*@
+    
     <link rel="stylesheet" href="@Url.Content("~/tkb/bootstrap-datetimepicker.css")">
     <link rel="stylesheet" href="@Url.Content("~/tkb/menu.css")">
     <link rel="stylesheet" href="@Url.Content("~/tkb/select2_2.css")">
     <link rel="stylesheet" href="@Url.Content("~/tkb/select2-bootstrap.css")">
-    @*<link rel="stylesheet" href="@Url.Content("~/dist/css/site.css")">
-    *@
+    
 
     <link rel="stylesheet" href="@Url.Content("~/tkb/main.css")">
 
@@ -151,7 +142,7 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
-                        with font-awesome or any other icon font library -->
+    with font-awesome or any other icon font library -->
                         <!-- Quyền Admin-->
                         @if ((int)Session["role"] == 1)
                         {
@@ -167,107 +158,35 @@
                                     <i class="fas fa-user-cog nav-icon"></i>
                                     <p>Phân Quyền</p>
                                 </a>
-
                             </li>
 
-                            //Hiển thị Tree List
+                            @*Hiển thị Tree List*@
                             <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="nav-icon fas fa-table"></i>
-                                        <p>
-                                            Quản lý
-                                            <i class="fas fa-angle-left right"></i>
-                                        </p>
-                                    </a>
-                                    <ul class="nav nav-treeview">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-table"></i>
+                                    <p>
+                                        Quản lý danh mục
+                                        <i class="fas fa-angle-left right"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
 
-                                        <li class="nav-item">
-                                            <a href="~/giangVien/Index" class="nav-link">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Phân quyền</p>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
+                                    <li class="nav-item">
+                                        <a href="~/hocKy/Index" class="nav-link" id="icon-text">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Học Kì</p>
+                                        </a>
+                                    </li>
 
-                            <li class="nav-item">
-                                    <a href="#" class="nav-link" id="icon-text">
-                                        <i class="nav-icon fas fa-table"></i>
-                                        <p>
-                                            Quản Lý Danh Mục
-                                            <i class="fas fa-angle-left right"></i>
-                                        </p>
-                                    </a>
-                                    <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="~/monHoc/Index" class="nav-link" id="icon-text">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Môn Học</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
 
-                                        <li class="nav-item">
-                                            <a href="~/Home/Catalog" class="nav-link" id="icon-text">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Nhập File Excel</p>
-                                            </a>
-                                        </li>
-
-                                        <li class="nav-item">
-                                            <a href="~/Nganh/Index" class="nav-link" id="icon-text">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Ngành Học</p>
-                                            </a>
-                                        </li>
-
-                                        <li class="nav-item">
-                                            <a href="~/monHoc/Index" class="nav-link" id="icon-text">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Môn Học</p>
-                                            </a>
-                                        </li>
-
-                                        <li class="nav-item">
-                                            <a href="~/hocPhan/Index" class="nav-link" id="icon-text">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Học Phần</p>
-                                            </a>
-                                        </li>
-
-                                        <li class="nav-item">
-                                            <a href="~/tuanHoc/Index" class="nav-link" id="icon-text">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Tuần Học</p>
-                                            </a>
-                                        </li>
-
-                                        <li class="nav-item">
-                                            <a href="~/lopHoc/Index" class="nav-link" id="icon-text">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Lớp Học</p>
-                                            </a>
-                                        </li>
-
-                                        <li class="nav-item">
-                                            <a href="~/phongHoc/Index" class="nav-link" id="icon-text">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Phòng Học</p>
-                                            </a>
-                                        </li>
-
-                                        <li class="nav-item">
-                                            <a href="~/tietHoc/Index" class="nav-link" id="icon-text">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Tiết Học</p>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-
-
-
-                            <li class="nav-header">-----------------------</li>
-
-                            @*<li class="nav-item">
-                                    <a href="~/Home/Search" class="nav-link" id="icon-text">
-                                        <i class="nav-icon fas fa-search"></i>
-                                        <p>Tìm kiếm</p>
-                                    </a>
-                                </li>*@
 
                             <li class="nav-item">
                                 <a href="@Url.Action("Logout","Account")" class="nav-link">
@@ -277,12 +196,6 @@
                                     </p>
                                 </a>
                             </li>
-
-                            @* <li class="nav-header">
-                                    @Html.Partial("_LoginPartial")
-                                </li>*@
-
-
                         }
 
 
@@ -295,57 +208,21 @@
                                     <p>Trang chủ</p>
                                 </a>
                             </li>
-
-
-
                             @*Hiển thị Tree List*@
-                            @*<li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="nav-icon fas fa-table"></i>
-                                        <p>
-                                            Quản lý
-                                            <i class="fas fa-angle-left right"></i>
-                                        </p>
-                                    </a>
-                                    <ul class="nav nav-treeview">
-
-                                        <li class="nav-item">
-                                            <a href="~/giangVien/Index" class="nav-link">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Phân quyền</p>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>*@
-
                             <li class="nav-item">
-                                <a href="#" class="nav-link" id="icon-text">
+                                <a href="#" class="nav-link">
                                     <i class="nav-icon fas fa-table"></i>
                                     <p>
-                                        Quản Lý Danh Mục
+                                        Quản lý danh mục
                                         <i class="fas fa-angle-left right"></i>
                                     </p>
                                 </a>
                                 <ul class="nav nav-treeview">
 
                                     <li class="nav-item">
-                                        <a href="~/Home/Catalog" class="nav-link" id="icon-text">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Nhập File Excel</p>
-                                        </a>
-                                    </li>
-
-                                    <li class="nav-item">
                                         <a href="~/hocKy/Index" class="nav-link" id="icon-text">
                                             <i class="far fa-circle nav-icon"></i>
-                                            <p>Học Kỳ</p>
-                                        </a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a href="~/Nganh/Index" class="nav-link" id="icon-text">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Ngành Học</p>
+                                            <p>Học Kì</p>
                                         </a>
                                     </li>
 
@@ -355,54 +232,9 @@
                                             <p>Môn Học</p>
                                         </a>
                                     </li>
-
-                                    <li class="nav-item">
-                                        <a href="~/hocPhan/Index" class="nav-link" id="icon-text">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Học Phần</p>
-                                        </a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a href="~/tuanHoc/Index" class="nav-link" id="icon-text">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Tuần Học</p>
-                                        </a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a href="~/lopHoc/Index" class="nav-link" id="icon-text">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Lớp Học</p>
-                                        </a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a href="~/phongHoc/Index" class="nav-link" id="icon-text">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Phòng Học</p>
-                                        </a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a href="~/tietHoc/Index" class="nav-link" id="icon-text">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Tiết Học</p>
-                                        </a>
-                                    </li>
                                 </ul>
                             </li>
 
-
-
-                            <li class="nav-header">-----------------------</li>
-
-                            @*<li class="nav-item">
-                                    <a href="~/Home/Search" class="nav-link" id="icon-text">
-                                        <i class="nav-icon fas fa-search"></i>
-                                        <p>Tìm kiếm</p>
-                                    </a>
-                                </li>*@
 
                             <li class="nav-item">
                                 <a href="@Url.Action("Logout","Account")" class="nav-link">
@@ -412,12 +244,6 @@
                                     </p>
                                 </a>
                             </li>
-
-                            @* <li class="nav-header">
-                                    @Html.Partial("_LoginPartial")
-                                </li>*@
-
-
                         }
 
                         <!-- Quyền Bộ môn-->
@@ -429,45 +255,21 @@
                                     <p>Trang chủ</p>
                                 </a>
                             </li>
-
-
-
                             @*Hiển thị Tree List*@
-                            @*<li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="nav-icon fas fa-table"></i>
-                                        <p>
-                                            Quản lý
-                                            <i class="fas fa-angle-left right"></i>
-                                        </p>
-                                    </a>
-                                    <ul class="nav nav-treeview">
-
-                                        <li class="nav-item">
-                                            <a href="~/giangVien/Index" class="nav-link">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Phân quyền</p>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>*@
-
                             <li class="nav-item">
-                                <a href="#" class="nav-link" id="icon-text">
+                                <a href="#" class="nav-link">
                                     <i class="nav-icon fas fa-table"></i>
                                     <p>
-                                        Quản Lý Danh Mục
+                                        Quản lý danh mục
                                         <i class="fas fa-angle-left right"></i>
                                     </p>
                                 </a>
                                 <ul class="nav nav-treeview">
 
-
-
                                     <li class="nav-item">
-                                        <a href="~/Nganh/Index" class="nav-link" id="icon-text">
+                                        <a href="~/hocKy/Index" class="nav-link" id="icon-text">
                                             <i class="far fa-circle nav-icon"></i>
-                                            <p>Ngành Học</p>
+                                            <p>Học Kì</p>
                                         </a>
                                     </li>
 
@@ -477,54 +279,8 @@
                                             <p>Môn Học</p>
                                         </a>
                                     </li>
-
-                                    <li class="nav-item">
-                                        <a href="~/hocPhan/Index" class="nav-link" id="icon-text">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Học Phần</p>
-                                        </a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a href="~/tuanHoc/Index" class="nav-link" id="icon-text">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Tuần Học</p>
-                                        </a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a href="~/lopHoc/Index" class="nav-link" id="icon-text">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Lớp Học</p>
-                                        </a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a href="~/phongHoc/Index" class="nav-link" id="icon-text">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Phòng Học</p>
-                                        </a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a href="~/tietHoc/Index" class="nav-link" id="icon-text">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Tiết Học</p>
-                                        </a>
-                                    </li>
                                 </ul>
                             </li>
-
-
-
-                            <li class="nav-header">-----------------------</li>
-
-                            @*<li class="nav-item">
-                                    <a href="~/Home/Search" class="nav-link" id="icon-text">
-                                        <i class="nav-icon fas fa-search"></i>
-                                        <p>Tìm kiếm</p>
-                                    </a>
-                                </li>*@
 
                             <li class="nav-item">
                                 <a href="@Url.Action("Logout","Account")" class="nav-link">
@@ -534,12 +290,6 @@
                                     </p>
                                 </a>
                             </li>
-
-                            @* <li class="nav-header">
-                                    @Html.Partial("_LoginPartial")
-                                </li>*@
-
-
                         }
 
                         <!-- Quyền Giảng viên-->
@@ -554,16 +304,9 @@
                             </li>
 
 
-                            <li class="nav-header">-----------------------</li>
+                         
 
-                            @*<li class="nav-item">
-                                    <a href="~/Home/Search" class="nav-link" id="icon-text">
-
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Tìm kiếm</p>
-                                    </a>
-
-                                </li>*@
+                          
 
                             <li class="nav-item">
                                 <a href="@Url.Action("Logout","Account")" class="nav-link">
@@ -653,27 +396,19 @@
 
     <!-- bs-custom-file-input -->
     <script src="@Url.Content("~/ScriptsTemplate/bs-custom-file-input/bs-custom-file-input.min.js")"></script>
-    <!--FullScreen-->
-    <script src="@Url.Content("~/ContentTemplate/build/js/Fullscreen.js")"></script>
-    <!--ToastTR-->
-    <script src="@Url.Content("~/ContentTemplate/plugins/toastr/toastr.min.js")"></script>
-    <!-- daterangepicker -->
-    <script src="@Url.Content("~/plugins/moment/moment.min.js")"></script>
-    <script src="@Url.Content("~/plugins/daterangepicker/daterangepicker.js")"></script>
+   
+
     <!--Jquery-Confirm-JS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.js" integrity="sha512-zP5W8791v1A6FToy+viyoyUUyjCzx+4K8XZCKzW28AnCoepPNIXecxh9mvGuy3Rt78OzEsU+VCvcObwAMvBAww==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- AdminLTE App -->
     <script src="@Url.Content("~/dist/js/adminlte.js")"></script>
     <script src="@Url.Content("~/PluginTemplate/sweetalert2/sweetalert2.min.js")"></script>
     <link rel="stylesheet" href="@Url.Content("~/PluginTemplate/sweetalert2/sweetalert2.min.css")">
-    <!--summernote-->
-    <script type="text/javascript" src="@Url.Content("~/PluginTemplate/summernote/summernote-bs4.min.js")"></script>
+   
     <!-- AdminLTE for demo purposes -->
     <script src="@Url.Content("~/dist/js/demo.js")"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <!--SignalR-->
-    <script src="@Url.Content("~/ScriptsTemplate/jquery.signalR-2.4.2.js")"></script>
-    <script src="@Url.Content("~/signalr/hubs")"></script>
+   
 
     <!-- overlayScrollbars -->
     <script src="@Url.Content("~/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js")"></script>
@@ -683,190 +418,10 @@
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="@Url.Content("~/dist/js/pages/dashboard.js")"></script>
 
-    <!-- fullCalendar 2.2.5 -->
-    <script src="@Url.Content("~/plugins/moment/moment.min.js")"></script>
-    <script src="@Url.Content("~/plugins/fullcalendar/main.js")"></script>
+ 
 
     <!--SweetAlert-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
-
-    <!-- AdminLTE for demo purposes -->
-    <!-- Page specific script -->
-    <script>
-        $(function () {
-
-            /* initialize the external events
-             -----------------------------------------------------------------*/
-            function ini_events(ele) {
-                ele.each(function () {
-
-                    // create an Event Object (https://fullcalendar.io/docs/event-object)
-                    // it doesn't need to have a start or end
-                    var eventObject = {
-                        title: $.trim($(this).text()) // use the element's text as the event title
-                    }
-
-                    // store the Event Object in the DOM element so we can get to it later
-                    $(this).data('eventObject', eventObject)
-
-                    // make the event draggable using jQuery UI
-                    $(this).draggable({
-                        zIndex: 1070,
-                        revert: true, // will cause the event to go back to its
-                        revertDuration: 0  //  original position after the drag
-                    })
-
-                })
-            }
-
-            ini_events($('#external-events div.external-event'))
-
-            /* initialize the calendar
-             -----------------------------------------------------------------*/
-            //Date for the calendar events (dummy data)
-            var date = new Date()
-            var d = date.getDate(),
-                m = date.getMonth(),
-                y = date.getFullYear()
-
-            var Calendar = FullCalendar.Calendar;
-            var Draggable = FullCalendar.Draggable;
-
-            var containerEl = document.getElementById('external-events');
-            var checkbox = document.getElementById('drop-remove');
-            var calendarEl = document.getElementById('calendar');
-
-            // initialize the external events
-            // -----------------------------------------------------------------
-
-            new Draggable(containerEl, {
-                itemSelector: '.external-event',
-                eventData: function (eventEl) {
-                    return {
-                        title: eventEl.innerText,
-                        backgroundColor: window.getComputedStyle(eventEl, null).getPropertyValue('background-color'),
-                        borderColor: window.getComputedStyle(eventEl, null).getPropertyValue('background-color'),
-                        textColor: window.getComputedStyle(eventEl, null).getPropertyValue('color'),
-                    };
-                }
-            });
-
-            var calendar = new Calendar(calendarEl, {
-                headerToolbar: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
-                },
-                themeSystem: 'bootstrap',
-                //Random default events
-                events: [
-                    {
-                        title: 'All Day Event',
-                        start: new Date(y, m, 1),
-                        backgroundColor: '#f56954', //red
-                        borderColor: '#f56954', //red
-                        allDay: true
-                    },
-                    {
-                        title: 'Long Event',
-                        start: new Date(y, m, d - 5),
-                        end: new Date(y, m, d - 2),
-                        backgroundColor: '#f39c12', //yellow
-                        borderColor: '#f39c12' //yellow
-                    },
-                    {
-                        title: 'Meeting',
-                        start: new Date(y, m, d, 10, 30),
-                        allDay: false,
-                        backgroundColor: '#0073b7', //Blue
-                        borderColor: '#0073b7' //Blue
-                    },
-                    {
-                        title: 'Lunch',
-                        start: new Date(y, m, d, 12, 0),
-                        end: new Date(y, m, d, 14, 0),
-                        allDay: false,
-                        backgroundColor: '#00c0ef', //Info (aqua)
-                        borderColor: '#00c0ef' //Info (aqua)
-                    },
-                    {
-                        title: 'Birthday Party',
-                        start: new Date(y, m, d + 1, 19, 0),
-                        end: new Date(y, m, d + 1, 22, 30),
-                        allDay: false,
-                        backgroundColor: '#00a65a', //Success (green)
-                        borderColor: '#00a65a' //Success (green)
-                    },
-                    {
-                        title: 'Click for Google',
-                        start: new Date(y, m, 28),
-                        end: new Date(y, m, 29),
-                        url: 'https://www.google.com/',
-                        backgroundColor: '#3c8dbc', //Primary (light-blue)
-                        borderColor: '#3c8dbc' //Primary (light-blue)
-                    }
-                ],
-                editable: true,
-                droppable: true, // this allows things to be dropped onto the calendar !!!
-                drop: function (info) {
-                    // is the "remove after drop" checkbox checked?
-                    if (checkbox.checked) {
-                        // if so, remove the element from the "Draggable Events" list
-                        info.draggedEl.parentNode.removeChild(info.draggedEl);
-                    }
-                }
-            });
-
-            calendar.render();
-            // $('#calendar').fullCalendar()
-
-            /* ADDING EVENTS */
-            var currColor = '#3c8dbc' //Red by default
-            // Color chooser button
-            $('#color-chooser > li > a').click(function (e) {
-                e.preventDefault()
-                // Save color
-                currColor = $(this).css('color')
-                // Add color effect to button
-                $('#add-new-event').css({
-                    'background-color': currColor,
-                    'border-color': currColor
-                })
-            })
-            $('#add-new-event').click(function (e) {
-                e.preventDefault()
-                // Get value and make sure it is not null
-                var val = $('#new-event').val()
-                if (val.length == 0) {
-                    return
-                }
-
-                // Create events
-                var event = $('<div />')
-                event.css({
-                    'background-color': currColor,
-                    'border-color': currColor,
-                    'color': '#fff'
-                }).addClass('external-event')
-                event.text(val)
-                $('#external-events').prepend(event)
-
-                // Add draggable funtionality
-                ini_events(event)
-
-                // Remove event from text input
-                $('#new-event').val('')
-            })
-        })
-    </script>
-
-
-
-
-
-
-
-
 
     @RenderSection("scripts", required: false)
 </body>

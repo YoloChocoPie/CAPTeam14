@@ -22,7 +22,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="~/Home/Index">Trang chủ</a></li>
-                        <li class="breadcrumb-item active">Lớp học</li>
+                   
                     </ol>
                 </div>
             </div>
@@ -37,9 +37,7 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Danh sách lớp học</h3>
-                            </br>
-                            <a class="btn btn-file createBtn1 btn btn-info fas fa-eye" title="TEST" href="@Url.Action("Create", "lopHoc")"> </a>
+                            
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -64,18 +62,20 @@
                                 <tbody>
                                     @foreach (var item in Model)
                                     {
-                                        <tr>
+                                    <tr>
 
 
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.tenHK)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.namBD)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.namKT)
-                                            </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.tenHK)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.namBD)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.namKT)
+                                        </td>
+                                        @if ((int)Session["role"] == 1 || (int)Session["role"] == 2)
+                                        {
                                             <td>
                                                 @Html.ActionLink("Xem thời khóa biểu", "Index", new { id = item.ID }) |
                                                 @Html.ActionLink("Import thời khóa biểu", "Catalog", new { id = item.ID }) |
@@ -83,7 +83,22 @@
                                                 @Html.ActionLink("Xóa Thời khóa biểu", "DeleteTKB", new { id = item.ID }, new { style = "color:red" })
 
                                             </td>
-                                        </tr>
+                                        }
+                                        @if ((int)Session["role"] == 3 )
+                                        {
+                                            <td>
+                                                @Html.ActionLink("Xem thời khóa biểu", "Index", new { id = item.ID })
+                                            </td>
+                                        }
+                                        @if ((int)Session["role"] == 4)
+                                        {
+                                            <td>
+                                                @Html.ActionLink("Xem thời khóa biểu", "Index2", new { id = item.ID })
+                                            </td>
+                                        }
+
+
+                                    </tr>
                                     }
 
                                 </tbody>

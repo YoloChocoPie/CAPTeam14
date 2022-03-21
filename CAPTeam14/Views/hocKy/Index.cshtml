@@ -33,9 +33,9 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Danh sách học kỳ</h3>
+                            <h3 class="card-title">Thêm học kì</h3>
                             </br>
-                            <a class="btn btn-file createBtn1 btn btn-info fas fa-eye" title="Tạo học kỳ mới" href="@Url.Action("Create", "hocKy")"> </a>
+                            <a class="btn btn-file createBtn1 btn btn-info fas fa-eye" title="Thêm học kì" href="@Url.Action("Create", "hocKy")"> </a>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -137,7 +137,7 @@
         $(function () {
             Swal.fire({
                 title: 'Thông báo',
-                text: 'Bạn đã cập nhập học phần thành công !!!',
+                text: 'Bạn đã cập nhập học kì thành công !!!',
                 icon: 'success',
                 showConfirmButton: true,
                 timer: 1500,
@@ -157,50 +157,8 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
-            $('.deleteBtn').click(function (e) {
-                e.preventDefault();
-                debugger;
-                var button = $(this);
-                var url = $(this).data("model-id");
-                $.confirm({
-                    title: 'Thông báo!',
-                    content: 'Bạn có muốn xóa chuyên ngành này không ???',
-                    buttons: {
-                        confirm: {
-                            text: 'Có',
-                            btnClass: 'btn-green',
-                            action: function () {
-                                $.ajax({
-                                    url: url,
-                                    type: "POST",
-                                    contentType: "application/json;charset=UTF-8",
-                                    dataType: "json",
-                                    success: function (r) {
-                                        if (r.success) {
-                                            button.parents("tr").remove();
-                                            window.location.replace("/Admin/Specialized");
-                                        }
-                                        else {
-                                            toastr.warning('Không thể xóa data bị ràng buộc !!!');
-                                        }
-                                    },
-                                    error: function () {
-                                        $.alert("Lỗi !!!");
-                                    }
-                                });
-                            }
-                        },
-                        cancel: {
-                            text: 'Không',
-                            btnClass: 'btn-red',
-                            action: function () {
-                                $.alert('Bạn đã hủy thao tác !!!');
-                            }
-                        },
-                    }
-                });
-            });
-            $('.detailBtn1').click(function () {
+            
+            $('#example1').on('click', '.detailBtn1', function () {
                 var button = $(this);
                 var s_id = button.data("id1");
                 var url = button.data("model-id1");
@@ -271,76 +229,3 @@
     </script>
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.tenHK)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.namBD)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.namKT)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.tenHK)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.namBD)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.namKT)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-            </td>
-        </tr>
-    }
-
-</table>

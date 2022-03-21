@@ -41,6 +41,23 @@ namespace CAPTeam14.Controllers
             return View(tkb);
         }
 
+        public ActionResult Index2(int? id)
+        {
+            // lấy danh sách thời khóa biểu
+            var tkb = model.TKBs.OrderByDescending(x => x.ID).ToList();
+            // lấy danh sách học kì
+            var tkb1 = model.hocKies.FirstOrDefault(x => x.ID == id);
+            //hiển thị tên học kì đã chọn
+            ViewBag.test2 = tkb1.tenHK;
+            ViewBag.test3 = tkb1.ID;
+            TempData["test"] = tkb1.ID;
+            // lấy thông tin ID học kì đã chọn trong thời khóa biểu
+            ViewBag.test = id;
+
+            ViewBag.gv = model.nguoiDungs.Where(x => x.role == 4).OrderByDescending(x => x.ID).ToList();
+            return View(tkb);
+        }
+
         public ActionResult Index(int? id)
         {
             // lấy danh sách thời khóa biểu

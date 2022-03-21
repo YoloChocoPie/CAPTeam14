@@ -47,7 +47,7 @@ namespace CAPTeam14.Controllers
                     model.hocKies.Add(hocky1);
                     model.SaveChanges();
 
-                    return RedirectToAction("Index", "hocKy");
+                    return RedirectToAction("Index1", "Home");
                 }
                 else
                 {

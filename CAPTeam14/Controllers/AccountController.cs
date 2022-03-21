@@ -80,6 +80,9 @@ namespace CAPTeam14.Controllers
         {
             if (!ModelState.IsValid)
             {
+                Session.Abandon();
+                Request.Cookies.Clear();
+                AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
                 return View(model);
             }
 
@@ -89,7 +92,7 @@ namespace CAPTeam14.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    
+                   
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
