@@ -816,7 +816,7 @@ namespace CAPTeam14.Controllers
 
             var tt = model.TKBs.FirstOrDefault(x => x.ID == id);
             //var thungay = model.TKBs.Where(d => d.tuanHoc.thuS == tkb.tuanHoc.thuS);
-            var gvid = model.TKBs.Where(g => g.ID_GV == tkb.ID_GV && g.tietHoc.tietBD == tt.tietHoc.tietBD && g.tuanHoc.thuS == tt.tuanHoc.thuS).ToList().Count();
+            var gvid = model.TKBs.Where(g => g.ID_GV == tkb.ID_GV && g.tietHoc.tietBD == tt.tietHoc.tietBD && g.tuanHoc.thuS == tt.tuanHoc.thuS && g.ID_hocKy == tt.ID_hocKy).ToList().Count();
             if (gvid < 1)
             {
                 tt.ID_GV = tkb.ID_GV;
