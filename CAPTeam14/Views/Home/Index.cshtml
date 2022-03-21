@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CAPTeam14.Models.TKB>
+﻿@*@model IEnumerable<CAPTeam14.Models.TKB>*@
 @using CAPTeam14.Models;
 @using System.Data
 @{ var db = new CP24Team14Entities();
@@ -6,7 +6,7 @@
     //var queryy = db.hocKies.Select(r => r.ID);
 }
 
-
+@Html.ValidationSummary()
 <div class="content-wrapper">
     <!-- Main content -->
     <section class="content">
@@ -221,8 +221,7 @@
 
                                     @foreach (var item in db.TKBs.ToList().Where(x => x.ID_hocKy == (int)TempData["Test"]).Select(x => x.monHoc.tenMon).Distinct().OrderBy(x => x))
                                     {
-
-                                        <tr id="" name="@item" class="test ">
+                                        <tr name="@item" class="test ">
                                             <td style="font-size:16px"><strong>@item</strong></td>
 
                                             @*Thứ 2*@
@@ -233,7 +232,7 @@
                                                     if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test)
                                                     {
 
-                                                        <form id="@item2.ID" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                        <form name="@item2.ID_GV" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
                                                             <label><b>@item2.monHoc.maMon</b></label> <br />
                                                             <label><b>@item2.hocPhan.maLHP</b></label> <br />
                                                             <label><b>@item2.monHoc.tenMon</b></label> <br />
@@ -245,7 +244,8 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên");
+
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" });
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -265,7 +265,7 @@
                                                     else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test)
                                                     {
 
-                                                        <form id="@item2.ID" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                        <form name="@item2.ID_GV" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
                                                             <label><b>@item2.monHoc.maMon</b></label> <br />
                                                             <label><b>@item2.hocPhan.maLHP</b></label> <br />
                                                             <label><b>@item2.monHoc.tenMon</b></label> <br />
@@ -276,7 +276,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -302,7 +302,7 @@
                                                     if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test)
                                                     {
 
-                                                        <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                        <form class="formLT" name="@item2.ID_GV" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
                                                             <label><b>@item2.monHoc.maMon</b></label> <br />
                                                             <label><b>@item2.hocPhan.maLHP</b></label> <br />
                                                             <label><b>@item2.monHoc.tenMon</b></label> <br />
@@ -313,7 +313,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -332,7 +332,7 @@
                                                     else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test)
                                                     {
 
-                                                        <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                        <form class="formTT" name="formGV" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
                                                             <label><b>@item2.monHoc.maMon</b></label> <br />
                                                             <label><b>@item2.hocPhan.maLHP</b></label> <br />
                                                             <label><b>@item2.monHoc.tenMon</b></label> <br />
@@ -343,7 +343,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -369,7 +369,7 @@
                                                     if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test)
                                                     {
 
-                                                        <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                        <form class="formLT" name="formGV" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
                                                             <label><b>@item2.monHoc.maMon</b></label> <br />
                                                             <label><b>@item2.hocPhan.maLHP</b></label> <br />
                                                             <label><b>@item2.monHoc.tenMon</b></label> <br />
@@ -380,7 +380,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -399,7 +399,7 @@
                                                     else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test)
                                                     {
 
-                                                        <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                        <form class="formTT" name="formGV" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
                                                             <label><b>@item2.monHoc.maMon</b></label> <br />
                                                             <label><b>@item2.hocPhan.maLHP</b></label> <br />
                                                             <label><b>@item2.monHoc.tenMon</b></label> <br />
@@ -410,7 +410,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -436,7 +436,7 @@
                                                     if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test)
                                                     {
 
-                                                        <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                        <form class="formLT" name="formGV" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
                                                             <label><b>@item2.monHoc.maMon</b></label> <br />
                                                             <label><b>@item2.hocPhan.maLHP</b></label> <br />
                                                             <label><b>@item2.monHoc.tenMon</b></label> <br />
@@ -447,7 +447,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -466,7 +466,7 @@
                                                     else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test)
                                                     {
 
-                                                        <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                        <form class="formTT" name="formGV" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
                                                             <label><b>@item2.monHoc.maMon</b></label> <br />
                                                             <label><b>@item2.hocPhan.maLHP</b></label> <br />
                                                             <label><b>@item2.monHoc.tenMon</b></label> <br />
@@ -477,7 +477,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -500,7 +500,7 @@
                                                     if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test)
                                                     {
 
-                                                        <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                        <form class="formLT" name="formGV" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
                                                             <label><b>@item2.monHoc.maMon</b></label> <br />
                                                             <label><b>@item2.hocPhan.maLHP</b></label> <br />
                                                             <label><b>@item2.monHoc.tenMon</b></label> <br />
@@ -511,7 +511,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit" style="align-items:center">Save</button>
                                                                 }
                                                             }
@@ -527,7 +527,7 @@
                                                     else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test)
                                                     {
 
-                                                        <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                        <form class="formTT" name="formGV" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
                                                             <label><b>@item2.monHoc.maMon</b></label> <br />
                                                             <label><b>@item2.hocPhan.maLHP</b></label> <br />
                                                             <label><b>@item2.monHoc.tenMon</b></label> <br />
@@ -538,7 +538,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -577,7 +577,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -607,7 +607,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -644,7 +644,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -674,7 +674,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -711,7 +711,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -741,7 +741,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -778,7 +778,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -808,7 +808,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -845,7 +845,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -875,7 +875,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -914,7 +914,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -944,7 +944,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -981,7 +981,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -1011,7 +1011,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -1048,7 +1048,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -1078,7 +1078,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -1115,7 +1115,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -1145,7 +1145,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -1182,7 +1182,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -1212,7 +1212,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -1251,7 +1251,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -1281,7 +1281,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -1318,7 +1318,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -1348,7 +1348,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -1385,7 +1385,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -1415,7 +1415,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -1452,7 +1452,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -1482,7 +1482,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -1519,7 +1519,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -1549,7 +1549,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -1588,7 +1588,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -1618,7 +1618,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -1655,7 +1655,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -1685,7 +1685,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -1722,7 +1722,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -1752,7 +1752,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -1789,7 +1789,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -1819,7 +1819,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -1856,7 +1856,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -1886,7 +1886,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -1925,7 +1925,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -1955,7 +1955,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -1992,7 +1992,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -2022,7 +2022,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -2059,7 +2059,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -2089,7 +2089,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -2126,7 +2126,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -2156,7 +2156,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -2193,7 +2193,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -2223,7 +2223,7 @@
                                                             {
                                                                 using (Html.BeginForm())
                                                                 {
-                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên")
+                                                                    @Html.DropDownList("ID_GV", new SelectList(ViewBag.gv, "ID", "tenGV"), "Chọn giảng viên", new { required = "required" })
                                                                     <button class="btn btn-success" type="submit">Save</button>
                                                                 }
                                                             }
@@ -2263,9 +2263,6 @@
         //    TabTranferTabPerior(0);
         //});
 
-        function PrintTKB() {
-            printContent("divThoiKhoaBieuTietThu");
-        }
 
         // Lọc loại HP
         function FilterLoaiHP(select) {
@@ -2318,28 +2315,7 @@
             }
         }
 
-        //$(document).ready(function () {
-        //    $('#chonhk').on('change', function () {
-        //        var value = $(this).val();
-        //        var url = '/Home/TKBHK';
-        //       /*alert(value); // check xem đã lấy dc giá trị của dropdownlist hay chưa*/
-        //            $.ajax({
-        //                url: url,
-        //                type: 'get',
-        //                data: {
-        //                    id: value,
-        //                },
-        //                success: function (data) {
-        //                    //$('#TKBT14').html(data)
-        //                    alert(data)
-        //                },
-        //                error: function (responce) {
-        //                    alert(responce)
-        //                }
-        //            });
-        //    });
-        //});
-
+        // Lọc Môn học
         $(document).ready(function () {
             $('#chonmonhox').on('change', function () {
                 var value = $(this).val();
@@ -2360,29 +2336,6 @@
             });
         });
 
-        //$('tbody').each(function () {
-        //    var name = $(this).attr('name');
-        //    /*alert(id); // check xem đã lấy dc giá trị của dropdownlist hay chưa*/
-        //    $('.tbodyhk').hide();
-        //});
-
-        //$(document).ready(function () {
-        //    $('#chonhk').on('change', function () {
-        //        var value = $(this).val();
-
-        //        $('tbody').each(function () {
-        //            var name = $(this).attr('name');
-        //            /*alert(id); // check xem đã lấy dc giá trị của dropdownlist hay chưa*/
-        //            if (value == name) {
-        //                //$('.test').css("display", "none");
-        //                //$(this).css("display", "");
-        //                $('.tbodyhk').hide();
-        //                $(this).show();
-        //            }
-        //        });
-        //    });
-        //});
-
         // PHAN CONG _ AJAX hoạt động được
         $('form').submit(function (e) {
             e.preventDefault();
@@ -2390,16 +2343,26 @@
                 method: $(this).attr('method'),
                 url: $(this).attr('action'),
                 data: $(this).serialize(),
-            }).done(function (response) {
-                Swal.fire({
-                    title: 'Thông báo',
-                    text: 'Bạn đã phân công thành công !!!',
-                    icon: 'success',
-                    showConfirmButton: true,
-                });
+                success: function (res) {
+                    if (res.result == true) {
+                        Swal.fire({
+                            title: 'Thông báo',
+                            text: 'Bạn đã phân công thành công !!!',
+                            icon: 'success',
+                            showConfirmButton: true,
+                        });
+                    } else {
+                        Swal.fire({
+                            title: 'Thông báo',
+                            text: 'Giảng viên này đã được phân công quá nhiều !!!',
+                            icon: 'error',
+                            showConfirmButton: true,
+                        });
+                    }
+                }
             });
-
         });
+
 
         //function TabTranferTabPerior(key) {
         //    if (key == 0) {
@@ -2463,5 +2426,4 @@
             });
         </script>
     }*@
-
 

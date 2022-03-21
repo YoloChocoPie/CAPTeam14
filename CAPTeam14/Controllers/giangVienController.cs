@@ -60,12 +60,42 @@ namespace CAPTeam14.Controllers
             var giangvien = model.nguoiDungs.FirstOrDefault(x => x.ID == id);
             string ten = giangvien.tenGV;
             string maGV = giangvien.maGV;
-            bool? loaiGV = giangvien.loaiGV;
-            int? role = giangvien.role;
+            string loaiGV = "";
+            if(giangvien.loaiGV == true)
+            {
+                loaiGV = "Cơ hữu";
+            } else
+            {
+                loaiGV = "Thỉnh giảng";
+            }
+            string role = "";
+            if (giangvien.role == 1)
+            {
+                role = "Admin";
+            } else if (giangvien.role == 2)
+            {
+                role = "Ban chủ nhiệm khoa";
+            } else if (giangvien.role == 3)
+            {
+                role = "Bộ môn";
+            } else if (giangvien.role == 4)
+            {
+                role = "Giảng viên";
+            } else if (giangvien.role == null)
+            {
+                role = "Chưa kích hoạt";
+            }
             string khoa = giangvien.khoa;
             int? sdt = giangvien.sdt;
           
-            bool? gioiTinh = giangvien.gioiTinh;
+            string gioiTinh = "";
+            if (giangvien.gioiTinh == true)
+            {
+                gioiTinh = "Nam";
+            } else
+            {
+                gioiTinh = "Nữ";
+            }
 
             var abcdefg = new { a = ten, b = maGV, c = loaiGV, d = role, e = khoa, f = sdt, g = gioiTinh };
             return Json(abcdefg, JsonRequestBehavior.AllowGet);
@@ -132,8 +162,22 @@ namespace CAPTeam14.Controllers
         }
 
 
+        [HttpGet]
+        [LoginVerification]
+        public ActionResult DetailStatistic(int? id)
+        {
+            var cl = model.nguoiDungs.FirstOrDefault(x => x.ID == id);
+            //ViewBag.active = 7;
+            //ViewBag.year = year;
+            //int result = Int32.Parse(year);
+            ViewBag.tengv = cl.tenGV;            
+            ViewBag.sumclassweek = model.TKBs.Where(x => x.ID_GV == cl.ID).ToList().Count();
+            ViewBag.sumgghk = (decimal)(ViewBag.sumclassweek * 150)/60;
+            //ViewBag.sumsubhk = model.ACCOUNTs.Where(x => x.DATE_OF_REGISTRATION.Value.Year == result).ToList().Count();
 
 
+            return View(cl);
+        }
     }
 }
 

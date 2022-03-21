@@ -239,7 +239,11 @@ namespace CAPTeam14.Controllers
             string ten = monHoc.tenMon;
             string maMon = monHoc.maMon;
             string tinChi = monHoc.tinChi;
-            string tenKhac = monHoc.tengoiKhac;
+            string tenKhac = "";
+            if (monHoc.tengoiKhac == null)
+            {
+                tenKhac = "Không có";
+            }
             
 
             

@@ -812,17 +812,28 @@ namespace CAPTeam14.Controllers
         [HttpPost]
         public ActionResult PhanCong(int? id,TKB tkb, int? idGV)
         {
-            
+            ViewBag.gv = model.nguoiDungs.OrderByDescending(x => x.ID).ToList();
+
             var tt = model.TKBs.FirstOrDefault(x => x.ID == id);
-            tt.ID_GV = tkb.ID_GV;
-            model.SaveChanges();
-            return Json(JsonRequestBehavior.AllowGet);
+            //var thungay = model.TKBs.Where(d => d.tuanHoc.thuS == tkb.tuanHoc.thuS);
+            var gvid = model.TKBs.Where(g => g.ID_GV == tkb.ID_GV && g.tietHoc.tietBD == tt.tietHoc.tietBD && g.tuanHoc.thuS == tt.tuanHoc.thuS).ToList().Count();
+            if (gvid < 1)
+            {
+                tt.ID_GV = tkb.ID_GV;
+                model.SaveChanges();
+                return Json(new { result = true });
+
+            }
+            else if (gvid > 2)
+            {
+                //TempData["ThongBaoLoi"] = 1;
+                //ViewBag.Javascript = "<script language='javascript' type='text/javascript'>alert('Data Already Exists');</script>";
+                //ViewBag.DataExists = true;
+                return Json(new { result = false });
+            }
+
+            return Json(JsonRequestBehavior.AllowGet);            
+
         }
-
-      
-       
-      
-
-
     }
 }

@@ -4726,6 +4726,7 @@
     <Content Include="Views\Home\Index1.cshtml" />
     <Content Include="Views\Home\Catalog1.cshtml" />
     <Content Include="Views\Home\Index2.cshtml" />
+    <Content Include="Views\giangVien\DetailStatistic.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
