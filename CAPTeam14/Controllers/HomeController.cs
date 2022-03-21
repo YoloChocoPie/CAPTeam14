@@ -31,7 +31,7 @@ namespace CAPTeam14.Controllers
 
         public ActionResult Index()
         {
-            var tkb = model.TKBs.Where(x => x.ID_hocKy == 1).OrderByDescending(x => x.ID).ToList();
+            var tkb = model.TKBs.OrderByDescending(x => x.ID).ToList();
             ViewBag.gv = model.nguoiDungs.Where(x=> x.role == 4).OrderByDescending(x => x.ID).ToList();
             return View(tkb);
         }
@@ -402,50 +402,28 @@ namespace CAPTeam14.Controllers
         [HttpPost]
         public ActionResult PhanCong(int? id,TKB tkb, int? idGV)
         {
-            //ViewBag.gv = model.nguoiDungs.OrderByDescending(x => x.ID).ToList();
-            ////var ql = model.TKBs.ToList();
-            //try
-            //{
-            //    if (ModelState.IsValid)
-            //    {
-            //        var tt = model.TKBs.FirstOrDefault(x => x.ID == id);
+            ViewBag.gv = model.nguoiDungs.OrderByDescending(x => x.ID).ToList();
 
-            //        tt.ID_GV = tkb.ID_GV;
-
-            //        model.SaveChanges();
-            //        //TempData["ThongBao"] = 1;
-            //        return Json(tt,JsonRequestBehavior.AllowGet);
-            //        //return RedirectToAction("Index");
-            //    }
-            //    else
-            //    {
-            //        string messages = string.Join("; ", ModelState.Values
-            //                            .SelectMany(x => x.Errors)
-            //                            .Select(x => x.ErrorMessage));
-            //        ModelState.AddModelError("", messages);
-            //    }
-            //}
-            //catch (DataException)
-            //{
-            //    ModelState.AddModelError("", "Không thể lưu các thay đổi. Hãy thử lại và nếu sự cố vẫn tiếp diễn, hãy gặp quản trị viên hệ thống của bạn.");
-            //}
-            //return Json(JsonRequestBehavior.AllowGet);
-            ////return RedirectToAction("Index");            
-
-            //ViewBag.gv = model.nguoiDungs.OrderByDescending(x => x.ID).ToList();
-            //ViewBag.gv = new SelectList(model.nguoiDungs, "ID", "tenGV");
             var tt = model.TKBs.FirstOrDefault(x => x.ID == id);
-            tt.ID_GV = tkb.ID_GV;
-            model.SaveChanges();
-            return Json(JsonRequestBehavior.AllowGet);
-        }
+            //var thungay = model.TKBs.Where(d => d.tuanHoc.thuS == tkb.tuanHoc.thuS);
+            var gvid = model.TKBs.Where(g => g.ID_GV == tkb.ID_GV && g.tietHoc.tietBD == tt.tietHoc.tietBD && g.tuanHoc.thuS == tt.tuanHoc.thuS).ToList().Count();
+            if (gvid < 1)
+            {
+                tt.ID_GV = tkb.ID_GV;
+                model.SaveChanges();
+                return Json(new { result = true });
 
-        //[HttpGet]
-        //public ActionResult TKBHK(int? id, TKB tkb)
-        //{
-        //    var testhk = model.TKBs.Where(x => x.ID_hocKy == id).ToList();
-            
-        //    return View(testhk);
-        //}
+            }
+            else if (gvid > 2)
+            {
+                //TempData["ThongBaoLoi"] = 1;
+                //ViewBag.Javascript = "<script language='javascript' type='text/javascript'>alert('Data Already Exists');</script>";
+                //ViewBag.DataExists = true;
+                return Json(new { result = false });
+            }
+
+            return Json(JsonRequestBehavior.AllowGet);            
+
+        }
     }
 }
