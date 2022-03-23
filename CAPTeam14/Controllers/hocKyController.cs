@@ -32,7 +32,7 @@ namespace CAPTeam14.Controllers
         public ActionResult Create(hocKy hk)
         {
 
-            /*xacThuc(hp);*/
+            xacThuc(hk);
             try
             {
                 if (ModelState.IsValid)
@@ -47,7 +47,7 @@ namespace CAPTeam14.Controllers
                     model.hocKies.Add(hocky1);
                     model.SaveChanges();
 
-                    return RedirectToAction("Index1", "Home");
+                    return RedirectToAction("Index", "hocKy");
                 }
                 else
                 {
@@ -99,7 +99,7 @@ namespace CAPTeam14.Controllers
             ViewBag.active = 11;
             ViewBag.tt = "Edit";
 
-            /*xacThuc1(hp);*/
+            xacThuc1(hk);
             try
             {
                 if (ModelState.IsValid)
@@ -130,5 +130,173 @@ namespace CAPTeam14.Controllers
 
             return View(hk);
         }
+
+        //Hàm kiểm tra ký tự đặc biệt
+        public static bool Kytudacbiet(string str)
+        {
+            //khai báo các ký tự đặc biệt
+            string kytudacbiet = "^[0-9]+$";
+            //chuyển các ký tự đặc biệt sang dạng chuỗi
+            char[] chuoikytudacbiet = kytudacbiet.ToCharArray();
+            //kiểm tra trường thông tin người dùng nhập vào có chứa ký tự đặc biệt hay không
+            int index = str.IndexOfAny(chuoikytudacbiet);
+            // nếu index == -1 thì trả về false => không có ký tự đặc biệt
+            if (index == -1)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+
+        private void xacThuc(hocKy hk)
+        {
+            var code = model.hocKies.FirstOrDefault(d => d.tenHK == hk.tenHK);
+            //Test case bỏ trống tên học kì
+            if (hk.tenHK == null)
+            {
+                ModelState.AddModelError("tenHK", "Vui lòng nhập tên học kỳ");
+            }
+            else
+            {
+                // Test case nhập khoảng trắng
+                if (hk.tenHK.Trim() == "")
+                {
+                    ModelState.AddModelError("tenHK", "Không được nhập khoảng trắng");
+                }
+                if (code != null)
+                {
+                    ModelState.AddModelError("tenHK", "Tên học kì đã tồn tại");
+                }
+            }
+
+
+            //
+            //Test case bỏ trống năm bắt đầu
+            if (hk.namBD == null)
+            {
+                ModelState.AddModelError("namBD", "Vui lòng nhập năm bắt đầu");
+            }
+            else
+            {
+                // Test case nhập khoảng trắng
+                if (hk.namBD.Trim() == "")
+                {
+                    ModelState.AddModelError("namBD", "Không được nhập khoảng trắng");
+                }
+                else
+                {
+                    //Test case kiểm tra kí tự đặc biệt
+                    if (Kytudacbiet(hk.namBD.Trim()) == true)
+                    {
+                        ModelState.AddModelError("namBD", "Không được nhập ký tự");
+                    }
+                }
+
+            }
+
+            ////
+            //Test case bỏ trống năm kết thúc
+            if (hk.namKT == null)
+            {
+                ModelState.AddModelError("namKT", "Vui lòng nhập năm kết thúc");
+            }
+            else
+            {
+                // Test case nhập khoảng trắng
+                if (hk.namKT.ToString().Trim() == "")
+                {
+                    ModelState.AddModelError("namKT", "Không được nhập khoảng trắng");
+                }
+                else
+                {
+                    //Test case kiểm tra kí tự đặc biệt
+                    if (Kytudacbiet(hk.namKT.Trim()) == true)
+                    {
+                        ModelState.AddModelError("namKT", "Không được nhập ký tự");
+                    }
+                }
+
+            }
+        }
+
+
+
+
+
+
+        private void xacThuc1(hocKy hk)
+        {
+            var code = model.hocKies.FirstOrDefault(d => d.tenHK == hk.tenHK);
+            //Test case bỏ trống tên học kì
+            if (hk.tenHK == null)
+            {
+                ModelState.AddModelError("tenHK", "Vui lòng nhập tên học kỳ");
+            }
+            else
+            {
+                // Test case nhập khoảng trắng
+                if (hk.tenHK.Trim() == "")
+                {
+                    ModelState.AddModelError("tenHK", "Không được nhập khoảng trắng");
+                }
+
+            }
+
+
+            //
+            //Test case bỏ trống năm bắt đầu
+            if (hk.namBD == null)
+            {
+                ModelState.AddModelError("namBD", "Vui lòng nhập năm bắt đầu");
+            }
+            else
+            {
+                // Test case nhập khoảng trắng
+                if (hk.namBD.Trim() == "")
+                {
+                    ModelState.AddModelError("namBD", "Không được nhập khoảng trắng");
+                }
+                else
+                {
+                    //Test case kiểm tra kí tự đặc biệt
+                    if (Kytudacbiet(hk.namBD.Trim()) == true)
+                    {
+                        ModelState.AddModelError("namBD", "Không được nhập ký tự");
+                    }
+                }
+
+            }
+
+            ////
+            //Test case bỏ trống năm kết thúc
+            if (hk.namKT == null)
+            {
+                ModelState.AddModelError("namKT", "Vui lòng nhập năm kết thúc");
+            }
+            else
+            {
+                // Test case nhập khoảng trắng
+                if (hk.namKT.ToString().Trim() == "")
+                {
+                    ModelState.AddModelError("namKT", "Không được nhập khoảng trắng");
+                }
+                else
+                {
+                    //Test case kiểm tra kí tự đặc biệt
+                    if (Kytudacbiet(hk.namKT.Trim()) == true)
+                    {
+                        ModelState.AddModelError("namKT", "Không được nhập ký tự");
+                    }
+                }
+
+            }
+        }
     }
+
+
+    
 }
