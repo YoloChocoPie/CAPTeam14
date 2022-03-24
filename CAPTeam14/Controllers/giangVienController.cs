@@ -164,20 +164,61 @@ namespace CAPTeam14.Controllers
 
         [HttpGet]
         [LoginVerification]
-        public ActionResult DetailStatistic(int? id)
+        public ActionResult DetailStatistic(int? id, int? idhk)
         {
             var cl = model.nguoiDungs.FirstOrDefault(x => x.ID == id);
+            ViewBag.tengv = cl.tenGV;
+            ViewBag.maid = cl.ID;
             //ViewBag.active = 7;
             //ViewBag.year = year;
             //int result = Int32.Parse(year);
-            ViewBag.tengv = cl.tenGV;            
-            ViewBag.sumclassweek = model.TKBs.Where(x => x.ID_GV == cl.ID).ToList().Count();
-            ViewBag.sumgghk = (decimal)(ViewBag.sumclassweek * 150)/60;
+            //ViewBag.sumclassweek = model.TKBs.Where(x => x.ID_GV == cl.ID && x.ID_hocKy == idhk).ToList().Count();
+            //ViewBag.sumgghk = (decimal)(ViewBag.sumclassweek * 150) / 60;
             //ViewBag.sumsubhk = model.ACCOUNTs.Where(x => x.DATE_OF_REGISTRATION.Value.Year == result).ToList().Count();
-
-
             return View(cl);
+            
         }
+
+        [HttpGet]
+        public ActionResult thongke(int? idgv, int? idhk, TKB tkb)
+        {
+            var cl = model.nguoiDungs.FirstOrDefault(x => x.ID == idgv);
+
+            //đếm tổng số lớp trong 1 tuần
+            ViewBag.sumclassweek = model.TKBs.Where(x => x.ID_GV == cl.ID && x.ID_hocKy == idhk).ToList().Count();
+
+            // tính tổng giờ dạy trong 1 học kỳ
+            var listtuan = model.TKBs.Where(x => x.ID_GV == cl.ID && x.ID_hocKy == idhk).Select(x => x.tuanHoc.tuanHoc1).Distinct().ToList();
+            foreach(string tuan in listtuan)
+            {
+                string[] cc = tuan.Split(',', ';', ' ');
+                var ccc = cc.Count();
+                ViewBag.sav = ccc;
+            }
+            //var ret = model.tuanHocs.Where(x => x.ID = listtuan);
+            //string listtuane = model.tuanHocs.FirstOrDefault(x => x.tuanHoc1 == );
+            //var demtuan = listtuan.Count();
+            //var query = from t in model.TKBs
+            //            where t.ID_GV == cl.ID && t.ID_hocKy == idhk
+            //            select t.tuanHoc.tuanHoc1;
+            //string names = listtuan.Distinct().ToString();
+            //string[] tachtuan = names.Split(',', ';', ' ');
+            //var test = tachtuan.Count();
+            ViewBag.sumgghk = (decimal)(ViewBag.sumclassweek * 150) / 60 * ViewBag.sav;
+
+            // đếm tổng số môn dạy trong 1 học kỳ
+            var sumsubhk = model.TKBs.Where(x => x.ID_GV == cl.ID && x.ID_hocKy == idhk).Select(x => x.ID_monHoc).Distinct().ToList().Count();
+            //var abc = new { a = sumclassweek };
+            var resu = new
+            {
+                tongloptuan = ViewBag.sumclassweek,
+                tonggiohk = ViewBag.sumgghk,
+                tongmonhk = sumsubhk
+            };
+            return Json(resu, JsonRequestBehavior.AllowGet);
+
+        }
+
     }
 }
 

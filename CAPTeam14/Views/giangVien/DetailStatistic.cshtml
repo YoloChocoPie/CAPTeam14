@@ -49,10 +49,11 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Dữ liệu thống kê của giảng viên <strong>@ViewBag.tengv</strong> trong 
-                            <select style="margin-left:5px">
+                            <select style="margin-left:5px" id="chonhk">
+                                <option>Chọn học kỳ</option>
                                 @foreach (var itemHK in db.hocKies)
                                 {
-                                    <option value="">@itemHK.tenHK</option>
+                                    <option value="@itemHK.ID">@itemHK.tenHK</option>
                                 }
                             </select>
                             </h3>
@@ -68,7 +69,7 @@
                                 </thead>
                                 <tbody>
 
-                                    <tr>
+                                    @*<tr>
                                         <td class="text-center">
                                             1
                                         </td>
@@ -102,60 +103,10 @@
                                         <td class="text-center">
                                             @ViewBag.qna
                                         </td>
-                                    </tr>
+                                    </tr>*@
 
                                 </tbody>
                             </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <canvas id="myChart" class="h-100"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <canvas id="myChartAll" class="h-auto"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <canvas id="myChart1" class="h-50"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <canvas id="myChart2" class="h-50"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <canvas id="myChart3" class="h-50"></canvas>
                         </div>
                     </div>
                 </div>
@@ -166,232 +117,47 @@
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.4.0/chart.min.js" integrity="sha512-JxJpoAvmomz0MbIgw9mx+zZJLEvC6hIgQ6NcpFhVmbK1Uh5WynnRTTSGv3BTZMNBpPbocmdSJfldgV5lVnPtIw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<script type="text/javascript">
-    var myChart1 = new Chart(
-        document.getElementById('myChart1'),
-        {
-            type: 'line',
-            data:
-            {
-                labels: [
-                    '01',
-                    '02',
-                    '03',
-                    '04',
-                    '05',
-                    '06',
-                    '07',
-                    '08',
-                    '09',
-                    '10',
-                    '11',
-                    '12',
-                ],
-                datasets: [{
-                    label: 'Số giờ giảng trong học kỳ',
-                    backgroundColor: 'rgb(255, 99, 132)',
-                    borderColor: 'rgb(255, 99, 132)',
-                    @*data: [@qt[0], @qt[1], @qt[2], @qt[3], @qt[4], @qt[5], @qt[6], @qt[7], @qt[8], @qt[9], @qt[10], @qt[11]],*@
-                }]
-            },
-            options: {}
-        }
-    );
-    var myChart2 = new Chart(
-        document.getElementById('myChart2'),
-        {
-            type: 'line',
-            data: {
-                labels: [
-                    '01',
-                    '02',
-                    '03',
-                    '04',
-                    '05',
-                    '06',
-                    '07',
-                    '08',
-                    '09',
-                    '10',
-                    '11',
-                    '12',
-                ],
-                datasets: [{
-                    label: 'Số lớp giảng trong tuần',
-                    backgroundColor: 'rgba(54, 162, 235)',
-                    borderColor: 'rgba(54, 162, 235)',
-                    @*data: [@qnat[0], @qnat[1], @qnat[2], @qnat[3], @qnat[4], @qnat[5], @qnat[6], @qnat[7], @qnat[8], @qnat[9], @qnat[10], @qnat[11]],*@
-                }]
-            },
-            options: {}
-        }
-    );
-
-    var myChart3 = new Chart(
-        document.getElementById('myChart3'),
-        {
-            type: 'line',
-            data: {
-                labels: [
-                    '01',
-                    '02',
-                    '03',
-                    '04',
-                    '05',
-                    '06',
-                    '07',
-                    '08',
-                    '09',
-                    '10',
-                    '11',
-                    '12',
-                ],
-                datasets: [{
-                    label: 'Số môn giảng trong học kỳ',
-                    backgroundColor: 'rgba(255, 206, 86, 1)',
-                    borderColor: 'rgba(255, 206, 86, 1)',
-                    @*data: [@qat[0], @qat[1], @qat[2], @qat[3], @qat[4], @qat[5], @qat[6], @qat[7], @qat[8], @qat[9], @qat[10], @qat[11]],*@
-                }]
-            },
-            options: {}
-        }
-    );
-
-    var myChartAll = new Chart(
-        document.getElementById('myChartAll'),
-        {
-            type: 'line',
-            data: {
-                labels: [
-                    '01',
-                    '02',
-                    '03',
-                    '04',
-                    '05',
-                    '06',
-                    '07',
-                    '08',
-                    '09',
-                    '10',
-                    '11',
-                    '12',
-                ],
-                datasets: [
-                    {
-                        label: 'Số giờ giảng trong học kỳ',
-                        backgroundColor: 'rgb(255, 99, 132)',
-                        borderColor: 'rgb(255, 99, 132)',
-                        @*data: [@qt[0], @qt[1], @qt[2], @qt[3], @qt[4], @qt[5], @qt[6], @qt[7], @qt[8], @qt[9], @qt[10], @qt[11]],*@
-                    },
-                    {
-                        label: 'Số lớp giảng trong tuần',
-                        backgroundColor: 'rgba(54, 162, 235)',
-                        borderColor: 'rgba(54, 162, 235)',
-                        @*data: [@qnat[0], @qnat[1], @qnat[2], @qnat[3], @qnat[4], @qnat[5], @qnat[6], @qnat[7], @qnat[8], @qnat[9], @qnat[10], @qnat[11]],*@
-                    },
-                    {
-                        label: 'Số môn giảng trong học kỳ',
-                        backgroundColor: 'rgba(255, 206, 86, 1)',
-                        borderColor: 'rgba(255, 206, 86, 1)',
-                        @*data: [@qat[0], @qat[1], @qat[2], @qat[3], @qat[4], @qat[5], @qat[6], @qat[7], @qat[8], @qat[9], @qat[10], @qat[11]],*@
-                    },
-                    {
-                        label: 'label4',
-                        backgroundColor: 'rgba(75, 192, 192, 1)',
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        @*data: [@st[0], @st[1], @st[2], @st[3], @st[4], @st[5], @st[6], @st[7], @st[8], @st[9], @st[10], @st[11]],*@
-                    },
-                    {
-                        label: 'label5',
-                        backgroundColor: 'rgba(153, 102, 255, 1)',
-                        borderColor: 'rgba(153, 102, 255, 1)',
-                        @*data: [@at[0], @at[1], @at[2], @at[3], @at[4], @at[5], @at[6], @at[7], @at[8], @at[9], @at[10], @at[11]],*@
-                    },
-                    {
-                        label: 'label6',
-                        backgroundColor: 'rgba(255, 159, 64, 1)',
-                        borderColor: 'rgba(255, 159, 64, 1)',
-                        @*data: [@fqt[0], @fqt[1], @fqt[2], @fqt[3], @fqt[4], @fqt[5], @fqt[6], @fqt[7], @fqt[8], @fqt[9], @fqt[10], @fqt[11]],*@
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                interaction: {
-                    intersect: false,
-                },
-                stacked: false,
-                plugins: {
-                    title: {
-                        display: true,
-                        text: 'Tất cả thống kê'
-                    }
-                },
-                scales: {
-                    x: {
-                        type: 'linear',
-                        title: {
-                            display: true,
-                            text: 'Tháng'
-                        }
-                    },
-                    y: {
-                        type: 'linear',
-                        display: true,
-                        position: 'left',
-                        title: {
-                            display: true,
-                            text: 'Số lượng'
-                        }
-                    },
-                }
-            },
-        }
-    );
-</script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
-var ctx = document.getElementById('myChart').getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: [
-            'Câu hỏi đã gửi về',
-            'Câu hỏi đã trả lời',
-            'Câu hỏi chưa trả lời',
-            'Số lượng sinh viên trong hệ thống',
-            'Số lượng tài khoản trong hệ thống',
-            'Số lượng ưa thích câu hỏi trong hệ thống'
-        ],
-        datasets: [{
-            label: 'Bảng dữ liệu thống kê',
-            data: [@ViewBag.qt, @ViewBag.qa, @ViewBag.qna, @ViewBag.stu, @ViewBag.acc, @ViewBag.fq],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.8)',
-                'rgba(54, 162, 235, 0.8)',
-                'rgba(255, 206, 86, 0.8)',
-                'rgba(75, 192, 192, 0.8)',
-                'rgba(153, 102, 255, 0.8)',
-                'rgba(255, 159, 64, 0.8)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 4
-        }]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true,
+    $('#chonhk').on('change', function () {
+        var valur = $(this).val();
+        if (valur) {
+            $.ajax({
+            url: '@Url.Action("thongke", "giangVien")',
+            type: 'GET',
+            contentType: 'application/json; charset=UTF-8',
+            dataType: 'html',
+                data: {
+                idgv: '@ViewBag.maid',
+                idhk: valur
+            },
+            success: function (r) {
+                //$('#idtbody').remove();
+                data = JSON.parse(r)
+                $('tbody').html(
+                    '<tr>' +
+                    '<td class="text-center"> 1 </td>' +
+                    '<td class="text-center"> Số giờ giảng trong học kỳ </td>' +
+                    '<td td class="text-center">' + data.tonggiohk  + '(giờ) </td>' +
+                    '<tr>' +
+                    '<td class="text-center"> 2 </td>' +
+                    '<td class="text-center"> Số lớp giảng trong tuần </td>' +
+                    '<td class="text-center">' + data.tongloptuan + '</td>' +
+                    '<tr>' +
+                    '<td class="text-center"> 3 </td>' +
+                    '<td class="text-center"> Số môn giảng trong học kỳ </td>' +
+                    '<td class="text-center">' + data.tongmonhk + '</td>'
+                )
+            },
+            error: function (errormessage) {
+                Swal.fire({
+                    title: 'Thông báo',
+                    text: 'Hiện tại đang có lỗi. Vui lòng thử lại !!!',
+                    icon: 'error',
+                });
             }
+            });
         }
-    }
-});
+
+    });
 </script>

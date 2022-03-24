@@ -817,14 +817,14 @@ namespace CAPTeam14.Controllers
             var tt = model.TKBs.FirstOrDefault(x => x.ID == id);
             //var thungay = model.TKBs.Where(d => d.tuanHoc.thuS == tkb.tuanHoc.thuS);
             var gvid = model.TKBs.Where(g => g.ID_GV == tkb.ID_GV && g.tietHoc.tietBD == tt.tietHoc.tietBD && g.tuanHoc.thuS == tt.tuanHoc.thuS && g.ID_hocKy == tt.ID_hocKy).ToList().Count();
-            if (gvid < 1)
+            if (gvid == 0)
             {
                 tt.ID_GV = tkb.ID_GV;
                 model.SaveChanges();
                 return Json(new { result = true });
 
             }
-            else if (gvid > 2)
+            else if (gvid == 1)
             {
                 //TempData["ThongBaoLoi"] = 1;
                 //ViewBag.Javascript = "<script language='javascript' type='text/javascript'>alert('Data Already Exists');</script>";
