@@ -127,6 +127,7 @@ namespace CAPTeam14.Controllers
                     var tiet = new tietHoc(); // 6
                     var tuan = new tuanHoc(); // 7
                     var tkbTong = new TKB(); // 8
+                    var hocki = new hocKy();
 
 
 
@@ -416,14 +417,24 @@ namespace CAPTeam14.Controllers
                     //checktkbhp == null || checktkblop == null || checktkbtuan == null || checktkbnganh == null ||
                     // checktkbtiet == null || checktkbmon == null || checktkbphong == null
 
-                    var checktkbhp = model.TKBs.FirstOrDefault(x => x.ID_hocPhan == hocphan.ID);
 
-                    if (checktkbhp == null)
+
+                    var checktkbhp = model.TKBs.Where(x => x.ID_hocPhan == tkbTong.ID_hocPhan).FirstOrDefault(a => a.ID_hocKy == id);
+                    var checkhk = model.TKBs.FirstOrDefault(x => x.ID_hocKy == id);
+
+                    // nếu học phần chưa tồn tại => nếu học kì 
+                    if (checktkbhp == null )
                     {
+                        /*  if (checkhk == null)
+                          {
+
+                          }*/
                         tkbTong.ID_hocKy = id;
                         model.TKBs.Add(tkbTong);
                         model.SaveChanges();
+
                     }
+                  
 
 
                 }
@@ -789,14 +800,23 @@ namespace CAPTeam14.Controllers
                     //checktkbhp == null || checktkblop == null || checktkbtuan == null || checktkbnganh == null ||
                     // checktkbtiet == null || checktkbmon == null || checktkbphong == null
 
-                    var checktkbhp = model.TKBs.FirstOrDefault(x => x.ID_hocPhan == hocphan.ID);
+                    var checktkbhp = model.TKBs.Where(x => x.ID_hocPhan == tkbTong.ID_hocPhan).FirstOrDefault(a => a.ID_hocKy == id);
+                    var checkhk = model.TKBs.FirstOrDefault(x => x.ID_hocKy == id);
 
+                    // nếu học phần chưa tồn tại => nếu học kì 
                     if (checktkbhp == null)
                     {
+                        /*  if (checkhk == null)
+                          {
+
+                          }*/
                         tkbTong.ID_hocKy = id;
                         model.TKBs.Add(tkbTong);
                         model.SaveChanges();
+
                     }
+
+
 
 
                 }
