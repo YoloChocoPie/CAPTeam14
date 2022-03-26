@@ -58,9 +58,18 @@ namespace CAPTeam14.Controllers
 
         //
         // GET: /Account/Login
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            if (AuthenticationManager.User.Identity.IsAuthenticated)
+            {
+                Session.Abandon();
+                Request.Cookies.Clear();
+                AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                return RedirectToAction("Login");
+            }
+
             // xóa hết những Session, Cookies và đăng xuất nếu đã đăng nhập từ trước
 
             Session.Abandon();

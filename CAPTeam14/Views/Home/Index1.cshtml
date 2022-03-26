@@ -22,7 +22,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="~/Home/Index">Trang chủ</a></li>
-                   
+
                     </ol>
                 </div>
             </div>
@@ -37,7 +37,7 @@
 
                     <div class="card">
                         <div class="card-header">
-                            
+
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -62,43 +62,43 @@
                                 <tbody>
                                     @foreach (var item in Model)
                                     {
-                                    <tr>
+                                        <tr>
 
 
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.tenHK)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.namBD)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.namKT)
-                                        </td>
-                                        @if ((int)Session["role"] == 1 || (int)Session["role"] == 2)
-                                        {
                                             <td>
-                                                @Html.ActionLink("Xem thời khóa biểu", "Index", new { id = item.ID }) |
-                                                @Html.ActionLink("Import thời khóa biểu", "Catalog", new { id = item.ID }) |
-                                                @Html.ActionLink("Thay thế thời khóa biểu", "Catalog1", new { id = item.ID }) |
-                                                @Html.ActionLink("Xóa Thời khóa biểu", "DeleteTKB", new { id = item.ID }, new { style = "color:red" })
-
+                                                @Html.DisplayFor(modelItem => item.tenHK)
                                             </td>
-                                        }
-                                        @if ((int)Session["role"] == 3 )
-                                        {
                                             <td>
-                                                @Html.ActionLink("Xem thời khóa biểu", "Index", new { id = item.ID })
+                                                @Html.DisplayFor(modelItem => item.namBD)
                                             </td>
-                                        }
-                                        @if ((int)Session["role"] == 4)
-                                        {
                                             <td>
-                                                @Html.ActionLink("Xem thời khóa biểu", "Index2", new { id = item.ID })
+                                                @Html.DisplayFor(modelItem => item.namKT)
                                             </td>
-                                        }
+                                            @if ((int)Session["role"] == 1 || (int)Session["role"] == 2)
+                                            {
+                                                <td>
+                                                    @Html.ActionLink("Xem thời khóa biểu", "Index", new { id = item.ID }) |
+                                                    @Html.ActionLink("Import thời khóa biểu", "Catalog", new { id = item.ID }) |
+                                                    @Html.ActionLink("Thay thế thời khóa biểu", "Catalog1", new { id = item.ID }) |
+                                                    @Html.ActionLink("Xóa Thời khóa biểu", "DeleteTKB", new { id = item.ID }, new { style = "color:red" })
+
+                                                </td>
+                                            }
+                                            @if ((int)Session["role"] == 3)
+                                            {
+                                                <td>
+                                                    @Html.ActionLink("Xem thời khóa biểu", "Index", new { id = item.ID })
+                                                </td>
+                                            }
+                                            @if ((int)Session["role"] == 4)
+                                            {
+                                                <td>
+                                                    @Html.ActionLink("Xem thời khóa biểu", "Index2", new { id = item.ID })
+                                                </td>
+                                            }
 
 
-                                    </tr>
+                                        </tr>
                                     }
 
                                 </tbody>
@@ -132,9 +132,7 @@
 @if (TempData["ThongBao"] != null)
 {
     <script type="text/javascript">
-        $(function ()
-
-        {
+        $(function () {
             Swal.fire({
                 title: 'Thông báo',
                 text: 'Bạn đã xóa thời khóa biểu thành công !!!',
@@ -142,6 +140,30 @@
                 showConfirmButton: true,
                 timer: 1500,
             });
+        });
+    </script>
+}
+
+@if (TempData["dangnhap"] != null)
+{
+    <script type="text/javascript">
+        $(function () {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast.fire({
+                icon: 'success',
+                title: 'Đăng nhập thành công !'
+            })
         });
     </script>
 }

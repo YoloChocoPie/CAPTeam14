@@ -131,7 +131,7 @@ namespace CAPTeam14.Controllers
             return View(hk);
         }
 
-        //Hàm kiểm tra ký tự đặc biệt
+        /*//Hàm kiểm tra ký tự đặc biệt
         public static bool Kytudacbiet(string str)
         {
             //khai báo các ký tự đặc biệt
@@ -149,7 +149,7 @@ namespace CAPTeam14.Controllers
             {
                 return true;
             }
-        }
+        }*/
 
 
         private void xacThuc(hocKy hk)
@@ -189,11 +189,11 @@ namespace CAPTeam14.Controllers
                 }
                 else
                 {
-                    //Test case kiểm tra kí tự đặc biệt
+                   /* //Test case kiểm tra kí tự đặc biệt
                     if (Kytudacbiet(hk.namBD.Trim()) == true)
                     {
                         ModelState.AddModelError("namBD", "Không được nhập ký tự");
-                    }
+                    }*/
                 }
 
             }
@@ -213,11 +213,11 @@ namespace CAPTeam14.Controllers
                 }
                 else
                 {
-                    //Test case kiểm tra kí tự đặc biệt
+                   /* //Test case kiểm tra kí tự đặc biệt
                     if (Kytudacbiet(hk.namKT.Trim()) == true)
                     {
                         ModelState.AddModelError("namKT", "Không được nhập ký tự");
-                    }
+                    }*/
                 }
 
             }
@@ -262,11 +262,11 @@ namespace CAPTeam14.Controllers
                 }
                 else
                 {
-                    //Test case kiểm tra kí tự đặc biệt
+                   /* //Test case kiểm tra kí tự đặc biệt
                     if (Kytudacbiet(hk.namBD.Trim()) == true)
                     {
                         ModelState.AddModelError("namBD", "Không được nhập ký tự");
-                    }
+                    }*/
                 }
 
             }
@@ -286,11 +286,11 @@ namespace CAPTeam14.Controllers
                 }
                 else
                 {
-                    //Test case kiểm tra kí tự đặc biệt
+                   /* //Test case kiểm tra kí tự đặc biệt
                     if (Kytudacbiet(hk.namKT.Trim()) == true)
                     {
                         ModelState.AddModelError("namKT", "Không được nhập ký tự");
-                    }
+                    }*/
                 }
 
             }

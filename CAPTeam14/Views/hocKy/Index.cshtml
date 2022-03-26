@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<CAPTeam14.Models.hocKy>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Học Kì";
     Layout = "~/Views/Shared/_LayoutTemplate.cshtml";
 }
 
@@ -147,6 +147,9 @@
 }
 
 
+
+
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
@@ -157,7 +160,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
-            
+
             $('#example1').on('click', '.detailBtn1', function () {
                 var button = $(this);
                 var s_id = button.data("id1");
@@ -200,7 +203,7 @@
                                 '</div>' +
                                 '</div>' +
                                 '</div>' +
-                                
+
 
 
                                 '</form>',
