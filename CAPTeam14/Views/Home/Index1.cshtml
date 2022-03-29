@@ -167,3 +167,18 @@
         });
     </script>
 }
+
+
+@if (TempData["ThongBao1"] != null)
+{
+    <script type="text/javascript">
+        $(function () {
+            Swal.fire({
+                title: 'Thông báo',
+                text: 'Bạn đã import thành công !!!',
+                icon: 'success',
+                showConfirmButton: true,
+            });
+        });
+    </script>
+}

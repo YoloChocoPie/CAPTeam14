@@ -18,6 +18,7 @@ namespace CAPTeam14.Models
         public lopHoc()
         {
             this.TKBs = new HashSet<TKB>();
+            this.hocKies = new HashSet<hocKy>();
         }
     
         public int ID { get; set; }
@@ -25,5 +26,7 @@ namespace CAPTeam14.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TKB> TKBs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<hocKy> hocKies { get; set; }
     }
 }

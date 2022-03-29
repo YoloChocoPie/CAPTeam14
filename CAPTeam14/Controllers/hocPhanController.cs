@@ -61,7 +61,7 @@ namespace CAPTeam14.Controllers
             }
             catch (Exception)
             {
-                ModelState.AddModelError("", "Không thể thực hiện hành động này, vui lòng kiểm tra lại các trường thông tin");
+                ModelState.AddModelError("", "Không thể thực hiện hành động này, vui lòng kiểm tra lại file Excel có đúng định dạng Template");
             }
             return View(hp);
 

@@ -91,7 +91,34 @@
                                         </div>
                                     </div>
 
+                                    <div class="form-group">
+                                        <label>Tên lớp</label>
 
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-user"></i></span>
+                                            </div>
+                                            @Html.DropDownList("ID_lop", new SelectList(ViewBag.tenlop, "ID", "maLop"), new { @class = "form-control" })
+
+
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Tên Ngành</label>
+
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-user"></i></span>
+                                            </div>
+
+                                            @Html.DropDownList("ID_nganh", new SelectList(ViewBag.tennganh, "ID", "tenNganh"), new { @class = "form-control" })
+
+
+                                            @Html.ValidationMessageFor(model => model.ID_nganh, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
 
 
 

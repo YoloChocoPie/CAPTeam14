@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CP24Team14Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CP24Team14Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -74,6 +74,8 @@
           <Property Name="tenHK" Type="nvarchar(max)" />
           <Property Name="namBD" Type="nvarchar(max)" />
           <Property Name="namKT" Type="nvarchar(max)" />
+          <Property Name="ID_nganh" Type="int" />
+          <Property Name="ID_lop" Type="int" />
         </EntityType>
         <EntityType Name="hocPhan">
           <Key>
@@ -252,6 +254,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_hocKy_lopHoc">
+          <End Role="lopHoc" Type="Self.lopHoc" Multiplicity="0..1" />
+          <End Role="hocKy" Type="Self.hocKy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lopHoc">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="hocKy">
+              <PropertyRef Name="ID_lop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_hocKy_Nganh">
+          <End Role="Nganh" Type="Self.Nganh" Multiplicity="0..1" />
+          <End Role="hocKy" Type="Self.hocKy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nganh">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="hocKy">
+              <PropertyRef Name="ID_nganh" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_hocPhan">
           <End Role="hocPhan" Type="Self.hocPhan" Multiplicity="0..1" />
           <End Role="TKB" Type="Self.TKB" Multiplicity="*" />
@@ -398,6 +424,14 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
+          <AssociationSet Name="FK_hocKy_lopHoc" Association="Self.FK_hocKy_lopHoc">
+            <End Role="lopHoc" EntitySet="lopHoc" />
+            <End Role="hocKy" EntitySet="hocKy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_hocKy_Nganh" Association="Self.FK_hocKy_Nganh">
+            <End Role="Nganh" EntitySet="Nganh" />
+            <End Role="hocKy" EntitySet="hocKy" />
+          </AssociationSet>
           <AssociationSet Name="FK_hocPhan" Association="Self.FK_hocPhan">
             <End Role="hocPhan" EntitySet="hocPhan" />
             <End Role="TKB" EntitySet="TKB" />
@@ -435,8 +469,7 @@
             <End Role="TKB" EntitySet="TKB" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CP24Team14Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -509,6 +542,10 @@
           <Property Name="namBD" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="namKT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="TKBs" Relationship="Self.FK_TKB_hocKy" FromRole="hocKy" ToRole="TKB" />
+          <Property Name="ID_nganh" Type="Int32" />
+          <Property Name="ID_lop" Type="Int32" />
+          <NavigationProperty Name="lopHoc" Relationship="CP24Team14Model.FK_hocKy_lopHoc" FromRole="hocKy" ToRole="lopHoc" />
+          <NavigationProperty Name="Nganh" Relationship="CP24Team14Model.FK_hocKy_Nganh" FromRole="hocKy" ToRole="Nganh" />
         </EntityType>
         <EntityType Name="hocPhan">
           <Key>
@@ -529,6 +566,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="maLop" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="TKBs" Relationship="Self.FK_TKB_lopHoc" FromRole="lopHoc" ToRole="TKB" />
+          <NavigationProperty Name="hocKies" Relationship="CP24Team14Model.FK_hocKy_lopHoc" FromRole="lopHoc" ToRole="hocKy" />
         </EntityType>
         <EntityType Name="monHoc">
           <Key>
@@ -549,6 +587,7 @@
           <Property Name="maNganh" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="tenNganh" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="TKBs" Relationship="Self.FK_TKB_Nganh" FromRole="Nganh" ToRole="TKB" />
+          <NavigationProperty Name="hocKies" Relationship="CP24Team14Model.FK_hocKy_Nganh" FromRole="Nganh" ToRole="hocKy" />
         </EntityType>
         <EntityType Name="nguoiDung">
           <Key>
@@ -858,7 +897,39 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <AssociationSet Name="FK_hocKy_lopHoc" Association="CP24Team14Model.FK_hocKy_lopHoc">
+            <End Role="lopHoc" EntitySet="lopHocs" />
+            <End Role="hocKy" EntitySet="hocKies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_hocKy_Nganh" Association="CP24Team14Model.FK_hocKy_Nganh">
+            <End Role="Nganh" EntitySet="Nganhs" />
+            <End Role="hocKy" EntitySet="hocKies" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_hocKy_lopHoc">
+          <End Type="CP24Team14Model.lopHoc" Role="lopHoc" Multiplicity="0..1" />
+          <End Type="CP24Team14Model.hocKy" Role="hocKy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lopHoc">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="hocKy">
+              <PropertyRef Name="ID_lop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_hocKy_Nganh">
+          <End Type="CP24Team14Model.Nganh" Role="Nganh" Multiplicity="0..1" />
+          <End Type="CP24Team14Model.hocKy" Role="hocKy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nganh">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="hocKy">
+              <PropertyRef Name="ID_nganh" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -923,6 +994,8 @@
           <EntitySetMapping Name="hocKies">
             <EntityTypeMapping TypeName="CP24Team14Model.hocKy">
               <MappingFragment StoreEntitySet="hocKy">
+                <ScalarProperty Name="ID_lop" ColumnName="ID_lop" />
+                <ScalarProperty Name="ID_nganh" ColumnName="ID_nganh" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="tenHK" ColumnName="tenHK" />
                 <ScalarProperty Name="namBD" ColumnName="namBD" />

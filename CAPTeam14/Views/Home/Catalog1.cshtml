@@ -4,7 +4,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+   
     <!-- Main Sidebar Container -->
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -17,8 +17,8 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="~/Home/Index">Home</a></li>
-                            <li class="breadcrumb-item active">Import</li>
+                            <li class="breadcrumb-item"><a href="~/Home/Index1">Trang chủ</a></li>
+                            <li class="breadcrumb-item active">Thay thế</li>
                         </ol>
                     </div>
                 </div>
@@ -34,6 +34,15 @@
                             <div class="pd-20 card-box mb-30">
                                 <form>
 
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                    <div class="form-group">
+                                        <div class="control-label col-md-2">Tải File Template:</div>
+                                        <div class="col-md-10">
+                                            <a href="/Home/DownloadExcel/"><img src="~/Doc/excel.jpg" width="25" height="25" title="Tải Template" alt="excel" /></a>
+
+                                        </div>
+                                    </div>
 
 
 
@@ -76,7 +85,7 @@
 
 
 
-                                           
+
                                         }
 
                                         <script type="text/javascript" language="javascript">

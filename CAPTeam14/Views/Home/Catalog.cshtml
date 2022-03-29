@@ -4,7 +4,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+   
     <!-- Main Sidebar Container -->
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -13,11 +13,11 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Import</h1>
+                       <b> Thông tin học kì đã chọn</b>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="~/Home/Index">Home</a></li>
+                            <li class="breadcrumb-item"><a href="~/Home/Index1">Trang chủ</a></li>
                             <li class="breadcrumb-item active">Import</li>
                         </ol>
                     </div>
@@ -34,7 +34,49 @@
                             <div class="pd-20 card-box mb-30">
                                 <form>
 
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
+                                    <div class="container-fluid">
+                                        <div class="form-control ">
+                                            <div class="row row-cols-5">
+                                                <div class="col" id="p1"><label>Học kỳ:  @ViewBag.test2</label></div>
+                                                <div class="col" id="p2"> <label>Năm bắt đầu : @ViewBag.nambd</label></div>
+                                                <div class="col" id="p3"><label>Năm kết thúc : @ViewBag.namkt</label></div>
+
+
+                                                <div class="col" id="p4"><label>Tên ngành : @ViewBag.nganh</label></div>
+                                                <div class="col" id="p5">
+                                                 
+                                                        <select class="col">
+                                                          
+                                                            <option>  @ViewBag.tenlop </option>
+                                                        </select>
+                                                  
+                                                
+                                                </div>
+                                                
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                    
+
+                                    <br />
+
+
+
+
+
+                                    <div class="form-group">
+                                        <div class="control-label col-md-2"> <b>Tải File Template:</b></div>
+                                        <div class="col-md-10">
+                                            <a href="/Home/DownloadExcel/"><img src="~/Doc/excel.jpg" width="25" height="25" title="Tải Template" alt="excel" /></a>
+
+                                        </div>
+                                    </div>
 
 
                                     <div class="form-group">
@@ -50,8 +92,8 @@
                                         @using (Html.BeginForm("Catalog", "Home", FormMethod.Post, new { enctype = "multipart/form-data", id = "UploadForm", style = "width:30%" }))
                                         {
                                             @Html.LabelFor(model => model.ID_hocKy, "", htmlAttributes: new { @class = "control-label col-md-2" })
-                                            
-                                            
+
+
                                             @Html.EditorFor(model => model.ID_hocKy, new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.test1, @readonly = "readonly", style = "display:none" } })
 
                                             @Html.ValidationMessageFor(model => model.ID_hocKy, "", new { @class = "text-danger" })
@@ -76,7 +118,7 @@
 
 
 
-                                          
+
                                         }
 
                                         <script type="text/javascript" language="javascript">
@@ -99,6 +141,22 @@
 
                                             $('#UploadForm').submit(function (e) {
                                                 e.preventDefault();
+                                                const errors = [];
+
+                                                // Check inputs...
+
+                                                if (errors.length) {
+                                                    Swal.fire({
+                                                        title: 'Thông báo',
+                                                        text: 'Test !!!',
+                                                        icon: 'error',
+                                                        showConfirmButton: true,
+                                                    });
+                                                    e.preventDefault(); // The browser will not make the HTTP POST request
+
+                                                    return;
+                                                }
+
                                                 Swal.fire({
                                                     title: 'Bạn có muốn import file excel này ?',
                                                     //text: "You won't be able to revert this!",
@@ -123,6 +181,9 @@
                                                                 Swal.hideLoading()
                                                             },
                                                         });
+
+
+
                                                     }
                                                 })
                                             });
@@ -140,16 +201,3 @@
 </div>
 }
 
-@if (TempData["ThongBao"] != null)
-{
-    <script type="text/javascript">
-        $(function () {
-            Swal.fire({
-                title: 'Thông báo',
-                text: 'Bạn đã import thành công !!!',
-                icon: 'success',
-                showConfirmButton: true,
-            });
-        });
-    </script>
-}

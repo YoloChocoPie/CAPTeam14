@@ -51,6 +51,13 @@
                                         <th>
                                             Năm kết thúc
                                         </th>
+                                        <th>
+                                            Tên lớp
+                                        </th>
+                                        <th>
+                                            Tên ngành
+                                        </th>
+
 
 
                                         <th></th>
@@ -59,31 +66,39 @@
                                 <tbody>
                                     @foreach (var item in Model)
                                     {
-                                        <tr>
+                                    <tr>
 
 
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.tenHK)
-                                            </td>
-                                            <td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.tenHK)
+                                        </td>
+                                        <td>
 
-                                                @Html.DisplayFor(modelItem => item.namBD)
-                                            </td>
-                                            <td>
+                                            @Html.DisplayFor(modelItem => item.namBD)
+                                        </td>
+                                        <td>
 
-                                                @Html.DisplayFor(modelItem => item.namKT)
-                                            </td>
+                                            @Html.DisplayFor(modelItem => item.namKT)
+                                        </td>
+                                        <td>
+
+                                            @Html.DisplayFor(modelItem => item.lopHoc.maLop)
+                                        </td>
+                                        <td>
+
+                                            @Html.DisplayFor(modelItem => item.Nganh.tenNganh)
+                                        </td>
 
 
 
 
 
-                                            <td>
+                                        <td>
 
-                                                <a class="btn btn-file detailBtn1 btn btn-danger" title="Xem chi tiết" data-model-id1="@Url.Action("Edit", "hocKy", new { id = item.ID })" data-id1="@Url.Action("Details", "hocKy", new { id = item.ID })"><i class="fas fa-eye"></i></a>
+                                            <a class="btn btn-file detailBtn1 btn btn-danger" title="Xem chi tiết" data-model-id1="@Url.Action("Edit", "hocKy", new { id = item.ID })" data-id1="@Url.Action("Details", "hocKy", new { id = item.ID })"><i class="fas fa-eye"></i></a>
 
-                                            </td>
-                                        </tr>
+                                        </td>
+                                    </tr>
                                     }
 
                                 </tbody>
@@ -203,6 +218,7 @@
                                 '</div>' +
                                 '</div>' +
                                 '</div>' +
+                               
 
 
 

@@ -34,6 +34,8 @@
         <AssociationConnector Association="CP24Team14Model.FK_TKB_tietHoc" ManuallyRouted="false" />
         <AssociationConnector Association="CP24Team14Model.FK_TKB_tuanHoc" ManuallyRouted="false" />
         <AssociationConnector Association="CP24Team14Model.AspNetUserRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="CP24Team14Model.FK_hocKy_lopHoc" />
+        <AssociationConnector Association="CP24Team14Model.FK_hocKy_Nganh" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

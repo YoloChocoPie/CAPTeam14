@@ -19,7 +19,7 @@ namespace CAPTeam14.Models
         {
             this.TKBs = new HashSet<TKB>();
         }
-
+    
         public int ID { get; set; }
         public string userID { get; set; }
         public string maGV { get; set; }

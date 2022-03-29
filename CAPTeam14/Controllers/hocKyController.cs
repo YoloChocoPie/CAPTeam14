@@ -24,6 +24,8 @@ namespace CAPTeam14.Controllers
         [HttpGet]
         public ActionResult Create()
         {
+            ViewBag.tenlop = model.lopHocs.OrderByDescending(x => x.ID).ToList();
+            ViewBag.tennganh = model.Nganhs.OrderByDescending(x => x.ID).ToList();
             return View();
         }
 
@@ -41,7 +43,8 @@ namespace CAPTeam14.Controllers
                     hocky1.namBD = hk.namBD;
                     hocky1.namKT = hk.namKT;
                     hocky1.tenHK = hk.tenHK;
-
+                    hocky1.ID_nganh = hk.ID_nganh;
+                    hocky1.ID_lop = hk.ID_lop;
                     TempData["taoHK"] = 1;
 
                     model.hocKies.Add(hocky1);
@@ -61,6 +64,8 @@ namespace CAPTeam14.Controllers
             {
                 ModelState.AddModelError("", "Không thể thực hiện hành động này, vui lòng kiểm tra lại các trường thông tin");
             }
+            ViewBag.tenlop = model.lopHocs.OrderByDescending(x => x.ID).ToList();
+            ViewBag.tennganh = model.Nganhs.OrderByDescending(x => x.ID).ToList();
             return View(hk);
 
         }
@@ -74,10 +79,11 @@ namespace CAPTeam14.Controllers
             string tenhk = hocKy.tenHK;
             string nambd = hocKy.namBD;
             string namkt = hocKy.namKT;
+          
             
 
 
-            var abc = new { a = tenhk, b = nambd, c = namkt };
+            var abc= new { a = tenhk, b = nambd, c = namkt };
             return Json(abc, JsonRequestBehavior.AllowGet);
         }
 
@@ -88,7 +94,8 @@ namespace CAPTeam14.Controllers
             ViewBag.active = 11;
             ViewBag.tt = "Edit";
             var cl = model.hocKies.FirstOrDefault(x => x.ID == id);
-
+            ViewBag.tenlop = model.lopHocs.OrderByDescending(x => x.ID).ToList();
+            ViewBag.tennganh = model.Nganhs.OrderByDescending(x => x.ID).ToList();
             return View(cl);
         }
 
@@ -108,6 +115,8 @@ namespace CAPTeam14.Controllers
                     hocky1.namBD = hk.namBD;
                     hocky1.namKT = hk.namKT;
                     hocky1.tenHK = hk.tenHK;
+                    hocky1.ID_nganh = hk.ID_nganh;
+                    hocky1.ID_lop = hk.ID_lop;
 
 
                     model.SaveChanges();
@@ -127,7 +136,8 @@ namespace CAPTeam14.Controllers
             {
                 ModelState.AddModelError("", "Không thể lưu các thay đổi. Hãy thử lại và nếu sự cố vẫn tiếp diễn, hãy gặp quản trị viên hệ thống của bạn.");
             }
-
+            ViewBag.tenlop = model.lopHocs.OrderByDescending(x => x.ID).ToList();
+            ViewBag.tennganh = model.Nganhs.OrderByDescending(x => x.ID).ToList();
             return View(hk);
         }
 
