@@ -36,6 +36,8 @@
         <AssociationConnector Association="CP24Team14Model.AspNetUserRoles" ManuallyRouted="false" />
         <AssociationConnector Association="CP24Team14Model.FK_hocKy_lopHoc" />
         <AssociationConnector Association="CP24Team14Model.FK_hocKy_Nganh" />
+        <EntityTypeShape EntityType="CP24Team14Model.danhsachGV" Width="1.5" PointX="0.75" PointY="9.875" />
+        <AssociationConnector Association="CP24Team14Model.FK_nguoiDung_danhsachGV" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

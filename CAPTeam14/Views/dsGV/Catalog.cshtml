@@ -1,10 +1,10 @@
-﻿@model CAPTeam14.Models.TKB
+﻿@model CAPTeam14.Models.danhsachGV
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-   
+
     <!-- Main Sidebar Container -->
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -13,12 +13,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Thay thế thời khóa biểu</h1>
+                        @*<b> Thông tin học kì đã chọn</b>*@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="~/Home/Index1">Trang chủ</a></li>
-                            <li class="breadcrumb-item active">Thay thế</li>
+                            <li class="breadcrumb-item active">Import danh sách giảng viên</li>
                         </ol>
                     </div>
                 </div>
@@ -34,7 +34,9 @@
                             <div class="pd-20 card-box mb-30">
                                 <form>
 
-                                    <div class="container-fluid">
+
+
+                                    @*<div class="container-fluid">
                                         <div class="form-control ">
                                             <div class="row row-cols-5">
                                                 <div class="col" id="p1"><label>Học kỳ:  @ViewBag.test2</label></div>
@@ -57,7 +59,7 @@
                                             </div>
                                         </div>
 
-                                    </div>
+                                    </div>*@
 
 
 
@@ -66,18 +68,20 @@
 
                                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
+
+
+
                                     <div class="form-group">
-                                        <div class="control-label col-md-2">Tải File Template:</div>
+                                        <div class="control-label col-md-2"> <b>Tải File Template:</b></div>
                                         <div class="col-md-10">
-                                            <a href="/Home/DownloadExcel/"><img src="~/Doc/excel.jpg" width="25" height="25" title="Tải Template" alt="excel" /></a>
+                                            <a href="/dsGV/DownloadExcel/"><img src="~/Doc/excel.jpg" width="25" height="25" title="Tải Template" alt="excel" /></a>
 
                                         </div>
                                     </div>
 
 
-
                                     <div class="form-group">
-                                        @using (Html.BeginForm("Catalog1", "Home", FormMethod.Post, new { enctype = "multipart/form-data", id = "UploadForm" }))
+                                        @using (Html.BeginForm("Catalog", "dsGV", FormMethod.Post, new { enctype = "multipart/form-data", id = "UploadForm" }))
                                         {
 
                                         }
@@ -86,14 +90,9 @@
 
                                     <div class="form-group">
 
-                                        @using (Html.BeginForm("Catalog1", "Home", FormMethod.Post, new { enctype = "multipart/form-data", id = "UploadForm", style = "width:30%" }))
+                                        @using (Html.BeginForm("Catalog", "dsGV", FormMethod.Post, new { enctype = "multipart/form-data", id = "UploadForm", style = "width:30%" }))
                                         {
-                                            @Html.LabelFor(model => model.ID_hocKy, "", htmlAttributes: new { @class = "control-label col-md-2" })
-
-
-                                            @Html.EditorFor(model => model.ID_hocKy, new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.test1, @readonly = "readonly", style = "display:none" } })
-
-                                            @Html.ValidationMessageFor(model => model.ID_hocKy, "", new { @class = "text-danger" })
+                                            
 
 
 
@@ -101,14 +100,14 @@
                                             <br />
 
 
-                                            <label>File Thời khóa biểu</label>
+                                            <label>File danh sách giảng viên</label>
 
                                             <input type="file" name="excel" value="submit" onchange="checkfile(this);" accept=".xls, .xlsx" class="form-control-file form-control height-auto" required>
                                             <br />
 
                                             <button id="UploadFile" type="submit" class="btn btn-success" @*data-toggle="modal"*@ @*data-target="#myModal3"*@ data-backdrop="static" style="float: left">Import</button>
                                             <br />
-                                            <a href="@Url.Action("Index1", "Home")" style="float: right; margin-top: -20px" ; class="btn btn-danger" onclick="return confirm('Bạn có muốn Hủy?')">Hủy</a>
+                                            <a href="@Url.Action("Index", "dsGV")" style="float: right; margin-top: -20px" ; class="btn btn-danger" onclick="return confirm('Bạn có muốn Hủy?')">Hủy</a>
                                             <br />
                                             <br />
                                             <br />
@@ -138,8 +137,24 @@
 
                                             $('#UploadForm').submit(function (e) {
                                                 e.preventDefault();
+                                                const errors = [];
+
+                                                // Check inputs...
+
+                                                if (errors.length) {
+                                                    Swal.fire({
+                                                        title: 'Thông báo',
+                                                        text: 'Test !!!',
+                                                        icon: 'error',
+                                                        showConfirmButton: true,
+                                                    });
+                                                    e.preventDefault(); // The browser will not make the HTTP POST request
+
+                                                    return;
+                                                }
+
                                                 Swal.fire({
-                                                    title: 'Bạn có chắc chắn muốn thay thế thời khóa biểu ? Toàn bộ dữ liệu sẽ bị xóa.',
+                                                    title: 'Bạn có muốn import file excel này ?',
                                                     //text: "You won't be able to revert this!",
                                                     icon: 'warning',
                                                     showCancelButton: true,
@@ -162,6 +177,9 @@
                                                                 Swal.hideLoading()
                                                             },
                                                         });
+
+
+
                                                     }
                                                 })
                                             });
@@ -179,16 +197,3 @@
     </div>
 }
 
-@if (TempData["ThongBao"] != null)
-{
-    <script type="text/javascript">
-        $(function () {
-            Swal.fire({
-                title: 'Thông báo',
-                text: 'Bạn đã thay thế thời khóa biểu thành công !!!',
-                icon: 'success',
-                showConfirmButton: true,
-            });
-        });
-    </script>
-}

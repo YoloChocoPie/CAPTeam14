@@ -34,7 +34,7 @@
                             <div class="pd-20 card-box mb-30">
                                 <form>
 
-                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
 
                                     <div class="container-fluid">
                                         <div class="form-control ">
@@ -46,15 +46,15 @@
 
                                                 <div class="col" id="p4"><label>Tên ngành : @ViewBag.nganh</label></div>
                                                 <div class="col" id="p5">
-                                                 
-                                                        <select class="col">
-                                                          
-                                                            <option>  @ViewBag.tenlop </option>
-                                                        </select>
-                                                  
-                                                
+
+                                                    <select class="col">
+
+                                                        <option>  @ViewBag.tenlop </option>
+                                                    </select>
+
+
                                                 </div>
-                                                
+
 
                                             </div>
                                         </div>
@@ -62,10 +62,11 @@
                                     </div>
 
 
-                                    
+
 
                                     <br />
 
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
 
 

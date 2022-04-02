@@ -75,14 +75,22 @@ namespace CAPTeam14.Controllers
             ViewBag.gv = model.nguoiDungs.Where(x=> x.role == 4).OrderByDescending(x => x.ID).ToList();
             return View(tkb);
         }
-       // Query Delete TKB
+        // Query Delete TKB
         public ActionResult DeleteTKB(int? id)
         {
             ViewBag.test = model.TKBs.Where(x => x.ID_hocKy == id).OrderByDescending(x => x.ID).ToList();
+            var query = model.Database.SqlQuery<int>("SELECT ID_GV FROM [TKB] WHERE ID_hocKy = @ID_hocKy AND ID_GV IS NOT NULL ", new SqlParameter("@ID_hocKy", id)).ToList().Count();
+            if (query == 0)
+            {
+                model.Database.ExecuteSqlCommand("DELETE FROM [TKB] WHERE ID_hocKy = @ID_hocKy ", new SqlParameter("@ID_hocKy", id));
+                return Json(new { result = true }, JsonRequestBehavior.AllowGet);
+            }
+            else if (query != 0)
+            {
+                return Json(new { result = false }, JsonRequestBehavior.AllowGet);
+            }
 
-            model.Database.ExecuteSqlCommand("DELETE FROM [TKB] WHERE ID_hocKy = @ID_hocKy ", new SqlParameter("@ID_hocKy", id));
-            TempData["ThongBao"] = 1;
-            return RedirectToAction("Index1", "Home");
+            return Json(JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
         // Luồng đi mới của Import
@@ -508,6 +516,11 @@ namespace CAPTeam14.Controllers
             // hiển thị tên học kì đã chọn
             ViewBag.test2 = tkb1.tenHK;
             ViewBag.test1 = id;
+
+            ViewBag.nambd = tkb1.namBD;
+            ViewBag.namkt = tkb1.namKT;
+            ViewBag.tenlop = tkb1.lopHoc.maLop;
+            ViewBag.nganh = tkb1.Nganh.tenNganh;
             return View();
         }
 
@@ -858,7 +871,7 @@ namespace CAPTeam14.Controllers
                 }
                 // kết thúc vòng lặp và ngưng đọc dữ liệu sau 29 cột
                 IEDreader.Close();
-                TempData["ThongBao1"] = 1;
+                TempData["ThongBao2"] = 1;
                 return RedirectToAction("Index1", "Home");
 
             }
@@ -873,13 +886,12 @@ namespace CAPTeam14.Controllers
 
 
         [HttpPost]
-        public ActionResult PhanCong(int? id,TKB tkb, int? idGV)
+        public ActionResult PhanCong(int? id, TKB tkb, int? idGV)
         {
             ViewBag.gv = model.nguoiDungs.OrderByDescending(x => x.ID).ToList();
 
             var tt = model.TKBs.FirstOrDefault(x => x.ID == id);
-            //var thungay = model.TKBs.Where(d => d.tuanHoc.thuS == tkb.tuanHoc.thuS);
-            var gvid = model.TKBs.Where(g => g.ID_GV == tkb.ID_GV && g.tietHoc.tietBD == tt.tietHoc.tietBD && g.tuanHoc.thuS == tt.tuanHoc.thuS && g.ID_hocKy == tt.ID_hocKy).ToList().Count();
+            var gvid = model.TKBs.Where(g => g.ID_GV == tkb.ID_GV && g.tietHoc.tietBD == tt.tietHoc.tietBD && g.tuanHoc.thuS == tt.tuanHoc.thuS && g.ID_hocKy == tt.ID_hocKy).ToList().Count(g => g.ID_GV != null);
             if (gvid == 0)
             {
                 tt.ID_GV = tkb.ID_GV;
@@ -895,8 +907,36 @@ namespace CAPTeam14.Controllers
                 return Json(new { result = false });
             }
 
-            return Json(JsonRequestBehavior.AllowGet);            
+            return Json(JsonRequestBehavior.AllowGet);
 
+        }
+
+        [HttpGet]
+        public JsonResult TKBDetails(int? id)
+        {
+            model.Configuration.ProxyCreationEnabled = false;
+            var tkbdt = model.TKBs.FirstOrDefault(x => x.ID == id);
+            var mdt = model.monHocs.FirstOrDefault(x => x.ID == tkbdt.ID_monHoc);
+            var lhpdt = model.hocPhans.FirstOrDefault(x => x.ID == tkbdt.ID_hocPhan);
+            var phdt = model.phongHocs.FirstOrDefault(x => x.ID == tkbdt.ID_Phong);
+            var tuandt = model.tuanHocs.FirstOrDefault(x => x.ID == tkbdt.ID_Tuan);
+            var tdt = model.tietHocs.FirstOrDefault(x => x.ID == tkbdt.ID_Tiet);
+            //string mm = tkbdt.monHoc.maMon;
+            //string mlhp = tkbdt.hocPhan.maLHP;
+            //string tmh = tkbdt.monHoc.tenMon;
+            //string lhp = tkbdt.hocPhan.loaiHP;
+            //string ph = tkbdt.phongHoc.maPhong;
+            //string tuanday = tkbdt.tuanHoc.tuanHoc1;
+
+            var mm = mdt.maMon;
+            var mlhp = lhpdt.maLHP;
+            var tmh = mdt.tenMon;
+            var lhp = lhpdt.loaiHP;
+            var ph = phdt.maPhong;
+            var tuanday = tuandt.tuanHoc1;
+            var tiethoc = tdt.tietHoc1;
+            var abcdef = new { a = mm, b = mlhp, c = tmh, d = lhp, e = ph, f = tuanday, g = tiethoc };
+            return Json(abcdef, JsonRequestBehavior.AllowGet);
         }
     }
 }

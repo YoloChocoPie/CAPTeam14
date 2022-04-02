@@ -197,6 +197,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\dsGVController.cs" />
     <Compile Include="Controllers\giangVienController.cs" />
     <Compile Include="Controllers\hocKyController.cs" />
     <Compile Include="Controllers\hocPhanController.cs" />
@@ -227,6 +228,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\C__MigrationHistory.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\danhsachGV.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\hocKy.cs">
@@ -4509,6 +4513,7 @@
     <Content Include="Content\bootstrap\variables.less" />
     <Content Include="Content\bootstrap\mixins.less" />
     <Content Include="Doc\Template.xlsx" />
+    <Content Include="Doc\DSGiangVien.xlsx" />
     <None Include="Properties\PublishProfiles\FTPProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FTPProfile1.pubxml" />
     <None Include="ScriptsTemplate\jquery-3.4.1.intellisense.js" />
@@ -4727,6 +4732,9 @@
     <Content Include="Views\Home\Catalog1.cshtml" />
     <Content Include="Views\Home\Index2.cshtml" />
     <Content Include="Views\giangVien\DetailStatistic.cshtml" />
+    <Content Include="Views\dsGV\Index.cshtml" />
+    <Content Include="Views\dsGV\Catalog.cshtml" />
+    <Content Include="Views\dsGV\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
