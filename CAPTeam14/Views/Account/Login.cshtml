@@ -2,7 +2,7 @@
 @model LoginViewModel
 @{
     Layout = null;
-  
+
 }
 
 <!DOCTYPE html>
@@ -25,21 +25,21 @@
 
 
 
-  
+
     <link rel="icon" href="~/assets/VanLang-Logo.png">
 
 
 
 
 
-  
+
 
 
     <link rel="stylesheet" href="@Url.Content("~/Login/LoginStyle.css")">
     <script src="@Url.Content("~/PluginTemplate/sweetalert2/sweetalert2.min.js")"></script>
     <link rel="stylesheet" href="@Url.Content("~/PluginTemplate/sweetalert2/sweetalert2.min.css")">
 
-  
+
 
 
 </head>
@@ -99,6 +99,20 @@
                 icon: 'error',
                 title: 'Tài khoản của bạn chưa được kích hoạt !'
             })
+        });
+    </script>
+}
+
+@if (TempData["ThongBao1"] != null)
+{
+    <script type="text/javascript">
+        $(function () {
+            Swal.fire({
+                title: 'Thông báo',
+                text: 'Bạn đã đăng kí thành công !!!',
+                icon: 'success',
+                showConfirmButton: true,
+            });
         });
     </script>
 }

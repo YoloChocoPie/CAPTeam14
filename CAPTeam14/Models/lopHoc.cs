@@ -17,16 +17,16 @@ namespace CAPTeam14.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public lopHoc()
         {
-            this.TKBs = new HashSet<TKB>();
             this.hocKies = new HashSet<hocKy>();
+            this.TKBs = new HashSet<TKB>();
         }
     
         public int ID { get; set; }
         public string maLop { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TKB> TKBs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<hocKy> hocKies { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TKB> TKBs { get; set; }
     }
 }

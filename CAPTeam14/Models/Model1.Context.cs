@@ -30,6 +30,7 @@ namespace CAPTeam14.Models
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
+        public virtual DbSet<danhsachGV> danhsachGVs { get; set; }
         public virtual DbSet<hocKy> hocKies { get; set; }
         public virtual DbSet<hocPhan> hocPhans { get; set; }
         public virtual DbSet<lopHoc> lopHocs { get; set; }
@@ -40,7 +41,7 @@ namespace CAPTeam14.Models
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<tietHoc> tietHocs { get; set; }
         public virtual DbSet<TKB> TKBs { get; set; }
+        public virtual DbSet<tuan> tuans { get; set; }
         public virtual DbSet<tuanHoc> tuanHocs { get; set; }
-        public virtual DbSet<danhsachGV> danhsachGVs { get; set; }
     }
 }

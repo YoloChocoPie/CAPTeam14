@@ -369,7 +369,8 @@ namespace CAPTeam14.Controllers
                         Session["user-id"] = User.Identity.GetUserId();
                         Session["hoten"] = giangVien.tenGV;
                         Session["role"] = giangVien.role;
-                        Session["id"] = giangVien.ID;
+                        Session["id"] = giangVien.ID_dsGV;
+                        Session["id1"] = giangVien.ID;
                         // nếu session role là null ~ chưa có kích hoạt
                         if ((Session["role"] == null))
                         {
@@ -480,10 +481,11 @@ namespace CAPTeam14.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create( nguoiDung acc)
+        public ActionResult Create( nguoiDung acc, danhsachGV gv)
         {
             // khởi tạo hàm string lấy ID của người dùng hiện tại
             string checkID = User.Identity.GetUserId();
+           
             xacThuc(acc);
             try
             {
@@ -498,10 +500,19 @@ namespace CAPTeam14.Controllers
                     taikhoan.gioiTinh = acc.gioiTinh;
                     taikhoan.role = acc.role;
                     taikhoan.sdt = acc.sdt;
+                    // kiểm tra nếu mã giảng viên có đúng với dữ liệu mã giảng viên thực tế
+                    // nếu đúng thì lưu thông tin profile
+                    var gv1 = model.danhsachGVs.FirstOrDefault(x => x.maGV == taikhoan.maGV);
+                    if (gv1 != null)
+                    {
+                        
+                        taikhoan.ID_dsGV = gv1.ID;
+                    }
+                  
 
                     model.nguoiDungs.Add(taikhoan);
                     model.SaveChanges();
-
+                    TempData["ThongBao1"] = 1;
 
                     // sau khi xác nhận thông tin thành công. Trước khi quay về trang chủ phải xóa hết mọi hoạt động
                     Session.Abandon();
@@ -565,6 +576,7 @@ namespace CAPTeam14.Controllers
         private void xacThuc(nguoiDung acc)
         {
             var code = model.nguoiDungs.FirstOrDefault(d => d.maGV == acc.maGV);
+            var gv1 = model.danhsachGVs.FirstOrDefault(x => x.maGV == acc.maGV);
             //Test case bỏ trống họ tên
             if (acc.tenGV == null)
             {
@@ -613,28 +625,23 @@ namespace CAPTeam14.Controllers
                 }
                 else
                 {
-                    //Test Case nhập quá 10 kí tự
-                    if (acc.maGV.Length > 10)
-                    {
-                        ModelState.AddModelError("maGV", "Mã Giảng viên không vượt quá 10 kí tự");
-                    }
-                    //Test case nhập ít hơn 10 kí tự
-                    if (acc.maGV.Length < 10)
-                    {
-                        ModelState.AddModelError("maGV", "Mã Giảng viên không được ít hơn 10 kí tự");
-                    }
-                    else
-                    {
+                    
                         //Test case kiểm tra kí tự đặc biệt
                         if (Kytudacbiet(acc.maGV.Trim()) == true)
                         {
                             ModelState.AddModelError("maGV", "Mã Giảng viên không được có ký tự đặc biệt");
                         }
-                    }
+                    
                     if (code != null)
                     {
                         ModelState.AddModelError("maGV", "Mã giảng viên đã tồn tại");
                     }
+                    if (gv1 == null)
+                    {
+
+                        ModelState.AddModelError("maGV", "Mã giảng viên không tồn tại trên dữ liệu. Vui lòng liên hệ với người quản lý");
+                    }
+
 
                 }
             }

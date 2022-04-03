@@ -33,7 +33,7 @@ namespace CAPTeam14.Controllers
         // khi chọn danh sách học kì sẽ hiển thị thời khóa biểu với học kì tương ứng
         public ActionResult Index1()
         {
-            var tkb = model.hocKies.OrderByDescending(x => x.ID).ToList();
+            var tkb = model.hocKies.OrderBy(x => x.ID).ToList();
             var test = model.TKBs.OrderByDescending(x => x.ID).Count();
             ViewBag.test = test;
            
@@ -62,7 +62,7 @@ namespace CAPTeam14.Controllers
         public ActionResult Index(int? id)
         {
             // lấy danh sách thời khóa biểu
-            var tkb = model.TKBs.OrderByDescending(x => x.ID).ToList();
+            var tkb = model.TKBs.OrderBy(x => x.ID).ToList();
             // lấy danh sách học kì
             var tkb1 = model.hocKies.FirstOrDefault(x => x.ID == id);
             //hiển thị tên học kì đã chọn
@@ -71,8 +71,8 @@ namespace CAPTeam14.Controllers
             TempData["test"] = tkb1.ID;
             // lấy thông tin ID học kì đã chọn trong thời khóa biểu
             ViewBag.test = id;
-           
-            ViewBag.gv = model.nguoiDungs.Where(x=> x.role == 4).OrderByDescending(x => x.ID).ToList();
+
+            ViewBag.gv = model.danhsachGVs.OrderBy(x => x.ID).ToList();
             return View(tkb);
         }
         // Query Delete TKB
@@ -83,6 +83,7 @@ namespace CAPTeam14.Controllers
             if (query == 0)
             {
                 model.Database.ExecuteSqlCommand("DELETE FROM [TKB] WHERE ID_hocKy = @ID_hocKy ", new SqlParameter("@ID_hocKy", id));
+
                 return Json(new { result = true }, JsonRequestBehavior.AllowGet);
             }
             else if (query != 0)
@@ -96,7 +97,10 @@ namespace CAPTeam14.Controllers
         // Luồng đi mới của Import
         public ActionResult Catalog(int? id)
         {
-
+            ViewBag.hk1 = model.hocKies.OrderBy(x => x.ID).ToList();
+            ViewBag.tenlop = model.lopHocs.OrderByDescending(x => x.ID).ToList();
+            ViewBag.tennganh = model.Nganhs.OrderByDescending(x => x.ID).ToList();
+            //
             ViewBag.hocky = model.hocKies.OrderByDescending(x => x.ID).ToList();
             // lấy id của học kì đã chọn
             var tkb1 = model.hocKies.FirstOrDefault(x => x.ID == id);
@@ -106,8 +110,8 @@ namespace CAPTeam14.Controllers
 
             ViewBag.nambd = tkb1.namBD;
             ViewBag.namkt = tkb1.namKT;
-            ViewBag.tenlop = tkb1.lopHoc.maLop;
-            ViewBag.nganh = tkb1.Nganh.tenNganh;
+          /*  ViewBag.tenlop = tkb1.lopHoc.maLop;
+            ViewBag.nganh = tkb1.Nganh.tenNganh;*/
             return View();
         }
 
@@ -123,11 +127,19 @@ namespace CAPTeam14.Controllers
             return File(path, "application/vnd.ms-excel", "Template.xlsx");
         }
 
-        public ActionResult Catalog(TKB tkb, int? id)
+        public ActionResult Catalog(TKB tkb, int? id, hocKy hk)
         {
-           
+            
+
             try
             {
+                ViewBag.tenlop = model.lopHocs.OrderByDescending(x => x.ID).ToList();
+                ViewBag.tennganh = model.Nganhs.OrderByDescending(x => x.ID).ToList();
+                var hocky1 = model.hocKies.FirstOrDefault(x => x.ID == id);
+                hocky1.ID_nganh = hk.ID_nganh;
+                hocky1.ID_lop = hk.ID_lop;
+                model.SaveChanges();
+
 
                 // khai báo thư viên IEDreader
                 // khai báo thư viên EDSC
@@ -505,11 +517,14 @@ namespace CAPTeam14.Controllers
         }
 
 
-        [HttpGet]
+       /* [HttpGet]
         // Thay thế thời khóa biểu
         public ActionResult Catalog1(int? id)
         {
-
+            ViewBag.hk1 = model.hocKies.OrderBy(x => x.ID).ToList();
+            ViewBag.tenlop = model.lopHocs.OrderByDescending(x => x.ID).ToList();
+            ViewBag.tennganh = model.Nganhs.OrderByDescending(x => x.ID).ToList();
+            //
             ViewBag.hocky = model.hocKies.OrderByDescending(x => x.ID).ToList();
             // lấy id của học kì đã chọn
             var tkb1 = model.hocKies.FirstOrDefault(x => x.ID == id);
@@ -519,8 +534,7 @@ namespace CAPTeam14.Controllers
 
             ViewBag.nambd = tkb1.namBD;
             ViewBag.namkt = tkb1.namKT;
-            ViewBag.tenlop = tkb1.lopHoc.maLop;
-            ViewBag.nganh = tkb1.Nganh.tenNganh;
+           
             return View();
         }
 
@@ -530,7 +544,9 @@ namespace CAPTeam14.Controllers
             model.Database.ExecuteSqlCommand("DELETE FROM [TKB] WHERE ID_hocKy = @ID_hocKy ", new SqlParameter("@ID_hocKy", id));
             try
             {
-
+                ViewBag.hk1 = model.hocKies.OrderBy(x => x.ID).ToList();
+                ViewBag.tenlop = model.lopHocs.OrderByDescending(x => x.ID).ToList();
+                ViewBag.tennganh = model.Nganhs.OrderByDescending(x => x.ID).ToList();
                 // khai báo thư viên IEDreader
                 // khai báo thư viên EDSC
                 IExcelDataReader IEDreader = ExcelReaderFactory.CreateOpenXmlReader(Request.Files[0].InputStream);
@@ -837,12 +853,12 @@ namespace CAPTeam14.Controllers
                         // kiểm tra dữ liệu thời khóa biểu đã tồn tại hay chưa
                         // table tkb
 
-                        /* var checktkblop = model.TKBs.FirstOrDefault(x => x.ID_Lop == lop.ID);
+                        *//* var checktkblop = model.TKBs.FirstOrDefault(x => x.ID_Lop == lop.ID);
                          var checktkbtuan = model.TKBs.FirstOrDefault(x => x.ID_Tuan == tuan.ID);
                          var checktkbnganh = model.TKBs.FirstOrDefault(x => x.ID_Nganh == nganh.ID);
                          var checktkbtiet = model.TKBs.FirstOrDefault(x => x.ID_Tiet == tiet.ID);
                          var checktkbmon = model.TKBs.FirstOrDefault(x => x.ID_monHoc == mon.ID);
-                         var checktkbphong = model.TKBs.FirstOrDefault(x => x.ID_Phong == phong.ID);*/
+                         var checktkbphong = model.TKBs.FirstOrDefault(x => x.ID_Phong == phong.ID);*//*
 
                         //checktkbhp == null || checktkblop == null || checktkbtuan == null || checktkbnganh == null ||
                         // checktkbtiet == null || checktkbmon == null || checktkbphong == null
@@ -855,10 +871,10 @@ namespace CAPTeam14.Controllers
                         // nếu học phần chưa tồn tại => nếu học kì 
                         if (checktkbhp == null)
                         {
-                            /*  if (checkhk == null)
+                            *//*  if (checkhk == null)
                               {
 
-                              }*/
+                              }*//*
                             tkbTong.ID_hocKy = id;
                             model.TKBs.Add(tkbTong);
                             model.SaveChanges();
@@ -881,14 +897,14 @@ namespace CAPTeam14.Controllers
                 ModelState.AddModelError("", "Không thể thực hiện hành động này, vui lòng kiểm tra File Excel có đúng định dạng");
             }
             return View(tkb);
-        }
+        }*/
 
 
 
         [HttpPost]
         public ActionResult PhanCong(int? id, TKB tkb, int? idGV)
         {
-            ViewBag.gv = model.nguoiDungs.OrderByDescending(x => x.ID).ToList();
+            ViewBag.gv = model.danhsachGVs.OrderByDescending(x => x.ID).ToList();
 
             var tt = model.TKBs.FirstOrDefault(x => x.ID == id);
             var gvid = model.TKBs.Where(g => g.ID_GV == tkb.ID_GV && g.tietHoc.tietBD == tt.tietHoc.tietBD && g.tuanHoc.thuS == tt.tuanHoc.thuS && g.ID_hocKy == tt.ID_hocKy).ToList().Count(g => g.ID_GV != null);

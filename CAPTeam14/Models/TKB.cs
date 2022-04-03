@@ -25,12 +25,12 @@ namespace CAPTeam14.Models
         public Nullable<int> ID_GV { get; set; }
         public Nullable<int> ID_hocKy { get; set; }
     
+        public virtual danhsachGV danhsachGV { get; set; }
         public virtual hocKy hocKy { get; set; }
         public virtual hocPhan hocPhan { get; set; }
         public virtual lopHoc lopHoc { get; set; }
         public virtual monHoc monHoc { get; set; }
         public virtual Nganh Nganh { get; set; }
-        public virtual nguoiDung nguoiDung { get; set; }
         public virtual phongHoc phongHoc { get; set; }
         public virtual tietHoc tietHoc { get; set; }
         public virtual tuanHoc tuanHoc { get; set; }

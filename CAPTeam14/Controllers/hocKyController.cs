@@ -24,8 +24,8 @@ namespace CAPTeam14.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            ViewBag.tenlop = model.lopHocs.OrderByDescending(x => x.ID).ToList();
-            ViewBag.tennganh = model.Nganhs.OrderByDescending(x => x.ID).ToList();
+            /*ViewBag.tenlop = model.lopHocs.OrderByDescending(x => x.ID).ToList();
+            ViewBag.tennganh = model.Nganhs.OrderByDescending(x => x.ID).ToList();*/
             return View();
         }
 
@@ -43,8 +43,8 @@ namespace CAPTeam14.Controllers
                     hocky1.namBD = hk.namBD;
                     hocky1.namKT = hk.namKT;
                     hocky1.tenHK = hk.tenHK;
-                    hocky1.ID_nganh = hk.ID_nganh;
-                    hocky1.ID_lop = hk.ID_lop;
+                    /*hocky1.ID_nganh = hk.ID_nganh;
+                    hocky1.ID_lop = hk.ID_lop;*/
                     TempData["taoHK"] = 1;
 
                     model.hocKies.Add(hocky1);
@@ -64,8 +64,8 @@ namespace CAPTeam14.Controllers
             {
                 ModelState.AddModelError("", "Không thể thực hiện hành động này, vui lòng kiểm tra lại các trường thông tin");
             }
-            ViewBag.tenlop = model.lopHocs.OrderByDescending(x => x.ID).ToList();
-            ViewBag.tennganh = model.Nganhs.OrderByDescending(x => x.ID).ToList();
+            /*ViewBag.tenlop = model.lopHocs.OrderByDescending(x => x.ID).ToList();
+            ViewBag.tennganh = model.Nganhs.OrderByDescending(x => x.ID).ToList();*/
             return View(hk);
 
         }

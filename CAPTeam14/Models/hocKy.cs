@@ -26,10 +26,12 @@ namespace CAPTeam14.Models
         public string namKT { get; set; }
         public Nullable<int> ID_nganh { get; set; }
         public Nullable<int> ID_lop { get; set; }
+        public Nullable<int> ID_tuan { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TKB> TKBs { get; set; }
         public virtual lopHoc lopHoc { get; set; }
         public virtual Nganh Nganh { get; set; }
+        public virtual tuan tuan { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TKB> TKBs { get; set; }
     }
 }

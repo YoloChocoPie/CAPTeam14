@@ -14,12 +14,6 @@ namespace CAPTeam14.Models
     
     public partial class nguoiDung
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public nguoiDung()
-        {
-            this.TKBs = new HashSet<TKB>();
-        }
-    
         public int ID { get; set; }
         public string userID { get; set; }
         public string maGV { get; set; }
@@ -32,8 +26,6 @@ namespace CAPTeam14.Models
         public Nullable<int> ID_dsGV { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TKB> TKBs { get; set; }
         public virtual danhsachGV danhsachGV { get; set; }
     }
 }

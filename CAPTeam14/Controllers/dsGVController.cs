@@ -42,7 +42,7 @@ namespace CAPTeam14.Controllers
             return File(path, "application/vnd.ms-excel", "TemplateGiangVien.xlsx");
         }
 
-        public ActionResult Catalog()
+        public ActionResult Catalog(danhsachGV ds)
         {
 
             try
@@ -139,7 +139,7 @@ namespace CAPTeam14.Controllers
             {
                 ModelState.AddModelError("", "Không thể thực hiện hành động này, vui lòng kiểm tra File Excel có đúng định dạng");
             }
-            return View();
+            return View(ds);
 
 
         }

@@ -12,24 +12,18 @@ namespace CAPTeam14.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class danhsachGV
+    public partial class tuan
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public danhsachGV()
+        public tuan()
         {
-            this.nguoiDungs = new HashSet<nguoiDung>();
-            this.TKBs = new HashSet<TKB>();
+            this.hocKies = new HashSet<hocKy>();
         }
     
         public int ID { get; set; }
-        public string maGV { get; set; }
-        public string tenGV { get; set; }
-        public string loaiGV { get; set; }
-        public string khoa { get; set; }
+        public Nullable<int> sotuan { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<nguoiDung> nguoiDungs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TKB> TKBs { get; set; }
+        public virtual ICollection<hocKy> hocKies { get; set; }
     }
 }

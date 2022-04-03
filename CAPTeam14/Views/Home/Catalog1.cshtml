@@ -42,7 +42,7 @@
                                                 <div class="col" id="p3"><label>Năm kết thúc : @ViewBag.namkt</label></div>
 
 
-                                                <div class="col" id="p4"><label>Tên ngành : @ViewBag.nganh</label></div>
+                                                @*<div class="col" id="p4"><label>Tên ngành : @ViewBag.nganh</label></div>
                                                 <div class="col" id="p5">
 
                                                     <select class="col">
@@ -51,7 +51,7 @@
                                                     </select>
 
 
-                                                </div>
+                                                </div>*@
 
 
                                             </div>
@@ -66,13 +66,7 @@
 
                                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                                    <div class="form-group">
-                                        <div class="control-label col-md-2">Tải File Template:</div>
-                                        <div class="col-md-10">
-                                            <a href="/Home/DownloadExcel/"><img src="~/Doc/excel.jpg" width="25" height="25" title="Tải Template" alt="excel" /></a>
-
-                                        </div>
-                                    </div>
+                                    
 
 
 
@@ -88,12 +82,23 @@
 
                                         @using (Html.BeginForm("Catalog1", "Home", FormMethod.Post, new { enctype = "multipart/form-data", id = "UploadForm", style = "width:30%" }))
                                         {
-                                            @Html.LabelFor(model => model.ID_hocKy, "", htmlAttributes: new { @class = "control-label col-md-2" })
+                                            <label>Chọn lớp:</label>
+                                            @Html.DropDownList("ID_lop", new SelectList(ViewBag.tenlop, "ID", "maLop"), new { @class = "form-control", @disabled = "disabled" })
 
+                                            <label>Chọn ngành:</label>
+                                            @Html.DropDownList("ID_nganh", new SelectList(ViewBag.tennganh, "ID", "tenNganh"), new { @class = "form-control", @disabled = "disabled" })
 
-                                            @Html.EditorFor(model => model.ID_hocKy, new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.test1, @readonly = "readonly", style = "display:none" } })
+                                            <br />
+                                            <br />
 
-                                            @Html.ValidationMessageFor(model => model.ID_hocKy, "", new { @class = "text-danger" })
+                                            <div class="form-group">
+                                                <div class="control-label col-md-2"> </div>
+                                                <label>Tải File Template:</label>
+                                                <div class="col-md-10">
+                                                    <a href="/Home/DownloadExcel/"><img src="~/Doc/excel.jpg" width="25" height="25" title="Tải Template" alt="excel" /></a>
+
+                                                </div>
+                                            </div>
 
 
 

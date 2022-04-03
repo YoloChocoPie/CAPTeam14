@@ -36,15 +36,15 @@
 
 
 
-                                    <div class="container-fluid">
+                                    <div class="container">
                                         <div class="form-control ">
-                                            <div class="row row-cols-5">
-                                                <div class="col" id="p1"><label>Học kỳ:  @ViewBag.test2</label></div>
-                                                <div class="col" id="p2"> <label>Năm bắt đầu : @ViewBag.nambd</label></div>
-                                                <div class="col" id="p3"><label>Năm kết thúc : @ViewBag.namkt</label></div>
+                                            <div class="row">
+                                                <div class="col-sm-4" id="p1"><label>Học kỳ:  @ViewBag.test2</label></div>
+                                                <div class="col-sm-4" id="p2"> <label>Năm bắt đầu : @ViewBag.nambd</label></div>
+                                                <div class="col-sm-4" id="p3"><label>Năm kết thúc : @ViewBag.namkt</label></div>
 
 
-                                                <div class="col" id="p4"><label>Tên ngành : @ViewBag.nganh</label></div>
+                                               @* <div class="col" id="p4"><label>Tên ngành : @ViewBag.nganh</label></div>
                                                 <div class="col" id="p5">
 
                                                     <select class="col">
@@ -53,7 +53,7 @@
                                                     </select>
 
 
-                                                </div>
+                                                </div>*@
 
 
                                             </div>
@@ -71,13 +71,7 @@
 
 
 
-                                    <div class="form-group">
-                                        <div class="control-label col-md-2"> <b>Tải File Template:</b></div>
-                                        <div class="col-md-10">
-                                            <a href="/Home/DownloadExcel/"><img src="~/Doc/excel.jpg" width="25" height="25" title="Tải Template" alt="excel" /></a>
-
-                                        </div>
-                                    </div>
+                                   
 
 
                                     <div class="form-group">
@@ -92,20 +86,33 @@
 
                                         @using (Html.BeginForm("Catalog", "Home", FormMethod.Post, new { enctype = "multipart/form-data", id = "UploadForm", style = "width:30%" }))
                                         {
-                                            @Html.LabelFor(model => model.ID_hocKy, "", htmlAttributes: new { @class = "control-label col-md-2" })
+                                            @*@Html.LabelFor(model => model.ID_hocKy, "", htmlAttributes: new { @class = "control-label col-md-2" })
 
 
-                                            @Html.EditorFor(model => model.ID_hocKy, new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.test1, @readonly = "readonly", style = "display:none" } })
+            @Html.EditorFor(model => model.ID_hocKy, new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.test1, @readonly = "readonly", style = "display:none" } })
 
-                                            @Html.ValidationMessageFor(model => model.ID_hocKy, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.ID_hocKy, "", new { @class = "text-danger" })*@
 
 
+                                            <label>Chọn lớp:</label>
+                                            @Html.DropDownList("ID_lop", new SelectList(ViewBag.tenlop, "ID", "maLop"), "---Chọn Lớp---", new { @class = "form-control" })
+
+                                            <label>Chọn ngành:</label>
+                                            @Html.DropDownList("ID_nganh", new SelectList(ViewBag.tennganh, "ID", "tenNganh"), "---Chọn Ngành---", new { @class = "form-control" })
 
                                             <br />
                                             <br />
 
+                                            <div class="form-group">
+                                                <div class="control-label col-md-2"> </div>
+                                                <label>Tải File Template:</label>
+                                                <div class="col-md-10">
+                                                    <a href="/Home/DownloadExcel/"><img src="~/Doc/excel.jpg" width="25" height="25" title="Tải Template" alt="excel" /></a>
 
-                                            <label>File Thời khóa biểu</label>
+                                                </div>
+                                            </div>
+
+                                            <label>Chọn File Import</label>
 
                                             <input type="file" name="excel" value="submit" onchange="checkfile(this);" accept=".xls, .xlsx" class="form-control-file form-control height-auto" required>
                                             <br />

@@ -142,7 +142,7 @@ namespace CAPTeam14.Controllers
                     giangvien.userID = acc.userID;
                     giangvien.gioiTinh = acc.gioiTinh;
 
-                    if ((int)Session["id"] == acc.ID)
+                    if ((int)Session["id1"] == acc.ID)
                     {
                         TempData["phanquyen1"] = 1;
                         return RedirectToAction("Index");
@@ -190,7 +190,7 @@ namespace CAPTeam14.Controllers
         {
             var cl = model.nguoiDungs.FirstOrDefault(x => x.ID == idgv);
             //đếm tổng số lớp trong 1 tuần
-            ViewBag.sumclassweek = model.TKBs.Where(x => x.ID_GV == cl.ID && x.ID_hocKy == idhk).ToList().Count();
+            ViewBag.sumclassweek = model.TKBs.Where(x => x.ID_GV == cl.ID_dsGV && x.ID_hocKy == idhk).ToList().Count();
 
             // tính tổng giờ dạy trong 1 học kỳ
             //var listtuan = model.TKBs.Where(x => x.ID_GV == cl.ID && x.ID_hocKy == idhk).Select(x => x.tuanHoc.tuanHoc1).Distinct().ToList();
@@ -203,7 +203,7 @@ namespace CAPTeam14.Controllers
             ViewBag.sumgghk = (decimal)(ViewBag.sumclassweek * 150) / 60;
 
             // đếm tổng số môn dạy trong 1 học kỳ
-            ViewBag.sumsubhk = model.TKBs.Where(x => x.ID_GV == cl.ID && x.ID_hocKy == idhk).Select(x => x.ID_monHoc).Distinct().ToList().Count();
+            ViewBag.sumsubhk = model.TKBs.Where(x => x.ID_GV == cl.ID_dsGV && x.ID_hocKy == idhk).Select(x => x.ID_monHoc).Distinct().ToList().Count();
             //var abc = new { a = sumclassweek };
             var resu = new
             {
