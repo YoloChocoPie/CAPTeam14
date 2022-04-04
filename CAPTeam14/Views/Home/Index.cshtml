@@ -58,23 +58,14 @@
                 </select>
             </div>
 
-            @*<div class="col-md-4 form-group" id="cbTweek">
-                    <label>Tuần:</label>
-                    <select class="form-control width-70" id="Week" name="Week" onchange="TabTranferTabPerior(0)">
+            <div class="col-md-4 form-group" >
+                <label>Tuần:</label>
+                @*<select class="form-control width-70" id="Week" name="Week" onchange="TabTranferTabPerior(0)">
 
-                        @foreach (var tuan in db.tuanHocs.Select(x => x.tuanHoc1).Distinct())
-                        {
-                            string cc = tuan;
-                            string[] cl = cc.Split(',', ';', ' ');
 
-                            foreach (var clm in cl)
-                            {
-                                <option value="@clm">@clm</option>
-                            }
-
-                        }
-                    </select>
-                </div>*@
+        </select>*@
+                @Html.DropDownList("ID", ViewBag.IDs as SelectList)
+            </div>
 
         </div>
 
@@ -213,7 +204,7 @@
 
                                 <tbody name="" class="tbodyhk" style="background-color: rgb(255, 255, 255)">
 
-                                    @foreach (var item in db.TKBs.ToList().Where(x => x.ID_hocKy == (int)TempData["Test"]).Select(x => x.monHoc.tenMon).Distinct().OrderBy(x => x))
+                                    @foreach (var item in db.TKBs.ToList().Where(x => x.ID_hocKy == (int)TempData["Test"] ).Select(x => x.monHoc.tenMon).Distinct().OrderBy(x => x))
                                     {
                                         <tr name="@item" class="test ">
                                             <td style="font-size:16px"><strong>@item</strong></td>
@@ -221,10 +212,10 @@
                                             @*Thứ 2*@
                                             <td colspan="3">
                                                 @*Tiết 1 -3*@
-                                                @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "2" && d.tietHoc.tietBD == "1" && d.monHoc.tenMon == item))
+                                                @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "2" && d.tietHoc.tietBD == "1" && d.monHoc.tenMon == item ))
                                                 {
 
-                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test)
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                     {
 
                                                         <form name="@item2.ID_GV" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -2268,6 +2259,9 @@
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script>
+
+
+
         //$(document).ready(function () {
         //    TabTranferTabPerior(0);
         //});
@@ -2458,6 +2452,15 @@
             }
             alert(valur);
         });
+
+          $(document).ready(function () {
+     $("#ID").on("change", function () {
+            var selectedId = this.value;
+           
+
+             window.location.href = '@Url.Action("Index", "Home")' + '?selectedId=' + selectedId;
+        });
+     });
 
         //function DrawingSchedules2() {
         //    $.ajax({

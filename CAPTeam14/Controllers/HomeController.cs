@@ -58,9 +58,32 @@ namespace CAPTeam14.Controllers
             ViewBag.gv = model.nguoiDungs.Where(x => x.role == 4).OrderByDescending(x => x.ID).ToList();
             return View(tkb);
         }
-
-        public ActionResult Index(int? id)
+        [HttpGet]
+        public ActionResult Index(int? id, string selectedId)
         {
+            foreach (var tuan in model.tuanHocs.Select(x => x.tuanHoc1).Distinct())
+            {
+                string cc = tuan;
+                string[] cl = cc.Split(',', ';', ' ');
+                
+                foreach (var clm in cl)
+                {
+                    string dmm = clm;
+                    if (cl.Contains(selectedId))
+                    {
+                        TempData["Tuan1"] = selectedId;
+                    }
+                   
+                }
+
+            };
+            //
+            TempData["Tuan"] = selectedId;
+            //
+
+            
+            ViewBag.IDs = new SelectList( model.tuans.OrderBy(x => x.ID), "", "ID");
+           
             // lấy danh sách thời khóa biểu
             var tkb = model.TKBs.OrderBy(x => x.ID).ToList();
             // lấy danh sách học kì
@@ -97,6 +120,10 @@ namespace CAPTeam14.Controllers
         // Luồng đi mới của Import
         public ActionResult Catalog(int? id)
         {
+            //
+
+            //
+
             ViewBag.hk1 = model.hocKies.OrderBy(x => x.ID).ToList();
             ViewBag.tenlop = model.lopHocs.OrderByDescending(x => x.ID).ToList();
             ViewBag.tennganh = model.Nganhs.OrderByDescending(x => x.ID).ToList();

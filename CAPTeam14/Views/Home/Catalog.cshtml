@@ -95,10 +95,10 @@
 
 
                                             <label>Chọn lớp:</label>
-                                            @Html.DropDownList("ID_lop", new SelectList(ViewBag.tenlop, "ID", "maLop"), "---Chọn Lớp---", new { @class = "form-control" })
+                                            @Html.DropDownList("ID_lop", new SelectList(ViewBag.tenlop, "ID", "maLop"),  "---Chọn Lớp---", new { @class = "form-control", @required = "required" })
 
                                             <label>Chọn ngành:</label>
-                                            @Html.DropDownList("ID_nganh", new SelectList(ViewBag.tennganh, "ID", "tenNganh"), "---Chọn Ngành---", new { @class = "form-control" })
+                                            @Html.DropDownList("ID_nganh", new SelectList(ViewBag.tennganh, "ID", "tenNganh"), "---Chọn Ngành---", new { @class = "form-control", @required = "required" })
 
                                             <br />
                                             <br />
