@@ -14,24 +14,24 @@
 
         <div width="100%" class="form-inline col-md-12 magin-bottom-5px" style="margin-bottom:10px">
             @*<div class="col-md-4 form-group">
-                    <label>Giảng viên:</label>
-                    <select class="form-control width-70" id="">
-                        <option> Tất cả</option>
-                        @foreach (var itemgv in db.danhsachGVs)
-                        {
-                            <option value="">@itemgv.tenGV</option>
-                        }
-                    </select>
-                </div>*@
+            <label>Giảng viên:</label>
+            <select class="form-control width-70" id="">
+                <option> Tất cả</option>
+                @foreach (var itemgv in db.danhsachGVs)
+                {
+                    <option value="">@itemgv.tenGV</option>
+                }
+            </select>
+        </div>*@
 
             <div class="col-md-4 form-group">
                 <label>Học kỳ:</label>
                 <select class="form-control width-70" id="chonhk">
                     <option value="koALL" selected>@ViewBag.test2</option>
                     @*@foreach (var item in db.hocKies)
-                        {
-                            <option value="@item.ID" >@item.tenHK</option>
-                        }*@
+                {
+                    <option value="@item.ID" >@item.tenHK</option>
+                }*@
                 </select>
             </div>
 
@@ -58,23 +58,14 @@
                 </select>
             </div>
 
-            @*<div class="col-md-4 form-group" id="cbTweek">
-                    <label>Tuần:</label>
-                    <select class="form-control width-70" id="Week" name="Week" onchange="TabTranferTabPerior(0)">
+            <div class="col-md-4 form-group">
+                <label>Tuần:</label>
+                @*<select class="form-control width-70" id="Week" name="Week" onchange="TabTranferTabPerior(0)">
 
-                        @foreach (var tuan in db.tuanHocs.Select(x => x.tuanHoc1).Distinct())
-                        {
-                            string cc = tuan;
-                            string[] cl = cc.Split(',', ';', ' ');
 
-                            foreach (var clm in cl)
-                            {
-                                <option value="@clm">@clm</option>
-                            }
-
-                        }
-                    </select>
-                </div>*@
+            </select>*@
+                @Html.DropDownList("ID", ViewBag.IDs as SelectList)
+            </div>
 
         </div>
 
@@ -230,7 +221,7 @@
                                                     @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "2" && d.tietHoc.tietBD == "1" && d.monHoc.tenMon == item))
                                                     {
 
-                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"])
+                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form id="@item2.ID" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -247,7 +238,7 @@
                                                             </form>
 
                                                         }
-                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"])
+                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form id="@item2.ID" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -268,7 +259,7 @@
                                                     @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "2" && d.tietHoc.tietBD == "4" && d.monHoc.tenMon == item))
                                                     {
 
-                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"])
+                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -282,7 +273,7 @@
                                                             </form>
 
                                                         }
-                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"])
+                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -303,7 +294,7 @@
                                                     @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "2" && d.tietHoc.tietBD == "7" && d.monHoc.tenMon == item))
                                                     {
 
-                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"])
+                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -317,7 +308,7 @@
                                                             </form>
 
                                                         }
-                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"])
+                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -338,7 +329,7 @@
                                                     @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "2" && d.tietHoc.tietBD == "10" && d.monHoc.tenMon == item))
                                                     {
 
-                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"])
+                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -352,7 +343,7 @@
                                                             </form>
 
                                                         }
-                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"])
+                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -373,7 +364,7 @@
                                                     @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "2" && d.tietHoc.tietBD == "13" && d.monHoc.tenMon == item))
                                                     {
 
-                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"])
+                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -387,7 +378,7 @@
                                                             </form>
 
                                                         }
-                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"])
+                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -410,7 +401,7 @@
                                                     @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "3" && d.tietHoc.tietBD == "1" && d.monHoc.tenMon == item))
                                                     {
 
-                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"])
+                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -424,7 +415,7 @@
                                                             </form>
 
                                                         }
-                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"])
+                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -445,7 +436,7 @@
                                                     @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "3" && d.tietHoc.tietBD == "4" && d.monHoc.tenMon == item))
                                                     {
 
-                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"])
+                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -459,7 +450,7 @@
                                                             </form>
 
                                                         }
-                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"])
+                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -480,7 +471,7 @@
                                                     @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "3" && d.tietHoc.tietBD == "7" && d.monHoc.tenMon == item))
                                                     {
 
-                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"])
+                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -494,7 +485,7 @@
                                                             </form>
 
                                                         }
-                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"])
+                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -515,7 +506,7 @@
                                                     @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "3" && d.tietHoc.tietBD == "10" && d.monHoc.tenMon == item))
                                                     {
 
-                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"])
+                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -529,7 +520,7 @@
                                                             </form>
 
                                                         }
-                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"])
+                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -550,7 +541,7 @@
                                                     @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "3" && d.tietHoc.tietBD == "13" && d.monHoc.tenMon == item))
                                                     {
 
-                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"])
+                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -564,7 +555,7 @@
                                                             </form>
 
                                                         }
-                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"])
+                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -587,8 +578,7 @@
                                                     @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "4" && d.tietHoc.tietBD == "1" && d.monHoc.tenMon == item))
                                                     {
 
-                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"]
-)
+                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -602,8 +592,7 @@
                                                             </form>
 
                                                         }
-                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"]
-)
+                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -624,8 +613,7 @@
                                                     @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "4" && d.tietHoc.tietBD == "4" && d.monHoc.tenMon == item))
                                                     {
 
-                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"]
-)
+                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -639,8 +627,7 @@
                                                             </form>
 
                                                         }
-                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"]
-)
+                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -661,8 +648,7 @@
                                                     @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "4" && d.tietHoc.tietBD == "7" && d.monHoc.tenMon == item))
                                                     {
 
-                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"]
-)
+                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -676,8 +662,7 @@
                                                             </form>
 
                                                         }
-                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"]
-)
+                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -698,8 +683,7 @@
                                                     @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "4" && d.tietHoc.tietBD == "10" && d.monHoc.tenMon == item))
                                                     {
 
-                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"]
-)
+                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -713,8 +697,7 @@
                                                             </form>
 
                                                         }
-                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"]
-)
+                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -735,8 +718,7 @@
                                                     @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "4" && d.tietHoc.tietBD == "13" && d.monHoc.tenMon == item))
                                                     {
 
-                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"]
-)
+                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -750,8 +732,7 @@
                                                             </form>
 
                                                         }
-                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"]
-)
+                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -774,8 +755,7 @@
                                                     @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "5" && d.tietHoc.tietBD == "1" && d.monHoc.tenMon == item))
                                                     {
 
-                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"]
-)
+                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -789,8 +769,7 @@
                                                             </form>
 
                                                         }
-                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"]
-)
+                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -811,8 +790,7 @@
                                                     @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "5" && d.tietHoc.tietBD == "4" && d.monHoc.tenMon == item))
                                                     {
 
-                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"]
-)
+                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -826,8 +804,7 @@
                                                             </form>
 
                                                         }
-                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"]
-)
+                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -848,8 +825,7 @@
                                                     @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "5" && d.tietHoc.tietBD == "7" && d.monHoc.tenMon == item))
                                                     {
 
-                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"]
-)
+                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -863,8 +839,7 @@
                                                             </form>
 
                                                         }
-                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"]
-)
+                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -885,8 +860,7 @@
                                                     @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "5" && d.tietHoc.tietBD == "10" && d.monHoc.tenMon == item))
                                                     {
 
-                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"]
-)
+                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -900,8 +874,7 @@
                                                             </form>
 
                                                         }
-                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"]
-)
+                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -922,8 +895,7 @@
                                                     @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "5" && d.tietHoc.tietBD == "13" && d.monHoc.tenMon == item))
                                                     {
 
-                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"]
-)
+                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -937,8 +909,7 @@
                                                             </form>
 
                                                         }
-                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"]
-)
+                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -961,8 +932,7 @@
                                                     @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "6" && d.tietHoc.tietBD == "1" && d.monHoc.tenMon == item))
                                                     {
 
-                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"]
-)
+                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -976,8 +946,7 @@
                                                             </form>
 
                                                         }
-                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"]
-)
+                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -998,8 +967,7 @@
                                                     @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "6" && d.tietHoc.tietBD == "4" && d.monHoc.tenMon == item))
                                                     {
 
-                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"]
-)
+                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -1013,8 +981,7 @@
                                                             </form>
 
                                                         }
-                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"]
-)
+                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -1035,8 +1002,7 @@
                                                     @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "6" && d.tietHoc.tietBD == "7" && d.monHoc.tenMon == item))
                                                     {
 
-                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"]
-)
+                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -1050,8 +1016,7 @@
                                                             </form>
 
                                                         }
-                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"]
-)
+                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -1072,8 +1037,7 @@
                                                     @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "6" && d.tietHoc.tietBD == "10" && d.monHoc.tenMon == item))
                                                     {
 
-                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"]
-)
+                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -1087,8 +1051,7 @@
                                                             </form>
 
                                                         }
-                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"]
-)
+                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -1109,8 +1072,7 @@
                                                     @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "6" && d.tietHoc.tietBD == "13" && d.monHoc.tenMon == item))
                                                     {
 
-                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"]
-)
+                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -1124,8 +1086,7 @@
                                                             </form>
 
                                                         }
-                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"]
-)
+                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -1148,8 +1109,7 @@
                                                     @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "7" && d.tietHoc.tietBD == "1" && d.monHoc.tenMon == item))
                                                     {
 
-                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"]
-)
+                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -1163,8 +1123,7 @@
                                                             </form>
 
                                                         }
-                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"]
-)
+                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -1185,8 +1144,7 @@
                                                     @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "7" && d.tietHoc.tietBD == "4" && d.monHoc.tenMon == item))
                                                     {
 
-                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"]
-)
+                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -1200,8 +1158,7 @@
                                                             </form>
 
                                                         }
-                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"]
-)
+                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -1222,8 +1179,7 @@
                                                     @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "7" && d.tietHoc.tietBD == "7" && d.monHoc.tenMon == item))
                                                     {
 
-                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"]
-)
+                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -1237,8 +1193,7 @@
                                                             </form>
 
                                                         }
-                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"]
-)
+                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -1259,8 +1214,7 @@
                                                     @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "7" && d.tietHoc.tietBD == "10" && d.monHoc.tenMon == item))
                                                     {
 
-                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"]
-)
+                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -1274,8 +1228,7 @@
                                                             </form>
 
                                                         }
-                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"]
-)
+                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -1296,8 +1249,7 @@
                                                     @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "7" && d.tietHoc.tietBD == "13" && d.monHoc.tenMon == item))
                                                     {
 
-                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"]
-)
+                                                        if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -1311,8 +1263,7 @@
                                                             </form>
 
                                                         }
-                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"]
-)
+                                                        else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
                                                         {
 
                                                             <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -1488,6 +1439,24 @@
 
         });
 
+        //test
+        $('#testchon').on('change', function () {
+            valur = $(this).val();
+            if (valur == 0) {
+                alert("nasndpasd")
+            }
+            alert(valur);
+        });
+
+          $(document).ready(function () {
+     $("#ID").on("change", function () {
+            var selectedId = this.value;
+
+
+             window.location.href = '@Url.Action("Index", "Home")' + '?selectedId=' + selectedId;
+        });
+     });
+
         //function TabTranferTabPerior(key) {
         //    if (key == 0) {
         //        // tab week
@@ -1503,7 +1472,7 @@
         //}
 
 
-        function DrawingSchedules2() {
+        @*function DrawingSchedules2() {
             $.ajax({
                 url: "~/Home/DrawingStudentSchedule_Perior",
                 type: "GET",
@@ -1521,7 +1490,7 @@
                 },
             });
         }
-
+*@
     </script>
 
     <!-- /.content -->

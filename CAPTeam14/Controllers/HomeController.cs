@@ -41,8 +41,32 @@ namespace CAPTeam14.Controllers
             return View(tkb);
         }
 
-        public ActionResult Index2(int? id)
+        public ActionResult Index2(int? id, string selectedId)
         {
+            foreach (var tuan in model.tuanHocs.Select(x => x.tuanHoc1).Distinct())
+            {
+                string cc = tuan;
+                string[] cl = cc.Split(',', ';', ' ');
+
+                foreach (var clm in cl)
+                {
+                    string dmm = clm;
+                    if (cl.Contains(selectedId))
+                    {
+                        TempData["Tuan1"] = selectedId;
+                    }
+
+                }
+
+            };
+            //
+            TempData["Tuan"] = selectedId;
+            //
+
+
+            ViewBag.IDs = new SelectList(model.tuans.OrderBy(x => x.ID), "", "ID");
+
+
             // lấy danh sách thời khóa biểu
             var tkb = model.TKBs.OrderByDescending(x => x.ID).ToList();
             // lấy danh sách học kì
