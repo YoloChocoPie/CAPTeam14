@@ -43,7 +43,7 @@ namespace CAPTeam14.Controllers
 
         public ActionResult Index2(int? id, string selectedId)
         {
-            foreach (var tuan in model.tuanHocs.Select(x => x.tuanHoc1).Distinct())
+            foreach (var tuan in model.TKBs.Where(x => x.ID_hocKy == id).Select(x => x.tuanHoc.tuanHoc1).Distinct())
             {
                 string cc = tuan;
                 string[] cl = cc.Split(',', ';', ' ');
@@ -54,9 +54,18 @@ namespace CAPTeam14.Controllers
                     if (cl.Contains(selectedId))
                     {
                         TempData["Tuan1"] = selectedId;
+                        break;
                     }
 
+                    else
+                    {
+                        TempData["Tuan1"] = "1";
+
+                    }
+                    break;
+
                 }
+                break;
 
             };
             //
