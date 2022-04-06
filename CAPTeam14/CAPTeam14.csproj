@@ -4676,7 +4676,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Courses.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
@@ -4700,7 +4699,6 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\Create.cshtml" />
     <Content Include="Views\Shared\_LayoutTemplate.cshtml" />
-    <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\giangVien\Index.cshtml" />
     <Content Include="Views\giangVien\Edit.cshtml" />
     <Content Include="Views\giangVien\Details.cshtml" />
@@ -4726,7 +4724,6 @@
     <Content Include="Views\tietHoc\Index.cshtml" />
     <Content Include="Views\tietHoc\Create.cshtml" />
     <Content Include="Views\tietHoc\Edit.cshtml" />
-    <Content Include="Views\Home\Test.cshtml" />
     <Content Include="Views\Shared\NotFound.cshtml" />
     <Content Include="Views\hocKy\Index.cshtml" />
     <Content Include="Views\hocKy\Create.cshtml" />
@@ -4738,6 +4735,7 @@
     <Content Include="Views\dsGV\Index.cshtml" />
     <Content Include="Views\dsGV\Catalog.cshtml" />
     <Content Include="Views\dsGV\Edit.cshtml" />
+    <Content Include="Views\Home\IndexEx.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

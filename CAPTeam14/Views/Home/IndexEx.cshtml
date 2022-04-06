@@ -1,0 +1,292 @@
+﻿@model IEnumerable<CAPTeam14.Models.TKB>
+
+@{
+    ViewBag.Title = "IndexEx";
+    Layout = "~/Views/Shared/_LayoutTemplate.cshtml";
+}
+
+
+
+
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="~/Home/Index1">Trang chủ</a></li>
+                        <li class="breadcrumb-item active">Lớp học</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Export thời khóa biểu của học kì  @ViewBag.test2</h3>
+                            </br>
+                           
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="example1" class="table table-bordered table-striped" hidden="hidden">
+                                <thead>
+                                    <tr>
+
+                                        <th>
+                                            Mã gốc liên học phần
+                                        </th>
+                                        <th>
+                                            Mã môn học
+                                        </th>
+                                        <th>
+                                            Mã liên học phần
+                                        </th>
+                                        <th>
+                                            Tên học phần
+                                        </th>
+                                        <th>
+                                            Số tín chỉ
+                                        </th>
+                                        <th>
+                                            Loại học phần
+                                        </th>
+
+                                        <th>
+                                            Mã lớp
+                                        </th>
+
+                                        <th>
+                                            TSMH
+                                        </th>
+                                        <th>
+                                            Số tiết đã xếp
+                                        </th>
+                                        <th>
+                                            PH
+                                        </th>
+                                       
+                                        <th>
+                                            Thứ
+                                        </th>
+                                        <th>
+                                            Tiết BD
+                                        </th>
+                                        <th>
+                                            Số Tiết
+                                        </th>
+
+                                        <th>
+                                            phòng
+                                        </th>
+                                        <th>
+                                            Mã CBGD
+                                        </th>
+                                        <th>
+                                            Tên CBGD
+                                        </th>
+                                        <th>
+                                            PH_X
+                                        </th>
+                                        <th>
+                                            Sức chứa
+                                        </th>
+                                        <th>
+                                            SisoTKB
+                                        </th>
+                                        <th>
+                                            Trống
+                                        </th>
+                                        <th>
+                                            Tình trạng LHP
+                                        </th>
+                                        <th>
+                                            TuanHoc2
+                                        </th>
+                                        <th>
+                                            ThuS
+                                        </th>
+                                        <th>
+                                            TietS
+                                        </th>
+                                        <th>
+                                            SoSVDK
+                                        </th>
+                                        <th>
+                                            TuanBD
+                                        </th>
+                                        <th>
+                                            TuanKT
+                                        </th>
+
+                                        <th>
+                                            Mã Ngành
+                                        </th>
+                                        <th>
+                                            Tên Ngành
+                                        </th>
+
+
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Where(x => x.hocKy.ID == ViewBag.test))
+                                    {
+                                    <tr>
+
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.hocPhan.maGocLHP)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.monHoc.maMon)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.hocPhan.maLHP)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.monHoc.tenMon)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.monHoc.tinChi)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.hocPhan.loaiHP)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.lopHoc.maLop)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.hocPhan.TSMH)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.tietHoc.tongTiet)
+                                        </td>
+                                        <td></td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.tuanHoc.thuS)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.tietHoc.tietS)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.tietHoc.tietHoc1)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.phongHoc.maPhong)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.danhsachGV.maGV)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.danhsachGV.tenGV)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.phongHoc.loaiPhong)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.phongHoc.sucChua)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.phongHoc.siSo)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.phongHoc.trong)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.hocPhan.tinhtrangLHP)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.tuanHoc.tuanHoc1)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.tuanHoc.thuS)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.tietHoc.tietS)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.phongHoc.soSVDK)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.tuanHoc.tuanBD)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.tuanHoc.tuanKT)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Nganh.maNganh)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Nganh.tenNganh)
+                                        </td>
+
+                                        <td></td>
+                                       
+
+
+
+                                    </tr>
+                                    }
+
+                                </tbody>
+                                @*<tfoot>
+                                        <tr>
+                                            <th>Rendering engine</th>
+                                            <th>Browser</th>
+                                            <th>Platform(s)</th>
+                                            <th>Engine version</th>
+                                            <th>CSS grade</th>
+                                        </tr>
+                                    </tfoot>*@
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
