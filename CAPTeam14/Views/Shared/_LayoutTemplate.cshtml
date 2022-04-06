@@ -169,250 +169,256 @@
                     <nav class="mt-2">
                         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                             <!-- Add icons to the links using the .nav-icon class
-                            with font-awesome or any other icon font library -->
+    with font-awesome or any other icon font library -->
                             <!-- Quyền Admin-->
                             @if ((int)Session["role"] == 1)
                             {
-                            <li class="nav-item">
-                                <a href="~/Home/Index1" class="nav-link" id="icon-text">
-                                    <i class="nav-icon fas fa-calendar-alt"></i>
-                                    <p>Trang chủ</p>
-                                </a>
-                            </li>
+                                <li class="nav-item">
+                                    <a href="~/Home/Index1" class="nav-link" id="icon-text">
+                                        <i class="nav-icon fas fa-calendar-alt"></i>
+                                        <p>Trang chủ</p>
+                                    </a>
+                                </li>
 
-                            <li class="nav-item">
+                                <li class="nav-item">
 
-                                <a href="~/giangVien/Index" class="nav-link" id="icon-text">
-                                    <i class="fas fa-user-cog nav-icon"></i>
-                                    <p>Phân Quyền</p>
-                                </a>
-                            </li>
+                                    <a href="~/giangVien/Index" class="nav-link" id="icon-text">
+                                        <i class="fas fa-user-cog nav-icon"></i>
+                                        <p>Phân Quyền</p>
+                                    </a>
+                                </li>
 
-                            @*Hiển thị Tree List*@
-                            <li class="nav-item">
-                                <a href="#" class="nav-link" id="icon-text">
-                                    <i class="nav-icon fas fa-table"></i>
-                                    <p>
-                                        Quản lý danh mục
-                                        <i class="fas fa-angle-left right"></i>
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
+                                @*Hiển thị Tree List*@
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link" id="icon-text">
+                                        <i class="nav-icon fas fa-table"></i>
+                                        <p>
+                                            Quản lý danh mục
+                                            <i class="fas fa-angle-left right"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
 
-                                    <li class="nav-item">
-                                        <a href="~/hocKy/Index" class="nav-link" id="icon-text">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Học Kì</p>
-                                        </a>
-                                    </li>
+                                        <li class="nav-item">
+                                            <a href="~/hocKy/Index" class="nav-link" id="icon-text">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Học Kì</p>
+                                            </a>
+                                        </li>
 
-                                    <li class="nav-item">
-                                        <a href="~/monHoc/Index" class="nav-link" id="icon-text">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Môn Học</p>
-                                        </a>
-                                    </li>
+                                        <li class="nav-item">
+                                            <a href="~/monHoc/Index" class="nav-link" id="icon-text">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Môn Học</p>
+                                            </a>
+                                        </li>
 
-                                    <li class="nav-item">
-                                        <a href="~/Nganh/Index" class="nav-link" id="icon-text">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Ngành học</p>
-                                        </a>
-                                    </li>
+                                        <li class="nav-item">
+                                            <a href="~/Nganh/Index" class="nav-link" id="icon-text">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Ngành học</p>
+                                            </a>
+                                        </li>
 
-                                    <li class="nav-item">
-                                        <a href="~/lopHoc/Index" class="nav-link" id="icon-text">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Lớp học</p>
-                                        </a>
-                                    </li>
+                                        <li class="nav-item">
+                                            <a href="~/lopHoc/Index" class="nav-link" id="icon-text">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Lớp học</p>
+                                            </a>
+                                        </li>
 
-                                    <li class="nav-item">
-                                        <a href="~/dsGV/Index" class="nav-link" id="icon-text">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Danh sách giảng viên</p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-
-
-                            <li class="nav-item">
-                                <a href="@Url.Action("Logout","Account")" class="nav-link">
-                                    <i class="nav-icon fas fa-sign-out-alt" id="icon-text"></i>
-                                    <p id="icon-text">
-                                        Đăng xuất
-                                    </p>
-                                </a>
-                            </li>
-                        }
+                                        <li class="nav-item">
+                                            <a href="~/dsGV/Index" class="nav-link" id="icon-text">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Danh sách giảng viên</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
 
 
-<!-- Quyền Ban chủ nhiệm khoa-->
-@if ((int)Session["role"] == 2)
-{
-    <li class="nav-item">
-        <a href="~/Home/Index1" class="nav-link" id="icon-text">
-            <i class="nav-icon fas fa-calendar-alt"></i>
-            <p>Trang chủ</p>
-        </a>
-    </li>
-    @*Hiển thị Tree List*@
-    <li class="nav-item">
-        <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-table"></i>
-            <p>
-                Quản lý danh mục
-                <i class="fas fa-angle-left right"></i>
-            </p>
-        </a>
-        <ul class="nav nav-treeview">
-
-            <li class="nav-item">
-                <a href="~/hocKy/Index" class="nav-link" id="icon-text">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Học Kì</p>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a href="~/monHoc/Index" class="nav-link" id="icon-text">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Môn Học</p>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a href="~/Nganh/Index" class="nav-link" id="icon-text">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Ngành học</p>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a href="~/lopHoc/Index" class="nav-link" id="icon-text">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Lớp học</p>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a href="~/dsGV/Index" class="nav-link" id="icon-text">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Danh sách giảng viên</p>
-                </a>
-            </li>
-        </ul>
-    </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Logout","Account")" class="nav-link">
+                                        <i class="nav-icon fas fa-sign-out-alt" id="icon-text"></i>
+                                        <p id="icon-text">
+                                            Đăng xuất
+                                        </p>
+                                    </a>
+                                </li>
+                            }
 
 
-    <li class="nav-item">
-        <a href="@Url.Action("Logout","Account")" class="nav-link">
-            <i class="nav-icon fas fa-sign-out-alt" id="icon-text"></i>
-            <p id="icon-text">
-                Đăng xuất
-            </p>
-        </a>
-    </li>
-}
+                            <!-- Quyền Ban chủ nhiệm khoa-->
+                            @if ((int)Session["role"] == 2)
+                            {
+                                <li class="nav-item">
+                                    <a href="~/Home/Index1" class="nav-link" id="icon-text">
+                                        <i class="nav-icon fas fa-calendar-alt"></i>
+                                        <p>Trang chủ</p>
+                                    </a>
+                                </li>
+                                @*Hiển thị Tree List*@
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon fas fa-table"></i>
+                                        <p>
+                                            Quản lý danh mục
+                                            <i class="fas fa-angle-left right"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
 
-<!-- Quyền Bộ môn-->
-@if ((int)Session["role"] == 3)
-{
-    <li class="nav-item">
-        <a href="~/Home/Index1" class="nav-link" id="icon-text">
-            <i class="nav-icon fas fa-calendar-alt"></i>
-            <p>Trang chủ</p>
-        </a>
-    </li>
-    @*Hiển thị Tree List*@
-    <li class="nav-item">
-        <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-table"></i>
-            <p>
-                Quản lý danh mục
-                <i class="fas fa-angle-left right"></i>
-            </p>
-        </a>
-        <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="~/hocKy/Index" class="nav-link" id="icon-text">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Học Kì</p>
+                                            </a>
+                                        </li>
 
-            <li class="nav-item">
-                <a href="~/hocKy/Index" class="nav-link" id="icon-text">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Học Kì</p>
-                </a>
-            </li>
+                                        <li class="nav-item">
+                                            <a href="~/monHoc/Index" class="nav-link" id="icon-text">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Môn Học</p>
+                                            </a>
+                                        </li>
 
-            <li class="nav-item">
-                <a href="~/monHoc/Index" class="nav-link" id="icon-text">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Môn Học</p>
-                </a>
-            </li>
+                                        <li class="nav-item">
+                                            <a href="~/Nganh/Index" class="nav-link" id="icon-text">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Ngành học</p>
+                                            </a>
+                                        </li>
 
-            <li class="nav-item">
-                <a href="~/Nganh/Index" class="nav-link" id="icon-text">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Ngành học</p>
-                </a>
-            </li>
+                                        <li class="nav-item">
+                                            <a href="~/lopHoc/Index" class="nav-link" id="icon-text">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Lớp học</p>
+                                            </a>
+                                        </li>
 
-            <li class="nav-item">
-                <a href="~/lopHoc/Index" class="nav-link" id="icon-text">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Lớp học</p>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a href="~/dsGV/Index" class="nav-link" id="icon-text">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Danh sách giảng viên</p>
-                </a>
-            </li>
-        </ul>
-    </li>
-
-    <li class="nav-item">
-        <a href="@Url.Action("Logout","Account")" class="nav-link">
-            <i class="nav-icon fas fa-sign-out-alt" id="icon-text"></i>
-            <p id="icon-text">
-                Đăng xuất
-            </p>
-        </a>
-    </li>
-}
-
-<!-- Quyền Giảng viên-->
-@if ((int)Session["role"] == 4)
-{
-    <li class="nav-item">
-        <a href="~/Home/Index1" class="nav-link" id="icon-text">
-
-            <i class="nav-icon fas fa-calendar-alt"></i>
-            <p>Trang chủ</p>
-        </a>
-    </li>
+                                        <li class="nav-item">
+                                            <a href="~/dsGV/Index" class="nav-link" id="icon-text">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Danh sách giảng viên</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
 
 
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Logout","Account")" class="nav-link">
+                                        <i class="nav-icon fas fa-sign-out-alt" id="icon-text"></i>
+                                        <p id="icon-text">
+                                            Đăng xuất
+                                        </p>
+                                    </a>
+                                </li>
+                            }
 
+                            <!-- Quyền Bộ môn-->
+                            @if ((int)Session["role"] == 3)
+                            {
+                                <li class="nav-item">
+                                    <a href="~/Home/Index1" class="nav-link" id="icon-text">
+                                        <i class="nav-icon fas fa-calendar-alt"></i>
+                                        <p>Trang chủ</p>
+                                    </a>
+                                </li>
+                                @*Hiển thị Tree List*@
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon fas fa-table"></i>
+                                        <p>
+                                            Quản lý danh mục
+                                            <i class="fas fa-angle-left right"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
 
+                                        <li class="nav-item">
+                                            <a href="~/hocKy/Index" class="nav-link" id="icon-text">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Học Kì</p>
+                                            </a>
+                                        </li>
 
+                                        <li class="nav-item">
+                                            <a href="~/monHoc/Index" class="nav-link" id="icon-text">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Môn Học</p>
+                                            </a>
+                                        </li>
 
-    <li class="nav-item">
-        <a href="@Url.Action("Logout","Account")" class="nav-link">
-            <i class="nav-icon fas fa-table" id="icon-text"></i>
-            <p id="icon-text">
-                Đăng xuất
-            </p>
-        </a>
-    </li>
-}
+                                        <li class="nav-item">
+                                            <a href="~/Nganh/Index" class="nav-link" id="icon-text">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Ngành học</p>
+                                            </a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a href="~/lopHoc/Index" class="nav-link" id="icon-text">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Lớp học</p>
+                                            </a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a href="~/dsGV/Index" class="nav-link" id="icon-text">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Danh sách giảng viên</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Logout","Account")" class="nav-link">
+                                        <i class="nav-icon fas fa-sign-out-alt" id="icon-text"></i>
+                                        <p id="icon-text">
+                                            Đăng xuất
+                                        </p>
+                                    </a>
+                                </li>
+                            }
+
+                            <!-- Quyền Giảng viên-->
+                            @if ((int)Session["role"] == 4)
+                            {
+                                <li class="nav-item">
+                                    <a href="~/Home/Index1" class="nav-link" id="icon-text">
+
+                                        <i class="nav-icon fas fa-calendar-alt"></i>
+                                        <p>Trang chủ</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="~/giangVien/DetailStatistic1" class="nav-link" id="icon-text">
+
+                                        <i class="nav-icon fas fa-calendar-alt"></i>
+                                        <p>Thống kê cá nhấn</p>
+                                    </a>
+                                </li>
 
 
 
 
-</ul>
+
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Logout","Account")" class="nav-link">
+                                        <i class="nav-icon fas fa-table" id="icon-text"></i>
+                                        <p id="icon-text">
+                                            Đăng xuất
+                                        </p>
+                                    </a>
+                                </li>
+                            }
+
+
+
+
+                        </ul>
 </nav>
 <!-- /.sidebar-menu -->
 </div>

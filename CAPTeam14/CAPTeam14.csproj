@@ -4736,6 +4736,7 @@
     <Content Include="Views\dsGV\Catalog.cshtml" />
     <Content Include="Views\dsGV\Edit.cshtml" />
     <Content Include="Views\Home\IndexEx.cshtml" />
+    <Content Include="Views\giangVien\DetailStatistic1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
