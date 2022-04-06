@@ -215,7 +215,7 @@
                                                 @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "2" && d.tietHoc.tietBD == "1" && d.monHoc.tenMon == item ))
                                                 {
 
-                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"])  )
                                                     {
 
                                                         <form name="@item2.ID_GV" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -248,7 +248,7 @@
                                                         </form>
 
                                                     }
-                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form name="@item2.ID_GV" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -286,7 +286,7 @@
                                                 @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "2" && d.tietHoc.tietBD == "4" && d.monHoc.tenMon == item))
                                                 {
 
-                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form class="formLT" name="@item2.ID_GV" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -316,7 +316,7 @@
                                                         </form>
 
                                                     }
-                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form class="formTT" name="formGV" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -354,7 +354,7 @@
                                                 @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "2" && d.tietHoc.tietBD == "7" && d.monHoc.tenMon == item))
                                                 {
 
-                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form class="formLT" name="formGV" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -384,7 +384,7 @@
                                                         </form>
 
                                                     }
-                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form class="formTT" name="formGV" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -422,7 +422,7 @@
                                                 @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "2" && d.tietHoc.tietBD == "10" && d.monHoc.tenMon == item))
                                                 {
 
-                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form class="formLT" name="formGV" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -452,7 +452,7 @@
                                                         </form>
 
                                                     }
-                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form class="formTT" name="formGV" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -487,7 +487,7 @@
                                                 @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "2" && d.tietHoc.tietBD == "13" && d.monHoc.tenMon == item))
                                                 {
 
-                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form class="formLT" name="formGV" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -514,7 +514,7 @@
                                                         </form>
 
                                                     }
-                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form class="formTT" name="formGV" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -554,7 +554,7 @@
                                                 @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "3" && d.tietHoc.tietBD == "1" && d.monHoc.tenMon == item))
                                                 {
 
-                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form name="@item2.ID_GV" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -587,7 +587,7 @@
                                                         </form>
 
                                                     }
-                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form name="@item2.ID_GV" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -625,7 +625,7 @@
                                                 @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "3" && d.tietHoc.tietBD == "4" && d.monHoc.tenMon == item))
                                                 {
 
-                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form class="formLT" name="@item2.ID_GV" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -655,7 +655,7 @@
                                                         </form>
 
                                                     }
-                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form class="formTT" name="formGV" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -693,7 +693,7 @@
                                                 @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "3" && d.tietHoc.tietBD == "7" && d.monHoc.tenMon == item))
                                                 {
 
-                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form class="formLT" name="formGV" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -723,7 +723,7 @@
                                                         </form>
 
                                                     }
-                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form class="formTT" name="formGV" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -761,7 +761,7 @@
                                                 @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "3" && d.tietHoc.tietBD == "10" && d.monHoc.tenMon == item))
                                                 {
 
-                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form class="formLT" name="formGV" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -791,7 +791,7 @@
                                                         </form>
 
                                                     }
-                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form class="formTT" name="formGV" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -826,7 +826,7 @@
                                                 @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "3" && d.tietHoc.tietBD == "13" && d.monHoc.tenMon == item))
                                                 {
 
-                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form class="formLT" name="formGV" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -853,7 +853,7 @@
                                                         </form>
 
                                                     }
-                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form class="formTT" name="formGV" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -893,7 +893,7 @@
                                                 @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "4" && d.tietHoc.tietBD == "1" && d.monHoc.tenMon == item))
                                                 {
 
-                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form name="@item2.ID_GV" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -926,7 +926,7 @@
                                                         </form>
 
                                                     }
-                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form name="@item2.ID_GV" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -964,7 +964,7 @@
                                                 @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "4" && d.tietHoc.tietBD == "4" && d.monHoc.tenMon == item))
                                                 {
 
-                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form class="formLT" name="@item2.ID_GV" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -994,7 +994,7 @@
                                                         </form>
 
                                                     }
-                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form class="formTT" name="formGV" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -1032,7 +1032,7 @@
                                                 @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "4" && d.tietHoc.tietBD == "7" && d.monHoc.tenMon == item))
                                                 {
 
-                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form class="formLT" name="formGV" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -1062,7 +1062,7 @@
                                                         </form>
 
                                                     }
-                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form class="formTT" name="formGV" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -1100,7 +1100,7 @@
                                                 @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "4" && d.tietHoc.tietBD == "10" && d.monHoc.tenMon == item))
                                                 {
 
-                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form class="formLT" name="formGV" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -1130,7 +1130,7 @@
                                                         </form>
 
                                                     }
-                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form class="formTT" name="formGV" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -1165,7 +1165,7 @@
                                                 @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "4" && d.tietHoc.tietBD == "13" && d.monHoc.tenMon == item))
                                                 {
 
-                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form class="formLT" name="formGV" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -1192,7 +1192,7 @@
                                                         </form>
 
                                                     }
-                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form class="formTT" name="formGV" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -1232,7 +1232,7 @@
                                                 @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "5" && d.tietHoc.tietBD == "1" && d.monHoc.tenMon == item))
                                                 {
 
-                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form name="@item2.ID_GV" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -1265,7 +1265,7 @@
                                                         </form>
 
                                                     }
-                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form name="@item2.ID_GV" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -1303,7 +1303,7 @@
                                                 @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "5" && d.tietHoc.tietBD == "4" && d.monHoc.tenMon == item))
                                                 {
 
-                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form class="formLT" name="@item2.ID_GV" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -1333,7 +1333,7 @@
                                                         </form>
 
                                                     }
-                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form class="formTT" name="formGV" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -1371,7 +1371,7 @@
                                                 @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "5" && d.tietHoc.tietBD == "7" && d.monHoc.tenMon == item))
                                                 {
 
-                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form class="formLT" name="formGV" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -1401,7 +1401,7 @@
                                                         </form>
 
                                                     }
-                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form class="formTT" name="formGV" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -1439,7 +1439,7 @@
                                                 @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "5" && d.tietHoc.tietBD == "10" && d.monHoc.tenMon == item))
                                                 {
 
-                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form class="formLT" name="formGV" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -1469,7 +1469,7 @@
                                                         </form>
 
                                                     }
-                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form class="formTT" name="formGV" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -1504,7 +1504,7 @@
                                                 @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "5" && d.tietHoc.tietBD == "13" && d.monHoc.tenMon == item))
                                                 {
 
-                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form class="formLT" name="formGV" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -1531,7 +1531,7 @@
                                                         </form>
 
                                                     }
-                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form class="formTT" name="formGV" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -1571,7 +1571,7 @@
                                                 @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "6" && d.tietHoc.tietBD == "1" && d.monHoc.tenMon == item))
                                                 {
 
-                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form name="@item2.ID_GV" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -1604,7 +1604,7 @@
                                                         </form>
 
                                                     }
-                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form name="@item2.ID_GV" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -1642,7 +1642,7 @@
                                                 @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "6" && d.tietHoc.tietBD == "4" && d.monHoc.tenMon == item))
                                                 {
 
-                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form class="formLT" name="@item2.ID_GV" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -1672,7 +1672,7 @@
                                                         </form>
 
                                                     }
-                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form class="formTT" name="formGV" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -1710,7 +1710,7 @@
                                                 @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "6" && d.tietHoc.tietBD == "7" && d.monHoc.tenMon == item))
                                                 {
 
-                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form class="formLT" name="formGV" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -1740,7 +1740,7 @@
                                                         </form>
 
                                                     }
-                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form class="formTT" name="formGV" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -1778,7 +1778,7 @@
                                                 @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "6" && d.tietHoc.tietBD == "10" && d.monHoc.tenMon == item))
                                                 {
 
-                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form class="formLT" name="formGV" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -1808,7 +1808,7 @@
                                                         </form>
 
                                                     }
-                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form class="formTT" name="formGV" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -1843,7 +1843,7 @@
                                                 @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "6" && d.tietHoc.tietBD == "13" && d.monHoc.tenMon == item))
                                                 {
 
-                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form class="formLT" name="formGV" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -1870,7 +1870,7 @@
                                                         </form>
 
                                                     }
-                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form class="formTT" name="formGV" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -1910,7 +1910,7 @@
                                                 @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "7" && d.tietHoc.tietBD == "1" && d.monHoc.tenMon == item))
                                                 {
 
-                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form name="@item2.ID_GV" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -1943,7 +1943,7 @@
                                                         </form>
 
                                                     }
-                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form name="@item2.ID_GV" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -1981,7 +1981,7 @@
                                                 @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "7" && d.tietHoc.tietBD == "4" && d.monHoc.tenMon == item))
                                                 {
 
-                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form class="formLT" name="@item2.ID_GV" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -2011,7 +2011,7 @@
                                                         </form>
 
                                                     }
-                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form class="formTT" name="formGV" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -2049,7 +2049,7 @@
                                                 @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "7" && d.tietHoc.tietBD == "7" && d.monHoc.tenMon == item))
                                                 {
 
-                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form class="formLT" name="formGV" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -2079,7 +2079,7 @@
                                                         </form>
 
                                                     }
-                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form class="formTT" name="formGV" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -2117,7 +2117,7 @@
                                                 @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "7" && d.tietHoc.tietBD == "10" && d.monHoc.tenMon == item))
                                                 {
 
-                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form class="formLT" name="formGV" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -2147,7 +2147,7 @@
                                                         </form>
 
                                                     }
-                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form class="formTT" name="formGV" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -2182,7 +2182,7 @@
                                                 @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "7" && d.tietHoc.tietBD == "13" && d.monHoc.tenMon == item))
                                                 {
 
-                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    if (item2.hocPhan.loaiHP == "Lý thuyết" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form class="formLT" name="formGV" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -2209,7 +2209,7 @@
                                                         </form>
 
                                                     }
-                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && (string)TempData["Tuan1"] == (string)TempData["Tuan"])
+                                                    else if (item2.hocPhan.loaiHP == "Thực hành" && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["Tuan1"]))
                                                     {
 
                                                         <form class="formTT" name="formGV" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
