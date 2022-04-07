@@ -20,7 +20,12 @@ namespace CAPTeam14.Controllers
             var giangvien = model.nguoiDungs.OrderByDescending(x => x.ID).ToList();
             return View(giangvien);
         }
-       
+        public ActionResult Index2()
+        {
+            var giangvien = model.nguoiDungs.OrderByDescending(x => x.ID).ToList();
+            return View(giangvien);
+        }
+
         [HttpGet]
 
         public JsonResult Details(int? id)

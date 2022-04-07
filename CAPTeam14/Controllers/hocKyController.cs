@@ -231,6 +231,11 @@ namespace CAPTeam14.Controllers
                 }
 
             }
+            if (Convert.ToInt32(hk.namBD) > Convert.ToInt32(hk.namKT) )
+            {
+                ModelState.AddModelError("namKT", "Năm kết thúc không được nhỏ hơn năm bắt đầu");
+            }
+          
         }
 
 

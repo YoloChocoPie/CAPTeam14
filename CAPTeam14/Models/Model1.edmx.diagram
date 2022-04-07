@@ -40,6 +40,9 @@
         <AssociationConnector Association="CP24Team14Model.FK_TKB_tietHoc" ManuallyRouted="false" />
         <AssociationConnector Association="CP24Team14Model.FK_TKB_tuanHoc" ManuallyRouted="false" />
         <AssociationConnector Association="CP24Team14Model.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="CP24Team14Model.Contact" Width="1.5" PointX="12.625" PointY="1" />
+        <EntityTypeShape EntityType="CP24Team14Model.vande" Width="1.5" PointX="10.375" PointY="1.5" />
+        <AssociationConnector Association="CP24Team14Model.FK_Contact_vande" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

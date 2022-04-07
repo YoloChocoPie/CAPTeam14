@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CP24Team14Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CP24Team14Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -65,6 +65,19 @@
           <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="maTicket" Type="nvarchar" MaxLength="128" />
+          <Property Name="tenTicket" Type="nvarchar(max)" />
+          <Property Name="ndTicket" Type="nvarchar(max)" />
+          <Property Name="trangthai" Type="nvarchar(max)" />
+          <Property Name="ID_vande" Type="int" />
+          <Property Name="admin" Type="nvarchar(max)" />
+          <Property Name="nguoigui" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="danhsachGV">
           <Key>
@@ -205,6 +218,13 @@
           <Property Name="tuanKT" Type="nvarchar(max)" />
           <Property Name="thu" Type="nvarchar" MaxLength="128" />
         </EntityType>
+        <EntityType Name="vande">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tenVande" Type="nvarchar(max)" />
+        </EntityType>
         <Association Name="FK_AspNetUser">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
           <End Role="nguoiDung" Type="Self.nguoiDung" Multiplicity="*" />
@@ -214,6 +234,18 @@
             </Principal>
             <Dependent Role="nguoiDung">
               <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contact_vande">
+          <End Role="vande" Type="Self.vande" Multiplicity="0..1" />
+          <End Role="Contact" Type="Self.Contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vande">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Contact">
+              <PropertyRef Name="ID_vande" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -436,6 +468,7 @@
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contact" EntityType="Self.Contact" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="danhsachGV" EntityType="Self.danhsachGV" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="hocKy" EntityType="Self.hocKy" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="hocPhan" EntityType="Self.hocPhan" Schema="dbo" store:Type="Tables" />
@@ -449,9 +482,14 @@
           <EntitySet Name="TKB" EntityType="Self.TKB" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tuan" EntityType="Self.tuan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tuanHoc" EntityType="Self.tuanHoc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vande" EntityType="Self.vande" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_AspNetUser" Association="Self.FK_AspNetUser">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="nguoiDung" EntitySet="nguoiDung" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contact_vande" Association="Self.FK_Contact_vande">
+            <End Role="vande" EntitySet="vande" />
+            <End Role="Contact" EntitySet="Contact" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -522,8 +560,7 @@
             <End Role="TKB" EntitySet="TKB" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CP24Team14Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1040,7 +1077,47 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <EntitySet Name="Contacts" EntityType="CP24Team14Model.Contact" />
+          <EntitySet Name="vandes" EntityType="CP24Team14Model.vande" />
+          <AssociationSet Name="FK_Contact_vande" Association="CP24Team14Model.FK_Contact_vande">
+            <End Role="vande" EntitySet="vandes" />
+            <End Role="Contact" EntitySet="Contacts" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="maTicket" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="tenTicket" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ndTicket" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="trangthai" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ID_vande" Type="Int32" />
+          <Property Name="admin" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="nguoigui" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="vande" Relationship="CP24Team14Model.FK_Contact_vande" FromRole="Contact" ToRole="vande" />
+        </EntityType>
+        <EntityType Name="vande">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tenVande" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Contacts" Relationship="CP24Team14Model.FK_Contact_vande" FromRole="vande" ToRole="Contact" />
+        </EntityType>
+        <Association Name="FK_Contact_vande">
+          <End Type="CP24Team14Model.vande" Role="vande" Multiplicity="0..1" />
+          <End Type="CP24Team14Model.Contact" Role="Contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vande">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Contact">
+              <PropertyRef Name="ID_vande" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1262,6 +1339,28 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Contacts">
+            <EntityTypeMapping TypeName="CP24Team14Model.Contact">
+              <MappingFragment StoreEntitySet="Contact">
+                <ScalarProperty Name="nguoigui" ColumnName="nguoigui" />
+                <ScalarProperty Name="admin" ColumnName="admin" />
+                <ScalarProperty Name="ID_vande" ColumnName="ID_vande" />
+                <ScalarProperty Name="trangthai" ColumnName="trangthai" />
+                <ScalarProperty Name="ndTicket" ColumnName="ndTicket" />
+                <ScalarProperty Name="tenTicket" ColumnName="tenTicket" />
+                <ScalarProperty Name="maTicket" ColumnName="maTicket" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vandes">
+            <EntityTypeMapping TypeName="CP24Team14Model.vande">
+              <MappingFragment StoreEntitySet="vande">
+                <ScalarProperty Name="tenVande" ColumnName="tenVande" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

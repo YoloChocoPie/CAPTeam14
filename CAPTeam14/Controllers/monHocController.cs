@@ -244,6 +244,10 @@ namespace CAPTeam14.Controllers
             {
                 tenKhac = "Không có";
             }
+            else
+            {
+                tenKhac = monHoc.tengoiKhac;
+            }    
             
 
             

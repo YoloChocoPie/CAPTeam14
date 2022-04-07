@@ -43,5 +43,7 @@ namespace CAPTeam14.Models
         public virtual DbSet<TKB> TKBs { get; set; }
         public virtual DbSet<tuan> tuans { get; set; }
         public virtual DbSet<tuanHoc> tuanHocs { get; set; }
+        public virtual DbSet<Contact> Contacts { get; set; }
+        public virtual DbSet<vande> vandes { get; set; }
     }
 }

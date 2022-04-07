@@ -1,0 +1,138 @@
+﻿@model IEnumerable<CAPTeam14.Models.Contact>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutTemplate.cshtml";
+}
+
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="~/Home/Index1">Trang chủ</a></li>
+                        <li class="breadcrumb-item active">Danh sách Ticket</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Danh sách Ticket</h3>
+                            </br>
+
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+
+                                        <th>
+                                            Nội dung tóm tắt ticket
+                                        </th>
+                                        <th>
+                                            Người gửi
+                                        </th>
+
+                                        <th>
+                                            Trạng thái
+                                        </th>
+
+
+
+
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Where(x => x.nguoigui == ViewBag.ten))
+                                    {
+                                        <tr>
+
+
+
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.tenTicket)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.nguoigui)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.trangthai)
+                                            </td>
+
+
+                                            <td></td>
+
+
+
+
+                                           
+                                        </tr>
+                                    }
+
+                                </tbody>
+                                @*<tfoot>
+                                        <tr>
+                                            <th>Rendering engine</th>
+                                            <th>Browser</th>
+                                            <th>Platform(s)</th>
+                                            <th>Engine version</th>
+                                            <th>CSS grade</th>
+                                        </tr>
+                                    </tfoot>*@
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+
+
+
+}
+
+
+
+
+
+
+
+

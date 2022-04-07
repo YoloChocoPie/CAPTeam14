@@ -1,7 +1,7 @@
-﻿@model IEnumerable<CAPTeam14.Models.hocKy>
+﻿@model IEnumerable<CAPTeam14.Models.Contact>
 
 @{
-    ViewBag.Title = "Học Kì";
+    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutTemplate.cshtml";
 }
 
@@ -18,7 +18,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="~/Home/Index1">Trang chủ</a></li>
-                        <li class="breadcrumb-item active">Học Kỳ</li>
+                        <li class="breadcrumb-item active">Danh sách Ticket</li>
                     </ol>
                 </div>
             </div>
@@ -33,30 +33,27 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Thêm học kì</h3>
+                            <h3 class="card-title">Danh sách Ticket</h3>
                             </br>
-                            <a class="btn btn-file createBtn1 btn btn-info fas fa-eye" title="Thêm học kì" href="@Url.Action("Create", "hocKy")"> </a>
+
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
+
                                         <th>
-                                            Tên học kỳ
+                                            Nội dung tóm tắt ticket
                                         </th>
                                         <th>
-                                            Năm bắt đầu
+                                            Người gửi
                                         </th>
+
                                         <th>
-                                            Năm kết thúc
+                                            Trạng thái
                                         </th>
-                                        <th>
-                                            Tên lớp
-                                        </th>
-                                        <th>
-                                            Tên ngành
-                                        </th>
+
 
 
 
@@ -66,39 +63,32 @@
                                 <tbody>
                                     @foreach (var item in Model)
                                     {
-                                    <tr>
+                                        <tr>
 
 
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.tenHK)
-                                        </td>
-                                        <td>
 
-                                            @Html.DisplayFor(modelItem => item.namBD)
-                                        </td>
-                                        <td>
-
-                                            @Html.DisplayFor(modelItem => item.namKT)
-                                        </td>
-                                        <td>
-
-                                            @Html.DisplayFor(modelItem => item.lopHoc.maLop)
-                                        </td>
-                                        <td>
-
-                                            @Html.DisplayFor(modelItem => item.Nganh.tenNganh)
-                                        </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.tenTicket)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.nguoigui)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.trangthai)
+                                            </td>
 
 
 
 
 
-                                        <td>
 
-                                            <a class="btn btn-file detailBtn1 btn btn-danger" title="Xem chi tiết" data-model-id1="@Url.Action("Edit", "hocKy", new { id = item.ID })" data-id1="@Url.Action("Details", "hocKy", new { id = item.ID })"><i class="fas fa-eye"></i></a>
 
-                                        </td>
-                                    </tr>
+                                            <td>
+
+                                                <a class="btn btn-file detailBtn1 btn btn-danger" title="Xem chi tiết" data-model-id1="@Url.Action("Edit", "Contact", new { id = item.ID })" data-id1="@Url.Action("Details", "Contact", new { id = item.ID })"><i class="fas fa-eye"></i></a>
+
+                                            </td>
+                                        </tr>
                                     }
 
                                 </tbody>
@@ -128,16 +118,18 @@
 <!-- /.content-wrapper -->
 
 
-
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 
-@if (TempData["taoHK"] != null)
+
+
+
+@if (TempData["EditContact"] != null)
 {
     <script type="text/javascript">
         $(function () {
             Swal.fire({
                 title: 'Thông báo',
-                text: 'Bạn đã thêm học kỳ thành công !!!',
+                text: 'Bạn đã xử lý thành công !!!',
                 icon: 'success',
                 showConfirmButton: true,
                 timer: 1500,
@@ -145,22 +137,6 @@
         });
     </script>
 }
-
-@if (TempData["EditHK"] != null)
-{
-    <script type="text/javascript">
-        $(function () {
-            Swal.fire({
-                title: 'Thông báo',
-                text: 'Bạn đã cập nhập học kì thành công !!!',
-                icon: 'success',
-                showConfirmButton: true,
-                timer: 1500,
-            });
-        });
-    </script>
-}
-
 
 
 
@@ -188,13 +164,13 @@
                     success: function (result) {
                         $.confirm({
                             columnClass: 'col-md-5',
-                            title: '<div class="text-center container"><p>Thông tin của học kỳ  ' + result.a + '</p></div>',
+                            title: '<div class="text-center container"><p>Thông tin của ticket' + result.a + '  </p> </div>',
                             content: '' +
                                 '<form action="" class="formName container">' +
                                 '<div class="form-group">' +
                                 '<div class="row">' +
                                 '<div class="col-md-12">' +
-                                '<label>Tên học kỳ</label>' +
+                                '<label>Mã ticket </label>' +
                                 '<input type="text" class="form-control" value="' + result.a + '" readonly />' +
                                 '</div>' +
                                 '</div>' +
@@ -203,7 +179,7 @@
                                 '<div class="form-group">' +
                                 '<div class="row">' +
                                 '<div class="col-md-12">' +
-                                '<label>Năm bắt đầu</label>' +
+                                '<label>Nội dung tóm tắt ticket </label>' +
                                 '<input type="text" class="form-control" value="' + result.b + '" readonly />' +
                                 '</div>' +
                                 '</div>' +
@@ -212,20 +188,41 @@
                                 '<div class="form-group">' +
                                 '<div class="row">' +
                                 '<div class="col-md-12">' +
-                                '<label>Năm kết thúc</label>' +
+                                '<label>Nội dung chi tiết </label>' +
                                 '<input type="text" class="form-control" value="' + result.c + '" readonly />' +
                                 '</div>' +
                                 '</div>' +
                                 '</div>' +
                                 '</div>' +
-                               
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Người gửi </label>' +
+                                '<input type="text" class="form-control" value="' + result.d + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<label>Vấn đề </label>' +
+                                '<input type="text" class="form-control" value="' + result.e + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<label>Trạng thái </label>' +
+                                '<input type="text" class="form-control" value="' + result.f + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+
 
 
 
                                 '</form>',
                             buttons: {
                                 confirm: {
-                                    text: 'Cập nhập',
+                                    text: 'Xử lý',
                                     btnClass: 'btn-green',
                                     action: function () {
                                         window.location.assign(url);
@@ -248,3 +245,91 @@
     </script>
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*
+
+
+    <h2>Index</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.maTicket)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tenTicket)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ndTicket)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.trangthai)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.admin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nguoigui)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.vande.tenVande)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.maTicket)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tenTicket)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ndTicket)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.trangthai)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.admin)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nguoigui)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.vande.tenVande)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                </td>
+            </tr>
+        }
+
+    </table>
+*@

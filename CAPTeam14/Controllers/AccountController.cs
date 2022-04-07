@@ -561,16 +561,7 @@ namespace CAPTeam14.Controllers
             }
         }
 
-        //Hàm kiểm tra định dạng Email
-        public bool kiemtraEmail(string email)
-        {
-            // khai báo các regex
-            // abc@gmail.com
-            string pattern = @"^(?!\.)(""([^""\r\\]|\\[""\r\\])*""|" + @"([-a-z0-9!#$%&'*+/=?^_`{|}~]|(?<!\.)\.)*)(?<!\.)" + @"@[a-z0-9][\w\.-]*[a-z0-9]\.[a-z][a-z\.]*[a-z]$";
-            // đưa các regex để chuyển đổi và bỏ qua ký tự viết in hoa hay viết thường
-            var regex = new Regex(pattern, RegexOptions.IgnoreCase);
-            return regex.IsMatch(email);
-        }
+        
 
         //Validate dữ liệu
         private void xacThuc(nguoiDung acc)
