@@ -216,7 +216,7 @@ namespace CAPTeam14.Controllers
         public FileResult DownloadExcel()
         {
             // nhớ sửa lại đường dẫn khi publish server
-            string path = "CP24Team14/Doc/Template.xlsx";
+            string path = "/CP24Team14/Doc/Template.xlsx";
             return File(path, "application/vnd.ms-excel", "Template.xlsx");
         }
 
