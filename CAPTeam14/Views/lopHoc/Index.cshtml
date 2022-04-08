@@ -33,9 +33,7 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Danh sách lớp học</h3>
-                            </br>
-                            <a class="btn btn-file createBtn1 btn btn-info fas fa-eye" title="Thêm lớp học mới" href="@Url.Action("Create", "lopHoc")"> </a>
+                            <a class="btn btn-file createBtn1 btn btn-info" title="Thêm lớp học mới" href="@Url.Action("Create", "lopHoc")">Thêm lớp học</a>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -68,7 +66,7 @@
 
                                             <td>
 
-                                                <a class="btn btn-file detailBtn1 btn btn-danger" title="Xem chi tiết" data-model-id1="@Url.Action("Edit", "lopHoc", new { id = item.ID })" data-id1="@Url.Action("Details", "lopHoc", new { id = item.ID })"><i class="fas fa-eye"></i></a>
+                                                <a class="btn btn-file detailBtn1 btn btn-info" title="Xem chi tiết" data-model-id1="@Url.Action("Edit", "lopHoc", new { id = item.ID })" data-id1="@Url.Action("Details", "lopHoc", new { id = item.ID })"><i class="fas fa-eye"></i></a>
 
                                             </td>
                                         </tr>

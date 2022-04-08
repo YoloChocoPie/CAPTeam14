@@ -34,10 +34,7 @@
                     <div class="card">
 
                         <div class="card-header">
-
-                            <h3 class="card-title">Danh sách môn học</h3>
-                            </br>
-                            <a class="btn btn-file createBtn1 btn btn-info fas fa-eye" title="Thêm môn học" href="@Url.Action("Create", "monHoc")"> </a>
+                            <a class="btn btn-file createBtn1 btn btn-info" title="Thêm môn học" href="@Url.Action("Create", "monHoc")">Thêm môn học</a>
                         </div>
                         <!-- /.card-header -->
 
@@ -81,7 +78,7 @@
                                                 @Html.DisplayFor(modelItem => item.tengoiKhac)
                                             </td>
                                             <td>
-                                                <a class="btn btn-file detailBtn1 btn btn-danger" title="Xem chi tiết" data-model-id1="@Url.Action("Edit", "monHoc", new { id = item.ID })" data-id1="@Url.Action("Details", "monHoc", new { id = item.ID })"><i class="fas fa-eye"></i></a>
+                                                <a class="btn btn-file detailBtn1 btn btn-info" title="Xem chi tiết" data-model-id1="@Url.Action("Edit", "monHoc", new { id = item.ID })" data-id1="@Url.Action("Details", "monHoc", new { id = item.ID })"><i class="fas fa-eye"></i></a>
                                             </td>
                                         </tr>
                                     }
