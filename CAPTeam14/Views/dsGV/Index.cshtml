@@ -35,9 +35,7 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Import Danh sách giảng viên</h3>
-                            </br>
-                            <a class="btn btn-file createBtn1 btn btn-info fas fa-eye" title="Import danh sách giảng viên" href="@Url.Action("Catalog", "dsGV")"> </a>
+                            <a class="btn btn-file createBtn1 btn btn-info" title="Import danh sách giảng viên" href="@Url.Action("Catalog", "dsGV")">Import danh sách giảng viên</a>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -78,7 +76,7 @@
 
                                             <td>
 
-                                                <a class="btn btn-file detailBtn1 btn btn-danger" title="Xem chi tiết" data-model-id1="@Url.Action("Edit", "dsGV", new { id = item.ID })" data-id1="@Url.Action("Details", "dsGV", new { id = item.ID })"><i class="fas fa-eye"></i></a>
+                                                <a class="btn btn-file detailBtn1 btn btn-info" title="Xem chi tiết" data-model-id1="@Url.Action("Edit", "dsGV", new { id = item.ID })" data-id1="@Url.Action("Details", "dsGV", new { id = item.ID })"><i class="fas fa-eye"></i></a>
 
                                             </td>
                                         </tr>
