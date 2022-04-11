@@ -105,13 +105,13 @@ namespace CAPTeam14.Controllers
                     if (cl.Contains(selectedId))
                     {
                         TempData["Tuan1"] = selectedId;
-                        break;
+                        //break;
                     }
-                   
+
                     else
                     {
                         TempData["Tuan1"] = "1";
-                        
+
                     }
                     break;
                    
@@ -120,11 +120,12 @@ namespace CAPTeam14.Controllers
 
             };
             //
-            TempData["Tuan"] = selectedId;
+            TempData["Tuan"] = selectedId;            
             //
 
             
-            ViewBag.IDs = new SelectList( model.tuans.OrderBy(x => x.ID), "", "ID");
+            ViewBag.IDs = new SelectList( model.tuans.OrderBy(x => x.ID), "ID", "sotuan");
+            
            
             // lấy danh sách thời khóa biểu
             var tkb = model.TKBs.OrderBy(x => x.ID).ToList();
@@ -134,11 +135,16 @@ namespace CAPTeam14.Controllers
             ViewBag.test2 = tkb1.tenHK;
             ViewBag.test3 = tkb1.ID;
             TempData["test"] = tkb1.ID;
+            if (tkb1.lockstat == true)
+            {
+                ViewBag.lockstat = 1;
+            } else
+            {
+                ViewBag.lockstat = 2;
+            }
             // lấy thông tin ID học kì đã chọn trong thời khóa biểu
             ViewBag.test = id;
             // xuất thời khóa biểu
-
-            ViewBag.ex = 
 
             ViewBag.gv = model.danhsachGVs.OrderBy(x => x.ID).ToList();
             return View(tkb);
@@ -610,9 +616,6 @@ namespace CAPTeam14.Controllers
         }
 
 
-
-
-
         [HttpPost]
         public ActionResult PhanCong(int? id, TKB tkb, int? idGV)
         {
@@ -666,5 +669,45 @@ namespace CAPTeam14.Controllers
             var abcdef = new { a = mm, b = mlhp, c = tmh, d = lhp, e = ph, f = tuanday, g = tiethoc };
             return Json(abcdef, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult LockTKB (int? id)
+        {
+            model.Database.ExecuteSqlCommand("UPDATE [hocKy] SET lockstat = 1 WHERE ID = @ID_hocKy ", new SqlParameter("@ID_hocKy", id));
+            return RedirectToAction("Index1", "Home");
+        }
+
+        public ActionResult UnLockTKB(int? id)
+        {
+            model.Database.ExecuteSqlCommand("UPDATE [hocKy] SET lockstat = 0 WHERE ID = @ID_hocKy ", new SqlParameter("@ID_hocKy", id));
+            return RedirectToAction("Index1", "Home");
+        }
+
+        public ActionResult CancelAll (int? id)
+        {
+            var tkb = model.TKBs.OrderBy(x => x.ID).ToList();
+            model.Database.ExecuteSqlCommand("UPDATE [TKB] SET ID_GV = null WHERE ID_hocKy = @ID_hocKy ", new SqlParameter("@ID_hocKy", id));
+            TempData["cancel"] = 1;
+            return Redirect(Request.UrlReferrer.ToString());
+        }
+
+        [HttpGet]
+        [LoginVerification]
+        public ActionResult DetailStatisticAll(int? id)
+        {
+            var gv = model.danhsachGVs.OrderBy(x => x.ID).ToList();
+            var tkb1 = model.hocKies.FirstOrDefault(x => x.ID == id);
+            TempData["idhk"] = tkb1.ID;
+            //ViewBag.tengv = Session["hoten"];
+            //ViewBag.maid = Session["id1"];
+            //ViewBag.active = 7;
+            //ViewBag.year = year;
+            //int result = Int32.Parse(year);
+            //ViewBag.sumclassweek = model.TKBs.Where(x => x.ID_GV == cl.ID && x.ID_hocKy == idhk).ToList().Count();
+            //ViewBag.sumgghk = (decimal)(ViewBag.sumclassweek * 150) / 60;
+            //ViewBag.sumsubhk = model.ACCOUNTs.Where(x => x.DATE_OF_REGISTRATION.Value.Year == result).ToList().Count();
+            return View();
+
+        }
+
     }
 }

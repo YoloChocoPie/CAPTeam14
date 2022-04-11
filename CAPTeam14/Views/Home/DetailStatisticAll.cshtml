@@ -49,7 +49,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">
-                                Dữ liệu thống kê của giảng viên <strong>@ViewBag.tengv</strong> trong
+                                Dữ liệu thống kê của <strong>tất cả giảng viên</strong> trong
                                 <select style="margin-left:5px" id="chonhk">
                                     <option>Chọn học kỳ</option>
                                     @foreach (var itemHK in db.hocKies)
@@ -60,51 +60,45 @@
                             </h3>
                         </div>
                         <div class="card-body">
-                            <table class="table table-bordered">
+                            <table id="example1" class="table table-bordered table-striped">
                                 <thead>
-                                    <tr style="background-color:cornflowerblue">
-                                        <th class="text-center">STT</th>
-                                        <th class="text-center">Thông tin dữ liệu</th>
-                                        <th class="text-center">Số lượng</th>
+                                    <tr>
+                                        <th>
+                                            Mã giảng viên
+                                        </th>
+                                        <th>
+                                            Họ tên
+                                        </th>
+                                        <th>
+                                            Số giờ giảng trong học kỳ
+                                        </th>
+                                        <th>
+                                            Số lớp giảng trong tuần
+                                        </th>
+                                        <th>
+                                            Số môn giảng trong học kỳ
+                                        </th>
+
+
                                     </tr>
                                 </thead>
                                 <tbody>
-
-                                    @*<tr>
-                                            <td class="text-center">
-                                                1
+                                    @foreach (var item in db.danhsachGVs)
+                                    {
+                                        <tr>
+                                            <td> @item.maGV</td>
+                                            <td> @item.tenGV</td>
+                                            <td>
+                                               
                                             </td>
-                                            <td class="text-center">
-                                                Số giờ giảng trong học kỳ
+                                            <td>
+                                                @db.TKBs.ToList().Where(x => x.ID_GV == item.ID && x.ID_hocKy == (int)TempData["idhk"]).Count()
                                             </td>
-                                            <td class="text-center">
-                                                @ViewBag.sumgghk (giờ)
+                                            <td>
+                                                @db.TKBs.ToList().Where(x => x.ID_GV == item.ID && x.ID_hocKy == (int)TempData["idhk"]).Select(x => x.ID_monHoc).Distinct().Count()
                                             </td>
                                         </tr>
-
-                                        <tr>
-                                            <td class="text-center">
-                                                2
-                                            </td>
-                                            <td class="text-center">
-                                                Số lớp giảng trong tuần
-                                            </td>
-                                            <td class="text-center">
-                                                @ViewBag.sumclassweek
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td class="text-center">
-                                                3
-                                            </td>
-                                            <td class="text-center">
-                                                Số môn giảng trong học kỳ
-                                            </td>
-                                            <td class="text-center">
-                                                @ViewBag.qna
-                                            </td>
-                                        </tr>*@
+                                    }
 
                                 </tbody>
                             </table>
@@ -153,7 +147,7 @@
         var valur = $(this).val();
         if (valur) {
             $.ajax({
-            url: '@Url.Action("thongke", "giangVien")',
+            url: '@Url.Action("thongkeAll", "giangVien")',
             type: 'GET',
             contentType: 'application/json; charset=UTF-8',
             dataType: 'html',
@@ -164,20 +158,7 @@
             success: function (r) {
                 //$('#idtbody').remove();
                 data = JSON.parse(r)
-                $('tbody').html(
-                    '<tr>' +
-                    '<td class="text-center"> 1 </td>' +
-                    '<td class="text-center"> Số giờ giảng trong tuần </td>' +
-                    '<td td class="text-center">' + data.tonggiohk  + '(giờ) </td>' +
-                    '<tr>' +
-                    '<td class="text-center"> 2 </td>' +
-                    '<td class="text-center"> Số lớp giảng trong tuần </td>' +
-                    '<td class="text-center">' + data.tongloptuan + '</td>' +
-                    '<tr>' +
-                    '<td class="text-center"> 3 </td>' +
-                    '<td class="text-center"> Số môn giảng trong học kỳ </td>' +
-                    '<td class="text-center">' + data.tongmonhk + '</td>'
-                )
+                $('#cottongloptuan').append(data);
             },
             error: function (errormessage) {
                 Swal.fire({
@@ -192,52 +173,19 @@
     });
 </script>
 
-<script type="text/javascript">
-    @*var myChart6 = new Chart(
-        document.getElementById('myChart6'),
-        {
-            type: 'line',
-            data: {
-                labels: [
-                    '01',
-                    '02',
-                    '03',
-                    '04',
-                    '05',
-                    '06',
-                    '07',
-                    '08',
-                    '09',
-                    '10',
-                    '11',
-                    '12',
-                ],
-                datasets: [{
-                    label: 'Số lượng like các câu hỏi',
-                    backgroundColor: 'rgba(255, 159, 64, 1)',
-                    borderColor: 'rgba(255, 159, 64, 1)',
-                    data: [@fqt[0], @fqt[1], @fqt[2], @fqt[3], @fqt[4], @fqt[5], @fqt[6], @fqt[7], @fqt[8], @fqt[9], @fqt[10], @fqt[11]],
-                }]
-            },
-            options: {}
-        }
-    );*@
-
-</script>
-
-<script>
+<!--<script>
     $('#chonhk').on('change', function () {
 
         var valur = $(this).val();
         if (valur) {
             $.ajax({
-            url: '@Url.Action("thongke", "giangVien")',
+            url: '@Url.Action("thongkeAll", "giangVien")',
             type: 'GET',
             contentType: 'application/json; charset=UTF-8',
             dataType: 'html',
-                data: {
-                idgv: '@ViewBag.maid',
-                idhk: valur
+                data: {-->
+                @*idgv: '@ViewBag.maid',*@
+                <!--idhk: valur
             },
             success: function (r) {
                 data = JSON.parse(r)
@@ -250,14 +198,31 @@
                         labels: [
                             'Số giờ giảng trong tuần',
                             'Số lớp giảng trong tuần',
-                            'Số môn giảng trong học kỳ',      
+                            'Số môn giảng trong học kỳ',
+                            'Số môn giảng trong học kỳ',
+                            'Số môn giảng trong học kỳ',
+                            'Số môn giảng trong học kỳ',
+                            'Số môn giảng trong học kỳ',
+                            'Số môn giảng trong học kỳ',
+                            'Số môn giảng trong học kỳ',
+                            'Số môn giảng trong học kỳ',
+                            'Số môn giảng trong học kỳ',
+                            'Số môn giảng trong học kỳ',
+                            'Số môn giảng trong học kỳ',
+                            'Số môn giảng trong học kỳ',
+                            'Số môn giảng trong học kỳ',
+                            'Số môn giảng trong học kỳ',
+                            'Số môn giảng trong học kỳ',
+                            'Số môn giảng trong học kỳ',
+                            'Số môn giảng trong học kỳ',
+
                         ],
                         datasets: [{
-                            label: 'Bảng dữ liệu thống kê',
+                            label: 'Bảng dữ liệu thống kê',-->
                             @* data: [@ViewBag.sumclassweek, @ViewBag.sumgghk, @ViewBag.sumsubhk],*@
-                            data: [data.tonggiohk, data.tongloptuan, data.tongmonhk],
+                            <!--data: [data.tonggiohk, data.tongloptuan, data.tongmonhk],-->
                             @* data: [@ViewBag.qt, @ViewBag.qa, @ViewBag.qna, @ViewBag.stu, @ViewBag.acc, @ViewBag.fq],*@
-                            backgroundColor: [
+                            <!--backgroundColor: [
                                 'rgba(255, 99, 132, 0.8)',
                                 'rgba(54, 162, 235, 0.8)',
                                 'rgba(255, 206, 86, 0.8)',
@@ -273,16 +238,30 @@
                         }]
                     },
                     options: {
-                        scales: {
-                            y: {
-                                beginAtZero: true,
+                        indexAxis: 'y',
+                        // Elements options apply to all of the options unless overridden in a dataset
+                        // In this case, we are setting the border of each horizontal bar to be 2px wide
+                        elements: {
+                            bar: {
+                                borderWidth: 2,
+                            }
+                        },
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'right',
+                            },
+                            title: {
+                                display: true,
+                                text: 'Chart.js Horizontal Bar Chart'
                             }
                         }
-                    }
+                    },
+
                 });
                 myChart.render();
             }
             });
         }
     });
-</script>
+</script>-->

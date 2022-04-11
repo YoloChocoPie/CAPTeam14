@@ -100,6 +100,7 @@
           <Property Name="ID_nganh" Type="int" />
           <Property Name="ID_lop" Type="int" />
           <Property Name="ID_tuan" Type="int" />
+          <Property Name="lockstat" Type="bit" />
         </EntityType>
         <EntityType Name="hocPhan">
           <Key>
@@ -305,42 +306,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_hocKy_lopHoc">
-          <End Role="lopHoc" Type="Self.lopHoc" Multiplicity="0..1" />
-          <End Role="hocKy" Type="Self.hocKy" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="lopHoc">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="hocKy">
-              <PropertyRef Name="ID_lop" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_hocKy_Nganh">
-          <End Role="Nganh" Type="Self.Nganh" Multiplicity="0..1" />
-          <End Role="hocKy" Type="Self.hocKy" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Nganh">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="hocKy">
-              <PropertyRef Name="ID_nganh" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_hocKy_tuan">
-          <End Role="tuan" Type="Self.tuan" Multiplicity="0..1" />
-          <End Role="hocKy" Type="Self.hocKy" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tuan">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="hocKy">
-              <PropertyRef Name="ID_tuan" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_hocPhan">
           <End Role="hocPhan" Type="Self.hocPhan" Multiplicity="0..1" />
           <End Role="TKB" Type="Self.TKB" Multiplicity="*" />
@@ -507,18 +472,6 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
-          <AssociationSet Name="FK_hocKy_lopHoc" Association="Self.FK_hocKy_lopHoc">
-            <End Role="lopHoc" EntitySet="lopHoc" />
-            <End Role="hocKy" EntitySet="hocKy" />
-          </AssociationSet>
-          <AssociationSet Name="FK_hocKy_Nganh" Association="Self.FK_hocKy_Nganh">
-            <End Role="Nganh" EntitySet="Nganh" />
-            <End Role="hocKy" EntitySet="hocKy" />
-          </AssociationSet>
-          <AssociationSet Name="FK_hocKy_tuan" Association="Self.FK_hocKy_tuan">
-            <End Role="tuan" EntitySet="tuan" />
-            <End Role="hocKy" EntitySet="hocKy" />
-          </AssociationSet>
           <AssociationSet Name="FK_hocPhan" Association="Self.FK_hocPhan">
             <End Role="hocPhan" EntitySet="hocPhan" />
             <End Role="TKB" EntitySet="TKB" />
@@ -651,6 +604,7 @@
           <NavigationProperty Name="Nganh" Relationship="Self.FK_hocKy_Nganh" FromRole="hocKy" ToRole="Nganh" />
           <NavigationProperty Name="tuan" Relationship="Self.FK_hocKy_tuan" FromRole="hocKy" ToRole="tuan" />
           <NavigationProperty Name="TKBs" Relationship="Self.FK_TKB_hocKy" FromRole="hocKy" ToRole="TKB" />
+          <Property Name="lockstat" Type="Boolean" />
         </EntityType>
         <EntityType Name="hocPhan">
           <Key>
@@ -1193,6 +1147,7 @@
           <EntitySetMapping Name="hocKies">
             <EntityTypeMapping TypeName="CP24Team14Model.hocKy">
               <MappingFragment StoreEntitySet="hocKy">
+                <ScalarProperty Name="lockstat" ColumnName="lockstat" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="tenHK" ColumnName="tenHK" />
                 <ScalarProperty Name="namBD" ColumnName="namBD" />
