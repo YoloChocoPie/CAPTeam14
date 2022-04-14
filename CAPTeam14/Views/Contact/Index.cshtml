@@ -61,35 +61,54 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (var item in Model)
+                                    @if ((int)Session["role"] == 1)
                                     {
-                                        <tr>
+                                        foreach (var item in Model)
+                                        {
+                                            <tr>
 
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.tenTicket)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.nguoigui)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.trangthai)
+                                                </td>
+                                                <td>
 
+                                                    <a class="btn btn-file detailBtn1 btn btn-info" title="Xem chi tiết" data-model-id1="@Url.Action("Edit", "Contact", new { id = item.ID })" data-id1="@Url.Action("Details", "Contact", new { id = item.ID })"><i class="fas fa-eye"></i></a>
 
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.tenTicket)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.nguoigui)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.trangthai)
-                                            </td>
+                                                </td>
 
+                                            </tr>
+                                        }
 
-
-
-
-
-
-                                            <td>
-
-                                                <a class="btn btn-file detailBtn1 btn btn-info" title="Xem chi tiết" data-model-id1="@Url.Action("Edit", "Contact", new { id = item.ID })" data-id1="@Url.Action("Details", "Contact", new { id = item.ID })"><i class="fas fa-eye"></i></a>
-
-                                            </td>
-                                        </tr>
                                     }
+                                    else if ((int)Session["role"] == 2 || (int)Session["role"] == 3 || (int)Session["role"] == 4)
+                                    {
+                                        foreach (var item in Model.Where(x => x.nguoigui == ViewBag.ten))
+                                        {
+                                            <tr>
+
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.tenTicket)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.nguoigui)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.trangthai)
+                                                </td>
+                                                <td>
+                                                    @*bỏ trống*@
+                                                </td>
+
+                                            </tr>
+                                        }
+                                    }
+
 
                                 </tbody>
                                 @*<tfoot>

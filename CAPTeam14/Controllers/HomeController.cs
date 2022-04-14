@@ -696,6 +696,7 @@ namespace CAPTeam14.Controllers
         {
             var gv = model.danhsachGVs.OrderBy(x => x.ID).ToList();
             var tkb1 = model.hocKies.FirstOrDefault(x => x.ID == id);
+            ViewBag.thk = tkb1.tenHK;
             TempData["idhk"] = tkb1.ID;
             //ViewBag.tengv = Session["hoten"];
             //ViewBag.maid = Session["id1"];

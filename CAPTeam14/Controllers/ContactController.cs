@@ -17,14 +17,15 @@ namespace CAPTeam14.Controllers
         public ActionResult Index()
         {
             var contact = model.Contacts.OrderByDescending(x => x.ID).ToList();
-            return View(contact);
-        }
-        public ActionResult Index1()
-        {
-            var contact = model.Contacts.OrderByDescending(x => x.ID).ToList();
             ViewBag.ten = (string)Session["hoten"];
             return View(contact);
         }
+        //public ActionResult Index1()
+        //{
+        //    var contact = model.Contacts.OrderByDescending(x => x.ID).ToList();
+        //    ViewBag.ten = (string)Session["hoten"];
+        //    return View(contact);
+        //}
 
 
         //Tạo ticket

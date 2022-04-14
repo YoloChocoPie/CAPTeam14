@@ -29,7 +29,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="~/Home/Index">Trang chủ</a></li>
-                            <li class="breadcrumb-item active">Thêm học kỳ</li>
+                            <li class="breadcrumb-item active">Liên hệ admin</li>
                         </ol>
                     </div>
                 </div>
@@ -46,8 +46,7 @@
                                 @Html.AntiForgeryToken()
 
                                 <div class="card-body">
-                                    <label>Thêm học kỳ</label>
-                                    <hr />
+                                    <label>Gửi liên hệ</label><hr/>
                                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
 
@@ -75,7 +74,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-user"></i></span>
                                             </div>
-                                            @Html.TextAreaFor(model => model.ndTicket, new { style = "width:499px !important; height:242px "  })
+                                            @Html.TextAreaFor(model => model.ndTicket, new { style = "width:430px !important; height:242px "  })
 
 
                                         </div>

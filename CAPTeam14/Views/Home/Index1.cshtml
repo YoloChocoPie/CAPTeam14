@@ -79,7 +79,7 @@
                                                 if ((int)Session["role"] == 1 || (int)Session["role"] == 2)
                                                 {
                                                     <td>
-                                                        @Html.ActionLink("Xem thời khóa biểu", "Index", new { id = item.ID }) |
+                                                        @Html.ActionLink("Xem thời khóa biểu", "Index", new { id = item.ID }, new { @class = "seeTT" }) |
                                                         @Html.ActionLink("Xem thống kê", "DetailStatisticAll", new { id = item.ID }) |
                                                         @Html.ActionLink("Import thời khóa biểu", "Catalog", new { id = item.ID }) |
                                                         @Html.ActionLink("Export thời khóa biểu", "IndexEx", new { id = item.ID }) |
@@ -255,5 +255,9 @@
                 });
             }
         })
+    });
+
+    $('.seeTT').click(function (e) {
+        sessionStorage.clear();
     });
 </script>
