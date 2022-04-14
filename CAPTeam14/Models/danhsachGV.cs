@@ -19,6 +19,7 @@ namespace CAPTeam14.Models
         {
             this.nguoiDungs = new HashSet<nguoiDung>();
             this.TKBs = new HashSet<TKB>();
+            this.hocKies = new HashSet<hocKy>();
         }
     
         public int ID { get; set; }
@@ -31,5 +32,7 @@ namespace CAPTeam14.Models
         public virtual ICollection<nguoiDung> nguoiDungs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TKB> TKBs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<hocKy> hocKies { get; set; }
     }
 }

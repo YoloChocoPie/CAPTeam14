@@ -435,7 +435,7 @@ namespace CAPTeam14.Controllers
                             tuan = checktuanKT;
                             tuan = checkthu;
 
-                            tkbTong.ID_Tuan = checkthu.ID;
+                            tkbTong.ID_Tuan = checktuanHoc.ID;
                         }
 
                         // ngành
@@ -698,6 +698,25 @@ namespace CAPTeam14.Controllers
             var tkb1 = model.hocKies.FirstOrDefault(x => x.ID == id);
             ViewBag.thk = tkb1.tenHK;
             TempData["idhk"] = tkb1.ID;
+            foreach (var item in model.danhsachGVs)
+            {
+                foreach (var tuan in model.TKBs.Where(x => x.ID_hocKy == id && x.ID_GV == item.ID).Select(x => x.tuanHoc.tuanHoc1).Distinct())
+                {
+                    string cc = tuan;
+                    string[] cl = cc.Split(',', ';', ' ');
+
+                    foreach (var clm in cl)
+                    {
+                        string dmm = clm;
+
+
+                    }
+                    break;
+
+                };
+            }
+            
+
             //ViewBag.tengv = Session["hoten"];
             //ViewBag.maid = Session["id1"];
             //ViewBag.active = 7;

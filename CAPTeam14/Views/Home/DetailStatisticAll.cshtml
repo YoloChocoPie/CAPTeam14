@@ -27,6 +27,8 @@
         //at.Add(item5);
         //fqt.Add(item6);
     }
+    double sogio = 0;
+
 }
 
 <div class="content-wrapper text-sm">
@@ -78,11 +80,36 @@
                                 <tbody>
                                     @foreach (var item in db.danhsachGVs)
                                     {
+
+
+
+
+
+
+
                                         <tr>
                                             <td> @item.maGV</td>
                                             <td> @item.tenGV</td>
                                             <td>
-                                               
+
+                                                @{var dslg = db.TKBs.ToList().Where(x => x.ID_hocKy == (int)TempData["idhk"] && x.ID_GV == item.ID);
+                                                    foreach (var tuan in dslg.Select(x => x.tuanHoc.tuanHoc1))
+                                                    {
+
+                                                        string cc = string.Join(",", dslg.Select(x => x.tuanHoc.tuanHoc1));
+                                                        var cl = cc.Split(',', ';', ' ').Length;
+
+                                                        for (int i = 1; i < cl + 1; i++)
+                                                        {
+                                                            sogio = (double)2.5 * i;
+                                                        }
+                                                        @sogio
+                                                        break;
+
+                                                    };
+
+                                                }
+
                                             </td>
                                             <td>
                                                 @db.TKBs.ToList().Where(x => x.ID_GV == item.ID && x.ID_hocKy == (int)TempData["idhk"]).Count()
