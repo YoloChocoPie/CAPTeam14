@@ -10,29 +10,13 @@
 <div class="content-wrapper">
     <!-- Main content -->
     <section class="content">
-        <div class="bgtitle">Thời khóa biểu</div>
+        <div class="bgtitle">Thời khóa biểu học kỳ: @ViewBag.test2</div>
 
         <div width="100%" class="form-inline col-md-12 magin-bottom-5px" style="margin-bottom:10px">
-            @*<div class="col-md-4 form-group">
-            <label>Giảng viên:</label>
-            <select class="form-control width-70" id="">
-                <option> Tất cả</option>
-                @foreach (var itemgv in db.danhsachGVs)
-                {
-                    <option value="">@itemgv.tenGV</option>
-                }
-            </select>
-        </div>*@
 
             <div class="col-md-4 form-group">
-                <label>Học kỳ:</label>
-                <select class="form-control width-70" id="chonhk">
-                    <option value="koALL" selected>@ViewBag.test2</option>
-                    @*@foreach (var item in db.hocKies)
-                {
-                    <option value="@item.ID" >@item.tenHK</option>
-                }*@
-                </select>
+                <label>Tuần:</label>
+                @Html.DropDownList("IDT", new SelectList(ViewBag.hkyy, "ID", "sotuan"), "Chọn tuần", new { @class = "form-control width-70" })
             </div>
 
             <div class="col-md-4 form-group">
@@ -58,34 +42,7 @@
                 </select>
             </div>
 
-            <div class="col-md-4 form-group">
-                <label>Tuần:</label>
-                @*<select class="form-control width-70" id="Week" name="Week" onchange="TabTranferTabPerior(0)">
-
-
-            </select>*@
-                @Html.DropDownList("ID", ViewBag.IDs as SelectList)
-            </div>
-
         </div>
-
-        @*<div width="100%" class="form-inline col-md-12 magin-bottom-5px">
-                <div class="col-md-4 form-group">
-                    <label>Trạng Thái:</label>
-                    <select class="form-control width-70" onchange="FilterStatus(this)">
-                        <option value="KoPhancong">Chưa phân công</option>
-                        <option value="DaPhancong">Đã Phân công</option>
-                    </select>
-                </div>
-
-
-
-
-
-
-            </div>*@
-
-
 
         <div class="tab-content" style="background-color: #fff">
             <div id="tabWeek" class="tab-pane @*fade*@ in active">
@@ -1448,76 +1405,23 @@
             alert(valur);
         });
 
-          $(document).ready(function () {
-     $("#ID").on("change", function () {
-            var selectedId = this.value;
-
-
-             window.location.href = '@Url.Action("Index2", "Home")' + '?selectedId=' + selectedId;
-        });
-     });
-
-        //function TabTranferTabPerior(key) {
-        //    if (key == 0) {
-        //        // tab week
-        //        $("#cbTweek").show();
-        //        $("#btnPrint").hide();
-        //        DrawingSchedules();
-        //    } else if (key == 1) {
-        //        //tab perior
-        //        $("#cbTweek").hide();
-        //        $("#btnPrint").show();
-        //        DrawingSchedules2();
-        //    }
-        //}
-
-
-        @*function DrawingSchedules2() {
-            $.ajax({
-                url: "~/Home/DrawingStudentSchedule_Perior",
-                type: "GET",
-                async: true,
-                dataType: "html",
-                data: {
-                    YearStudy: $("#YearStudy").val(),
-                    TermID: $("#TermID").val(),
-                },
-                success: function (html) {
-                    $("#divThoiKhoaBieuTietThu").html(html);
-                },
-                error: function (jqXHR, textStatus, err) {
-                    ShowAlert("Lỗi kết nối", err);
-                },
+          // Chọn tuần
+        $(document).ready(function () {
+            if (sessionStorage.getItem('#IDT')) {
+                $('#IDT').val(sessionStorage.getItem('#IDT'));
+            }
+            $("#IDT").on("change", function () {
+                var selectedId = this.value;
+                sessionStorage.setItem('#IDT', selectedId);
+                window.location.href = '@Url.Action("Index2", "Home")' + '?selectedId=' + selectedId;
             });
-        }
-*@
+        });
+
+
     </script>
 
     <!-- /.content -->
 </div>
-<!-- /.content-wrapper -->
-@*@if (TempData["dangnhap"] != null)
-    {
-        <script type="text/javascript">
-            $(function () {
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 3000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                })
 
-                Toast.fire({
-                    icon: 'success',
-                    title: 'Đăng nhập thành công !'
-                })
-            });
-        </script>
-    }*@
 
 

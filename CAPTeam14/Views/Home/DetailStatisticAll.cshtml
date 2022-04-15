@@ -82,7 +82,19 @@
                                             <td> @item.maGV</td>
                                             <td> @item.tenGV</td>
                                             <td>
-                                               
+
+                                                @foreach (var gg in db.TKBs.ToList().Where(x => x.ID_GV == item.ID && x.ID_hocKy == (int)TempData["idhk"]).Select(x => x.tuanHoc.tuanHoc1))
+                                                {
+                                                    string rs = string.Join(",", db.TKBs.ToList().Where(x => x.ID_GV == item.ID && x.ID_hocKy == (int)TempData["idhk"]).Select(x => x.tuanHoc.tuanHoc1)); // dùng lệnh join để cộng chuỗi tuần lại và ngăn cách bởi dấu phẩy
+                                                    var ff = rs.Split(',', ';', ' ').Length; // tách
+                                                    for (int i = 1; i < ff + 1; i++)
+                                                    {
+                                                        ViewBag.sumtest = (double)2.5 * i; // đếm
+
+                                                    }
+                                                    
+                                                }
+                                                @ViewBag.sumtest
                                             </td>
                                             <td>
                                                 @db.TKBs.ToList().Where(x => x.ID_GV == item.ID && x.ID_hocKy == (int)TempData["idhk"]).Count()

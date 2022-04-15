@@ -167,15 +167,23 @@ namespace CAPTeam14.Controllers
             //đếm tổng số lớp trong 1 tuần
             ViewBag.sumclassweek = model.TKBs.Where(x => x.ID_GV == cl.ID && x.ID_hocKy == idhk).ToList().Count();
 
+            // tính tổng giờ dạy trong 1 tuần
+            //ViewBag.sumgghk = (decimal)(ViewBag.sumclassweek * 150) / 60;
+
             // tính tổng giờ dạy trong 1 học kỳ
-            //var listtuan = model.TKBs.Where(x => x.ID_GV == cl.ID && x.ID_hocKy == idhk).Select(x => x.tuanHoc.tuanHoc1).Distinct().ToList();
-            //foreach(string tuan in listtuan)
-            //{
-            //    string[] cc = tuan.Split(',', ';', ' ');
-            //    var ccc = cc.Count();
-            //    ViewBag.sav = ccc;
-            //}
-            ViewBag.sumgghk = (decimal)(ViewBag.sumclassweek * 150) / 60;
+            var dslg = model.TKBs.Where(x => x.ID_GV == cl.ID && x.ID_hocKy == idhk).ToList(); // tìm ra những lớp giảng trong tuần = tolist()
+            foreach (var lopgiang in dslg.Select(x => x.tuanHoc.tuanHoc1)) //dùng foreach + linq để truy xuất ra những tuần dạng string theo lớp giảng
+            {
+
+                //ViewBag.sumALL += lopgiang;
+                string rs = string.Join(",", dslg.Select(x => x.tuanHoc.tuanHoc1)); // dùng lệnh join để cộng chuỗi tuần lại và ngăn cách bởi dấu phẩy
+                var ff = rs.Split(',', ';', ' ').Length; // tách 
+                for (int i = 1; i < ff + 1; i++)
+                {
+                    ViewBag.sumghk = (double)2.5 * i; // đếm 
+
+                }
+            }
 
             // đếm tổng số môn dạy trong 1 học kỳ
             ViewBag.sumsubhk = model.TKBs.Where(x => x.ID_GV == cl.ID && x.ID_hocKy == idhk).Select(x => x.ID_monHoc).Distinct().ToList().Count();
@@ -183,7 +191,7 @@ namespace CAPTeam14.Controllers
             var resu = new
             {
                 tongloptuan = ViewBag.sumclassweek,
-                tonggiohk = ViewBag.sumgghk,
+                tonggiohk = ViewBag.sumghk,
                 tongmonhk = ViewBag.sumsubhk
             };
             return Json(resu, JsonRequestBehavior.AllowGet);
@@ -219,22 +227,32 @@ namespace CAPTeam14.Controllers
             ViewBag.sumclassweek = model.TKBs.Where(x => x.ID_GV == id && x.ID_hocKy == idhk).ToList().Count();
 
             // tính tổng giờ dạy trong 1 học kỳ
-            //var listtuan = model.TKBs.Where(x => x.ID_GV == cl.ID && x.ID_hocKy == idhk).Select(x => x.tuanHoc.tuanHoc1).Distinct().ToList();
-            //foreach(string tuan in listtuan)
-            //{
-            //    string[] cc = tuan.Split(',', ';', ' ');
-            //    var ccc = cc.Count();
-            //    ViewBag.sav = ccc;
-            //}
-            ViewBag.sumgghk = (decimal)(ViewBag.sumclassweek * 150) / 60;
+            var dslg = model.TKBs.Where(x => x.ID_GV == id && x.ID_hocKy == idhk).ToList(); // tìm ra những lớp giảng trong tuần = tolist()
+            foreach (var lopgiang in dslg.Select(x => x.tuanHoc.tuanHoc1)) //dùng foreach + linq để truy xuất ra những tuần dạng string theo lớp giảng
+            {
+
+                //ViewBag.sumALL += lopgiang;
+                string rs = string.Join(",", dslg.Select(x => x.tuanHoc.tuanHoc1)); // dùng lệnh join để cộng chuỗi tuần lại và ngăn cách bởi dấu phẩy
+                var ff = rs.Split(',', ';', ' ').Length; // tách 
+                for (int i = 1; i < ff + 1; i++)
+                {
+                    ViewBag.sumghk = (double)2.5 * i; // đếm 
+                    if (ViewBag.sumghk == null)
+                    {
+                        ViewBag.sumghk = 0;
+                    }
+
+                }
+            }
+
+
 
             // đếm tổng số môn dạy trong 1 học kỳ
             ViewBag.sumsubhk = model.TKBs.Where(x => x.ID_GV == id && x.ID_hocKy == idhk).Select(x => x.ID_monHoc).Distinct().ToList().Count();
-            //var abc = new { a = sumclassweek };
             var resu = new
             {
                 tongloptuan = ViewBag.sumclassweek,
-                tonggiohk = ViewBag.sumgghk,
+                tonggiohk = ViewBag.sumghk,
                 tongmonhk = ViewBag.sumsubhk
             };
             return Json(resu, JsonRequestBehavior.AllowGet);

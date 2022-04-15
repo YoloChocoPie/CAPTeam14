@@ -91,13 +91,13 @@
                                                 if ((int)Session["role"] == 3)
                                                 {
                                                     <td>
-                                                        @Html.ActionLink("Xem thời khóa biểu", "Index", new { id = item.ID })
+                                                        @Html.ActionLink("Xem thời khóa biểu", "Index", new { id = item.ID }, new { @class = "seeTT" })
                                                     </td>
                                                 }
                                                 if ((int)Session["role"] == 4)
                                                 {
                                                     <td>
-                                                        @Html.ActionLink("Xem thời khóa biểu", "Index2", new { id = item.ID })
+                                                        @Html.ActionLink("Xem thời khóa biểu", "Index2", new { id = item.ID }, new { @class = "seeTT" })
                                                     </td>
                                                 }
                                             } else if (item.lockstat == true) 
@@ -105,7 +105,7 @@
                                                 if ((int)Session["role"] == 1 || (int)Session["role"] == 2)
                                                 {
                                                     <td>
-                                                        @Html.ActionLink("Xem thời khóa biểu", "Index", new { id = item.ID }) |
+                                                        @Html.ActionLink("Xem thời khóa biểu", "Index", new { id = item.ID }, new { @class = "seeTT" }) |
                                                         <label>Xem thống kê | </label>
                                                         <label>Import thời khóa biểu | </label>
                                                         <label>Export thời khóa biểu | </label>
@@ -117,13 +117,13 @@
                                                 if ((int)Session["role"] == 3)
                                                 {
                                                     <td>
-                                                        <label>Xem thời khóa biểu</label>
+                                                        @Html.ActionLink("Xem thời khóa biểu", "Index", new { id = item.ID }, new { @class = "seeTT" }) |
                                                     </td>
                                                 }
                                                 if ((int)Session["role"] == 4)
                                                 {
                                                     <td>
-                                                        @Html.ActionLink("Xem thời khóa biểu", "Index2", new { id = item.ID })
+                                                        @Html.ActionLink("Xem thời khóa biểu", "Index2", new { id = item.ID }, new { @class = "seeTT" })
                                                     </td>
                                                 }
                                             }
