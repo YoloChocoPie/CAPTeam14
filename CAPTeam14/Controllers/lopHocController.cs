@@ -118,6 +118,37 @@ namespace CAPTeam14.Controllers
             
         }
 
+        private void xacThuc2(lopHoc lh)
+        {
+            // kiểm tra xem mã liên học phần và mã gốc liên học phần đã tồn tại hay chưa
+            // Các trường hợp cover :
+            // - Không được bỏ trống
+            // - Không bị trùng
+            // - Không nhập khoảng trắng
+            var code = model.lopHocs.FirstOrDefault(a => a.maLop == lh.maLop);
+
+            //Mã lớp
+            if (lh.maLop == null)
+            {
+                ModelState.AddModelError("maLop", "Vui lòng nhập mã lớp");
+            }
+            else
+            {
+                
+                
+                    // Test case nhập khoảng trắng
+                    if (lh.maLop.Trim() == "")
+                    {
+                        ModelState.AddModelError("maLop", "Không được nhập khoảng trắng");
+                    }
+                
+
+
+            }
+
+
+        }
+
 
         [HttpGet]
         public JsonResult Details(int id)
@@ -149,7 +180,7 @@ namespace CAPTeam14.Controllers
             ViewBag.active = 11;
             ViewBag.tt = "Edit";
 
-            xacThuc(lh);
+            xacThuc2(lh);
             try
             {
                 if (ModelState.IsValid)

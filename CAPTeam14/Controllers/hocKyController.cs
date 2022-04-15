@@ -258,6 +258,7 @@ namespace CAPTeam14.Controllers
                 {
                     ModelState.AddModelError("tenHK", "Không được nhập khoảng trắng");
                 }
+              
 
             }
 
@@ -301,11 +302,15 @@ namespace CAPTeam14.Controllers
                 }
                 else
                 {
-                   /* //Test case kiểm tra kí tự đặc biệt
-                    if (Kytudacbiet(hk.namKT.Trim()) == true)
+                    /* //Test case kiểm tra kí tự đặc biệt
+                     if (Kytudacbiet(hk.namKT.Trim()) == true)
+                     {
+                         ModelState.AddModelError("namKT", "Không được nhập ký tự");
+                     }*/
+                    if (Convert.ToInt32(hk.namBD) > Convert.ToInt32(hk.namKT))
                     {
-                        ModelState.AddModelError("namKT", "Không được nhập ký tự");
-                    }*/
+                        ModelState.AddModelError("namKT", "Năm kết thúc không được nhỏ hơn năm bắt đầu");
+                    }
                 }
 
             }

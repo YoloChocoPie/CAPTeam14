@@ -28,6 +28,7 @@
         //fqt.Add(item6);
     }
     double sogio = 0;
+    double kogv = 0;
 
 }
 
@@ -92,6 +93,7 @@
                                             <td> @item.tenGV</td>
                                             <td>
 
+
                                                 @{var dslg = db.TKBs.ToList().Where(x => x.ID_hocKy == (int)TempData["idhk"] && x.ID_GV == item.ID);
                                                     foreach (var tuan in dslg.Select(x => x.tuanHoc.tuanHoc1))
                                                     {
@@ -109,6 +111,8 @@
                                                     };
 
                                                 }
+
+
 
                                             </td>
                                             <td>

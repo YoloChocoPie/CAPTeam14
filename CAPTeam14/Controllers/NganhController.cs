@@ -140,6 +140,67 @@ namespace CAPTeam14.Controllers
             }
         }
 
+        private void xacThuc2(Nganh nganh)
+        {
+            var code = model.Nganhs.FirstOrDefault(d => d.maNganh == nganh.maNganh);
+            //Test case bỏ trống mã ngành
+            if (nganh.maNganh == null)
+            {
+                ModelState.AddModelError("maNganh", "Vui lòng nhập mã ngành học");
+            }
+            else
+            {
+               
+                // Test case nhập khoảng trắng
+                if (nganh.maNganh.ToString().Trim() == "")
+                {
+                    ModelState.AddModelError("maNganh", "Không được nhập khoảng trắng");
+                }
+                else
+                {
+                    //Test case kiểm tra kí tự đặc biệt
+                    if (Kytudacbiet(nganh.maNganh.ToString().Trim()) == true)
+                    {
+                        ModelState.AddModelError("maNganh", "Mã ngành không được có ký tự đặc biệt");
+                    }
+                    else 
+                    {
+                        if (code != null)
+                        {
+                            ModelState.AddModelError("maNganh", "Mã ngành đã tồn tại");
+                        }
+                    }
+                    
+                }
+            }
+
+            //
+            //Test case bỏ trống tên ngành
+            if (nganh.tenNganh == null)
+            {
+                ModelState.AddModelError("tenNganh", "Vui lòng nhập tên ngành ");
+            }
+            else
+            {
+                // Test case nhập khoảng trắng
+                if (nganh.tenNganh.Trim() == "")
+                {
+                    ModelState.AddModelError("tenNganh", "Không được nhập khoảng trắng");
+                }
+                else
+                {
+                    //Test case kiểm tra kí tự đặc biệt
+                    if (Kytudacbiet(nganh.tenNganh.ToString().Trim()) == true)
+                    {
+                        ModelState.AddModelError("tenNganh", "Tên ngành không được có ký tự đặc biệt");
+                    }
+                }
+
+            }
+        
+    }
+
+
 
         [HttpGet]
         public JsonResult Details(int id)
@@ -172,7 +233,7 @@ namespace CAPTeam14.Controllers
             ViewBag.active = 11;
             ViewBag.tt = "Edit";
             
-            xacThuc(nganh);
+            xacThuc2(nganh);
             try
             {
                 if (ModelState.IsValid)

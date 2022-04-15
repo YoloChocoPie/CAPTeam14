@@ -36,7 +36,7 @@ namespace CAPTeam14.Controllers
             var tkb = model.hocKies.OrderBy(x => x.ID).ToList();
             var test = model.TKBs.OrderByDescending(x => x.ID).Count();
             ViewBag.test = test;
-           
+
 
             return View(tkb);
         }
@@ -71,13 +71,14 @@ namespace CAPTeam14.Controllers
             //
             TempData["Tuan"] = selectedId;
             //
+            
 
-
-            ViewBag.IDs = new SelectList(model.tuans.OrderBy(x => x.ID), "", "ID");
-
+            //ViewBag.IDs = new SelectList(model.tuans.OrderBy(x => x.ID), "", "ID");
+            ViewBag.hkyy = model.tuans.OrderBy(x => x.ID).ToList();
 
             // lấy danh sách thời khóa biểu
             var tkb = model.TKBs.OrderByDescending(x => x.ID).ToList();
+            var tkb12 = model.TKBs.FirstOrDefault(x => x.ID_hocKy == id);
             // lấy danh sách học kì
             var tkb1 = model.hocKies.FirstOrDefault(x => x.ID == id);
             //hiển thị tên học kì đã chọn
@@ -85,6 +86,11 @@ namespace CAPTeam14.Controllers
             ViewBag.test3 = tkb1.ID;
             TempData["test"] = tkb1.ID;
             
+            if (tkb12.ID_GV == (int)Session["id"])
+            {
+                ViewBag.kiemtra = 1;
+            }
+
             // lấy thông tin ID học kì đã chọn trong thời khóa biểu
             ViewBag.test = id;
 
@@ -98,14 +104,14 @@ namespace CAPTeam14.Controllers
             {
                 string cc = tuan;
                 string[] cl = cc.Split(',', ';', ' ');
-                
+
                 foreach (var clm in cl)
                 {
                     string dmm = clm;
                     if (cl.Contains(selectedId))
                     {
                         TempData["Tuan1"] = selectedId;
-                        //break;
+                        break;
                     }
 
                     else
@@ -114,19 +120,19 @@ namespace CAPTeam14.Controllers
 
                     }
                     break;
-                   
+
                 }
                 break;
 
             };
             //
-            TempData["Tuan"] = selectedId;            
+            TempData["Tuan"] = selectedId;
             //
 
-            
-            ViewBag.IDs = new SelectList( model.tuans.OrderBy(x => x.ID), "ID", "sotuan");
-            
-           
+
+            //ViewBag.IDs = new SelectList( model.tuans.OrderBy(x => x.ID), "ID", "sotuan");
+            ViewBag.hkyy = model.tuans.OrderBy(x => x.ID).ToList();
+
             // lấy danh sách thời khóa biểu
             var tkb = model.TKBs.OrderBy(x => x.ID).ToList();
             // lấy danh sách học kì
@@ -135,16 +141,16 @@ namespace CAPTeam14.Controllers
             ViewBag.test2 = tkb1.tenHK;
             ViewBag.test3 = tkb1.ID;
             TempData["test"] = tkb1.ID;
-            if (tkb1.lockstat == true)
-            {
-                ViewBag.lockstat = 1;
-            } else
+            if (tkb1.lockstat == false || tkb1.lockstat == null)
             {
                 ViewBag.lockstat = 2;
             }
+            else
+            {
+                ViewBag.lockstat = 1;
+            }
             // lấy thông tin ID học kì đã chọn trong thời khóa biểu
             ViewBag.test = id;
-            // xuất thời khóa biểu
 
             ViewBag.gv = model.danhsachGVs.OrderBy(x => x.ID).ToList();
             return View(tkb);
@@ -152,7 +158,7 @@ namespace CAPTeam14.Controllers
         [HttpGet]
         public ActionResult IndexEx(int? id)
         {
-            
+
             // lấy danh sách thời khóa biểu
             var tkb = model.TKBs.OrderBy(x => x.ID).ToList();
             // lấy danh sách học kì
@@ -209,8 +215,8 @@ namespace CAPTeam14.Controllers
 
             ViewBag.nambd = tkb1.namBD;
             ViewBag.namkt = tkb1.namKT;
-          /*  ViewBag.tenlop = tkb1.lopHoc.maLop;
-            ViewBag.nganh = tkb1.Nganh.tenNganh;*/
+            /*  ViewBag.tenlop = tkb1.lopHoc.maLop;
+              ViewBag.nganh = tkb1.Nganh.tenNganh;*/
             return View();
         }
 
@@ -228,7 +234,7 @@ namespace CAPTeam14.Controllers
 
         public ActionResult Catalog(TKB tkb, int? id, hocKy hk)
         {
-            
+
 
             try
             {
@@ -590,7 +596,7 @@ namespace CAPTeam14.Controllers
                 ModelState.AddModelError("", "Không thể thực hiện hành động này, vui lòng kiểm tra File Excel có đúng định dạng");
             }
             return View(tkb);
-          
+
 
         }
 
@@ -600,7 +606,7 @@ namespace CAPTeam14.Controllers
             ViewBag.Message = "Your application description page.";
 
             return View();
-        }        
+        }
 
         public ActionResult Search()
         {
@@ -622,6 +628,15 @@ namespace CAPTeam14.Controllers
             ViewBag.gv = model.danhsachGVs.OrderByDescending(x => x.ID).ToList();
 
             var tt = model.TKBs.FirstOrDefault(x => x.ID == id);
+            var gvid_warning = model.TKBs.Where(g => g.ID_GV == tkb.ID_GV && g.tuanHoc.thuS == tt.tuanHoc.thuS && g.ID_hocKy == tt.ID_hocKy).ToList().Count(g => g.ID_GV != null);
+            if (gvid_warning >= 3)
+            {
+
+                tt.ID_GV = tkb.ID_GV;
+                model.SaveChanges();
+                return Json(new { resp = true });
+
+            }
             var gvid = model.TKBs.Where(g => g.ID_GV == tkb.ID_GV && g.tietHoc.tietBD == tt.tietHoc.tietBD && g.tuanHoc.thuS == tt.tuanHoc.thuS && g.ID_hocKy == tt.ID_hocKy).ToList().Count(g => g.ID_GV != null);
             if (gvid == 0)
             {
@@ -632,14 +647,12 @@ namespace CAPTeam14.Controllers
             }
             else if (gvid == 1)
             {
-                //TempData["ThongBaoLoi"] = 1;
-                //ViewBag.Javascript = "<script language='javascript' type='text/javascript'>alert('Data Already Exists');</script>";
-                //ViewBag.DataExists = true;
                 return Json(new { result = false });
             }
 
-            return Json(JsonRequestBehavior.AllowGet);
 
+
+            return Json(JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
@@ -670,7 +683,7 @@ namespace CAPTeam14.Controllers
             return Json(abcdef, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult LockTKB (int? id)
+        public ActionResult LockTKB(int? id)
         {
             model.Database.ExecuteSqlCommand("UPDATE [hocKy] SET lockstat = 1 WHERE ID = @ID_hocKy ", new SqlParameter("@ID_hocKy", id));
             return RedirectToAction("Index1", "Home");
@@ -682,7 +695,7 @@ namespace CAPTeam14.Controllers
             return RedirectToAction("Index1", "Home");
         }
 
-        public ActionResult CancelAll (int? id)
+        public ActionResult CancelAll(int? id)
         {
             var tkb = model.TKBs.OrderBy(x => x.ID).ToList();
             model.Database.ExecuteSqlCommand("UPDATE [TKB] SET ID_GV = null WHERE ID_hocKy = @ID_hocKy ", new SqlParameter("@ID_hocKy", id));
@@ -698,22 +711,19 @@ namespace CAPTeam14.Controllers
             var tkb1 = model.hocKies.FirstOrDefault(x => x.ID == id);
             ViewBag.thk = tkb1.tenHK;
             TempData["idhk"] = tkb1.ID;
-            foreach (var item in model.danhsachGVs)
+            ViewBag.kocogv = null;
+            var gv1 = model.TKBs.OrderBy(x => x.ID);
+            var kogv = model.TKBs.OrderBy(x => x.ID_hocKy == id);
+            foreach (var item in kogv.Select(x => x.ID_GV))
             {
-                foreach (var tuan in model.TKBs.Where(x => x.ID_hocKy == id && x.ID_GV == item.ID).Select(x => x.tuanHoc.tuanHoc1).Distinct())
+                if (item.ToString() == null)
                 {
-                    string cc = tuan;
-                    string[] cl = cc.Split(',', ';', ' ');
-
-                    foreach (var clm in cl)
-                    {
-                        string dmm = clm;
-
-
-                    }
-                    break;
-
-                };
+                    ViewBag.kocogv = 1;
+                }
+                else
+                {
+                    ViewBag.kocogv = 2;
+                }
             }
             
 

@@ -10,7 +10,7 @@
 <div class="content-wrapper">
     <!-- Main content -->
     <section class="content">
-        <div class="bgtitle">Thời khóa biểu</div>
+        <div class="bgtitle">Thời khóa biểu học kỳ: @ViewBag.test2</div>
 
         <div width="100%" class="form-inline col-md-12 magin-bottom-5px" style="margin-bottom:10px">
             @*<div class="col-md-4 form-group">
@@ -25,10 +25,8 @@
                 </div>*@
 
             <div class="col-md-4 form-group">
-                <label>Học kỳ:</label>
-                <select class="form-control width-70" id="chonhk">
-                    <option value="koALL" selected>@ViewBag.test2</option>
-                </select>
+                <label>Tuần:</label>
+                @Html.DropDownList("IDT", new SelectList(ViewBag.hkyy, "ID", "sotuan"), "Chọn tuần", new { @class = "form-control width-70" })
             </div>
 
             <div class="col-md-4 form-group">
@@ -52,11 +50,6 @@
                         <option value="@mhx">@mhx</option>
                     }
                 </select>
-            </div>
-
-            <div class="col-md-4 form-group">
-                <label>Tuần:</label>
-                @Html.DropDownList("ID", ViewBag.IDs as SelectList)
             </div>
 
         </div>
@@ -225,7 +218,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -279,7 +272,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -340,7 +333,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -394,7 +387,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -455,7 +448,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -509,7 +502,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -570,7 +563,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -624,7 +617,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -685,7 +678,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -739,7 +732,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -802,7 +795,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -856,7 +849,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -917,7 +910,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -971,7 +964,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -1032,7 +1025,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -1086,7 +1079,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -1147,7 +1140,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -1201,7 +1194,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -1262,7 +1255,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -1316,7 +1309,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -1379,7 +1372,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -1433,7 +1426,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -1494,7 +1487,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -1548,7 +1541,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -1609,7 +1602,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -1663,7 +1656,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -1724,7 +1717,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -1778,7 +1771,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -1839,7 +1832,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -1893,7 +1886,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -1956,7 +1949,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -2010,7 +2003,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -2071,7 +2064,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -2125,7 +2118,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -2186,7 +2179,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -2240,7 +2233,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -2301,7 +2294,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -2355,7 +2348,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -2416,7 +2409,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -2470,7 +2463,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -2533,7 +2526,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -2587,7 +2580,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -2648,7 +2641,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -2702,7 +2695,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -2763,7 +2756,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -2817,7 +2810,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -2878,7 +2871,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -2932,7 +2925,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -2993,7 +2986,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -3047,7 +3040,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -3110,7 +3103,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -3164,7 +3157,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -3225,7 +3218,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -3279,7 +3272,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -3340,7 +3333,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -3394,7 +3387,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -3455,7 +3448,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -3509,7 +3502,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -3570,7 +3563,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -3624,7 +3617,7 @@
                                                                 <label><b>@item2.hocPhan.loaiHP</b></label> <br />
                                                                 <label><b>@item2.phongHoc.maPhong</b></label> <br />
                                                                 <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />*@
-                                                            @if (item2.hocKy.lockstat == false)
+                                                            @if (item2.hocKy.lockstat == false || item2.hocKy.lockstat == null)
                                                             {
                                                                 if (item2.ID_GV == null)
                                                                 {
@@ -3782,13 +3775,30 @@
                             icon: 'success',
                             showConfirmButton: true,
                         });
-                    } else {
+                    } else if (res.result == false) {
                         Swal.fire({
                             title: 'Thông báo',
                             text: 'Giảng viên này đã có lớp giảng vào thời gian này !!!',
                             icon: 'error',
                             showConfirmButton: true,
                         });
+                    }
+                    if (res.resp == true) {
+                        Swal.fire({
+                            title: 'Thông báo',
+                            text: 'Giảng viên này đã được phân công 3 lớp giảng trong ngày !!!',
+                            icon: 'warning',
+                            showConfirmButton: true,
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                Swal.fire({
+                                    title: 'Thông báo',
+                                    text: 'Bạn đã phân công thành công !!!',
+                                    icon: 'success',
+                                    showConfirmButton: true,
+                                });
+                            }
+                        })
                     }
                 }
             });
@@ -3917,12 +3927,12 @@
 
         // Chọn tuần
         $(document).ready(function () {
-            if (sessionStorage.getItem('#ID')) {
-                $('#ID').val(sessionStorage.getItem('#ID'));
+            if (sessionStorage.getItem('#IDT')) {
+                $('#IDT').val(sessionStorage.getItem('#IDT'));
             }
-            $("#ID").on("change", function () {
+            $("#IDT").on("change", function () {
                 var selectedId = this.value;
-                sessionStorage.setItem('#ID', selectedId);
+                sessionStorage.setItem('#IDT', selectedId);
                 window.location.href = '@Url.Action("Index", "Home")' + '?selectedId=' + selectedId;
             });
         });
