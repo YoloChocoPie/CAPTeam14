@@ -17,7 +17,7 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="~/Home/Index1">Trang chủ</a></li>
+                          <li class="breadcrumb-item"><a href="@Url.Action("Index1","Home")">Trang chủ</a></li>
                         <li class="breadcrumb-item active">Phòng học</li>
                     </ol>
                 </div>
@@ -131,7 +131,7 @@
         $(function () {
             Swal.fire({
                 title: 'Thông báo',
-                text: 'Bạn đã cập nhập phòng học thành công !!!',
+                text: 'Bạn đã Cập nhật phòng học thành công !!!',
                 icon: 'success',
                 showConfirmButton: true,
                 timer: 1500,
@@ -262,7 +262,7 @@
                                 '</form>',
                             buttons: {
                                 confirm: {
-                                    text: 'Cập nhập',
+                                    text: 'Cập nhật',
                                     btnClass: 'btn-green',
                                     action: function () {
                                         window.location.assign(url);

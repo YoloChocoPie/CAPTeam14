@@ -371,6 +371,22 @@ namespace CAPTeam14.Controllers
                         Session["role"] = giangVien.role;
                         Session["id"] = giangVien.ID_dsGV;
                         Session["id1"] = giangVien.ID;
+                        if ((int)Session["role"] == 1)
+                        {
+                            Session["vaitro"] = "Admin";
+                        }
+                        else if ((int)Session["role"] == 2) 
+                        {
+                            Session["vaitro"] = "Ban chủ nhiệm khoa";
+                        }
+                        else if ((int)Session["role"] == 3)
+                        {
+                            Session["vaitro"] = "Bộ môn";
+                        }
+                        else if ((int)Session["role"] == 4)
+                        {
+                            Session["vaitro"] = "Giảng viên";
+                        }
                         // nếu session role là null ~ chưa có kích hoạt
                         if ((Session["role"] == null))
                         {

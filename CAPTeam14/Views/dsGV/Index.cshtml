@@ -19,7 +19,7 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="~/Home/Index1">Trang chủ</a></li>
+                          <li class="breadcrumb-item"><a href="@Url.Action("Index1","Home")">Trang chủ</a></li>
                         <li class="breadcrumb-item active">Danh sách giảng viên</li>
                     </ol>
                 </div>
@@ -49,6 +49,9 @@
                                         <th>
                                             Họ tên
                                         </th>
+                                        <th hidden="hidden"> Loại giảng viên</th>
+                                        <th hidden="hidden"> Khoa</th>
+
                                         <th>
 
                                         </th>
@@ -57,21 +60,28 @@
                                 <tbody>
                                     @foreach (var item in Model)
                                     {
-                                        <tr>
+                                    <tr>
 
 
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.maGV)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.tenGV)
-                                            </td>
-                                            <td>
-                                                <a class="btn btn-file detailBtn1 btn btn-info" title="Xem chi tiết" data-model-id1="@Url.Action("Edit", "dsGV", new { id = item.ID })" data-id1="@Url.Action("Details", "dsGV", new { id = item.ID })"><i class="fas fa-eye"></i></a>
-                                                <a class="btn btn-file btn btn-warning" title="Xem thống kê" href="@Url.Action("DetailStatistic", "giangVien", new { id = item.ID })"><i class="fas fa-chart-bar"></i></a>
-                                            </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.maGV)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.tenGV)
+                                        </td>
+                                        <td hidden="hidden">
+                                            @Html.DisplayFor(modelItem => item.loaiGV)
+                                        </td>
+                                        <td hidden="hidden">
+                                            @Html.DisplayFor(modelItem => item.khoa)
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-file detailBtn1 btn btn-info" title="Xem chi tiết" data-model-id1="@Url.Action("Edit", "dsGV", new { id = item.ID })" data-id1="@Url.Action("Details", "dsGV", new { id = item.ID })"><i class="fas fa-eye"></i></a>
+                                            <a class="btn btn-file btn btn-warning" title="Xem thống kê" href="@Url.Action("DetailStatistic", "giangVien", new { id = item.ID })"><i class="fas fa-chart-bar"></i></a>
+                                        </td>
+                                      
 
-                                        </tr>
+                                    </tr>
                                     }
 
                                 </tbody>                                
@@ -117,7 +127,7 @@
         $(function () {
             Swal.fire({
                 title: 'Thông báo',
-                text: 'Bạn đã cập nhập giảng viên thành công !!!',
+                text: 'Bạn đã Cập nhật giảng viên thành công !!!',
                 icon: 'success',
                 showConfirmButton: true,
                 timer: 1500,
@@ -151,7 +161,7 @@
                     success: function (result) {
                         $.confirm({
                             columnClass: 'col-md-5',
-                            title: '<div class="text-center container"><p>Thông tin của lớp học' + result.a + '  </p> </div>',
+                            title: '<div class="text-center container"><p>Thông tin của giảng viên' + result.a + '  </p> </div>',
                             content: '' +
                                 '<form action="" class="formName container">' +
                                 '<div class="form-group">' +
@@ -197,7 +207,7 @@
                                 '</form>',
                             buttons: {
                                 confirm: {
-                                    text: 'Cập nhập',
+                                    text: 'Cập nhật',
                                     btnClass: 'btn-green',
                                     action: function () {
                                         window.location.assign(url);

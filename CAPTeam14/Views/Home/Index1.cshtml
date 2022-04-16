@@ -21,7 +21,7 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="~/Home/Index1">Trang chủ</a></li>
+                          <li class="breadcrumb-item"><a href="@Url.Action("Index1","Home")">Trang chủ</a></li>
 
                     </ol>
                 </div>
@@ -41,7 +41,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="example1" class="table table-bordered table-striped">
+                            <table id="example12" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>
@@ -110,15 +110,15 @@
                                             {
                                                 if ((int)Session["role"] == 1 || (int)Session["role"] == 2)
                                                 {
-                                                    <td>
-                                                        @Html.ActionLink("Xem thời khóa biểu", "Index", new { id = item.ID }, new { @class = "seeTT" }) |
-                                                        <label>Xem thống kê | </label>
-                                                        <label>Import thời khóa biểu | </label>
-                                                        <label>Export thời khóa biểu | </label>
-                                                        <label>Xóa thời khóa biểu | </label>
-                                                        @Html.ActionLink("Bỏ khóa Thời khóa biểu", "UnLockTKB", new { id = item.ID })
+                                        <td>
+                                            @Html.ActionLink("Xem thời khóa biểu", "Index", new { id = item.ID }, new { @class = "seeTT" }) |
+                                            @Html.ActionLink("Xem thống kê", "DetailStatisticAll", new { id = item.ID }) |
+                                            <label>Import thời khóa biểu | </label>
+                                            <label>Export thời khóa biểu | </label>
+                                            <label>Xóa thời khóa biểu | </label>
+                                            @Html.ActionLink("Bỏ khóa Thời khóa biểu", "UnLockTKB", new { id = item.ID })
 
-                                                    </td>
+                                        </td>
                                                 }
                                                 if ((int)Session["role"] == 3)
                                                 {

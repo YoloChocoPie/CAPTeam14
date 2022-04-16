@@ -1,7 +1,7 @@
 ﻿@model CAPTeam14.Models.hocKy
 
 @{
-    ViewBag.Title = "Cập nhập Học Kì";
+    ViewBag.Title = "Cập nhật Học Kì";
     Layout = "~/Views/Shared/_LayoutTemplate.cshtml";
 }
 
@@ -29,8 +29,8 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="~/Home/Index">Trang chủ</a></li>
-                            <li class="breadcrumb-item active">Cập nhập học kỳ</li>
+                             <li class="breadcrumb-item"><a href="@Url.Action("Index1","Home")">Trang chủ</a></li>
+                            <li class="breadcrumb-item active">Cập nhật học kỳ</li>
                         </ol>
                     </div>
                 </div>
@@ -47,7 +47,7 @@
                                 @Html.AntiForgeryToken()
 
                                 <div class="card-body">
-                                    <label>Cập nhập học kỳ</label>
+                                    <label>Cập nhật học kỳ</label>
                                     <hr />
                                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -132,7 +132,7 @@
                                             <a class="btn btn-danger btn-block" href="@Url.Action("Index", "hocKy")">Quay lại</a>
                                         </div>
                                         <div class="col-6">
-                                            <button type="submit" value="Save" class="btn btn-success btn-block">Cập nhập</button>
+                                            <button type="submit" value="Save" class="btn btn-success btn-block">Cập nhật</button>
                                         </div>
                                     </div>
                                 </div>

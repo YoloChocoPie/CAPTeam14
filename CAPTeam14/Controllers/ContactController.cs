@@ -59,7 +59,7 @@ namespace CAPTeam14.Controllers
                     model.Contacts.Add(contact1);
                     model.SaveChanges();
 
-                    return RedirectToAction("Create", "Contact");
+                    return RedirectToAction("Index", "Contact");
                 }
                 else
                 {

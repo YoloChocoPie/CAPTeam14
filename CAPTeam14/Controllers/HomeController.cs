@@ -13,8 +13,8 @@ using ExcelDataReader;
 using System.Data.SqlClient;
 
 
-// 02/03/2022 cập nhập lại luồng đi Import, cải thiện tốc độ performance bằng cách chuyển hết định dạng sang chuỗi
-// 02/03/22 04:42 đang dừng lại ở câu lệnh kiểm tra học phần đã tồn tại hay chưa. Đã cập nhập database và thêm table Học Kỳ
+// 02/03/2022 Cập nhật lại luồng đi Import, cải thiện tốc độ performance bằng cách chuyển hết định dạng sang chuỗi
+// 02/03/22 04:42 đang dừng lại ở câu lệnh kiểm tra học phần đã tồn tại hay chưa. Đã Cập nhật database và thêm table Học Kỳ
 // 03/03/22 3:59 đã hoành thiện chức năng import dữ liệu kiểu mới. Tuy nhiên cần cải thiện lại về giao diện và cần thêm/sửa học kì cũng như lấy
 // dữ liệu của học kì vào thời khóa biểu tổng
 

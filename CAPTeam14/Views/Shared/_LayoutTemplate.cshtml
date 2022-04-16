@@ -122,7 +122,8 @@
                 <!-- Right navbar links -->
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <b class="nav-link"> @Session["hoten"]</b>
+                        <b class="nav-link"> @Session["hoten"] (@Session["vaitro"])</b>
+
                     </li>
 
                     <li class="nav-item">
@@ -174,7 +175,7 @@
                             @if ((int)Session["role"] == 1)
                             {
                                 <li class="nav-item">
-                                    <a href="~/Home/Index1" class="nav-link" id="icon-text">
+                                    <a href="@Url.Action("Index1","Home")" class="nav-link" id="icon-text">
                                         <i class="nav-icon fas fa-calendar-alt"></i>
                                         <p>Trang chủ</p>
                                     </a>
@@ -182,14 +183,14 @@
 
                                 <li class="nav-item">
 
-                                    <a href="~/giangVien/Index" class="nav-link" id="icon-text">
+                                    <a href="@Url.Action("Index","giangVien")" class="nav-link" id="icon-text">
                                         <i class="fas fa-user-cog nav-icon"></i>
                                         <p>Phân Quyền</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
 
-                                    <a href="~/Contact/Index" class="nav-link" id="icon-text">
+                                    <a href="@Url.Action("Index","Contact")" class="nav-link" id="icon-text">
                                         <i class="fas fa-user-cog nav-icon"></i>
                                         <p>Ticket</p>
                                     </a>
@@ -207,35 +208,35 @@
                                     <ul class="nav nav-treeview">
 
                                         <li class="nav-item">
-                                            <a href="~/hocKy/Index" class="nav-link" id="icon-text">
+                                            <a href="@Url.Action("Index","hocKy")" class="nav-link" id="icon-text">
                                                 <i class="far fa-circle nav-icon"></i>
                                                 <p>Học Kì</p>
                                             </a>
                                         </li>
 
                                         <li class="nav-item">
-                                            <a href="~/monHoc/Index" class="nav-link" id="icon-text">
+                                            <a href="@Url.Action("Index","monHoc")" class="nav-link" id="icon-text">
                                                 <i class="far fa-circle nav-icon"></i>
                                                 <p>Môn Học</p>
                                             </a>
                                         </li>
 
                                         <li class="nav-item">
-                                            <a href="~/Nganh/Index" class="nav-link" id="icon-text">
+                                            <a href="@Url.Action("Index","Nganh")" class="nav-link" id="icon-text">
                                                 <i class="far fa-circle nav-icon"></i>
                                                 <p>Ngành học</p>
                                             </a>
                                         </li>
 
                                         <li class="nav-item">
-                                            <a href="~/lopHoc/Index" class="nav-link" id="icon-text">
+                                            <a href="@Url.Action("Index","lopHoc")" class="nav-link" id="icon-text">
                                                 <i class="far fa-circle nav-icon"></i>
                                                 <p>Lớp học</p>
                                             </a>
                                         </li>
 
                                         <li class="nav-item">
-                                            <a href="~/dsGV/Index" class="nav-link" id="icon-text">
+                                            <a href="@Url.Action("Index","dsGV")" class="nav-link" id="icon-text">
                                                 <i class="far fa-circle nav-icon"></i>
                                                 <p>Danh sách giảng viên</p>
                                             </a>
@@ -265,20 +266,20 @@
                             @if ((int)Session["role"] == 2)
                             {
                                 <li class="nav-item">
-                                    <a href="~/Home/Index1" class="nav-link" id="icon-text">
+                                    <a href="@Url.Action("Index1","Home")" class="nav-link" id="icon-text">
                                         <i class="nav-icon fas fa-calendar-alt"></i>
                                         <p>Trang chủ</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="~/Contact/Create" class="nav-link" id="icon-text">
+                                    <a href="@Url.Action("Create","Contact")" class="nav-link" id="icon-text">
 
                                         <i class="nav-icon fas fa-calendar-alt"></i>
                                         <p>Liên hệ Admin</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="~/Contact/Index" class="nav-link" id="icon-text">
+                                    <a href="@Url.Action("Index","Contact")" class="nav-link" id="icon-text">
 
                                         <i class="nav-icon fas fa-calendar-alt"></i>
                                         <p>Ticket đã gửi</p>
@@ -286,7 +287,7 @@
                                 </li>
                                 @*Hiển thị Tree List*@
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="#" class="nav-link" id="icon-text">
                                         <i class="nav-icon fas fa-table"></i>
                                         <p>
                                             Quản lý danh mục
@@ -296,35 +297,35 @@
                                     <ul class="nav nav-treeview">
 
                                         <li class="nav-item">
-                                            <a href="~/hocKy/Index" class="nav-link" id="icon-text">
+                                            <a href="@Url.Action("Index","hocKy")" class="nav-link" id="icon-text">
                                                 <i class="far fa-circle nav-icon"></i>
                                                 <p>Học Kì</p>
                                             </a>
                                         </li>
 
                                         <li class="nav-item">
-                                            <a href="~/monHoc/Index" class="nav-link" id="icon-text">
+                                            <a href="@Url.Action("Index","monHoc")" class="nav-link" id="icon-text">
                                                 <i class="far fa-circle nav-icon"></i>
                                                 <p>Môn Học</p>
                                             </a>
                                         </li>
 
                                         <li class="nav-item">
-                                            <a href="~/Nganh/Index" class="nav-link" id="icon-text">
+                                            <a href="@Url.Action("Index","Nganh")" class="nav-link" id="icon-text">
                                                 <i class="far fa-circle nav-icon"></i>
                                                 <p>Ngành học</p>
                                             </a>
                                         </li>
 
                                         <li class="nav-item">
-                                            <a href="~/lopHoc/Index" class="nav-link" id="icon-text">
+                                            <a href="@Url.Action("Index","lopHoc")" class="nav-link" id="icon-text">
                                                 <i class="far fa-circle nav-icon"></i>
                                                 <p>Lớp học</p>
                                             </a>
                                         </li>
 
                                         <li class="nav-item">
-                                            <a href="~/dsGV/Index" class="nav-link" id="icon-text">
+                                            <a href="@Url.Action("Index","dsGV")" class="nav-link" id="icon-text">
                                                 <i class="far fa-circle nav-icon"></i>
                                                 <p>Danh sách giảng viên</p>
                                             </a>
@@ -347,20 +348,20 @@
                             @if ((int)Session["role"] == 3)
                             {
                                 <li class="nav-item">
-                                    <a href="~/Home/Index1" class="nav-link" id="icon-text">
+                                    <a href="@Url.Action("Index1","Home")" class="nav-link" id="icon-text">
                                         <i class="nav-icon fas fa-calendar-alt"></i>
                                         <p>Trang chủ</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="~/Contact/Create" class="nav-link" id="icon-text">
+                                    <a href="@Url.Action("Create","Contact")" class="nav-link" id="icon-text">
 
                                         <i class="nav-icon fas fa-calendar-alt"></i>
                                         <p>Liên hệ Admin</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="~/Contact/Index" class="nav-link" id="icon-text">
+                                    <a href="@Url.Action("Index","Contact")" class="nav-link" id="icon-text">
 
                                         <i class="nav-icon fas fa-calendar-alt"></i>
                                         <p>Ticket đã gửi</p>
@@ -368,7 +369,7 @@
                                 </li>
                                 @*Hiển thị Tree List*@
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="#" class="nav-link" id="icon-text">
                                         <i class="nav-icon fas fa-table"></i>
                                         <p>
                                             Quản lý danh mục
@@ -378,35 +379,35 @@
                                     <ul class="nav nav-treeview">
 
                                         <li class="nav-item">
-                                            <a href="~/hocKy/Index" class="nav-link" id="icon-text">
+                                            <a href="@Url.Action("Index","hocKy")" class="nav-link" id="icon-text">
                                                 <i class="far fa-circle nav-icon"></i>
                                                 <p>Học Kì</p>
                                             </a>
                                         </li>
 
                                         <li class="nav-item">
-                                            <a href="~/monHoc/Index" class="nav-link" id="icon-text">
+                                            <a href="@Url.Action("Index","monHoc")" class="nav-link" id="icon-text">
                                                 <i class="far fa-circle nav-icon"></i>
                                                 <p>Môn Học</p>
                                             </a>
                                         </li>
 
                                         <li class="nav-item">
-                                            <a href="~/Nganh/Index" class="nav-link" id="icon-text">
+                                            <a href="@Url.Action("Index","Nganh")" class="nav-link" id="icon-text">
                                                 <i class="far fa-circle nav-icon"></i>
                                                 <p>Ngành học</p>
                                             </a>
                                         </li>
 
                                         <li class="nav-item">
-                                            <a href="~/lopHoc/Index" class="nav-link" id="icon-text">
+                                            <a href="@Url.Action("Index","lopHoc")" class="nav-link" id="icon-text">
                                                 <i class="far fa-circle nav-icon"></i>
                                                 <p>Lớp học</p>
                                             </a>
                                         </li>
 
                                         <li class="nav-item">
-                                            <a href="~/dsGV/Index" class="nav-link" id="icon-text">
+                                            <a href="@Url.Action("Index","dsGV")" class="nav-link" id="icon-text">
                                                 <i class="far fa-circle nav-icon"></i>
                                                 <p>Danh sách giảng viên</p>
                                             </a>
@@ -428,28 +429,28 @@
                             @if ((int)Session["role"] == 4)
                             {
                                 <li class="nav-item">
-                                    <a href="~/Home/Index1" class="nav-link" id="icon-text">
+                                    <a href="@Url.Action("Index1","Home")" class="nav-link" id="icon-text">
 
                                         <i class="nav-icon fas fa-calendar-alt"></i>
                                         <p>Trang chủ</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="~/giangVien/DetailStatistic1" class="nav-link" id="icon-text">
+                                    <a href="@Url.Action("DetailStatistic1","giangVien")" class="nav-link" id="icon-text">
 
                                         <i class="nav-icon fas fa-calendar-alt"></i>
-                                        <p>Thống kê cá nhấn</p>
+                                        <p>Thống kê cá nhân</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="~/Contact/Create" class="nav-link" id="icon-text">
+                                    <a href="@Url.Action("Create","Contact")" class="nav-link" id="icon-text">
 
                                         <i class="nav-icon fas fa-calendar-alt"></i>
                                         <p>Liên hệ Admin</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="~/Contact/Index" class="nav-link" id="icon-text">
+                                    <a href="@Url.Action("Index","Contact")" class="nav-link" id="icon-text">
 
                                         <i class="nav-icon fas fa-calendar-alt"></i>
                                         <p>Ticket đã gửi</p>
@@ -534,6 +535,22 @@
             "responsive": true, "lengthChange": false, "autoWidth": false,
             "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
+    });
+
+    $(function () {
+        $("#example12").DataTable({
+            "responsive": true, "lengthChange": false, "autoWidth": false,
+            "buttons": ["copy", "csv", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#example12_wrapper .col-md-6:eq(0)');
         $('#example2').DataTable({
             "paging": true,
             "lengthChange": false,

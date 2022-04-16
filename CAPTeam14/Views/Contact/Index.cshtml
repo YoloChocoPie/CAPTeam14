@@ -17,7 +17,7 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="~/Home/Index1">Trang chủ</a></li>
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index1","Home")">Trang chủ</a></li>
                         <li class="breadcrumb-item active">Danh sách Ticket</li>
                     </ol>
                 </div>
@@ -34,7 +34,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Danh sách Ticket</h3>
-                            
+
 
                         </div>
                         <!-- /.card-header -->
@@ -57,7 +57,7 @@
 
 
 
-                                        <th></th>
+                                        <th hidden="hidden"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -101,7 +101,7 @@
                                                 <td>
                                                     @Html.DisplayFor(modelItem => item.trangthai)
                                                 </td>
-                                                <td>
+                                                <td hidden="hidden">
                                                     @*bỏ trống*@
                                                 </td>
 
@@ -157,6 +157,21 @@
     </script>
 }
 
+
+@if (TempData["taoticket"] != null)
+{
+    <script type="text/javascript">
+        $(function () {
+            Swal.fire({
+                title: 'Thông báo',
+                text: 'Bạn đã gửi ticket thành công !!!',
+                icon: 'success',
+                showConfirmButton: true,
+                timer: 1500,
+            });
+        });
+    </script>
+}
 
 
 
