@@ -12,13 +12,23 @@ namespace CAPTeam14
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            
             //Trang chủ
             routes.MapRoute(
                 name: "userdetail",
-                url: "Home/{userid}",
+                url: "HomePage/{userid}",
                 defaults: new {controller = "Home",action = "Index1", userid = UrlParameter.Optional}, namespaces: new[] { string.Format("{0}.Controllers", typeof(RouteConfig).Namespace) });
 
-           /* routes.MapRoute(
+            routes.MapRoute(
+               name: "downloadex",
+               url: "download/{userid}",
+               defaults: new { controller = "Home", action = "DownloadExcel", userid = UrlParameter.Optional }, namespaces: new[] { string.Format("{0}.Controllers", typeof(RouteConfig).Namespace) });
+
+            routes.MapRoute(
+               name: "downloaddsGV",
+               url: "downloaddsGV/{userid}",
+               defaults: new { controller = "dsGV", action = "DownloadExcel", userid = UrlParameter.Optional }, namespaces: new[] { string.Format("{0}.Controllers", typeof(RouteConfig).Namespace) });
+            /*routes.MapRoute(
                name: "tkb",
                url: "Thoikhoabieu/{userid}",
                defaults: new { controller = "Home", action = "Index", userid = UrlParameter.Optional }, namespaces: new[] { string.Format("{0}.Controllers", typeof(RouteConfig).Namespace) });*/
@@ -130,10 +140,10 @@ namespace CAPTeam14
             url: "DanhsachGV/{userid}",
             defaults: new { controller = "dsGV", action = "Index", userid = UrlParameter.Optional }, namespaces: new[] { string.Format("{0}.Controllers", typeof(RouteConfig).Namespace) });
 
-            routes.MapRoute(
+           /* routes.MapRoute(
             name: "ImportDanhsachGV",
             url: "ImportDanhsachGV/{userid}",
-            defaults: new { controller = "dsGV", action = "Catalog", userid = UrlParameter.Optional }, namespaces: new[] { string.Format("{0}.Controllers", typeof(RouteConfig).Namespace) });
+            defaults: new { controller = "dsGV", action = "Catalog", userid = UrlParameter.Optional }, namespaces: new[] { string.Format("{0}.Controllers", typeof(RouteConfig).Namespace) });*/
 
             routes.MapRoute(
             name: "EditdsGV",
@@ -159,14 +169,15 @@ namespace CAPTeam14
             name: "Create",
             url: "taotaikhoan/{userid}",
             defaults: new { controller = "Account", action = "Create", userid = UrlParameter.Optional }, namespaces: new[] { string.Format("{0}.Controllers", typeof(RouteConfig).Namespace) });
+
             //
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index1", id = UrlParameter.Optional }
             );
-
             
+
         }
 
     }

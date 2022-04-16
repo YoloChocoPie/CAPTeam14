@@ -3933,11 +3933,9 @@
             $("#IDT").on("change", function () {
                 var selectedId = this.value;
                 sessionStorage.setItem('#IDT', selectedId);
-                /**/
-                window.location.href = 'Thoikhoabieu' + id + '?selectedId=' + selectedId;
-        /**/
-    });
-});
+                window.location.href = '@Url.Action("Index", "Home")' + '?selectedId=' + selectedId;
+            });
+        });
 
     </script>
 
