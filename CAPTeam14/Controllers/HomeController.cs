@@ -41,62 +41,7 @@ namespace CAPTeam14.Controllers
             return View(tkb);
         }
 
-        public ActionResult Index2(int? id, string selectedId)
-        {
-            foreach (var tuan in model.TKBs.Where(x => x.ID_hocKy == id).Select(x => x.tuanHoc.tuanHoc1).Distinct())
-            {
-                string cc = tuan;
-                string[] cl = cc.Split(',', ';', ' ');
-
-                foreach (var clm in cl)
-                {
-                    string dmm = clm;
-                    if (cl.Contains(selectedId))
-                    {
-                        TempData["Tuan1"] = selectedId;
-                        break;
-                    }
-
-                    else
-                    {
-                        TempData["Tuan1"] = "1";
-
-                    }
-                    break;
-
-                }
-                break;
-
-            };
-            //
-            TempData["Tuan"] = selectedId;
-            //
-            
-
-            //ViewBag.IDs = new SelectList(model.tuans.OrderBy(x => x.ID), "", "ID");
-            ViewBag.hkyy = model.tuans.OrderBy(x => x.ID).ToList();
-
-            // lấy danh sách thời khóa biểu
-            var tkb = model.TKBs.OrderByDescending(x => x.ID).ToList();
-            var tkb12 = model.TKBs.FirstOrDefault(x => x.ID_hocKy == id);
-            // lấy danh sách học kì
-            var tkb1 = model.hocKies.FirstOrDefault(x => x.ID == id);
-            //hiển thị tên học kì đã chọn
-            ViewBag.test2 = tkb1.tenHK;
-            ViewBag.test3 = tkb1.ID;
-            TempData["test"] = tkb1.ID;
-            
-            if (tkb12.ID_GV == (int)Session["id"])
-            {
-                ViewBag.kiemtra = 1;
-            }
-
-            // lấy thông tin ID học kì đã chọn trong thời khóa biểu
-            ViewBag.test = id;
-
-            ViewBag.gv = model.nguoiDungs.Where(x => x.role == 4).OrderByDescending(x => x.ID).ToList();
-            return View(tkb);
-        }
+       
         [HttpGet]
         public ActionResult Index(int? id, string selectedId)
         {
@@ -132,11 +77,11 @@ namespace CAPTeam14.Controllers
 
             //ViewBag.IDs = new SelectList( model.tuans.OrderBy(x => x.ID), "ID", "sotuan");
             ViewBag.hkyy = model.tuans.OrderBy(x => x.ID).ToList();
-
+          
             // lấy danh sách thời khóa biểu
             var tkb = model.TKBs.OrderBy(x => x.ID).ToList();
             // lấy danh sách học kì
-            var tkb1 = model.hocKies.FirstOrDefault(x => x.ID == id);
+                var tkb1 = model.hocKies.FirstOrDefault(x => x.ID == id);
             //hiển thị tên học kì đã chọn
             ViewBag.test2 = tkb1.tenHK;
             ViewBag.test3 = tkb1.ID;

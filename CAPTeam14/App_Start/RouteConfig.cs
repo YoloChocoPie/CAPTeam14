@@ -18,10 +18,10 @@ namespace CAPTeam14
                 url: "Home/{userid}",
                 defaults: new {controller = "Home",action = "Index1", userid = UrlParameter.Optional}, namespaces: new[] { string.Format("{0}.Controllers", typeof(RouteConfig).Namespace) });
 
-            routes.MapRoute(
+           /* routes.MapRoute(
                name: "tkb",
                url: "Thoikhoabieu/{userid}",
-               defaults: new { controller = "Home", action = "Index", userid = UrlParameter.Optional }, namespaces: new[] { string.Format("{0}.Controllers", typeof(RouteConfig).Namespace) });
+               defaults: new { controller = "Home", action = "Index", userid = UrlParameter.Optional }, namespaces: new[] { string.Format("{0}.Controllers", typeof(RouteConfig).Namespace) });*/
 
             routes.MapRoute(
               name: "thongketong",
