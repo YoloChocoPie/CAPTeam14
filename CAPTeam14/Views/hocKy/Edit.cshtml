@@ -74,7 +74,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-user"></i></span>
                                             </div>
-                                            @Html.EditorFor(model => model.namBD, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.EditorFor(model => model.namBD, new { htmlAttributes = new { @class = "form-control" , @type = "number" } })
                                             @Html.ValidationMessageFor(m => m.namBD, "", new { @class = "text-danger" })
 
                                         </div>
@@ -86,7 +86,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-user"></i></span>
                                             </div>
-                                            @Html.EditorFor(model => model.namKT, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.EditorFor(model => model.namKT, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
                                             @Html.ValidationMessageFor(m => m.namKT, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
@@ -98,7 +98,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-user"></i></span>
                                             </div>
-                                            @Html.DropDownList("ID_lop", new SelectList(ViewBag.tenlop, "ID", "maLop"), new { @class = "form-control" })
+                                            @Html.DropDownList("ID_lop", new SelectList(ViewBag.tenlop, "ID", "maLop"), new { @class = "form-control"  })
 
 
 

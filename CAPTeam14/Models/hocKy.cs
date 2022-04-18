@@ -25,7 +25,9 @@ namespace CAPTeam14.Models
         [RegularExpression(@"^\S+(?:\s\S+)*$", ErrorMessage = "Tên học kì không chứa khoảng trắng")]
         public string tenHK { get; set; }
         [RegularExpression(@"^\S+(?:\s\S+)*$", ErrorMessage = "Năm bắt đầu không chứa khoảng trắng")]
+      
         public string namBD { get; set; }
+        
         [RegularExpression(@"^\S+(?:\s\S+)*$", ErrorMessage = "Năm kết thúc không chứa khoảng trắng")]
         public string namKT { get; set; }
         public Nullable<int> ID_nganh { get; set; }

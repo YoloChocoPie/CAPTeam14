@@ -370,25 +370,53 @@ namespace CAPTeam14.Controllers
                         Session["hoten"] = giangVien.tenGV;
                         Session["role"] = giangVien.role;
                         Session["id"] = giangVien.ID_dsGV;
+                        if (Session["hoten"].ToString() == "Nguyễn Phan Hòa Thuận" && (Session["role"] == null))
+                        {
+                            Session.Abandon();
+                            Request.Cookies.Clear();
+                            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                            TempData["205"] = 1;
+                            TempData["0521"] = 1;
+                            return View("Login");
+                            
+                        }
                         Session["id1"] = giangVien.ID;
-                        if ((int)Session["role"] == 1)
+                        if (Session["role"] == null)
                         {
-                            Session["vaitro"] = "Admin";
+                            Session["vaitro"] = " Easter Egg : Nếu bạn thấy được dòng này, nghĩa là code bị lỗi - LTC";
                         }
-                        else if ((int)Session["role"] == 2) 
+                        else
                         {
-                            Session["vaitro"] = "Ban chủ nhiệm khoa";
+                            if ((int)Session["role"] == 1)
+                            {
+                                Session["vaitro"] = "Admin";
+                            }
+                            else
+                            {
+                                if ((int)Session["role"] == 2)
+                                {
+                                    Session["vaitro"] = "Ban chủ nhiệm khoa";
+                                }
+                                else
+                                {
+                                    if ((int)Session["role"] == 3)
+                                    {
+                                        Session["vaitro"] = "Bộ môn";
+                                    }
+                                    else
+                                    {
+                                        if ((int)Session["role"] == 4)
+                                        {
+                                            Session["vaitro"] = "Giảng viên";
+                                        }
+                                    }
+                                }
+                            }
                         }
-                        else if ((int)Session["role"] == 3)
-                        {
-                            Session["vaitro"] = "Bộ môn";
-                        }
-                        else if ((int)Session["role"] == 4)
-                        {
-                            Session["vaitro"] = "Giảng viên";
-                        }
-                        // nếu session role là null ~ chưa có kích hoạt
-                        if ((Session["role"] == null))
+                        
+                    
+                            // nếu session role là null ~ chưa có kích hoạt
+                            if ((Session["role"] == null))
                         {
                             //loại bỏ hết những hoạt động của người dùng hiện tại
                             Session.Abandon();

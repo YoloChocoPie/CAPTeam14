@@ -199,6 +199,17 @@ namespace CAPTeam14.Controllers
                 }
                 else
                 {
+                    if (hk.namBD.Length != 4 )
+                    {
+                        ModelState.AddModelError("namBD", "Vui lòng nhập đúng định dạng năm");
+                    }
+                    else
+                    {
+                        if (Convert.ToInt32(hk.namBD) <= 0)
+                        {
+                            ModelState.AddModelError("namBD", "Vui lòng nhập số hợp lệ");
+                        }
+                    }
                    /* //Test case kiểm tra kí tự đặc biệt
                     if (Kytudacbiet(hk.namBD.Trim()) == true)
                     {
@@ -223,11 +234,22 @@ namespace CAPTeam14.Controllers
                 }
                 else
                 {
-                   /* //Test case kiểm tra kí tự đặc biệt
-                    if (Kytudacbiet(hk.namKT.Trim()) == true)
+                    if (hk.namKT.Length != 4)
                     {
-                        ModelState.AddModelError("namKT", "Không được nhập ký tự");
-                    }*/
+                        ModelState.AddModelError("namKT", "Vui lòng nhập đúng định dạng năm");
+                    }
+                    else
+                    {
+                        if (Convert.ToInt32(hk.namKT) <= 0)
+                        {
+                            ModelState.AddModelError("namKT", "Vui lòng nhập số hợp lệ");
+                        }
+                    }
+                    /* //Test case kiểm tra kí tự đặc biệt
+                     if (Kytudacbiet(hk.namKT.Trim()) == true)
+                     {
+                         ModelState.AddModelError("namKT", "Không được nhập ký tự");
+                     }*/
                 }
 
             }
@@ -278,11 +300,22 @@ namespace CAPTeam14.Controllers
                 }
                 else
                 {
-                   /* //Test case kiểm tra kí tự đặc biệt
-                    if (Kytudacbiet(hk.namBD.Trim()) == true)
+                    if (hk.namBD.Length != 4)
                     {
-                        ModelState.AddModelError("namBD", "Không được nhập ký tự");
-                    }*/
+                        ModelState.AddModelError("namBD", "Vui lòng nhập đúng định dạng năm");
+                    }
+                    else
+                    {
+                        if (Convert.ToInt32(hk.namBD) <= 0)
+                        {
+                            ModelState.AddModelError("namBD", "Vui lòng nhập số hợp lệ");
+                        }
+                    }
+                    /* //Test case kiểm tra kí tự đặc biệt
+                     if (Kytudacbiet(hk.namBD.Trim()) == true)
+                     {
+                         ModelState.AddModelError("namBD", "Không được nhập ký tự");
+                     }*/
                 }
 
             }
@@ -302,6 +335,17 @@ namespace CAPTeam14.Controllers
                 }
                 else
                 {
+                    if (hk.namKT.Length != 4)
+                    {
+                        ModelState.AddModelError("namKT", "Vui lòng nhập đúng định dạng năm");
+                    }
+                    else
+                    {
+                        if (Convert.ToInt32(hk.namKT) <= 0)
+                        {
+                            ModelState.AddModelError("namKT", "Vui lòng nhập số hợp lệ");
+                        }
+                    }
                     /* //Test case kiểm tra kí tự đặc biệt
                      if (Kytudacbiet(hk.namKT.Trim()) == true)
                      {

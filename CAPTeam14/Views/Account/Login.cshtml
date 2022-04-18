@@ -25,7 +25,6 @@
 
 
 
-
     <link rel="icon" href="~/assets/VanLang-Logo.png">
 
 
@@ -38,6 +37,10 @@
     <link rel="stylesheet" href="@Url.Content("~/Login/LoginStyle.css")">
     <script src="@Url.Content("~/PluginTemplate/sweetalert2/sweetalert2.min.js")"></script>
     <link rel="stylesheet" href="@Url.Content("~/PluginTemplate/sweetalert2/sweetalert2.min.css")">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!--jquery-confirm-css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.css" integrity="sha512-0V10q+b1Iumz67sVDL8LPFZEEavo6H/nBSyghr7mm9JEQkOAm91HNoZQRvQdjennBb/oEuW+8oZHVpIKq+d25g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- summernote -->
 
 
 
@@ -66,6 +69,10 @@
     <!-- jQuery UI 1.11.4 -->
     <script src="@Url.Content("~/plugins/jquery-ui/jquery-ui.min.js")"></script>
 
+
+
+    <!--SweetAlert-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 
 
 
@@ -103,16 +110,27 @@
     </script>
 }
 
-@if (TempData["ThongBao1"] != null)
+
+@if (TempData["0521"] != null)
 {
     <script type="text/javascript">
         $(function () {
             Swal.fire({
-                title: 'Thông báo',
-                text: 'Bạn đã đăng kí thành công !!!',
-                icon: 'success',
-                showConfirmButton: true,
+                title: '',
+                width: 600,
+                padding: '17em',
+                color: '#716add',
+                background: ' url(https://lh3.googleusercontent.com/BmtxhqSHWWW9jklbEcAgMksZlOVmC7UfQT6HvrJjqpUWcSApn9mlaAp4xiBDENI5WbtbDMdIgGwvHc1DvR_mZf5JE09X8DGShug2D4zWXunhMitdKcJ9cZzQipVWs7Ie_d8vqw8esu_jncfpJC69CjkRbWEGQ73bsKpani4IjaCl-pvoUPt5ohYl881ZoCOtXdK1lmh2PwT0pEivG9f4NXsoZmP5BSBsB-tMasjtuGsUfJwVmSdUcVN0OjdGmvL9ZR9b4nfKslfJ89nz2zZp_G8qcBD2wFKO_gnggqx8eT2DYEWw5U_OCl9BsNJxiv_w4S8xQYf4bE6JiNC94aiZIsYiU1WqeGXmGjWACGOHEwH_mzaaZdVgZXS-BzLyf-nFbTYA3xfodlmYvKFhtftEIJAUlcJy8Pj4xg8-8nGEVTNzN4hjOq2AuFC7b2AYKU4Q7qr3WLMX1WClUqFUjEWCOo-qI5KhVGPwykC_1ZN-oDDS-eGCEwJdstSZqVPDFPzwTwHm9HOHSwn0JuD4HTFp704xbMtKQ5ca5xIBgj-ixYYeqJFtuDyjmMHqqZNv76nC60VgdiS97czOF-8mB6f5SaIipDpI_ACrj74LDvI7LxB1RPFPN9w05EEnyfYtiUNbJcs_hbTRQtgvU_H_l8pCqWjBrSAWwIUpqmPq5UuRrDfmzwlFRGjS2EZ7X3NH_ZmCAMT9Pa9XRAJCKJia6ocpNYKEzyLh0C5ZI-szmq4MQ-DNBMuaDgIQtgYJajKxJqGPs7q2L8qz-oDz2C5PYRq_YlMQ9wC4kDOs7UQUYctKMR8ahoX7AOFACQsGnVOTKVRyLW2KjO4BLQ=w567-h568-no?authuser=0)',
+                backdrop: `
+    rgba(0,0,123,0.4)
+    url("https://raw.githubusercontent.com/gist/T-Jedsada/dbee22959762fa6c0ccad8153830b51a/raw/8957088c2e31dba6d72ce86c615cb3c7bb7f0b0c/nyan-cat.gif")
+    left top
+    no-repeat
+  `
             });
         });
+        
+           
+            
     </script>
 }

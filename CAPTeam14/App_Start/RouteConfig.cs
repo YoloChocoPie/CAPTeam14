@@ -86,6 +86,11 @@ namespace CAPTeam14
             url: "Hockyedit/{userid}",
             defaults: new { controller = "hocKy", action = "Edit", userid = UrlParameter.Optional }, namespaces: new[] { string.Format("{0}.Controllers", typeof(RouteConfig).Namespace) });
 
+            routes.MapRoute(
+            name: "Hockycreate",
+            url: "Hockycreate/{userid}",
+            defaults: new { controller = "hocKy", action = "Create", userid = UrlParameter.Optional }, namespaces: new[] { string.Format("{0}.Controllers", typeof(RouteConfig).Namespace) });
+
             //Môn học
             routes.MapRoute(
             name: "Monhoc",
