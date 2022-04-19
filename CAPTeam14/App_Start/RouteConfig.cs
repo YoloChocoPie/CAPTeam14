@@ -38,10 +38,10 @@ namespace CAPTeam14
               url: "Thongketong/{userid}",
               defaults: new { controller = "Home", action = "DetailStatisticAll", userid = UrlParameter.Optional }, namespaces: new[] { string.Format("{0}.Controllers", typeof(RouteConfig).Namespace) });
 
-            routes.MapRoute(
+            /*routes.MapRoute(
               name: "importtkb",
               url: "Importtkb/{userid}",
-              defaults: new { controller = "Home", action = "Catalog", userid = UrlParameter.Optional }, namespaces: new[] { string.Format("{0}.Controllers", typeof(RouteConfig).Namespace) });
+              defaults: new { controller = "Home", action = "Catalog", userid = UrlParameter.Optional }, namespaces: new[] { string.Format("{0}.Controllers", typeof(RouteConfig).Namespace) });*/
 
             routes.MapRoute(
              name: "exporttkb",
@@ -145,10 +145,10 @@ namespace CAPTeam14
             url: "DanhsachGV/{userid}",
             defaults: new { controller = "dsGV", action = "Index", userid = UrlParameter.Optional }, namespaces: new[] { string.Format("{0}.Controllers", typeof(RouteConfig).Namespace) });
 
-           /* routes.MapRoute(
-            name: "ImportDanhsachGV",
-            url: "ImportDanhsachGV/{userid}",
-            defaults: new { controller = "dsGV", action = "Catalog", userid = UrlParameter.Optional }, namespaces: new[] { string.Format("{0}.Controllers", typeof(RouteConfig).Namespace) });*/
+            /* routes.MapRoute(
+             name: "ImportDanhsachGV",
+             url: "ImportDanhsachGV/{userid}",
+             defaults: new { controller = "dsGV", action = "Catalog", userid = UrlParameter.Optional }, namespaces: new[] { string.Format("{0}.Controllers", typeof(RouteConfig).Namespace) });*/
 
             routes.MapRoute(
             name: "EditdsGV",

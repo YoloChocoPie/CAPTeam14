@@ -54,7 +54,7 @@
                                             </div>
 
                                             @Html.EditorFor(model => model.maLop, new { htmlAttributes = new { @class = "form-control" } })
-
+                                            @Html.ValidationMessageFor(model => model.maLop, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
                                     <div class="row">

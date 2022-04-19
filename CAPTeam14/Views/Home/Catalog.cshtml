@@ -39,9 +39,9 @@
                                     <div class="container">
                                         <div class="form-control ">
                                             <div class="row">
-                                                <div class="col-sm-4" id="p1"><label>Học kỳ:  @ViewBag.test2</label></div>
-                                                <div class="col-sm-4" id="p2"> <label>Năm bắt đầu : @ViewBag.nambd</label></div>
-                                                <div class="col-sm-4" id="p3"><label>Năm kết thúc : @ViewBag.namkt</label></div>
+                                                <div class="col-sm-4" id="p1"><label>Học kỳ:  @Session["test2"]</label></div>
+                                                <div class="col-sm-4" id="p2"> <label>Năm bắt đầu : @Session["nambd"]</label></div>
+                                                <div class="col-sm-4" id="p3"><label>Năm kết thúc : @Session["namkt"]</label></div>
 
 
                                                @* <div class="col" id="p4"><label>Tên ngành : @ViewBag.nganh</label></div>
@@ -188,7 +188,12 @@
                                                             onAfterClose() {
                                                                 Swal.hideLoading()
                                                             },
+
+
                                                         });
+                                                        e.preventDefault(); // The browser will not make the HTTP POST request
+
+                                                        return;
 
 
 

@@ -209,11 +209,11 @@ namespace CAPTeam14.Controllers
             // lấy id của học kì đã chọn
             var tkb1 = model.hocKies.FirstOrDefault(x => x.ID == id);
             // hiển thị tên học kì đã chọn
-            ViewBag.test2 = tkb1.tenHK;
+            Session["test2"] = tkb1.tenHK;
             ViewBag.test1 = id;
 
-            ViewBag.nambd = tkb1.namBD;
-            ViewBag.namkt = tkb1.namKT;
+            Session["nambd"] = tkb1.namBD;
+            Session["namkt"] = tkb1.namKT;
             /*  ViewBag.tenlop = tkb1.lopHoc.maLop;
               ViewBag.nganh = tkb1.Nganh.tenNganh;*/
             return View();
@@ -227,7 +227,7 @@ namespace CAPTeam14.Controllers
         public FileResult DownloadExcel()
         {
             // nhớ sửa lại đường dẫn khi publish server
-            string path = "/CP24Team14/Doc/Template.xlsx";
+            string path = "/Doc/Template.xlsx";
             return File(path, "application/vnd.ms-excel", "Template.xlsx");
         }
 

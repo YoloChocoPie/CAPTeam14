@@ -60,7 +60,7 @@
                                             </div>
 
                                             @Html.EditorFor(model => model.maNganh, new { htmlAttributes = new { @class = "form-control" } })
-
+                                            @Html.ValidationMessageFor(model => model.maNganh, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
 
@@ -70,8 +70,8 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-user"></i></span>
                                             </div>
-                                            @Html.EditorFor(model => model.tenNganh, new { htmlAttributes = new { @class = "form-control"} })
-
+                                            @Html.EditorFor(model => model.tenNganh, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.tenNganh, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
 

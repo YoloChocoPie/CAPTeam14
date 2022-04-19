@@ -4729,7 +4729,6 @@
     <Content Include="Views\hocKy\Create.cshtml" />
     <Content Include="Views\hocKy\Edit.cshtml" />
     <Content Include="Views\Home\Index1.cshtml" />
-    <Content Include="Views\Home\Catalog1.cshtml" />
     <Content Include="Views\Home\Index2.cshtml" />
     <Content Include="Views\giangVien\DetailStatistic.cshtml" />
     <Content Include="Views\dsGV\Index.cshtml" />

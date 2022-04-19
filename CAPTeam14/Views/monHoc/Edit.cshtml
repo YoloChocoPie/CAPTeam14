@@ -59,7 +59,7 @@
                                             </div>
 
                                             @Html.EditorFor(model => model.tenMon, new { htmlAttributes = new { @class = "form-control" } })
-
+                                            @Html.ValidationMessageFor(model => model.tenMon, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
 
@@ -81,7 +81,7 @@
                                                 <span class="input-group-text"><i class="far fa-envelope"></i></span>
                                             </div>
                                             @Html.EditorFor(model => model.tinChi, new { htmlAttributes = new { @class = "form-control" } })
-
+                                            @Html.ValidationMessageFor(model => model.tinChi, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
 
@@ -92,7 +92,7 @@
                                                 <span class="input-group-text"><i class="far fa-envelope"></i></span>
                                             </div>
                                             @Html.EditorFor(model => model.tengoiKhac, new { htmlAttributes = new { @class = "form-control" } })
-
+                                            @Html.ValidationMessageFor(model => model.tengoiKhac, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
 

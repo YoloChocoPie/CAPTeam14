@@ -64,7 +64,7 @@
                                             </div>
 
                                             @Html.EditorFor(model => model.tenTicket, new { htmlAttributes = new { @class = "form-control" } })
-
+                                            @Html.ValidationMessageFor(model => model.tenTicket, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
 
@@ -74,8 +74,8 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-user"></i></span>
                                             </div>
-                                            @Html.TextAreaFor(model => model.ndTicket, new { style = "width:430px !important; height:242px "  })
-
+                                            @Html.TextAreaFor(model => model.ndTicket, new { style = "width:430px !important; height:242px " })
+                                            @Html.ValidationMessageFor(model => model.ndTicket, "", new { @class = "text-danger" })
 
                                         </div>
                                     </div>

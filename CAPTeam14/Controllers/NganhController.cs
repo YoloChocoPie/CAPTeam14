@@ -165,10 +165,7 @@ namespace CAPTeam14.Controllers
                     }
                     else 
                     {
-                        if (code != null)
-                        {
-                            ModelState.AddModelError("maNganh", "Mã ngành đã tồn tại");
-                        }
+                       
                     }
                     
                 }
