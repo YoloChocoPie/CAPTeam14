@@ -1270,25 +1270,27 @@
                 tarzan = document.getElementsByClassName("formLT");
                 if (targList) {
                     for (var x = 0; x < targList.length; x++) {
-                        for (var y = 0; y < tarzan.length; y++) {
 
-                            tarzan[y].style.display = ""
-                        }
                         targList[x].style.display = "";
+                    }
+                    for (var y = 0; y < tarzan.length; y++) {
+
+                        tarzan[y].style.display = "";
                     }
                 }
 
             } else if (select.value == "LyThuyet") {
-                targList = document.getElementsByClassName("formTT");
-                tarzan = document.getElementsByClassName("formLT");
+                targList = document.getElementsByClassName("formLT");
+                tarzan = document.getElementsByClassName("formTT");
                 if (targList) {
                     for (var x = 0; x < targList.length; x++) {
-                        for (var y = 0; y < tarzan.length; y++) {
 
-                            //tarzan[y].style.visibility = "visible"
-                            tarzan[y].style.display = ""
-                        }
-                        targList[x].style.display = "none";
+                        targList[x].style.display = "";
+                    }
+                    for (var y = 0; y < tarzan.length; y++) {
+
+                        //tarzan[y].style.visibility = "visible"
+                        tarzan[y].style.display = "none";
                     }
                 }
 
@@ -1299,12 +1301,13 @@
                 tarzan = document.getElementsByClassName("formTT");
                 if (targList) {
                     for (var x = 0; x < targList.length; x++) {
-                        for (var y = 0; y < tarzan.length; y++) {
 
-                            //tarzan[y].style.visibility = "visible"
-                            tarzan[y].style.display = ""
-                        }
                         targList[x].style.display = "none";
+                    }
+                    for (var y = 0; y < tarzan.length; y++) {
+
+                        //tarzan[y].style.visibility = "visible"
+                        tarzan[y].style.display = "";
                     }
                 }
 

@@ -43,31 +43,70 @@ namespace CAPTeam14.Controllers
 
         public ActionResult Index2(int? id, string selectedId)
         {
+            TempData["ketquatuan"] = "0";
             foreach (var tuan in model.TKBs.Where(x => x.ID_hocKy == id).Select(x => x.tuanHoc.tuanHoc1).Distinct())
             {
                 string cc = tuan;
                 string[] cl = cc.Split(',', ';', ' ');
+                TempData["Tuan1"] = "0";
 
                 foreach (var clm in cl)
                 {
                     string dmm = clm;
-                    if (cl.Contains(selectedId))
+                    if (dmm == selectedId)
                     {
                         TempData["Tuan1"] = selectedId;
                         break;
                     }
 
-                    else
-                    {
-                        TempData["Tuan1"] = "1";
 
-                    }
-                    break;
+
 
                 }
                 break;
 
+
+
+
             };
+            //
+            foreach (var tuan2 in model.TKBs.Where(x => x.ID_hocKy == id).Select(x => x.tuanHoc.tuanHoc1).Distinct())
+            {
+                string cc1 = tuan2;
+                string[] cl1 = cc1.Split(',', ';', ' ');
+                TempData["Tuan2"] = "0";
+
+                foreach (var clm1 in cl1)
+                {
+                    string dmm1 = clm1;
+                    if (dmm1 == selectedId)
+                    {
+                        TempData["Tuan2"] = selectedId;
+                        break;
+                    }
+
+
+
+
+                }
+
+
+
+
+
+            };
+
+            if ((string)TempData["Tuan1"] == selectedId)
+            {
+                TempData["ketquatuan"] = (string)TempData["Tuan1"];
+            }
+            else
+            {
+                if ((string)TempData["Tuan2"] == selectedId)
+                {
+                    TempData["ketquatuan"] = (string)TempData["Tuan2"];
+                }
+            }
             //
             TempData["Tuan"] = selectedId;
             //
@@ -99,31 +138,70 @@ namespace CAPTeam14.Controllers
         [HttpGet]
         public ActionResult Index(int? id, string selectedId)
         {
+            TempData["ketquatuan"] = "0";
             foreach (var tuan in model.TKBs.Where(x => x.ID_hocKy == id).Select(x => x.tuanHoc.tuanHoc1).Distinct())
             {
                 string cc = tuan;
                 string[] cl = cc.Split(',', ';', ' ');
+                TempData["Tuan1"] = "0";
 
                 foreach (var clm in cl)
                 {
                     string dmm = clm;
-                    if (cl.Contains(selectedId))
+                    if (dmm == selectedId)
                     {
                         TempData["Tuan1"] = selectedId;
                         break;
                     }
+                    
 
-                    else
-                    {
-                        TempData["Tuan1"] = "1";
-
-                    }
-                    break;
+                   
 
                 }
                 break;
 
+
+
+
             };
+            //
+            foreach (var tuan2 in model.TKBs.Where(x => x.ID_hocKy == id).Select(x => x.tuanHoc.tuanHoc1).Distinct())
+            {
+                string cc1 = tuan2;
+                string[] cl1 = cc1.Split(',', ';', ' ');
+                TempData["Tuan2"] = "0";
+
+                foreach (var clm1 in cl1)
+                {
+                    string dmm1 = clm1;
+                    if (dmm1 == selectedId)
+                    {
+                        TempData["Tuan2"] = selectedId;
+                        break;
+                    }
+
+
+
+
+                }
+               
+
+
+
+
+            };
+
+            if ((string)TempData["Tuan1"] == selectedId)
+            {
+                TempData["ketquatuan"] = (string)TempData["Tuan1"];
+            }
+            else
+            {
+                if ((string)TempData["Tuan2"] == selectedId )
+                {
+                    TempData["ketquatuan"] = (string)TempData["Tuan2"];
+                }
+            }
             //
             TempData["Tuan"] = selectedId;
             //
@@ -227,7 +305,7 @@ namespace CAPTeam14.Controllers
         public FileResult DownloadExcel()
         {
             // nhớ sửa lại đường dẫn khi publish server
-            string path = "/Doc/Template.xlsx";
+            string path = "/CP24Team14/Doc/Template.xlsx";
             return File(path, "application/vnd.ms-excel", "Template.xlsx");
         }
 
@@ -272,6 +350,7 @@ namespace CAPTeam14.Controllers
                         var tuan = new tuanHoc(); // 7
                         var tkbTong = new TKB(); // 8
                         var hocki = new hocKy();
+                        var giangvien = new danhsachGV();
 
 
 
@@ -294,8 +373,8 @@ namespace CAPTeam14.Controllers
                         String soTiet = cot[12].ToString();
                         String tietHoc = cot[13].ToString();
                         String phongHoc = cot[14].ToString();
-                        String maGV = cot[15].ToString(); // không dùng
-                        String tenGV = cot[16].ToString(); // không dùng
+                        String maGV = cot[15].ToString(); 
+                        String tenGV = cot[16].ToString(); 
                         String PHX = cot[17].ToString();
                         String sucChua = cot[18].ToString();
                         String siSo = cot[19].ToString();
@@ -313,6 +392,8 @@ namespace CAPTeam14.Controllers
                         //Không có cột ghi chú
 
                         //Kiểm Tra xem dữ liệu đã tồn tại hay chưa
+                        var checkmagv = model.danhsachGVs.FirstOrDefault(x => x.maGV == maGV); // new
+                        var checktengv = model.danhsachGVs.FirstOrDefault(x => x.tenGV == tenGV); // new
 
                         // 30 - 3 = 27 
 
@@ -358,7 +439,26 @@ namespace CAPTeam14.Controllers
                         var checkmaPhong = model.phongHocs.FirstOrDefault(x => x.maPhong == phongHoc); // 27
 
 
+                        //new
+                        if (checkmagv == null && checktengv == null)
+                        {
+                            giangvien = new danhsachGV
+                            {
+                                tenGV = tenGV,
+                                maGV = maGV,
+                            };
+                            model.danhsachGVs.Add(giangvien);
+                            model.SaveChanges();
 
+                            tkbTong.ID_GV = giangvien.ID;
+                        }
+                        else
+                        {
+                            giangvien = checktengv;
+                            giangvien = checkmagv;
+
+                            tkbTong.ID_GV = checkmagv.ID;
+                        }
 
                         // Học phần
 
@@ -440,7 +540,7 @@ namespace CAPTeam14.Controllers
                             tuan = checktuanKT;
                             tuan = checkthu;
 
-                            tkbTong.ID_Tuan = checktuanHoc.ID;
+                            tkbTong.ID_Tuan = checkthuS.ID;
                         }
 
                         // ngành
@@ -490,7 +590,7 @@ namespace CAPTeam14.Controllers
                             tiet = checktietHoc;
                             tiet = checktietS;
                             tiet = checktietBD;
-                            tkbTong.ID_Tiet = checktietBD.ID;
+                            tkbTong.ID_Tiet = checktongTiet.ID;
                         }
 
                         // môn học
@@ -546,7 +646,7 @@ namespace CAPTeam14.Controllers
                             phong = checktrong;
                             phong = checksoSVDK;
                             phong = checkmaPhong;
-                            tkbTong.ID_Phong = checkmaPhong.ID;
+                            tkbTong.ID_Phong = checkloaiPhong.ID;
                         }
                         // kiểm tra dữ liệu thời khóa biểu đã tồn tại hay chưa
                         // table tkb
