@@ -15,12 +15,12 @@
         <div width="100%" class="form-inline col-md-12 magin-bottom-5px" style="margin-bottom:10px">
 
             <div class="col-md-4 form-group">
-                <label>Tuần:</label>
+                <label style="width: 51px">Tuần : </label>
                 @Html.DropDownList("IDT", new SelectList(ViewBag.hkyy, "ID", "sotuan"), "Chọn tuần", new { @class = "form-control width-70" })
             </div>
 
             <div class="col-md-4 form-group">
-                <label>Loại HP:</label>
+                <label style="width: 116px">Loại Học Phần : </label>
                 <select class="form-control width-70" onchange="FilterLoaiHP(this)">
                     <option value="tatca">Tất cả</option>
                     <option value="LyThuyet">Lý Thuyết</option>
@@ -29,7 +29,7 @@
             </div>
 
             <div class="col-md-4 form-group" id="cbTweek">
-                <label>Môn học:</label>
+                <label style="width: 76px">Môn học : </label>
                 <select class="form-control width-70" id="chonmonhox">
                     <option value="All" selected="selected">Tất cả</option>
                     @foreach (var mhx in db.TKBs.ToList().Where(x => x.ID_hocKy == (int)TempData["Test"] && x.ID_GV == (int)Session["id"]).Select(x => x.monHoc.tenMon).Distinct().OrderBy(x => x))

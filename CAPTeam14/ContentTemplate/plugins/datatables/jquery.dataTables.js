@@ -11462,7 +11462,7 @@
 				 *      } );
 				 *    } );
 				 */
-				"sNext": "Next",
+				"sNext": "Tiếp theo",
 	
 	
 				/**
@@ -11485,7 +11485,7 @@
 				 *      } );
 				 *    } );
 				 */
-				"sPrevious": "Previous"
+				"sPrevious": "Quay về"
 			},
 	
 			/**
@@ -11508,7 +11508,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sEmptyTable": "No data available in table",
+			"sEmptyTable": "Dữ liệu không tồn tại",
 	
 	
 			/**
@@ -11540,7 +11540,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfo": "Showing _START_ to _END_ of _TOTAL_ entries",
+			"sInfo": "hiển thị _START_ tới _END_ của _TOTAL_ dữ liệu",
 	
 	
 			/**
@@ -11561,7 +11561,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfoEmpty": "Showing 0 to 0 of 0 entries",
+			"sInfoEmpty": "Hiển thị 0 tới 0 của 0 dữ liệu",
 	
 	
 			/**
@@ -11583,7 +11583,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfoFiltered": "(filtered from _MAX_ total entries)",
+			"sInfoFiltered": "(Phân loại từ _MAX_ dữ liệu)",
 	
 	
 			/**
@@ -11781,7 +11781,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sSearch": "Search:",
+			"sSearch": "Tìm kiếm : ",
 	
 	
 			/**
@@ -11839,7 +11839,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sZeroRecords": "No matching records found"
+			"sZeroRecords": "Dữ liêu không tồn tại"
 		},
 	
 	
