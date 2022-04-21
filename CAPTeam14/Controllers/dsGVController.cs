@@ -83,10 +83,8 @@ namespace CAPTeam14.Controllers
                         
 
                         // table hocPhans
-                        var checkmaGV = model.danhsachGVs.FirstOrDefault(x => x.maGV == maGV); // 1
-                        var checktenGV = model.danhsachGVs.FirstOrDefault(x => x.tenGV == tenGV); // 2
-                        var checkkhoa = model.danhsachGVs.FirstOrDefault(x => x.khoa == khoa); // 3
-                        var checkloaiGV = model.danhsachGVs.FirstOrDefault(x => x.loaiGV == loaiGV); // 4
+                        var checkmaGV = model.danhsachGVs.FirstOrDefault(x => x.maGV == maGV && x.tenGV == tenGV && x.khoa == khoa && x.loaiGV == loaiGV); // 1
+                       
                        
 
 
@@ -116,9 +114,7 @@ namespace CAPTeam14.Controllers
                         else
                         {
                             dsgv = checkmaGV;
-                            dsgv = checktenGV;
-                            dsgv = checkkhoa;
-                            dsgv = checkloaiGV;
+                           
                             
                         }
 

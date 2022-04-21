@@ -124,6 +124,8 @@ namespace CAPTeam14.Controllers
             ViewBag.test2 = tkb1.tenHK;
             ViewBag.test3 = tkb1.ID;
             TempData["test"] = tkb1.ID;
+           
+            
          
            
 
@@ -311,8 +313,6 @@ namespace CAPTeam14.Controllers
 
         public ActionResult Catalog(TKB tkb, int? id, hocKy hk)
         {
-
-
             try
             {
                 ViewBag.tenlop = model.lopHocs.OrderByDescending(x => x.ID).ToList();
@@ -373,8 +373,8 @@ namespace CAPTeam14.Controllers
                         String soTiet = cot[12].ToString();
                         String tietHoc = cot[13].ToString();
                         String phongHoc = cot[14].ToString();
-                        String maGV = cot[15].ToString(); 
-                        String tenGV = cot[16].ToString(); 
+                        String maGV = cot[15].ToString();
+                        String tenGV = cot[16].ToString();
                         String PHX = cot[17].ToString();
                         String sucChua = cot[18].ToString();
                         String siSo = cot[19].ToString();
@@ -392,79 +392,67 @@ namespace CAPTeam14.Controllers
                         //Không có cột ghi chú
 
                         //Kiểm Tra xem dữ liệu đã tồn tại hay chưa
-                        var checkmagv = model.danhsachGVs.FirstOrDefault(x => x.maGV == maGV); // new
-                        var checktengv = model.danhsachGVs.FirstOrDefault(x => x.tenGV == tenGV); // new
+                        var checkgv = model.danhsachGVs.FirstOrDefault(x => x.maGV == maGV && x.tenGV == tenGV); // new
+
 
                         // 30 - 3 = 27 
 
                         // table hocPhans
-                        var checkmagocLHP = model.hocPhans.FirstOrDefault(x => x.maGocLHP == magocLHP); // 1
-                        var checkmaLHP = model.hocPhans.FirstOrDefault(x => x.maLHP == maLHP); // 2
-                        var checkloaiHP = model.hocPhans.FirstOrDefault(x => x.loaiHP == loaiHP); // 3
-                        var checktinhtrangLHP = model.hocPhans.FirstOrDefault(x => x.tinhtrangLHP == tinhtrangLHP); // 4
-                        var checkTSMH = model.hocPhans.FirstOrDefault(x => x.TSMH == TSMH); // 5
+                        var checkhocphan = model.hocPhans.FirstOrDefault(x => x.maGocLHP == magocLHP && x.maLHP == maLHP && x.loaiHP == loaiHP && x.tinhtrangLHP == tinhtrangLHP && x.TSMH == TSMH); // 1
+
 
                         // table lopHocs
                         var checklopHoc = model.lopHocs.FirstOrDefault(x => x.maLop == maLop); // 6
 
                         // table tuanHoc
-                        var checkthuS = model.tuanHocs.FirstOrDefault(x => x.thuS == thuS); // 7
-                        var checktuanBD = model.tuanHocs.FirstOrDefault(x => x.tuanBD == tuanBD); // 8
-                        var checktuanHoc = model.tuanHocs.FirstOrDefault(x => x.tuanHoc1 == tuanHoc); // 9
-                        var checktuanKT = model.tuanHocs.FirstOrDefault(x => x.tuanKT == tuanKT); // 10
-                        var checkthu = model.tuanHocs.FirstOrDefault(x => x.thu == thu); // 11
+                        var checktuanhoc = model.tuanHocs.FirstOrDefault(x => x.thuS == thuS && x.tuanBD == tuanBD && x.tuanHoc1 == tuanHoc && x.tuanKT == tuanKT && x.thu == thu); // 7
+
 
                         // table Nganh
-                        var checkmaNganh = model.Nganhs.FirstOrDefault(x => x.maNganh == maNganh); // 12
-                        var checktenNganh = model.Nganhs.FirstOrDefault(x => x.tenNganh == tenNganh); // 13
+                        var checkmaNganh = model.Nganhs.FirstOrDefault(x => x.maNganh == maNganh && x.tenNganh == tenNganh); // 12
+
 
                         // table tietHocs
-                        var checktongTiet = model.tietHocs.FirstOrDefault(x => x.tongTiet == tongTiet); // 14
-                        var checksoTiet = model.tietHocs.FirstOrDefault(x => x.soTiet == soTiet); // 15
-                        var checktietHoc = model.tietHocs.FirstOrDefault(x => x.tietHoc1 == tietHoc); // 16
-                        var checktietS = model.tietHocs.FirstOrDefault(x => x.tietS == tietS); // 17
-                        var checktietBD = model.tietHocs.FirstOrDefault(x => x.tietBD == tietBD); // 18
+                        var checktiethoc = model.tietHocs.FirstOrDefault(x => x.tongTiet == tongTiet && x.soTiet == soTiet && x.tietHoc1 == tietHoc && x.tietS == tietS && x.tietBD == tietBD); // 14
+
 
                         // table monHoc
-                        var checkmaMon = model.monHocs.FirstOrDefault(x => x.maMon == maMon); // 19
-                        var checktenMon = model.monHocs.FirstOrDefault(x => x.tenMon == tenMon); // 20
-                        var checkTC = model.monHocs.FirstOrDefault(x => x.tinChi == soTC); // 21
+                        var checkmonhoc = model.monHocs.FirstOrDefault(x => x.maMon == maMon && x.tenMon == tenMon && x.tinChi == soTC); // 19
+
 
                         // table phongHoc
-                        var checkloaiPhong = model.phongHocs.FirstOrDefault(x => x.loaiPhong == PHX); // 22
-                        var checksucChua = model.phongHocs.FirstOrDefault(x => x.sucChua == sucChua); // 23
-                        var checksiSo = model.phongHocs.FirstOrDefault(x => x.siSo == siSo); // 24
-                        var checktrong = model.phongHocs.FirstOrDefault(x => x.trong == Trong); // 25
-                        var checksoSVDK = model.phongHocs.FirstOrDefault(x => x.soSVDK == soSVDK); // 26
-                        var checkmaPhong = model.phongHocs.FirstOrDefault(x => x.maPhong == phongHoc); // 27
+                        var checkphong = model.phongHocs.FirstOrDefault(x => x.loaiPhong == PHX && x.sucChua == sucChua && x.siSo == siSo && x.trong == Trong && x.soSVDK == soSVDK && x.maPhong == phongHoc); // 22
+
 
 
                         //new
-                        if (checkmagv == null && checktengv == null)
+                        if (checkgv == null)
                         {
-                            giangvien = new danhsachGV
+                            if (tenGV != "" && maGV != "")
                             {
-                                tenGV = tenGV,
-                                maGV = maGV,
-                            };
-                            model.danhsachGVs.Add(giangvien);
-                            model.SaveChanges();
+                                giangvien = new danhsachGV
+                                {
+                                    tenGV = tenGV,
+                                    maGV = maGV,
+                                };
+                                model.danhsachGVs.Add(giangvien);
+                                model.SaveChanges();
+                            }
 
-                            tkbTong.ID_GV = giangvien.ID;
                         }
                         else
                         {
-                            giangvien = checktengv;
-                            giangvien = checkmagv;
+                            giangvien = checkgv;
 
-                            tkbTong.ID_GV = checkmagv.ID;
+
+
                         }
 
                         // Học phần
 
                         // câu lệnh kiểm tra xem học phần đã tồn tại hay chưa
                         // nếu chưa tồn tại thì tạo mới Học Phần
-                        if (checkmagocLHP == null && checkmaLHP == null)
+                        if (checkhocphan == null)
                         {
                             hocphan = new hocPhan
                             {
@@ -486,12 +474,9 @@ namespace CAPTeam14.Controllers
                         // xem có dữ liệu nào khác thì
                         else
                         {
-                            hocphan = checkmagocLHP;
-                            hocphan = checkmaLHP;
-                            hocphan = checkloaiHP;
-                            hocphan = checktinhtrangLHP;
-                            hocphan = checkTSMH;
-                            tkbTong.ID_hocPhan = checkmagocLHP.ID;
+                            hocphan = checkhocphan;
+
+                            tkbTong.ID_hocPhan = checkhocphan.ID;
                         }
 
                         // lớp học
@@ -515,7 +500,7 @@ namespace CAPTeam14.Controllers
                         }
 
                         // tuần học
-                        if (checkthuS == null || checktuanBD == null || checktuanHoc == null || checktuanKT == null || checkthu == null)
+                        if (checktuanhoc == null)
                         {
                             tuan = new tuanHoc
                             {
@@ -534,17 +519,14 @@ namespace CAPTeam14.Controllers
                         //
                         else
                         {
-                            tuan = checkthuS;
-                            tuan = checktuanBD;
-                            tuan = checktuanHoc;
-                            tuan = checktuanKT;
-                            tuan = checkthu;
+                            tuan = checktuanhoc;
 
-                            tkbTong.ID_Tuan = checkthuS.ID;
+
+                            tkbTong.ID_Tuan = checktuanhoc.ID;
                         }
 
                         // ngành
-                        if (checkmaNganh == null || checktenNganh == null)
+                        if (checkmaNganh == null)
                         {
                             nganh = new Nganh
                             {
@@ -561,12 +543,12 @@ namespace CAPTeam14.Controllers
                         else
                         {
                             nganh = checkmaNganh;
-                            nganh = checktenNganh;
+
                             tkbTong.ID_Nganh = checkmaNganh.ID;
                         }
 
                         // tiết học
-                        if (checktongTiet == null || checksoTiet == null || checktietHoc == null || checktietS == null || checktietBD == null)
+                        if (checktiethoc == null)
                         {
                             tiet = new tietHoc
                             {
@@ -585,16 +567,13 @@ namespace CAPTeam14.Controllers
                         //
                         else
                         {
-                            tiet = checktongTiet;
-                            tiet = checksoTiet;
-                            tiet = checktietHoc;
-                            tiet = checktietS;
-                            tiet = checktietBD;
-                            tkbTong.ID_Tiet = checktongTiet.ID;
+                            tiet = checktiethoc;
+
+                            tkbTong.ID_Tiet = checktiethoc.ID;
                         }
 
                         // môn học
-                        if (checkmaMon == null || checktenMon == null)
+                        if (checkmonhoc == null)
                         {
 
                             mon = new monHoc
@@ -612,15 +591,15 @@ namespace CAPTeam14.Controllers
                         //
                         else
                         {
-                            mon = checktenMon;
-                            mon = checkmaMon;
-                            mon = checkTC;
-                            tkbTong.ID_monHoc = checktenMon.ID;
+
+                            mon = checkmonhoc;
+
+                            tkbTong.ID_monHoc = checkmonhoc.ID;
                         }
 
                         // phòng học
                         //  checksucChua == null || checksiSo == null || checktrong == null || checksoSVDK == null ||
-                        if (checkloaiPhong == null || checkmaPhong == null || checksucChua == null || checksiSo == null || checktrong == null || checksoSVDK == null)
+                        if (checkphong == null)
                         {
                             phong = new phongHoc
                             {
@@ -640,13 +619,9 @@ namespace CAPTeam14.Controllers
                         //
                         else
                         {
-                            phong = checkloaiPhong;
-                            phong = checksucChua;
-                            phong = checksiSo;
-                            phong = checktrong;
-                            phong = checksoSVDK;
-                            phong = checkmaPhong;
-                            tkbTong.ID_Phong = checkloaiPhong.ID;
+                            phong = checkphong;
+
+                            tkbTong.ID_Phong = checkphong.ID;
                         }
                         // kiểm tra dữ liệu thời khóa biểu đã tồn tại hay chưa
                         // table tkb
@@ -687,14 +662,13 @@ namespace CAPTeam14.Controllers
                 IEDreader.Close();
                 TempData["ThongBao1"] = 1;
                 return RedirectToAction("Index1", "Home");
-
             }
-
             catch (Exception)
             {
                 ModelState.AddModelError("", "Không thể thực hiện hành động này, vui lòng kiểm tra File Excel có đúng định dạng");
             }
             return View(tkb);
+
 
 
         }
