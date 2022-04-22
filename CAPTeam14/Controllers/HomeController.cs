@@ -43,7 +43,15 @@ namespace CAPTeam14.Controllers
 
         public ActionResult Index2(int? id, string selectedId)
         {
-            TempData["ketquatuan"] = "0";
+            if (selectedId == null)
+            {
+                selectedId = "0";
+            }
+            else if (selectedId != null)
+            {
+                TempData["tuan"] = selectedId;
+            }
+            /*TempData["ketquatuan"] = "0";
             foreach (var tuan in model.TKBs.Where(x => x.ID_hocKy == id).Select(x => x.tuanHoc.tuanHoc1).Distinct())
             {
                 string cc = tuan;
@@ -106,9 +114,9 @@ namespace CAPTeam14.Controllers
                 {
                     TempData["ketquatuan"] = (string)TempData["Tuan2"];
                 }
-            }
+            }*/
             //
-            TempData["Tuan"] = selectedId;
+           
             //
 
 
@@ -140,8 +148,17 @@ namespace CAPTeam14.Controllers
         [HttpGet]
         public ActionResult Index(int? id, string selectedId)
         {
+            if (selectedId == null)
+            {
+                selectedId = "0";
+            }
+            else if (selectedId != null)
+            {
+                TempData["tuan"] = selectedId;
+            }    
+            
             TempData["ketquatuan"] = "0";
-            foreach (var tuan in model.TKBs.Where(x => x.ID_hocKy == id).Select(x => x.tuanHoc.tuanHoc1).Distinct())
+            /*foreach (var tuan in model.TKBs.Where(x => x.ID_hocKy == id).Select(x => x.tuanHoc.tuanHoc1).Distinct().Contains(selectedId))
             {
                 string cc = tuan;
                 string[] cl = cc.Split(',', ';', ' ');
@@ -203,9 +220,9 @@ namespace CAPTeam14.Controllers
                 {
                     TempData["ketquatuan"] = (string)TempData["Tuan2"];
                 }
-            }
+            }*/
             //
-            TempData["Tuan"] = selectedId;
+         
             //
 
 
