@@ -721,7 +721,7 @@ namespace CAPTeam14.Controllers
             var gvid_warning = model.TKBs.Where(g => g.ID_GV == tkb.ID_GV && g.tuanHoc.thuS == tt.tuanHoc.thuS && g.ID_hocKy == tt.ID_hocKy).ToList().Count(g => g.ID_GV != null);
             if (gvid_warning >= 3)
             {
-
+                
                 tt.ID_GV = tkb.ID_GV;
                 model.SaveChanges();
                 return Json(new { resp = true });

@@ -95,10 +95,10 @@
 
 
                                             <label>Chọn lớp:</label>
-                                            @Html.DropDownList("ID_lop", new SelectList(ViewBag.tenlop, "ID", "maLop","721"),   new { @class = "form-control", @required = "required" })
+                                            @Html.DropDownList("ID_lop", new SelectList(ViewBag.tenlop, "ID", "maLop", "767"),   new { @class = "form-control", @required = "required" })
 
                                             <label>Chọn ngành:</label>
-                                            @Html.DropDownList("ID_nganh", new SelectList(ViewBag.tennganh, "ID", "tenNganh","239"),  new { @class = "form-control", @required = "required" })
+                                            @Html.DropDownList("ID_nganh", new SelectList(ViewBag.tennganh, "ID", "tenNganh", "250"),  new { @class = "form-control", @required = "required" })
 
                                             <br />
                                             <br />
@@ -166,14 +166,14 @@
                                                 }
 
                                                 Swal.fire({
-                                                    title: 'Bạn có muốn import file excel này ?',
+                                                    title: 'Vui lòng kiểm tra lại thông tin lớp học và ngành trước khi import dữ liệu',
                                                     //text: "You won't be able to revert this!",
                                                     icon: 'warning',
                                                     showCancelButton: true,
                                                     confirmButtonColor: '#3085d6',
                                                     cancelButtonColor: '#d33',
                                                     confirmButtonText: 'Import',
-                                                    cancelButtonText: 'Không'
+                                                    cancelButtonText: 'Hủy'
                                                 }).then((result) => {
                                                     if (result.isConfirmed) {
                                                         $(this).submit();

@@ -181,32 +181,30 @@
                                                     if ((item2.hocPhan.loaiHP == "Lý thuyết" || item2.hocPhan.loaiHP == "Lý Thuyết") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form id="@item2.ID" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
+                                                <form id="@item2.ID" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+
+                                                    <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                    <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                    <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br /> 
+                                                    <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                                   
 
 
 
-                                                        </form>
+                                                </form>
 
                                                     }
                                                     else if ((item2.hocPhan.loaiHP == "Thực hành" || item2.hocPhan.loaiHP == "Thực Hành") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form id="@item2.ID" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                            <form id="@item2.ID" class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                            </form>
 
                                                     }
 
@@ -219,29 +217,25 @@
                                                     if ((item2.hocPhan.loaiHP == "Lý thuyết" || item2.hocPhan.loaiHP == "Lý Thuyết") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                                <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                    <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                    <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                    <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                    <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                                </form>
 
                                                     }
                                                     else if ((item2.hocPhan.loaiHP == "Thực hành" || item2.hocPhan.loaiHP == "Thực Hành") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                            <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                            </form>
 
                                                     }
 
@@ -254,29 +248,25 @@
                                                     if ((item2.hocPhan.loaiHP == "Lý thuyết" || item2.hocPhan.loaiHP == "Lý Thuyết") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                                <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                    <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                    <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                    <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                    <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                                </form>
 
                                                     }
                                                     else if ((item2.hocPhan.loaiHP == "Thực hành" || item2.hocPhan.loaiHP == "Thực Hành") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                            <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                            </form>
 
                                                     }
 
@@ -289,29 +279,25 @@
                                                     if ((item2.hocPhan.loaiHP == "Lý thuyết" || item2.hocPhan.loaiHP == "Lý Thuyết") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                                <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                    <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                    <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                    <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                    <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                                </form>
 
                                                     }
                                                     else if ((item2.hocPhan.loaiHP == "Thực hành" || item2.hocPhan.loaiHP == "Thực Hành") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                            <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                            </form>
 
                                                     }
 
@@ -324,29 +310,25 @@
                                                     if ((item2.hocPhan.loaiHP == "Lý thuyết" || item2.hocPhan.loaiHP == "Lý Thuyết") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                                <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                    <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                    <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                    <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                    <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                                </form>
 
                                                     }
                                                     else if ((item2.hocPhan.loaiHP == "Thực hành" || item2.hocPhan.loaiHP == "Thực Hành") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                            <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                            </form>
 
                                                     }
 
@@ -361,29 +343,25 @@
                                                     if ((item2.hocPhan.loaiHP == "Lý thuyết" || item2.hocPhan.loaiHP == "Lý Thuyết") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                                <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                    <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                    <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                    <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                    <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                                </form>
 
                                                     }
                                                     else if ((item2.hocPhan.loaiHP == "Thực hành" || item2.hocPhan.loaiHP == "Thực Hành") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                            <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                            </form>
 
                                                     }
 
@@ -396,29 +374,25 @@
                                                     if ((item2.hocPhan.loaiHP == "Lý thuyết" || item2.hocPhan.loaiHP == "Lý Thuyết") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                                <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                    <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                    <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                    <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                    <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                                </form>
 
                                                     }
                                                     else if ((item2.hocPhan.loaiHP == "Thực hành" || item2.hocPhan.loaiHP == "Thực Hành") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                            <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                            </form>
 
                                                     }
 
@@ -431,29 +405,25 @@
                                                     if ((item2.hocPhan.loaiHP == "Lý thuyết" || item2.hocPhan.loaiHP == "Lý Thuyết") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                                <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                    <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                    <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                    <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                    <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                                </form>
 
                                                     }
                                                     else if ((item2.hocPhan.loaiHP == "Thực hành" || item2.hocPhan.loaiHP == "Thực Hành") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                            <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                            </form>
 
                                                     }
 
@@ -466,29 +436,25 @@
                                                     if ((item2.hocPhan.loaiHP == "Lý thuyết" || item2.hocPhan.loaiHP == "Lý Thuyết") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                                <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                    <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                    <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                    <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                    <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                                </form>
 
                                                     }
                                                     else if ((item2.hocPhan.loaiHP == "Thực hành" || item2.hocPhan.loaiHP == "Thực Hành") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                            <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                            </form>
 
                                                     }
 
@@ -501,29 +467,25 @@
                                                     if ((item2.hocPhan.loaiHP == "Lý thuyết" || item2.hocPhan.loaiHP == "Lý Thuyết") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                                <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                    <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                    <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                    <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                    <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                                </form>
 
                                                     }
                                                     else if ((item2.hocPhan.loaiHP == "Thực hành" || item2.hocPhan.loaiHP == "Thực Hành") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                            <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                            </form>
 
                                                     }
 
@@ -538,29 +500,25 @@
                                                     if ((item2.hocPhan.loaiHP == "Lý thuyết" || item2.hocPhan.loaiHP == "Lý Thuyết") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                                <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                    <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                    <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                    <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                    <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                                </form>
 
                                                     }
                                                     else if ((item2.hocPhan.loaiHP == "Thực hành" || item2.hocPhan.loaiHP == "Thực Hành") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                            <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                            </form>
 
                                                     }
 
@@ -573,29 +531,25 @@
                                                     if ((item2.hocPhan.loaiHP == "Lý thuyết" || item2.hocPhan.loaiHP == "Lý Thuyết") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                                <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                    <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                    <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                    <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                    <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                                </form>
 
                                                     }
                                                     else if ((item2.hocPhan.loaiHP == "Thực hành" || item2.hocPhan.loaiHP == "Thực Hành") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                            <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                            </form>
 
                                                     }
 
@@ -608,29 +562,25 @@
                                                     if ((item2.hocPhan.loaiHP == "Lý thuyết" || item2.hocPhan.loaiHP == "Lý Thuyết") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                                <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                    <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                    <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                    <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                    <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                                </form>
 
                                                     }
                                                     else if ((item2.hocPhan.loaiHP == "Thực hành" || item2.hocPhan.loaiHP == "Thực Hành") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                            <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                            </form>
 
                                                     }
 
@@ -643,29 +593,25 @@
                                                     if ((item2.hocPhan.loaiHP == "Lý thuyết" || item2.hocPhan.loaiHP == "Lý Thuyết") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                                <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                    <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                    <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                    <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                    <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                                </form>
 
                                                     }
                                                     else if ((item2.hocPhan.loaiHP == "Thực hành" || item2.hocPhan.loaiHP == "Thực Hành") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                            <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                            </form>
 
                                                     }
 
@@ -678,29 +624,25 @@
                                                     if ((item2.hocPhan.loaiHP == "Lý thuyết" || item2.hocPhan.loaiHP == "Lý Thuyết") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                                <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                    <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                    <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                    <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                    <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                                </form>
 
                                                     }
                                                     else if ((item2.hocPhan.loaiHP == "Thực hành" || item2.hocPhan.loaiHP == "Thực Hành") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                            <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                            </form>
 
                                                     }
 
@@ -715,29 +657,25 @@
                                                     if ((item2.hocPhan.loaiHP == "Lý thuyết" || item2.hocPhan.loaiHP == "Lý Thuyết") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                                <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                    <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                    <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                    <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                    <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                                </form>
 
                                                     }
                                                     else if ((item2.hocPhan.loaiHP == "Thực hành" || item2.hocPhan.loaiHP == "Thực Hành") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                            <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                            </form>
 
                                                     }
 
@@ -750,29 +688,25 @@
                                                     if ((item2.hocPhan.loaiHP == "Lý thuyết" || item2.hocPhan.loaiHP == "Lý Thuyết") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                                <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                    <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                    <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                    <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                    <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                                </form>
 
                                                     }
                                                     else if ((item2.hocPhan.loaiHP == "Thực hành" || item2.hocPhan.loaiHP == "Thực Hành") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                            <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                            </form>
 
                                                     }
 
@@ -785,29 +719,25 @@
                                                     if ((item2.hocPhan.loaiHP == "Lý thuyết" || item2.hocPhan.loaiHP == "Lý Thuyết") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                                <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                    <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                    <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                    <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                    <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                                </form>
 
                                                     }
                                                     else if ((item2.hocPhan.loaiHP == "Thực hành" || item2.hocPhan.loaiHP == "Thực Hành") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                            <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                            </form>
 
                                                     }
 
@@ -820,29 +750,25 @@
                                                     if ((item2.hocPhan.loaiHP == "Lý thuyết" || item2.hocPhan.loaiHP == "Lý Thuyết") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                                <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                    <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                    <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                    <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                    <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                                </form>
 
                                                     }
                                                     else if ((item2.hocPhan.loaiHP == "Thực hành" || item2.hocPhan.loaiHP == "Thực Hành") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                            <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                            </form>
 
                                                     }
 
@@ -855,29 +781,25 @@
                                                     if ((item2.hocPhan.loaiHP == "Lý thuyết" || item2.hocPhan.loaiHP == "Lý Thuyết") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                                <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                    <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                    <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                    <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                    <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                                </form>
 
                                                     }
                                                     else if ((item2.hocPhan.loaiHP == "Thực hành" || item2.hocPhan.loaiHP == "Thực Hành") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                            <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                            </form>
 
                                                     }
 
@@ -892,29 +814,25 @@
                                                     if ((item2.hocPhan.loaiHP == "Lý thuyết" || item2.hocPhan.loaiHP == "Lý Thuyết") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                                <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                    <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                    <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                    <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                    <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                                </form>
 
                                                     }
                                                     else if ((item2.hocPhan.loaiHP == "Thực hành" || item2.hocPhan.loaiHP == "Thực Hành") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                            <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                            </form>
 
                                                     }
 
@@ -927,29 +845,25 @@
                                                     if ((item2.hocPhan.loaiHP == "Lý thuyết" || item2.hocPhan.loaiHP == "Lý Thuyết") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                                <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                    <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                    <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                    <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                    <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                                </form>
 
                                                     }
                                                     else if ((item2.hocPhan.loaiHP == "Thực hành" || item2.hocPhan.loaiHP == "Thực Hành") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                            <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                            </form>
 
                                                     }
 
@@ -962,29 +876,25 @@
                                                     if ((item2.hocPhan.loaiHP == "Lý thuyết" || item2.hocPhan.loaiHP == "Lý Thuyết") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                                <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                    <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                    <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                    <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                    <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                                </form>
 
                                                     }
                                                     else if ((item2.hocPhan.loaiHP == "Thực hành" || item2.hocPhan.loaiHP == "Thực Hành") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                            <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                            </form>
 
                                                     }
 
@@ -997,29 +907,25 @@
                                                     if ((item2.hocPhan.loaiHP == "Lý thuyết" || item2.hocPhan.loaiHP == "Lý Thuyết") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                                <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                    <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                    <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                    <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                    <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                                </form>
 
                                                     }
                                                     else if ((item2.hocPhan.loaiHP == "Thực hành" || item2.hocPhan.loaiHP == "Thực Hành") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                            <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                            </form>
 
                                                     }
 
@@ -1032,29 +938,25 @@
                                                     if ((item2.hocPhan.loaiHP == "Lý thuyết" || item2.hocPhan.loaiHP == "Lý Thuyết") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                                <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                    <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                    <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                    <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                    <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                                </form>
 
                                                     }
                                                     else if ((item2.hocPhan.loaiHP == "Thực hành" || item2.hocPhan.loaiHP == "Thực Hành") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                            <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                            </form>
 
                                                     }
 
@@ -1069,29 +971,25 @@
                                                     if ((item2.hocPhan.loaiHP == "Lý thuyết" || item2.hocPhan.loaiHP == "Lý Thuyết") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                                <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                    <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                    <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                    <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                    <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                                </form>
 
                                                     }
                                                     else if ((item2.hocPhan.loaiHP == "Thực hành" || item2.hocPhan.loaiHP == "Thực Hành") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                            <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                            </form>
 
                                                     }
 
@@ -1104,29 +1002,25 @@
                                                     if ((item2.hocPhan.loaiHP == "Lý thuyết" || item2.hocPhan.loaiHP == "Lý Thuyết") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                                <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                    <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                    <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                    <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                    <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                                </form>
 
                                                     }
                                                     else if ((item2.hocPhan.loaiHP == "Thực hành" || item2.hocPhan.loaiHP == "Thực Hành") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                            <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                            </form>
 
                                                     }
 
@@ -1139,29 +1033,25 @@
                                                     if ((item2.hocPhan.loaiHP == "Lý thuyết" || item2.hocPhan.loaiHP == "Lý Thuyết") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                                <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                    <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                    <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                    <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                    <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                                </form>
 
                                                     }
                                                     else if ((item2.hocPhan.loaiHP == "Thực hành" || item2.hocPhan.loaiHP == "Thực Hành") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                            <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                            </form>
 
                                                     }
 
@@ -1174,29 +1064,25 @@
                                                     if ((item2.hocPhan.loaiHP == "Lý thuyết" || item2.hocPhan.loaiHP == "Lý Thuyết") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                                <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                    <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                    <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                    <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                    <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                                </form>
 
                                                     }
                                                     else if ((item2.hocPhan.loaiHP == "Thực hành" || item2.hocPhan.loaiHP == "Thực Hành") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                            <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                            </form>
 
                                                     }
 
@@ -1209,29 +1095,25 @@
                                                     if ((item2.hocPhan.loaiHP == "Lý thuyết" || item2.hocPhan.loaiHP == "Lý Thuyết") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                                <form class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                    <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                    <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                    <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                    <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                                </form>
 
                                                     }
                                                     else if ((item2.hocPhan.loaiHP == "Thực hành" || item2.hocPhan.loaiHP == "Thực Hành") && item2.ID_hocKy == ViewBag.test && item2.ID_GV == (int)Session["id"] && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
-                                                        <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
-                                                            <label><b>@item2.monHoc.maMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.maLHP</b></label> <br />
-                                                            <label><b>@item2.monHoc.tenMon</b></label> <br />
-                                                            <label><b>@item2.hocPhan.loaiHP</b></label> <br />
-                                                            <label><b>@item2.phongHoc.maPhong</b></label> <br />
-                                                            <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
-                                                            <label><b>Giảng viên : @item2.danhsachGV.tenGV</b></label> <br />
-                                                        </form>
+                                            <form class="formTT" style="background-color: lightskyblue; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
+                                                <label><b>Mã LHP : @item2.hocPhan.maLHP</b></label> <br />
+                                                <label><b>Môn : @item2.monHoc.tenMon</b></label> (<label><b>@item2.monHoc.maMon</b></label>) <br />
+
+                                                <label><b> Mã phòng : @item2.phongHoc.maPhong</b></label> -   <label><b>@item2.hocPhan.loaiHP</b></label> <br />
+                                                <label><b>Tuần : @item2.tuanHoc.tuanHoc1</b></label> <br />
+                                            </form>
 
                                                     }
 

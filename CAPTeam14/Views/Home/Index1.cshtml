@@ -53,6 +53,9 @@
                                         <th>
                                             Năm Kết thúc
                                         </th>
+                                        <th>
+                                            Mã lớp
+                                        </th>
 
 
 
@@ -74,7 +77,19 @@
                                         <td>
                                             @Html.DisplayFor(modelItem => item.namKT)
                                         </td>
-                                        
+                                        @if (item.ID_lop == null)
+                                        {
+                                            <td>
+                                                Không có
+                                            </td>
+                                        }
+                                        else
+	{
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.lopHoc.maLop)
+                                    </td>
+	}
+
                                         @if (item.lockstat == null || item.lockstat == false)
                                         {
                                             if ((int)Session["role"] == 1 || (int)Session["role"] == 2)
@@ -111,7 +126,7 @@
                                             if ((int)Session["role"] == 4)
                                             {
                                                 <td>
-                                                    @Html.ActionLink("Xem thời khóa biểu cá nhân", "Index2", new { id = item.ID }) |
+                                                    @Html.ActionLink("Xem thời khóa biểu cá nhân", "Index2", new { id = item.ID }) 
                                                 </td>
 
                                             }
@@ -149,9 +164,9 @@
                                             }
                                             if ((int)Session["role"] == 4)
                                             {
-                                    <td>
-                                        @Html.ActionLink("Xem thời khóa biểu cá nhân", "Index2", new { id = item.ID }) |
-                                    </td>
+                                                <td>
+                                                    @Html.ActionLink("Xem thời khóa biểu cá nhân", "Index2", new { id = item.ID })
+                                                </td>
 
 
                                             }

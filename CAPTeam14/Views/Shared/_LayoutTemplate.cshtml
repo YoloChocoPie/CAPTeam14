@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Site Metas -->
-    <title>Giảng Dạy và Phân Công</title>
+    @*<title>Giảng Dạy và Phân Công</title>*@
     <meta name="keywords" content="Team14">
     <meta name="description" content="Website quản lý giảng dạy và phân công của giảng viên khoa Công Nghệ Thông Tin">
     <meta name="author" content="Team14" />
@@ -533,7 +533,7 @@
     $(function () {
         $("#example1").DataTable({
             "responsive": true, "lengthChange": false, "autoWidth": false,
-            "buttons": ["excel", "print"]
+            "buttons": [{ extend: 'excel', title: '' }]
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
         $('#example2').DataTable({
             "paging": true,
@@ -548,7 +548,7 @@
 
     $(function () {
         $("#example12").DataTable({
-            "responsive": true, "lengthChange": false, "autoWidth": false,
+            "responsive": true, "lengthChange": true, "autoWidth": true,
            @* "buttons": ["copy", "csv", "pdf", "print"]*@
         }).buttons().container().appendTo('#example12_wrapper .col-md-6:eq(0)');
         $('#example2').DataTable({
@@ -557,7 +557,7 @@
             "searching": false,
             "ordering": true,
             "info": true,
-            "autoWidth": false,
+            "autoWidth": true,
             "responsive": true,
         });
     });

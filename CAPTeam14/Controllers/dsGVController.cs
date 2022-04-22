@@ -150,14 +150,38 @@ namespace CAPTeam14.Controllers
 
             string ten = ds.tenGV;
             string maGV = ds.maGV;
-            string loaiGV = ds.loaiGV;
+            
             
 
             
-            string khoa = ds.khoa;
-          
+            
 
-            var abcd = new { a = ten, b = maGV, c = loaiGV, d = khoa};
+            string loaiGV1 = "";
+            if (ds.loaiGV == "Cơ hữu")
+            {
+                loaiGV1 = "Cơ hữu";
+            }
+            else if (ds.loaiGV == "Giảng viên thỉnh giảng")
+            {
+                loaiGV1 = "Giảng viên thỉnh giảng";
+            }
+            else if (ds.loaiGV == null)
+            {
+                loaiGV1 = "Không có";
+            }
+
+            string khoa1 = "";
+            if (ds.khoa == "Khoa Công nghệ thông tin")
+            {
+                khoa1 = "Khoa Công nghệ thông tin";
+            }
+            else if (ds.khoa == null)
+            {
+                khoa1 = "Không có";
+            }
+
+
+            var abcd = new { a = ten, b = maGV, c = loaiGV1, d = khoa1 };
             return Json(abcd, JsonRequestBehavior.AllowGet);
         }
 

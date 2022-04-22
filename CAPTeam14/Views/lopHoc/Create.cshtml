@@ -26,7 +26,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                              <li class="breadcrumb-item"><a href="@Url.Action("Index1","Home")">Trang chủ</a></li>
-                            <li class="breadcrumb-item active">Thêm lớp học</li>
+                            <li class="breadcrumb-item active">Thêm mã lớp</li>
                         </ol>
                     </div>
                 </div>
@@ -43,7 +43,7 @@
                                 @Html.AntiForgeryToken()
 
                                 <div class="card-body">
-                                    <label>Thêm lớp học</label>
+                                    <label>Thêm mã lớp</label>
                                     <hr />
                                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                     <div class="form-group">
@@ -62,7 +62,7 @@
                                             <a class="btn btn-danger btn-block" href="@Url.Action("Index", "lopHoc")">Quay lại</a>
                                         </div>
                                         <div class="col-6">
-                                            <button type="submit" value="Create" class="btn btn-success btn-block">Thêm lớp học</button>
+                                            <button type="submit" value="Create" class="btn btn-success btn-block">Thêm mã lớp</button>
                                         </div>
                                     </div>
                                 </div>
