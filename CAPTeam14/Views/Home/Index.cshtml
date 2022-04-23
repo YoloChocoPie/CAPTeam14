@@ -3681,6 +3681,21 @@
     </section>
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    
+@if (TempData["ThongBao1"] != null)
+{
+    <script type="text/javascript">
+        $(function () {
+            Swal.fire({
+                title: 'Thông báo',
+                text: 'Bạn đã import thời khóa biểu thành công !!!',
+                icon: 'success',
+                showConfirmButton: true,
+            });
+        });
+    </script>
+}
+
     <script>
 
 

@@ -21,7 +21,7 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                          <li class="breadcrumb-item"><a href="@Url.Action("Index1","Home")">Trang chủ</a></li>
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index1","Home")">Trang chủ</a></li>
 
                     </ol>
                 </div>
@@ -65,116 +65,117 @@
                                 <tbody>
                                     @foreach (var item in Model)
                                     {
-                                    <tr>
+                                        <tr>
 
 
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.tenHK)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.namBD)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.namKT)
-                                        </td>
-                                        @if (item.ID_lop == null)
-                                        {
                                             <td>
-                                                Không có
+                                                @Html.DisplayFor(modelItem => item.tenHK)
                                             </td>
-                                        }
-                                        else
-	{
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.lopHoc.maLop)
-                                    </td>
-	}
-
-                                        @if (item.lockstat == null || item.lockstat == false)
-                                        {
-                                            if ((int)Session["role"] == 1 || (int)Session["role"] == 2)
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.namBD)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.namKT)
+                                            </td>
+                                            @if (item.ID_lop == null)
                                             {
                                                 <td>
-                                                    @Html.ActionLink("Xem thời khóa biểu tổng", "Index", new { id = item.ID }, new { @class = "seeTT" }) |
-                                                    @Html.ActionLink("Xem thời khóa biểu cá nhân", "Index2", new { id = item.ID }) |
-                                                    @Html.ActionLink("Import thời khóa biểu", "Catalog", new { id = item.ID }) |
-
-
-                                                    @Html.ActionLink("Xem thống kê", "DetailStatisticAll", new { id = item.ID }) |
-
-                                                    @Html.ActionLink("Export thời khóa biểu", "IndexEx", new { id = item.ID }) |
-
-
-                                                    @Html.ActionLink("Xóa Thời khóa biểu", "DeleteTKB", new { id = item.ID }, new { style = "color:red", @class = "deleteBtn" }) |
-                                                    @Html.ActionLink("Khóa Thời khóa biểu", "LockTKB", new { id = item.ID })
-
+                                                    Không có
                                                 </td>
                                             }
-                                            if ((int)Session["role"] == 3)
+                                            else
                                             {
-                                                <td>
-
-                                                    @Html.ActionLink("Xem thời khóa biểu tổng", "Index", new { id = item.ID }, new { @class = "seeTT" }) |
-                                                    @Html.ActionLink("Xem thời khóa biểu cá nhân", "Index2", new { id = item.ID }) |
-                                                    @Html.ActionLink("Xem thống kê", "DetailStatisticAll", new { id = item.ID }) |
-                                                    @Html.ActionLink("Export thời khóa biểu", "IndexEx", new { id = item.ID }) |
-                                                    <label>Import thời khóa biểu | </label>
-                                                    <label>Xóa thời khóa biểu | </label>
-
+                                                <td class="selector">
+                                                    @Html.DisplayFor(modelItem => item.lopHoc.maLop)
                                                 </td>
                                             }
-                                            if ((int)Session["role"] == 4)
+
+                                            @if (item.lockstat == null || item.lockstat == false)
                                             {
-                                                <td>
-                                                    @Html.ActionLink("Xem thời khóa biểu cá nhân", "Index2", new { id = item.ID }) 
-                                                </td>
+                                                if ((int)Session["role"] == 1 || (int)Session["role"] == 2)
+                                                {
+                                        <td>
+                                            - @Html.ActionLink("Xem thời khóa biểu tổng", "Index", new { id = item.ID }, new { @class = "seeTT" })  <br />
+                                            - @Html.ActionLink("Xem thời khóa biểu cá nhân", "Index2", new { id = item.ID }) <br />
+                                            -  @Html.ActionLink("Xem thống kê", "DetailStatisticAll", new { id = item.ID }) <br />
+                                            - @Html.ActionLink("Import thời khóa biểu", "Catalog", new { id = item.ID })  <br />
+                                            - @Html.ActionLink("Thay thế thời khóa biểu", "Catalog1", new { id = item.ID })  <br />
+                                            -  @Html.ActionLink("Export thời khóa biểu", "IndexEx", new { id = item.ID })  <br />
+
+
+
+
+
+
+                                            -  @Html.ActionLink("Xóa Thời khóa biểu", "DeleteTKB", new { id = item.ID }, new { style = "color:red", @class = "deleteBtn" })   <br />
+                                            - @Html.ActionLink("Khóa Thời khóa biểu", "LockTKB", new { id = item.ID })
+
+                                        </td>
+                                                }
+                                                if ((int)Session["role"] == 3)
+                                                {
+                                        <td>
+
+                                            - @Html.ActionLink("Xem thời khóa biểu tổng", "Index", new { id = item.ID }, new { @class = "seeTT" }) <br />
+                                            -  @Html.ActionLink("Xem thời khóa biểu cá nhân", "Index2", new { id = item.ID })  <br />
+                                            -  @Html.ActionLink("Xem thống kê", "DetailStatisticAll", new { id = item.ID })  <br />
+                                            -  @Html.ActionLink("Export thời khóa biểu", "IndexEx", new { id = item.ID })  <br />
+                                         
+
+                                        </td>
+                                                }
+                                                if ((int)Session["role"] == 4)
+                                                {
+                                                    <td>
+                                                      -  @Html.ActionLink("Xem thời khóa biểu cá nhân", "Index2", new { id = item.ID })
+                                                    </td>
+
+                                                }
 
                                             }
-
-                                        }
-                                        else if (item.lockstat == true)
-                                        {
-                                            if ((int)Session["role"] == 1 || (int)Session["role"] == 2)
+                                            else if (item.lockstat == true)
                                             {
-                                                <td>
-                                                    @Html.ActionLink("Xem thời khóa biểu tổng", "Index", new { id = item.ID }, new { @class = "seeTT" }) |
-                                                    @Html.ActionLink("Xem thời khóa biểu cá nhân", "Index2", new { id = item.ID }) |
+                                                if ((int)Session["role"] == 1 || (int)Session["role"] == 2)
+                                                {
+                                        <td>
+                                            - @Html.ActionLink("Xem thời khóa biểu tổng", "Index", new { id = item.ID }, new { @class = "seeTT" }) <br />
+                                            - @Html.ActionLink("Xem thời khóa biểu cá nhân", "Index2", new { id = item.ID })  <br />
 
-                                                    @Html.ActionLink("Xem thống kê", "DetailStatisticAll", new { id = item.ID }) |
-                                                    @Html.ActionLink("Export thời khóa biểu", "IndexEx", new { id = item.ID }) |
-                                                    <label>Import thời khóa biểu | </label>
-                                                    <label>Xóa thời khóa biểu | </label>
-                                                    @Html.ActionLink("Bỏ khóa Thời khóa biểu", "UnLockTKB", new { id = item.ID })
+                                            -  @Html.ActionLink("Xem thống kê", "DetailStatisticAll", new { id = item.ID }) <br />
+                                            -  @Html.ActionLink("Export thời khóa biểu", "IndexEx", new { id = item.ID }) <br />
+                                            -  <label>Import thời khóa biểu  </label> <br />
+                                            -  <label>Thay thế thời khóa biểu  </label> <br />
+                                            - <label>Xóa thời khóa biểu  </label>
+                                            -  @Html.ActionLink("Bỏ khóa Thời khóa biểu", "UnLockTKB", new { id = item.ID })
 
-                                                </td>
+                                        </td>
+                                                }
+                                                if ((int)Session["role"] == 3)
+                                                {
+                                                    <td>
+                                                       - @Html.ActionLink("Xem thời khóa biểu tổng", "Index", new { id = item.ID }, new { @class = "seeTT" }) <br />
+                                                      -  @Html.ActionLink("Xem thời khóa biểu cá nhân", "Index2", new { id = item.ID }) <br />
+                                                       - @Html.ActionLink("Xem thống kê", "DetailStatisticAll", new { id = item.ID }) <br />
+                                                       - @Html.ActionLink("Export thời khóa biểu", "IndexEx", new { id = item.ID }) <br />
+
+                                                   
+                                                    </td>
+
+
+                                                }
+                                                if ((int)Session["role"] == 4)
+                                                {
+                                                    <td>
+                                                      -  @Html.ActionLink("Xem thời khóa biểu cá nhân", "Index2", new { id = item.ID })
+                                                    </td>
+
+
+                                                }
+
+
+
                                             }
-                                            if ((int)Session["role"] == 3)
-                                            {
-                                                <td>
-                                                    @Html.ActionLink("Xem thời khóa biểu tổng", "Index", new { id = item.ID }, new { @class = "seeTT" })
-                                                    @Html.ActionLink("Xem thời khóa biểu cá nhân", "Index2", new { id = item.ID }) |
-                                                    @Html.ActionLink("Xem thống kê", "DetailStatisticAll", new { id = item.ID }) |
-                                                    @Html.ActionLink("Export thời khóa biểu", "IndexEx", new { id = item.ID }) |
-
-                                                    <label>Import thời khóa biểu | </label>
-                                                    <label>Xóa thời khóa biểu | </label>
-                                                </td>
-
-
-                                            }
-                                            if ((int)Session["role"] == 4)
-                                            {
-                                                <td>
-                                                    @Html.ActionLink("Xem thời khóa biểu cá nhân", "Index2", new { id = item.ID })
-                                                </td>
-
-
-                                            }
-
-
-
-                                        }
-                                    </tr>
+                                        </tr>
                                     }
 
                                 </tbody>
@@ -204,6 +205,17 @@
 <!-- /.content-wrapper -->
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cuttr/1.3.2/cuttr.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cuttr/1.3.2/cuttr.min.js"></script>
+
+
+<script type="text/javascript">
+    new Cuttr('.selector', {
+        length: 90,
+        ending: '...'
+    });
+</script>
 
 
 @if (TempData["dangnhap"] != null)
@@ -231,19 +243,6 @@
 }
 
 
-@if (TempData["ThongBao1"] != null)
-{
-    <script type="text/javascript">
-        $(function () {
-            Swal.fire({
-                title: 'Thông báo',
-                text: 'Bạn đã import thời khóa biểu thành công !!!',
-                icon: 'success',
-                showConfirmButton: true,
-            });
-        });
-    </script>
-}
 
 
 @if (TempData["ThongBao2"] != null)
