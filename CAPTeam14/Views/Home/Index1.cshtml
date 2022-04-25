@@ -85,7 +85,7 @@
                                             }
                                             else
                                             {
-                                                <td class="selector">
+                                                <td class="selector" style="width:390px">
                                                     @Html.DisplayFor(modelItem => item.lopHoc.maLop)
                                                 </td>
                                             }
@@ -99,7 +99,7 @@
                                             - @Html.ActionLink("Xem thời khóa biểu cá nhân", "Index2", new { id = item.ID }) <br />
                                             -  @Html.ActionLink("Xem thống kê", "DetailStatisticAll", new { id = item.ID }) <br />
                                             - @Html.ActionLink("Import thời khóa biểu", "Catalog", new { id = item.ID })  <br />
-                                            - @Html.ActionLink("Thay thế thời khóa biểu", "Catalog1", new { id = item.ID })  <br />
+                                            - @Html.ActionLink("Cập nhật thời khóa biểu", "Catalog1", new { id = item.ID })  <br />
                                             -  @Html.ActionLink("Export thời khóa biểu", "IndexEx", new { id = item.ID })  <br />
 
 
@@ -107,7 +107,7 @@
 
 
 
-                                            -  @Html.ActionLink("Xóa Thời khóa biểu", "DeleteTKB", new { id = item.ID }, new { style = "color:red", @class = "deleteBtn" })   <br />
+                                            -  @Html.ActionLink("Xóa Thời khóa biểu", "DeleteTKB", new { id = item.ID }, new { style = "color:red", @class = "deleteBtn" })   <br /> 
                                             - @Html.ActionLink("Khóa Thời khóa biểu", "LockTKB", new { id = item.ID })
 
                                         </td>
@@ -144,8 +144,8 @@
                                             -  @Html.ActionLink("Xem thống kê", "DetailStatisticAll", new { id = item.ID }) <br />
                                             -  @Html.ActionLink("Export thời khóa biểu", "IndexEx", new { id = item.ID }) <br />
                                             -  <label>Import thời khóa biểu  </label> <br />
-                                            -  <label>Thay thế thời khóa biểu  </label> <br />
-                                            - <label>Xóa thời khóa biểu  </label>
+                                            -  <label>Cập nhật thời khóa biểu  </label> <br />
+                                            - <label>Xóa thời khóa biểu  </label> <br />
                                             -  @Html.ActionLink("Bỏ khóa Thời khóa biểu", "UnLockTKB", new { id = item.ID })
 
                                         </td>
@@ -251,7 +251,7 @@
         $(function () {
             Swal.fire({
                 title: 'Thông báo',
-                text: 'Bạn đã thay thế thời khóa biểu thành công !!!',
+                text: 'Bạn đã Cập nhật thời khóa biểu thành công !!!',
                 icon: 'success',
                 showConfirmButton: true,
             });

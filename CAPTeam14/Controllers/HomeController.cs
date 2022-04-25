@@ -863,8 +863,65 @@ namespace CAPTeam14.Controllers
 
 
                     //new
-                    
-                   
+
+                    if (checktiethoc == null)
+                    {
+                        if ((tongTiet != "") && (soTiet != "") && (tietHoc != "")
+                                && (tietS != "") && (tietBD != ""))
+                        {
+                            tiet = new tietHoc
+                            {
+                                tongTiet = tongTiet,
+                                soTiet = soTiet,
+                                tietHoc1 = tietHoc,
+                                tietS = tietS,
+                                tietBD = tietBD,
+                            };
+                            model.tietHocs.Add(tiet);
+                            model.SaveChanges();
+
+                            tkbTong.ID_Tiet = tiet.ID;
+                        }
+                    }
+                    else
+                    {
+                        tiet = checktiethoc;
+
+                        tkbTong.ID_Tiet = checktiethoc.ID;
+                    }
+                    //
+                    // tuần học
+                        if (checktuanhoc == null)
+                        {
+                            if ( (thuS != "") && (tuanBD != "") && (tuanHoc != "") && (tuanKT != "")  
+                              && (thu != "") )
+                            {
+                                tuan = new tuanHoc
+                                {
+                                    thuS = thuS,
+                                    tuanBD = tuanBD,
+                                    tuanHoc1 = tuanHoc,
+                                    tuanKT = tuanKT,
+                                    thu = thu,
+                                };
+                                model.tuanHocs.Add(tuan);
+                                model.SaveChanges();
+
+                                tkbTong.ID_Tuan = tuan.ID;
+
+                            }
+
+                        }
+                        //
+                        else
+                        {
+                            tuan = checktuanhoc;
+
+
+                            tkbTong.ID_Tuan = checktuanhoc.ID;
+
+                        }
+                    //
                     // Học phần
 
                 
@@ -921,29 +978,58 @@ namespace CAPTeam14.Controllers
 
                     }
                     //
-                   
 
-                    var checktkbhp = model.TKBs.Where(x => x.ID_hocPhan == tkbTong.ID_hocPhan).FirstOrDefault(a => a.ID_hocKy == id && a.ID_Lop == checklopHoc.ID && a.ID_monHoc == checkmonhoc.ID
-                      && a.ID_Nganh == checkmaNganh.ID && a.ID_Phong == checkphong.ID );
+
+
+
+                    /*var edit = model.TKBs.Where(a => a.ID_Tiet != checktiethoc.ID || a.ID_Tuan != checktuanhoc.ID).Distinct().FirstOrDefault(x => x.ID_hocKy == id && x.ID_Lop == checklopHoc.ID && x.ID_monHoc == checkmonhoc.ID
+                      && x.ID_Nganh == checkmaNganh.ID && x.ID_Phong == checkphong.ID && x.ID_hocPhan == checkhocphan.ID );
+                    edit.ID_Tuan = checktuanhoc.ID;
+                    edit.ID_Tiet = checktiethoc.ID;
+                    model.SaveChanges();*/
+
+
+
+                    var checktkbhp = model.TKBs.Where(a => a.ID_Tiet != tkbTong.ID_Tiet ).Distinct().FirstOrDefault(x => x.ID_hocKy == id && x.ID_Lop == tkbTong.ID_Lop && x.ID_monHoc == tkbTong.ID_monHoc
+                      && x.ID_Nganh == tkbTong.ID_Nganh && x.ID_Phong == tkbTong.ID_Phong && x.ID_hocPhan == tkbTong.ID_hocPhan);
+
+                    var checktkbhp1 = model.TKBs.Where(a => a.ID_Tuan != tkbTong.ID_Tuan).Distinct().FirstOrDefault(x => x.ID_hocKy == id && x.ID_Lop == tkbTong.ID_Lop && x.ID_monHoc == tkbTong.ID_monHoc
+                      && x.ID_Nganh == tkbTong.ID_Nganh && x.ID_Phong == tkbTong.ID_Phong && x.ID_hocPhan == tkbTong.ID_hocPhan);
+
+                    var checktkbhp2 = model.TKBs.Where(a => a.ID_Tuan != tkbTong.ID_Tuan && a.ID_Tiet != tkbTong.ID_Tiet).Distinct().FirstOrDefault(x => x.ID_hocKy == id && x.ID_Lop == tkbTong.ID_Lop && x.ID_monHoc == tkbTong.ID_monHoc
+                     && x.ID_Nganh == tkbTong.ID_Nganh && x.ID_Phong == tkbTong.ID_Phong && x.ID_hocPhan == tkbTong.ID_hocPhan);
+
                     var checkhk = model.TKBs.FirstOrDefault(x => x.ID_hocKy == id);
 
                     //
-                    var edit = model.tuanHocs.FirstOrDefault(x => x.ID == checktkbhp.ID_Tuan);
-                    edit.thuS = thuS;
-                    edit.tuanBD = tuanBD;
-                    edit.tuanHoc1 = tuanHoc;
-                    edit.tuanKT = tuanKT;
-                    edit.thu = thu;
-                    model.SaveChanges();
+                    if (checktkbhp2 != null)
+                    {
+                        checktkbhp2.ID_Tuan = tkbTong.ID_Tuan;
+                        checktkbhp2.ID_Tiet = tkbTong.ID_Tiet;
+                        model.SaveChanges();
+                    }
+                    else
+                    {
+                        if (checktkbhp1 != null)
+                        {
+                            checktkbhp1.ID_Tuan = tkbTong.ID_Tuan;
+                           
+                            model.SaveChanges();
+                        }
+                        else
+                        {
+                            if (checktkbhp != null)
+                            {
+                               
+                                checktkbhp.ID_Tiet = tkbTong.ID_Tiet;
+                                model.SaveChanges();
+                            }
+                        }
+                    }
+                    //
+                    
 
-                    var edit1 = model.tietHocs.FirstOrDefault(x => x.ID == checktkbhp.ID_Tiet);
-                    edit1.tongTiet = tongTiet;
-                    edit1.soTiet = soTiet;
-                    edit1.tietHoc1 = tietHoc;
-                    edit1.tietS = tietS;
-                    edit1.tietBD = tietBD;
 
-                    model.SaveChanges();
 
                     //
 
