@@ -127,6 +127,7 @@ namespace CAPTeam14.Controllers
 
 
                     }
+                    break;
                 }
                 // kết thúc vòng lặp và ngưng đọc dữ liệu sau 29 cột
                 IEDreader.Close();
@@ -137,7 +138,8 @@ namespace CAPTeam14.Controllers
 
             catch (Exception)
             {
-                ModelState.AddModelError("", "Không thể thực hiện hành động này, vui lòng kiểm tra File Excel có đúng định dạng");
+
+                ModelState.AddModelError("", "Không thể thực hiện hành động này, vui lòng kiểm tra File Excel có đúng định dạng và nội dung file Excel");
             }
             return View(ds);
 
