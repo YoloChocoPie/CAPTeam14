@@ -280,6 +280,7 @@ namespace CAPTeam14.Controllers
                 {
                     ModelState.AddModelError("tenHK", "Không được nhập khoảng trắng");
                 }
+               
               
 
             }

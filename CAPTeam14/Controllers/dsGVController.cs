@@ -97,16 +97,20 @@ namespace CAPTeam14.Controllers
                         // nếu chưa tồn tại thì tạo mới Học Phần
                         if (checkmaGV == null)
                         {
-                            dsgv = new danhsachGV
+                            if (maGV != "" && tenGV != "" && khoa != "" && loaiGV != "" )
                             {
-                                maGV = maGV,
-                                tenGV = tenGV,
-                                khoa = khoa,
-                                loaiGV = loaiGV,
-                                
-                            };
-                            model.danhsachGVs.Add(dsgv);
-                            model.SaveChanges();
+                                dsgv = new danhsachGV
+                                {
+                                    maGV = maGV,
+                                    tenGV = tenGV,
+                                    khoa = khoa,
+                                    loaiGV = loaiGV,
+
+                                };
+                                model.danhsachGVs.Add(dsgv);
+                                model.SaveChanges();
+
+                            }
 
                         }
                         // còn nếu đã tồn tại một trong những dữ liệu trên rồi thì lưu giữ dữ liệu đã tồn tại và tiếp tục vòng lặp để kiểm tra 

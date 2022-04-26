@@ -63,7 +63,7 @@
                                                 <span class="input-group-text"><i class="far fa-envelope"></i></span>
                                             </div>
 
-                                            @Html.EditorFor(model => model.tenHK, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.EditorFor(model => model.tenHK, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                                             @Html.ValidationMessageFor(m => m.tenHK, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
