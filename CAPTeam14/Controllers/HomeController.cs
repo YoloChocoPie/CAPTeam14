@@ -250,7 +250,7 @@ namespace CAPTeam14.Controllers
             // lấy thông tin ID học kì đã chọn trong thời khóa biểu
             ViewBag.test = id;
 
-            ViewBag.gv = model.danhsachGVs.OrderBy(x => x.ID).ToList();
+            ViewBag.gv = model.danhsachGVs.OrderBy(x => x.tenGV).ToList();
             return View(tkb);
         }
         [HttpGet]
@@ -412,7 +412,7 @@ namespace CAPTeam14.Controllers
                         //Không có cột ghi chú
 
                         //Kiểm Tra xem dữ liệu đã tồn tại hay chưa
-                        var checkgv = model.danhsachGVs.FirstOrDefault(x => x.maGV == maGV && x.tenGV == tenGV); // new
+                        var checkgv = model.danhsachGVs.FirstOrDefault(x => x.maGV == maGV || x.tenGV == tenGV); // new
 
 
                         // 30 - 3 = 27 
@@ -1220,10 +1220,9 @@ namespace CAPTeam14.Controllers
 
             Message.Subject = " Bạn đã có lịch dạy ";
             Message.Body = "<br/> Xin chào." +
-                           "<br/> Bạn đã có lịch dạy học tại website Quản Lý và Phân Công của Team 14." +
-                           
-                           "<br/> Vui lòng truy cập vào website để xem thời khóa biểu của bạn"+
-                            "<br/> https://www.youtube.com/watch?v=AaF7rXatU9E";
+                           "<br/> Bạn đã có lịch dạy học tại website Giảng Dạy và Phân Công của Team 14." +                          
+                           "<br/> Vui lòng truy cập vào Website bên dưới để xem thời khóa biểu của bạn"+
+                            "<br/> https://cntttest.vanlanguni.edu.vn:18081/CP24Team14/";
             Message.IsBodyHtml = true;
             smtp.Send(Message);
         }
