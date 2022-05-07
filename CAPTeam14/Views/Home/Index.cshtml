@@ -25,8 +25,8 @@
                 </div>*@
 
             <div class="col-md-4 form-group">
-                <label style="width: 51px">Tuần : </label> 
-               
+                <label style="width: 51px">Tuần : </label>
+
 
                 @Html.DropDownList("IDT", new SelectList(ViewBag.hkyy, "ID", "sotuan"), "Chọn tuần", new { @class = "form-control width-70" })
             </div>
@@ -74,14 +74,14 @@
                     <div>
                         <div class="clearfix"></div>
                         <div class="alert alert-warning smallTxt config-alert">
-                            @if (ViewBag.lockstat == 1)
-                            {
+                            @*@if (ViewBag.lockstat == 1)
+                                {
 
-                            }
-                            else if (ViewBag.lockstat == 2)
-                            {
-                                <a class="btn btn-file cancelall btn btn-danger" style="text-decoration: none" title="Hủy toàn bộ phân công" href="@Url.Action("CancelAll", "Home", new { id = ViewBag.test3 })">Hủy toàn bộ phân công</a>
-                            }
+                                }
+                                else if (ViewBag.lockstat == 2)
+                                {
+                                    <a class="btn btn-file cancelall btn btn-danger" style="text-decoration: none" title="Hủy toàn bộ phân công" href="@Url.Action("CancelAll", "Home", new { id = ViewBag.test3 })">Hủy toàn bộ phân công</a>
+                                }*@
 
                         </div>
                         <div>
@@ -210,7 +210,7 @@
                                                 @foreach (var item2 in db.TKBs.Where(d => d.tuanHoc.thuS == "2" && d.tietHoc.tietBD == "1" && d.monHoc.tenMon == item))
                                                 {
 
-                                                    if ((item2.hocPhan.loaiHP == "Lý thuyết" || item2.hocPhan.loaiHP == "Lý Thuyết") && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]) )
+                                                    if ((item2.hocPhan.loaiHP == "Lý thuyết" || item2.hocPhan.loaiHP == "Lý Thuyết") && item2.ID_hocKy == ViewBag.test && item2.tuanHoc.tuanHoc1.Split(',', ';', ' ').Contains((string)TempData["tuan"]))
                                                     {
 
                                                         <form name="@item2.ID_GV" class="formLT" style="background-color: blanchedalmond; border: groove; margin: 8px;" action="@Url.Action("PhanCong", "Home", new { id = item2.ID })" method="post">
@@ -3681,20 +3681,36 @@
     </section>
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    
-@if (TempData["ThongBao1"] != null)
-{
-    <script type="text/javascript">
-        $(function () {
-            Swal.fire({
-                title: 'Thông báo',
-                text: 'Bạn đã import thời khóa biểu thành công !!!',
-                icon: 'success',
-                showConfirmButton: true,
+
+    @if (TempData["ThongBao1"] != null)
+    {
+        <script type="text/javascript">
+            $(function () {
+                Swal.fire({
+                    title: 'Thông báo',
+                    text: 'Bạn đã import thời khóa biểu thành công !!!',
+                    icon: 'success',
+                    showConfirmButton: true,
+                });
             });
-        });
-    </script>
-}
+        </script>
+    }
+
+
+
+    @if (TempData["ThongBao2"] != null)
+    {
+        <script type="text/javascript">
+            $(function () {
+                Swal.fire({
+                    title: 'Thông báo',
+                    text: 'Bạn đã Cập nhật thời khóa biểu thành công !!!',
+                    icon: 'success',
+                    showConfirmButton: true,
+                });
+            });
+        </script>
+    }
 
     <script>
 

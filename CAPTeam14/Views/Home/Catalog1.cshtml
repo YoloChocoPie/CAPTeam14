@@ -18,7 +18,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="@Url.Action("Index1","Home")">Trang chủ</a></li>
-                            <li class="breadcrumb-item active">Thay thế</li>
+                            <li class="breadcrumb-item active">Cập nhật</li>
                         </ol>
                     </div>
                 </div>
@@ -117,7 +117,7 @@
                                             <input type="file" name="excel" value="submit" onchange="checkfile(this);" accept=".xls, .xlsx" class="form-control-file form-control height-auto" required>
                                             <br />
 
-                                            <button id="UploadFile" type="submit" class="btn btn-success" @*data-toggle="modal"*@ @*data-target="#myModal3"*@ data-backdrop="static" style="float: left">Import</button>
+                                            <button id="UploadFile" type="submit" class="btn btn-success" @*data-toggle="modal"*@ @*data-target="#myModal3"*@ data-backdrop="static" style="float: left">Cập nhật</button>
                                             <br />
                                             <a href="@Url.Action("Index1", "Home")" style="float: right; margin-top: -20px" ; class="btn btn-danger" onclick="return confirm('Bạn có muốn Hủy?')">Hủy</a>
                                             <br />
@@ -166,13 +166,13 @@
                                                 }
 
                                                 Swal.fire({
-                                                    title: 'Vui lòng kiểm tra lại thông tin lớp học và ngành trước khi import dữ liệu',
+                                                    title: 'Bạn có muốn cập nhật dữ liệu của học kì này ?',
                                                     //text: "You won't be able to revert this!",
                                                     icon: 'warning',
                                                     showCancelButton: true,
                                                     confirmButtonColor: '#3085d6',
                                                     cancelButtonColor: '#d33',
-                                                    confirmButtonText: 'Import',
+                                                    confirmButtonText: 'Cập nhật',
                                                     cancelButtonText: 'Hủy'
                                                 }).then((result) => {
                                                     if (result.isConfirmed) {

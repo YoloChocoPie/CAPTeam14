@@ -11,6 +11,8 @@ using LinqToExcel;
 using System.Data.Entity.Validation;
 using ExcelDataReader;
 using System.Data.SqlClient;
+using System.Net.Mail;
+using System.Net;
 
 
 // 02/03/2022 Cập nhật lại luồng đi Import, cải thiện tốc độ performance bằng cách chuyển hết định dạng sang chuỗi
@@ -997,50 +999,33 @@ namespace CAPTeam14.Controllers
 
 
 
-                        var checktkbhp = model.TKBs.Where(a => a.ID_Tiet != tkbTong.ID_Tiet).Distinct().FirstOrDefault(x => x.ID_hocKy == id && x.ID_Lop == tkbTong.ID_Lop && x.ID_monHoc == tkbTong.ID_monHoc
-                         && x.ID_Nganh == tkbTong.ID_Nganh && x.ID_Phong == tkbTong.ID_Phong && x.ID_hocPhan == tkbTong.ID_hocPhan);
+                        var checktkbhp = model.TKBs.Distinct().FirstOrDefault(x => x.ID_hocKy == id && x.ID_Lop == tkbTong.ID_Lop && x.ID_monHoc == tkbTong.ID_monHoc
+                         && x.ID_Nganh == tkbTong.ID_Nganh && x.ID_Phong == tkbTong.ID_Phong && x.ID_hocPhan == tkbTong.ID_hocPhan && x.ID_Tuan == tkbTong.ID_Tuan);
 
-                        var checktkbhp1 = model.TKBs.Where(a => a.ID_Tuan != tkbTong.ID_Tuan).Distinct().FirstOrDefault(x => x.ID_hocKy == id && x.ID_Lop == tkbTong.ID_Lop && x.ID_monHoc == tkbTong.ID_monHoc
+                        /*var checktkbhp1 = model.TKBs.Where(a => a.ID_Tuan != tkbTong.ID_Tuan).Distinct().FirstOrDefault(x => x.ID_hocKy == id && x.ID_Lop == tkbTong.ID_Lop && x.ID_monHoc == tkbTong.ID_monHoc
                           && x.ID_Nganh == tkbTong.ID_Nganh && x.ID_Phong == tkbTong.ID_Phong && x.ID_hocPhan == tkbTong.ID_hocPhan);
 
                         var checktkbhp2 = model.TKBs.Where(a => a.ID_Tuan != tkbTong.ID_Tuan && a.ID_Tiet != tkbTong.ID_Tiet).Distinct().FirstOrDefault(x => x.ID_hocKy == id && x.ID_Lop == tkbTong.ID_Lop && x.ID_monHoc == tkbTong.ID_monHoc
-                         && x.ID_Nganh == tkbTong.ID_Nganh && x.ID_Phong == tkbTong.ID_Phong && x.ID_hocPhan == tkbTong.ID_hocPhan);
+                         && x.ID_Nganh == tkbTong.ID_Nganh && x.ID_Phong == tkbTong.ID_Phong && x.ID_hocPhan == tkbTong.ID_hocPhan);*/
 
                         var checkhk = model.TKBs.FirstOrDefault(x => x.ID_hocKy == id);
 
                         //
-                        if (checktkbhp2 != null)
+                        if (checktkbhp != null)
                         {
-                            checktkbhp2.ID_Tuan = tkbTong.ID_Tuan;
-                            checktkbhp2.ID_Tiet = tkbTong.ID_Tiet;
+
+                            checktkbhp.ID_Tiet = tkbTong.ID_Tiet;
                             model.SaveChanges();
-                        }
-                        else
-                        {
-                            if (checktkbhp1 != null)
-                            {
-                                checktkbhp1.ID_Tuan = tkbTong.ID_Tuan;
-
-                                model.SaveChanges();
-                            }
-                            else
-                            {
-                                if (checktkbhp != null)
-                                {
-
-                                    checktkbhp.ID_Tiet = tkbTong.ID_Tiet;
-                                    model.SaveChanges();
-                                }
-                            }
                         }
                         //
 
 
                     }
+                    break;
                 }
                 // kết thúc vòng lặp và ngưng đọc dữ liệu sau 29 cột
                 IEDreader.Close();
-                TempData["ThongBao1"] = 1;
+                TempData["ThongBao2"] = 1;
                 return RedirectToAction("Index", "Home", new { id = id });
             }
             catch (Exception)
@@ -1081,12 +1066,22 @@ namespace CAPTeam14.Controllers
             ViewBag.gv = model.danhsachGVs.OrderByDescending(x => x.ID).ToList();
 
             var tt = model.TKBs.FirstOrDefault(x => x.ID == id);
+            
             var gvid_warning = model.TKBs.Where(g => g.ID_GV == tkb.ID_GV && g.tuanHoc.thuS == tt.tuanHoc.thuS && g.ID_hocKy == tt.ID_hocKy).ToList().Count(g => g.ID_GV != null);
             if (gvid_warning >= 3)
             {
                 
                 tt.ID_GV = tkb.ID_GV;
                 model.SaveChanges();
+                var giangvien = model.nguoiDungs.FirstOrDefault(x => x.ID_dsGV == tt.ID_GV);
+                if (giangvien != null)
+                {
+                    SendEmailToUser(giangvien.AspNetUser.Email);
+                }
+                else
+                {
+
+                }
                 return Json(new { resp = true });
 
             }
@@ -1095,6 +1090,15 @@ namespace CAPTeam14.Controllers
             {
                 tt.ID_GV = tkb.ID_GV;
                 model.SaveChanges();
+                var giangvien = model.nguoiDungs.FirstOrDefault(x => x.ID_dsGV == tt.ID_GV);
+                if (giangvien != null)
+                {
+                    SendEmailToUser(giangvien.AspNetUser.Email);
+                }
+                else
+                {
+
+                }
                 return Json(new { result = true });
 
             }
@@ -1190,6 +1194,38 @@ namespace CAPTeam14.Controllers
             //ViewBag.sumsubhk = model.ACCOUNTs.Where(x => x.DATE_OF_REGISTRATION.Value.Year == result).ToList().Count();
             return View();
 
+        }
+
+
+
+        public void SendEmailToUser(string emailId)
+        {
+            var GenarateUserVerificationLink = ":18080/SEP24Team13/Admin/Auth/UserVerification/";
+            var link = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, GenarateUserVerificationLink);
+
+            var fromMail = new MailAddress("cuong.187pm06554@vanlanguni.vn", "TEAM14"); // set your email    
+            var fromEmailpassword = "yolooo123"; // Set your password     
+            var toEmail = new MailAddress(emailId);
+
+            var smtp = new SmtpClient();
+            smtp.Host = "smtp.office365.com";
+            smtp.Port = 587;
+            smtp.EnableSsl = true;
+            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+            smtp.UseDefaultCredentials = false;
+            smtp.Credentials = new NetworkCredential(fromMail.Address, fromEmailpassword);
+
+            var Message = new MailMessage(fromMail, toEmail);
+
+
+            Message.Subject = " Bạn đã có lịch dạy ";
+            Message.Body = "<br/> Xin chào." +
+                           "<br/> Bạn đã có lịch dạy học tại website Quản Lý và Phân Công của Team 14." +
+                           
+                           "<br/> Vui lòng truy cập vào website để xem thời khóa biểu của bạn"+
+                            "<br/> https://www.youtube.com/watch?v=AaF7rXatU9E";
+            Message.IsBodyHtml = true;
+            smtp.Send(Message);
         }
 
     }

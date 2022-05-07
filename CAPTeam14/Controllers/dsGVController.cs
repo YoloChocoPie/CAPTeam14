@@ -83,7 +83,7 @@ namespace CAPTeam14.Controllers
                         
 
                         // table hocPhans
-                        var checkmaGV = model.danhsachGVs.FirstOrDefault(x => x.maGV == maGV && x.tenGV == tenGV && x.khoa == khoa && x.loaiGV == loaiGV); // 1
+                        var checkmaGV = model.danhsachGVs.FirstOrDefault(x => x.maGV == maGV || x.tenGV == tenGV); // 1
                        
                        
 
@@ -97,7 +97,7 @@ namespace CAPTeam14.Controllers
                         // nếu chưa tồn tại thì tạo mới Học Phần
                         if (checkmaGV == null)
                         {
-                            if (maGV != "" && tenGV != "" && khoa != "" && loaiGV != "" )
+                            if (maGV != "" && tenGV != "" )
                             {
                                 dsgv = new danhsachGV
                                 {
@@ -117,7 +117,15 @@ namespace CAPTeam14.Controllers
                         // xem có dữ liệu nào khác thì
                         else
                         {
-                            dsgv = checkmaGV;
+                            if (maGV != checkmaGV.maGV)
+                            {
+                                checkmaGV.maGV = maGV;
+                                model.SaveChanges();
+                            }
+                            else
+                            {
+                                dsgv = checkmaGV;
+                            }
                            
                             
                         }

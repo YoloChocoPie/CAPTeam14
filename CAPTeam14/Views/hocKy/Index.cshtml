@@ -79,14 +79,33 @@
 
                                             @Html.DisplayFor(modelItem => item.namKT)
                                         </td>
-                                        <td>
+                                        @if (item.ID_lop == null)
+                                        {
+                                            <td>
+                                                Không có
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td>
 
-                                            @Html.DisplayFor(modelItem => item.lopHoc.maLop)
-                                        </td>
-                                        <td>
+                                                @Html.DisplayFor(modelItem => item.lopHoc.maLop)
+                                            </td>
+                                        }
+                                        @if (item.ID_nganh == null)
+                                        {
+                                            <td>
+                                                Không có
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td>
 
-                                            @Html.DisplayFor(modelItem => item.Nganh.tenNganh)
-                                        </td>
+                                                @Html.DisplayFor(modelItem => item.Nganh.tenNganh)
+                                            </td>
+                                        }
+
 
 
 
