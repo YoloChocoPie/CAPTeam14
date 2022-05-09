@@ -17,7 +17,7 @@ namespace CAPTeam14.Controllers
         // GET: dsGV
         public ActionResult Index()
         {
-            var dsgv = model.danhsachGVs.OrderByDescending(x => x.ID).ToList();
+            var dsgv = model.danhsachGVs.OrderBy(x => x.tenGV).ToList();
             return View(dsgv);
         }
 

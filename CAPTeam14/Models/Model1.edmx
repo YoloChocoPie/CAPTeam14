@@ -88,6 +88,7 @@
           <Property Name="tenGV" Type="nvarchar(max)" />
           <Property Name="loaiGV" Type="nvarchar(max)" />
           <Property Name="khoa" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="hocKy">
           <Key>
@@ -622,6 +623,7 @@
           <NavigationProperty Name="nguoiDungs" Relationship="Self.FK_nguoiDung_danhsachGV" FromRole="danhsachGV" ToRole="nguoiDung" />
           <NavigationProperty Name="TKBs" Relationship="Self.FK_TKB_danhsachGV" FromRole="danhsachGV" ToRole="TKB" />
           <NavigationProperty Name="hocKies" Relationship="CP24Team14Model.FK_hocKy_danhsachGV" FromRole="danhsachGV" ToRole="hocKy" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="hocKy">
           <Key>
@@ -1188,6 +1190,7 @@
           <EntitySetMapping Name="danhsachGVs">
             <EntityTypeMapping TypeName="CP24Team14Model.danhsachGV">
               <MappingFragment StoreEntitySet="danhsachGV">
+                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="maGV" ColumnName="maGV" />
                 <ScalarProperty Name="tenGV" ColumnName="tenGV" />

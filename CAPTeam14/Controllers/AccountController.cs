@@ -529,7 +529,7 @@ namespace CAPTeam14.Controllers
         {
             // khởi tạo hàm string lấy ID của người dùng hiện tại
             string checkID = User.Identity.GetUserId();
-           
+            string name = User.Identity.GetUserName();
             xacThuc(acc);
             try
             {
@@ -547,16 +547,59 @@ namespace CAPTeam14.Controllers
                     // kiểm tra nếu mã giảng viên có đúng với dữ liệu mã giảng viên thực tế
                     // nếu đúng thì lưu thông tin profile
                     var gv1 = model.danhsachGVs.FirstOrDefault(x => x.maGV == taikhoan.maGV);
+                    var gv2 = model.danhsachGVs.FirstOrDefault(x => x.maGV == taikhoan.maGV || x.Email == name);
+                    var gv3 = model.danhsachGVs.FirstOrDefault(x => x.Email == name);
+
+                    //1 Nếu mã giảng viên đã tồn tại trong dsgv => cho phép đăng kí bình thường 
+                    //2 Nếu chưa tồn tại => Nếu cả email và mã chưa tồn tại trong dsgv => tạo mới danh sách giảng viên => cho phép đăng kí => PASSED
+                    //3 Trường hợp email tồn tại mà mã không tồn tại => (không thể xảy ra) => chỉ xảy ra khi mã hết hạn => hiển thị " Thông tin đã được sử dụng " => PASSED 
+                    //4 Trường hợp email không tồn tại mà mã tồn tại => thêm email và quay về 1 => PASSED
+
                     if (gv1 != null)
                     {
-                        
+                        if (gv1.Email == null)
+                        {
+                            gv1.Email = name;
+                            model.SaveChanges();
+                        }
                         taikhoan.ID_dsGV = gv1.ID;
+                        model.nguoiDungs.Add(taikhoan);
+                        model.SaveChanges();
+
+                        TempData["ThongBao1"] = 1;
+                    }
+                    else
+                    {
+                        if (gv2 == null && gv3 == null)
+                        {
+                            
+
+                            //
+                            var giangvien = new danhsachGV();
+                            giangvien.Email = name;
+                            giangvien.tenGV = taikhoan.tenGV;
+                            giangvien.maGV = taikhoan.maGV;
+                            model.danhsachGVs.Add(giangvien);
+                            model.SaveChanges();
+
+                            taikhoan.ID_dsGV = giangvien.ID;
+                            model.nguoiDungs.Add(taikhoan);
+                            model.SaveChanges();
+
+                            TempData["ThongBao1"] = 1;
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("maGV", "Thông tin giảng viên đã được sử dụng");
+                            return View(acc);
+                        }
+                       
                     }
                   
 
-                    model.nguoiDungs.Add(taikhoan);
-                    model.SaveChanges();
-                    TempData["ThongBao1"] = 1;
+                    
+                    //
+
 
                     // sau khi xác nhận thông tin thành công. Trước khi quay về trang chủ phải xóa hết mọi hoạt động
                     Session.Abandon();
@@ -671,11 +714,11 @@ namespace CAPTeam14.Controllers
                     {
                         ModelState.AddModelError("maGV", "Mã giảng viên đã tồn tại");
                     }
-                    if (gv1 == null)
+                   /* if (gv1 == null)
                     {
 
                         ModelState.AddModelError("maGV", "Mã giảng viên không tồn tại trên dữ liệu. Vui lòng liên hệ với người quản lý");
-                    }
+                    }*/
 
 
                 }

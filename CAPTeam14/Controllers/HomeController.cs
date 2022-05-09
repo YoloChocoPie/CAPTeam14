@@ -706,6 +706,19 @@ namespace CAPTeam14.Controllers
                             model.TKBs.Add(tkbTong);
                             model.SaveChanges();
 
+                            var giangvien1 = model.danhsachGVs.FirstOrDefault(x => x.ID == tkbTong.ID_GV);
+                            var hk1 = model.hocKies.FirstOrDefault(x => x.ID == tkbTong.ID_hocKy);
+                            var mon1 = model.monHocs.FirstOrDefault(x => x.ID == tkbTong.ID_monHoc);
+                            var tuan1 = model.tuanHocs.FirstOrDefault(x => x.ID == tkbTong.ID_Tuan);
+                            if (giangvien1 != null)
+                            {
+                                SendEmailToUser(giangvien1.Email, hk1.tenHK, mon1.tenMon, tuan1.tuanHoc1);
+                            }
+                            else
+                            {
+
+                            }
+
                         }
 
 
@@ -1073,10 +1086,13 @@ namespace CAPTeam14.Controllers
                 
                 tt.ID_GV = tkb.ID_GV;
                 model.SaveChanges();
-                var giangvien = model.nguoiDungs.FirstOrDefault(x => x.ID_dsGV == tt.ID_GV);
+                var giangvien = model.danhsachGVs.FirstOrDefault(x => x.ID == tt.ID_GV);
+                var hk = model.hocKies.FirstOrDefault(x => x.ID == tt.ID_hocKy);
+                var mon = model.monHocs.FirstOrDefault(x => x.ID == tt.ID_monHoc);
+                var tuan = model.tuanHocs.FirstOrDefault(x => x.ID == tt.ID_Tuan);
                 if (giangvien != null)
                 {
-                    SendEmailToUser(giangvien.AspNetUser.Email);
+                    SendEmailToUser(giangvien.Email, hk.tenHK, mon.tenMon, tuan.tuanHoc1);
                 }
                 else
                 {
@@ -1090,10 +1106,13 @@ namespace CAPTeam14.Controllers
             {
                 tt.ID_GV = tkb.ID_GV;
                 model.SaveChanges();
-                var giangvien = model.nguoiDungs.FirstOrDefault(x => x.ID_dsGV == tt.ID_GV);
+                var giangvien = model.danhsachGVs.FirstOrDefault(x => x.ID == tt.ID_GV);
+                var hk = model.hocKies.FirstOrDefault(x => x.ID == tt.ID_hocKy);
+                var mon = model.monHocs.FirstOrDefault(x => x.ID == tt.ID_monHoc);
+                var tuan = model.tuanHocs.FirstOrDefault(x => x.ID == tt.ID_Tuan);
                 if (giangvien != null)
                 {
-                    SendEmailToUser(giangvien.AspNetUser.Email);
+                    SendEmailToUser(giangvien.Email, hk.tenHK, mon.tenMon, tuan.tuanHoc1);
                 }
                 else
                 {
@@ -1198,7 +1217,7 @@ namespace CAPTeam14.Controllers
 
 
 
-        public void SendEmailToUser(string emailId)
+        public void SendEmailToUser(string emailId, string tenhk, string tenmon, string tuan)
         {
             var GenarateUserVerificationLink = ":18080/SEP24Team13/Admin/Auth/UserVerification/";
             var link = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, GenarateUserVerificationLink);
@@ -1209,6 +1228,7 @@ namespace CAPTeam14.Controllers
 
             var smtp = new SmtpClient();
             smtp.Host = "smtp.office365.com";
+            /*smtp.Host = "smtp.gmail.com";*/
             smtp.Port = 587;
             smtp.EnableSsl = true;
             smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
@@ -1220,8 +1240,17 @@ namespace CAPTeam14.Controllers
 
             Message.Subject = " Bạn đã có lịch dạy ";
             Message.Body = "<br/> Xin chào." +
-                           "<br/> Bạn đã có lịch dạy học tại website Giảng Dạy và Phân Công của Team 14." +                          
-                           "<br/> Vui lòng truy cập vào Website bên dưới để xem thời khóa biểu của bạn"+
+                "<br/>" +
+                           "<br/> Đây là email tự động từ website Giảng Dạy và Phân Công của Team 14." +
+                           "<br/>" +
+                           "<br/> Bạn đã có lịch dạy học ở học kì : " + tenhk +
+                           "<br/>" +
+                           "<br/> Môn học : " + tenmon +
+                           "<br/>" +
+                           "<br/> Diễn ra từ các tuần : " + tuan +
+                           "<br/>" +
+                           "<br/> Vui lòng truy cập vào Website bên dưới để xem thời khóa biểu của bạn" +
+                           "<br/>" +
                             "<br/> https://cntttest.vanlanguni.edu.vn:18081/CP24Team14/";
             Message.IsBodyHtml = true;
             smtp.Send(Message);

@@ -17,12 +17,12 @@ namespace CAPTeam14.Controllers
 
         public ActionResult Index()
         {
-            var giangvien = model.nguoiDungs.OrderByDescending(x => x.ID).ToList();
+            var giangvien = model.nguoiDungs.OrderBy(x => x.tenGV).ToList();
             return View(giangvien);
         }
         public ActionResult Index2()
         {
-            var giangvien = model.nguoiDungs.OrderByDescending(x => x.ID).ToList();
+            var giangvien = model.nguoiDungs.OrderBy(x => x.tenGV).ToList();
             return View(giangvien);
         }
 

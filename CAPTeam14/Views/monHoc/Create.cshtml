@@ -54,50 +54,54 @@
 
 
 
-                                    <div class="form-group">
-                                        <label>Tên môn học</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="far fa-envelope"></i></span>
-                                            </div>
-
-                                            @Html.EditorFor(model => model.tenMon, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => model.tenMon, "", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    <label>Tên môn học</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-envelope"></i></span>
                                         </div>
-                                    </div>
 
-                                    <div class="form-group">
-                                        <label>Mã môn học</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="far fa-user"></i></span>
-                                            </div>
-                                            @Html.EditorFor(model => model.maMon, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => model.maMon, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>
+                                        @Html.EditorFor(model => model.tenMon, new { htmlAttributes = new { @class = "form-control" } })
 
-                                    <div class="form-group">
-                                        <label>Số tín chỉ</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="far fa-envelope"></i></span>
-                                            </div>
-                                            @Html.EditorFor(model => model.tinChi, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => model.tinChi, "", new { @class = "text-danger" })
-                                        </div>
                                     </div>
+                                    @Html.ValidationMessageFor(model => model.tenMon, "", new { @class = "text-danger" })
+                                </div>
 
-                                    <div class="form-group">
-                                        <label>Tên gọi khác</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="far fa-envelope"></i></span>
-                                            </div>
-                                            @Html.EditorFor(model => model.tengoiKhac, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => model.tengoiKhac, "", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    <label>Mã môn học</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-user"></i></span>
                                         </div>
+                                        @Html.EditorFor(model => model.maMon, new { htmlAttributes = new { @class = "form-control" } })
+
                                     </div>
+                                    @Html.ValidationMessageFor(model => model.maMon, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Số tín chỉ</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-envelope"></i></span>
+                                        </div>
+                                        @Html.EditorFor(model => model.tinChi, new { htmlAttributes = new { @class = "form-control" } })
+
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.tinChi, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Tên gọi khác</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-envelope"></i></span>
+                                        </div>
+                                        @Html.EditorFor(model => model.tengoiKhac, new { htmlAttributes = new { @class = "form-control" } })
+
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.tengoiKhac, "", new { @class = "text-danger" })
+                                </div>
 
 
 

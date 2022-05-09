@@ -56,17 +56,18 @@
 
 
 
-                                    <div class="form-group">
-                                        <label>Tên học kỳ</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="far fa-envelope"></i></span>
-                                            </div>
-
-                                            @Html.EditorFor(model => model.tenHK, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                                            @Html.ValidationMessageFor(m => m.tenHK, "", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    <label>Tên học kỳ</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-envelope"></i></span>
                                         </div>
+
+                                        @Html.EditorFor(model => model.tenHK, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+
                                     </div>
+                                    @Html.ValidationMessageFor(m => m.tenHK, "", new { @class = "text-danger" })
+                                </div>
 
                                     <div class="form-group">
                                         <label>Năm bắt đầu</label>
@@ -75,9 +76,10 @@
                                                 <span class="input-group-text"><i class="far fa-user"></i></span>
                                             </div>
                                             @Html.EditorFor(model => model.namBD, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
-                                            @Html.ValidationMessageFor(m => m.namBD, "", new { @class = "text-danger" })
+
 
                                         </div>
+                                        @Html.ValidationMessageFor(m => m.namBD, "", new { @class = "text-danger" })
                                     </div>
 
                                     <div class="form-group">
@@ -87,8 +89,9 @@
                                                 <span class="input-group-text"><i class="far fa-user"></i></span>
                                             </div>
                                             @Html.EditorFor(model => model.namKT, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
-                                            @Html.ValidationMessageFor(m => m.namKT, "", new { @class = "text-danger" })
+
                                         </div>
+                                        @Html.ValidationMessageFor(m => m.namKT, "", new { @class = "text-danger" })
                                     </div>
 
                                    @* <div class="form-group">

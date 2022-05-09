@@ -51,28 +51,30 @@
 
 
 
-                                    <div class="form-group">
-                                        <label>Mã Ngành</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="far fa-envelope"></i></span>
-                                            </div>
-
-                                            @Html.EditorFor(model => model.maNganh, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => model.maNganh, "", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    <label>Mã Ngành</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-envelope"></i></span>
                                         </div>
-                                    </div>
 
-                                    <div class="form-group">
-                                        <label>Tên Ngành Học</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="far fa-user"></i></span>
-                                            </div>
-                                            @Html.EditorFor(model => model.tenNganh, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => model.tenNganh, "", new { @class = "text-danger" })
-                                        </div>
+                                        @Html.EditorFor(model => model.maNganh, new { htmlAttributes = new { @class = "form-control" } })
+
                                     </div>
+                                    @Html.ValidationMessageFor(model => model.maNganh, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Tên Ngành Học</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-user"></i></span>
+                                        </div>
+                                        @Html.EditorFor(model => model.tenNganh, new { htmlAttributes = new { @class = "form-control" } })
+
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.tenNganh, "", new { @class = "text-danger" })
+                                </div>
 
 
 

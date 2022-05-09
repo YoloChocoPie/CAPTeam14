@@ -54,17 +54,18 @@
 
 
 
-                                    <div class="form-group">
-                                        <label>Mã lớp</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="far fa-envelope"></i></span>
-                                            </div>
-
-                                            @Html.EditorFor(model => model.maLop, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => model.maLop, "", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    <label>Mã lớp</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-envelope"></i></span>
                                         </div>
+
+                                        @Html.EditorFor(model => model.maLop, new { htmlAttributes = new { @class = "form-control" } })
+
                                     </div>
+                                    @Html.ValidationMessageFor(model => model.maLop, "", new { @class = "text-danger" })
+                                </div>
 
                                     
 
