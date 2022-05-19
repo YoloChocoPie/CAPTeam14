@@ -1,0 +1,147 @@
+﻿@model CAPTeam14.Models.nguoiDung
+@{
+    Layout = null;
+    ViewBag.Title = "Register";
+}
+
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Site Metas -->
+    <title>Giảng Dạy và Phân Công</title>
+    <meta name="keywords" content="Team14">
+    <meta name="description" content="Website quản lý giảng dạy và phân công của giảng viên khoa Công Nghệ Thông Tin">
+    <meta name="author" content="Team14" />
+
+
+    <link rel="stylesheet" href="@Url.Content("~/Reg/Sstyle.css")">
+
+
+
+
+    <link rel="icon" href="~/assets/VanLang-Logo.png">
+</head>
+
+<body>
+    <div class="background">
+        <div class="container">
+            <div class="title">Xác nhận thông tin</div>
+            <div class="content">
+                <div class="form-group">
+
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="user-details">
+
+                            <div class="input-box">
+                                @Html.LabelFor(m => m.tenGV, "Họ tên", new { @class = "details" })
+                                <div class="input-box">
+                                    @Html.EditorFor(m => m.tenGV, new { htmlAttributes = new { placeholder = "Nhập họ và tên ", required = "required" } })
+                                    @Html.ValidationMessageFor(m => m.tenGV, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="input-box">
+                                @Html.LabelFor(m => m.maGV, "Mã giảng viên", new { @class = "details" })
+                                <div class="input-box">
+                                    @Html.EditorFor(m => m.maGV, new { htmlAttributes = new { placeholder = "Nhập mã giảng viên ", required = "required" } })
+                                    @Html.ValidationMessageFor(m => m.maGV, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="input-box">
+                                @Html.LabelFor(m => m.khoa, "Khoa", new { @class = "details" })
+                                <div class="input-box">
+                                    @Html.EditorFor(m => m.khoa, new { htmlAttributes = new { placeholder = " Khoa Công Nghệ Thông Tin ", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(m => m.khoa, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="input-box">
+                                @Html.LabelFor(m => m.sdt, "Số điện thoại", new { @class = "details" })
+                                <div class="input-box">
+                                    @Html.EditorFor(m => m.sdt, new { htmlAttributes = new { placeholder = "Nhập số điện thoại ", required = "required" } })
+                                    @Html.ValidationMessageFor(m => m.sdt, "", new { @class = "text-danger", require = "require" })
+                                </div>
+                            </div>
+                            <div class="input-box">
+                                @Html.LabelFor(m => m.gioiTinh, "Giới tính", new { @class = "details" })
+                                <div class="input-box">
+
+                                    @Html.ValidationMessageFor(m => m.gioiTinh, "", new { @class = "text-danger" })
+                                    <select class="custom-select" name="gioiTinh" id="gioiTinh">
+                                        <option value="True" selected>Nam</option>
+                                        <option value="False">Nữ</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="input-box">
+                                @Html.LabelFor(m => m.loaiGV, "Loại giảng viên", new { @class = "details" })
+                                <div class="input-box">
+
+                                    @Html.ValidationMessageFor(m => m.loaiGV, "", new { @class = "text-danger" })
+
+                                    <select class="custom-select" name="loaiGV" id="loaiGV">
+                                        <option value="True" selected>Cơ hữu</option>
+                                        <option value="False">Thỉnh Giảng</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="gender-details">
+                            @Html.HiddenFor(model => model.role)
+                        </div>
+                        <div class="gender-details">
+                            @Html.HiddenFor(model => model.ID_dsGV)
+                        </div>
+                        <div class="gender-details">
+                            @Html.HiddenFor(model => model.userID)
+                        </div>
+
+                        <div class="button">
+
+                            <input type="submit" value="Đăng kí" />
+
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+}
+
+
+
+
+
+
+
+
+

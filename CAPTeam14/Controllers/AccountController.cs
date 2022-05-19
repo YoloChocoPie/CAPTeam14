@@ -9,14 +9,18 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using CAPTeam14.Models;
+using System.Text.RegularExpressions;
+using CAPTeam14.Middleware;
+using Microsoft.Owin.Security.VanLang;
 
 namespace CAPTeam14.Controllers
 {
-    [Authorize]
+   
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        CP24Team14Entities model = new CP24Team14Entities();
 
         public AccountController()
         {
@@ -54,10 +58,25 @@ namespace CAPTeam14.Controllers
 
         //
         // GET: /Account/Login
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            if (AuthenticationManager.User.Identity.IsAuthenticated)
+            {
+                Session.Abandon();
+                Request.Cookies.Clear();
+                AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                return RedirectToAction("Login");
+            }
+
+            // xóa hết những Session, Cookies và đăng xuất nếu đã đăng nhập từ trước
+
+            Session.Abandon();
+            Request.Cookies.Clear();
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             ViewBag.ReturnUrl = returnUrl;
+            
             return View();
         }
 
@@ -70,6 +89,9 @@ namespace CAPTeam14.Controllers
         {
             if (!ModelState.IsValid)
             {
+                Session.Abandon();
+                Request.Cookies.Clear();
+                AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
                 return View(model);
             }
 
@@ -79,6 +101,7 @@ namespace CAPTeam14.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                   
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -163,7 +186,7 @@ namespace CAPTeam14.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index1", "Home");
                 }
                 AddErrors(result);
             }
@@ -279,6 +302,11 @@ namespace CAPTeam14.Controllers
         public ActionResult ExternalLogin(string provider, string returnUrl)
         {
             // Request a redirect to the external login provider
+            // Vào trang đăng kí bên thứ ba và xóa bỏ, loại hết những Session, Cookies đang tồn tại
+            Session.Abandon();
+            Request.Cookies.Clear();
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+
             return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
         }
 
@@ -320,54 +348,150 @@ namespace CAPTeam14.Controllers
         //
         // GET: /Account/ExternalLoginCallback
         [AllowAnonymous]
-        public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
+        public async Task<ActionResult> ExternalLoginCallback(string returnUrl, string email)
         {
-            var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
-            if (loginInfo == null)
-            {
-                return RedirectToAction("Login");
-            }
+           
+            var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync2();
+          
 
             // Sign in the user with this external login provider if the user already has a login
-            var result = await SignInManager.ExternalSignInAsync(loginInfo, isPersistent: false);
+            var result = await SignInManager.ExternalSignInAsync2(loginInfo, UserManager);
+            ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
+            var user = model.AspNetUsers.FirstOrDefault(u => u.Email.Equals(loginInfo.Email));
+            var giangVien = model.nguoiDungs.FirstOrDefault(u => u.AspNetUser.Email.Equals(loginInfo.Email));
+           
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = false });
-                case SignInStatus.Failure:
+                    // nếu biến giangVien không có null, thì khởi tạo các Session
+                    if (giangVien != null)
+                    {
+                        Session["user-id"] = User.Identity.GetUserId();
+                        Session["hoten"] = giangVien.tenGV;
+                        Session["role"] = giangVien.role;
+                        Session["id"] = giangVien.ID_dsGV;
+                        if (Session["hoten"].ToString() == "Nguyễn Phan Hòa Thuận" && (Session["role"] == null))
+                        {
+                            Session.Abandon();
+                            Request.Cookies.Clear();
+                            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                            TempData["205"] = 1;
+                            TempData["0521"] = 1;
+                            return View("Login");
+                            
+                        }
+                        Session["id1"] = giangVien.ID;
+                        if (Session["role"] == null)
+                        {
+                            Session["vaitro"] = " Easter Egg : Nếu bạn thấy được dòng này, nghĩa là code bị lỗi - LTC";
+                        }
+                        else
+                        {
+                            if ((int)Session["role"] == 1)
+                            {
+                                Session["vaitro"] = "Admin";
+                            }
+                            else
+                            {
+                                if ((int)Session["role"] == 2)
+                                {
+                                    Session["vaitro"] = "Ban chủ nhiệm khoa";
+                                }
+                                else
+                                {
+                                    if ((int)Session["role"] == 3)
+                                    {
+                                        Session["vaitro"] = "Bộ môn";
+                                    }
+                                    else
+                                    {
+                                        if ((int)Session["role"] == 4)
+                                        {
+                                            Session["vaitro"] = "Giảng viên";
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        
+                    
+                            // nếu session role là null ~ chưa có kích hoạt
+                            if ((Session["role"] == null))
+                        {
+                            //loại bỏ hết những hoạt động của người dùng hiện tại
+                            Session.Abandon();
+                            Request.Cookies.Clear();
+                            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+
+                            TempData["kichhoat"] = 1;
+                            return View("Login");
+                        }
+                        // nếu session role là 0 ~ trạng thái đã bị admin chuyển thành chưa kích hoạt
+                        if ((int)Session["role"] == 0)
+                        {
+                            // loại bỏ hết những hoạt động của người dùng hiện tại
+                            Session.Abandon();
+                            Request.Cookies.Clear();
+                            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+
+                            TempData["kichhoat"] = 1;
+
+                            return View("Login");
+                        }
+                        TempData["dangnhap"] = 1;
+                        return RedirectToAction("Index1", "Home");
+                    }
+                    else 
+                    {
+                        return RedirectToAction("Create");
+                    }
+
+
+
+
+                    
+
+
+                
                 default:
                     // If the user does not have an account, then prompt the user to create an account
                     ViewBag.ReturnUrl = returnUrl;
-                    ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
+                    // Khi trường thông tin email chưa tồn tại, chuyển người dùng đến trang đăng kí, và lưu thông tin vào trong bảng AspNetUser
+
+                    //Update 02/01/2022
+                    // tự động đăng kí và lưu thông tin email. Người dùng không cần phải qua bước này
+
+                    return View("ExternalLoginConfirmation", new AspNetUser { Email = loginInfo.Email });
             }
         }
 
         //
         // POST: /Account/ExternalLoginConfirmation
+
+        //Update 02/01/2022
+        // tự động đăng kí và lưu thông tin email. Người dùng không cần phải qua bước này
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
+        public async Task<ActionResult> ExternalLoginConfirmation(AspNetUser model)
         {
             if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Index", "Manage");
+                return RedirectToAction("Index1", "Home");
             }
 
             if (ModelState.IsValid)
             {
                 // Get the information about the user from the external login provider
                 var info = await AuthenticationManager.GetExternalLoginInfoAsync();
-                if (info == null)
+                // Lưu thông tin vô database
+                var user = new ApplicationUser
                 {
-                    return View("ExternalLoginFailure");
-                }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                    UserName = model.Email,
+                    Email = model.Email,
+
+                };
+
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
@@ -375,24 +499,287 @@ namespace CAPTeam14.Controllers
                     if (result.Succeeded)
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                        return RedirectToLocal(returnUrl);
+                        
+                        // Nếu lưu thành công, thì chuyển người dùng tới Action Create - Tạo tài khoản
+                        return RedirectToAction("Create");
                     }
                 }
                 AddErrors(result);
+               
             }
 
-            ViewBag.ReturnUrl = returnUrl;
+
+
+
             return View(model);
         }
 
+
+        //Đăng kí
+        // khởi tạo view
+        [HttpGet]
+        public ActionResult Create() 
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create( nguoiDung acc, danhsachGV gv)
+        {
+            // khởi tạo hàm string lấy ID của người dùng hiện tại
+            string checkID = User.Identity.GetUserId();
+            string name = User.Identity.GetUserName();
+            xacThuc(acc);
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var taikhoan = new nguoiDung();
+                    taikhoan.userID = checkID;
+                    taikhoan.tenGV = acc.tenGV;
+                    taikhoan.maGV = acc.maGV;
+                    taikhoan.loaiGV = acc.loaiGV;
+                    taikhoan.khoa = "Khoa Công Nghệ Thông Tin";
+                    taikhoan.gioiTinh = acc.gioiTinh;
+                    taikhoan.role = acc.role;
+                    taikhoan.sdt = acc.sdt;
+                    // kiểm tra nếu mã giảng viên có đúng với dữ liệu mã giảng viên thực tế
+                    // nếu đúng thì lưu thông tin profile
+                    var gv1 = model.danhsachGVs.FirstOrDefault(x => x.maGV == taikhoan.maGV);
+                    var gv2 = model.danhsachGVs.FirstOrDefault(x => x.maGV == taikhoan.maGV || x.Email == name);
+                    var gv3 = model.danhsachGVs.FirstOrDefault(x => x.Email == name);
+
+                    //1 Nếu mã giảng viên đã tồn tại trong dsgv => cho phép đăng kí bình thường 
+                    //2 Nếu chưa tồn tại => Nếu cả email và mã chưa tồn tại trong dsgv => tạo mới danh sách giảng viên => cho phép đăng kí => PASSED
+                    //3 Trường hợp email tồn tại mà mã không tồn tại => (không thể xảy ra) => chỉ xảy ra khi mã hết hạn => hiển thị " Thông tin đã được sử dụng " => PASSED 
+                    //4 Trường hợp email không tồn tại mà mã tồn tại => thêm email và quay về 1 => PASSED
+
+                    if (gv1 != null)
+                    {
+                        if (gv1.Email == null)
+                        {
+                            gv1.Email = name;
+                            model.SaveChanges();
+                        }
+                        taikhoan.ID_dsGV = gv1.ID;
+                        model.nguoiDungs.Add(taikhoan);
+                        model.SaveChanges();
+
+                        TempData["ThongBao1"] = 1;
+                    }
+                    else
+                    {
+                        if (gv2 == null && gv3 == null)
+                        {
+                            
+
+                            //
+                            var giangvien = new danhsachGV();
+                            giangvien.Email = name;
+                            giangvien.tenGV = taikhoan.tenGV;
+                            giangvien.maGV = taikhoan.maGV;
+                            model.danhsachGVs.Add(giangvien);
+                            model.SaveChanges();
+
+                            taikhoan.ID_dsGV = giangvien.ID;
+                            model.nguoiDungs.Add(taikhoan);
+                            model.SaveChanges();
+
+                            TempData["ThongBao1"] = 1;
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("maGV", "Thông tin giảng viên đã được sử dụng");
+                            return View(acc);
+                        }
+                       
+                    }
+                  
+
+                    
+                    //
+
+
+                    // sau khi xác nhận thông tin thành công. Trước khi quay về trang chủ phải xóa hết mọi hoạt động
+                    Session.Abandon();
+                    Request.Cookies.Clear();
+                    AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                    //
+
+
+                    return RedirectToAction("Login");
+                }
+                else
+                {
+                    string messages = string.Join("; ", ModelState.Values
+                                        .SelectMany(x => x.Errors)
+                                        .Select(x => x.ErrorMessage));
+                    ModelState.AddModelError("", messages);
+                }
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "Không thể thực hiện hành động này, vui lòng kiểm tra lại các trường thông tin");
+            }
+            return View(acc);
+            
+        }
+
+        
+
+        //Hàm kiểm tra ký tự đặc biệt
+        public static bool Kytudacbiet(string str)
+        {
+            //khai báo các ký tự đặc biệt
+            string kytudacbiet = @"%!@#$%^&*()?/><:'\|}]{[_~`+=-" + "\"";
+            //chuyển các ký tự đặc biệt sang dạng chuỗi
+            char[] chuoikytudacbiet = kytudacbiet.ToCharArray();
+            //kiểm tra trường thông tin người dùng nhập vào có chứa ký tự đặc biệt hay không
+            int index = str.IndexOfAny(chuoikytudacbiet);
+            // nếu index == -1 thì trả về false => không có ký tự đặc biệt
+            if (index == -1)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        
+
+        //Validate dữ liệu
+        private void xacThuc(nguoiDung acc)
+        {
+            var code = model.nguoiDungs.FirstOrDefault(d => d.maGV == acc.maGV);
+            var gv1 = model.danhsachGVs.FirstOrDefault(x => x.maGV == acc.maGV);
+            //Test case bỏ trống họ tên
+            if (acc.tenGV == null)
+            {
+                ModelState.AddModelError("tenGV", "Vui lòng nhập họ tên");
+            }
+            else
+            {
+                // Test case nhập khoảng trắng
+                if (acc.tenGV.Trim() == "")
+                {
+                    ModelState.AddModelError("tenGV", "Không được nhập khoảng trắng");
+                }
+                else
+                {
+                    //Test Case nhập quá 30 kí tự
+                    if (acc.tenGV.Length > 30)
+                    {
+                        ModelState.AddModelError("tenGV", "Họ tên không vượt quá 30 kí tự");
+                    }
+
+                    else
+                    {
+                        //Test case kiểm tra kí tự đặc biệt
+                        if (Kytudacbiet(acc.tenGV.Trim()) == true)
+                        {
+                            ModelState.AddModelError("tenGV", "Họ tên không được có ký tự đặc biệt");
+                        }
+                    }
+
+                }
+            }
+
+
+            //
+            //Test case bỏ trống mã giảng viên
+            if (acc.maGV == null)
+            {
+                ModelState.AddModelError("maGV", "Vui lòng nhập mã giảng viên");
+            }
+            else
+            {
+                // Test case nhập khoảng trắng
+                if (acc.maGV.Trim() == "")
+                {
+                    ModelState.AddModelError("maGV", "Không được nhập khoảng trắng");
+                }
+                else
+                {
+                    
+                        //Test case kiểm tra kí tự đặc biệt
+                        if (Kytudacbiet(acc.maGV.Trim()) == true)
+                        {
+                            ModelState.AddModelError("maGV", "Mã Giảng viên không được có ký tự đặc biệt");
+                        }
+                    
+                    if (code != null)
+                    {
+                        ModelState.AddModelError("maGV", "Mã giảng viên đã tồn tại");
+                    }
+                   /* if (gv1 == null)
+                    {
+
+                        ModelState.AddModelError("maGV", "Mã giảng viên không tồn tại trên dữ liệu. Vui lòng liên hệ với người quản lý");
+                    }*/
+
+
+                }
+            }
+
+            ////
+            //Test case bỏ trống sdt
+            if (acc.sdt == null)
+            {
+                ModelState.AddModelError("sdt", "Vui lòng nhập số điện thoại");
+            }
+            else
+            {
+                // Test case nhập khoảng trắng
+                if (acc.sdt.ToString().Trim() == "")
+                {
+                    ModelState.AddModelError("sdt", "Không được nhập khoảng trắng");
+                }
+                else
+                {
+                    //Test Case nhập quá 10 kí tự
+                    if (acc.sdt.ToString().Length > 10)
+                    {
+                        ModelState.AddModelError("sdt", "Số điện thoại không vượt quá 10 kí tự");
+                    }
+                    //Test case nhập ít hơn 09 kí tự
+                    if (acc.sdt.ToString().Length < 9)
+                    {
+                        ModelState.AddModelError("sdt", "Số điện thoại không được ít hơn 10 kí tự");
+                    }
+                    else
+                    {
+                        //Test case kiểm tra kí tự đặc biệt
+                        if (Kytudacbiet(acc.sdt.ToString().Trim()) == true)
+                        {
+                            ModelState.AddModelError("sdt", "Số điện thoại không được có ký tự đặc biệt");
+                        }
+                    }
+                }
+            }
+        }
         //
         // POST: /Account/LogOff
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
+            Session.Abandon();
+            Request.Cookies.Clear();
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            
+           
+            
+             
+            return RedirectToAction("Login", "Account");
+        }
+
+        public ActionResult Logout()
+        {
+            LogOff();
+            return RedirectToAction("Login", "Account");
         }
 
         //

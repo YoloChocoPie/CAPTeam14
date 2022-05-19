@@ -1,63 +1,136 @@
 ﻿@using CAPTeam14.Models
 @model LoginViewModel
 @{
-    ViewBag.Title = "Log in";
+    Layout = null;
+
 }
 
-<h2>@ViewBag.Title.</h2>
-<div class="row">
-    <div class="col-md-8">
-        <section id="loginForm">
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                <h4>Use a local account to log in.</h4>
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Log in" class="btn btn-default" />
-                    </div>
-                </div>
-                <p>
-                    @Html.ActionLink("Register as a new user", "Register")
-                </p>
-                @* Enable this once you have account confirmation enabled for password reset functionality
-                    <p>
-                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                    </p>*@
-            }
-        </section>
-    </div>
-    <div class="col-md-4">
-        <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
-    </div>
-</div>
+<!DOCTYPE html>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Site Metas -->
+    <title>Giảng Dạy và Phân Công</title>
+    <meta name="keywords" content="Team14">
+    <meta name="description" content="Website quản lý giảng dạy và phân công của giảng viên khoa Công Nghệ Thông Tin">
+    <meta name="author" content="Team14" />
+
+
+
+
+
+
+    <link rel="icon" href="~/assets/VanLang-Logo.png">
+
+
+
+
+
+
+
+
+    <link rel="stylesheet" href="@Url.Content("~/Login/LoginStyle.css")">
+    <script src="@Url.Content("~/PluginTemplate/sweetalert2/sweetalert2.min.js")"></script>
+    <link rel="stylesheet" href="@Url.Content("~/PluginTemplate/sweetalert2/sweetalert2.min.css")">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!--jquery-confirm-css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.css" integrity="sha512-0V10q+b1Iumz67sVDL8LPFZEEavo6H/nBSyghr7mm9JEQkOAm91HNoZQRvQdjennBb/oEuW+8oZHVpIKq+d25g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- summernote -->
+
+
+
+
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="content">
+                <img src="@Url.Content("~/Login/logo-vlu.png")">
+
+                <div class="col-md-4">
+                    <section id="socialLoginForm">
+
+                        @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+                    </section>
+
+                </div>
+                </br>
+
+            </div>
+
+        </div>
+    </div>
+    <script src="@Url.Content("~/plugins/jquery/jquery.min.js")"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="@Url.Content("~/plugins/jquery-ui/jquery-ui.min.js")"></script>
+
+
+
+    <!--SweetAlert-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+
+
+
+    <script type="text/javascript" src="@Url.Content("~/Login/vanilla-tilt.js")"></script>
+    <script>
+        VanillaTilt.init(document.querySelectorAll(".card"), { max: 10, speed: 400, glare: true, "max-glare": 1 });
+    </script>
+</body>
+
+
+
+
+
+@if (TempData["kichhoat"] != null)
+{
+    <script type="text/javascript">
+        $(function () {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast.fire({
+                icon: 'error',
+                title: 'Tài khoản của bạn chưa được kích hoạt !'
+            })
+        });
+    </script>
+}
+
+
+@if (TempData["0521"] != null)
+{
+    <script type="text/javascript">
+        $(function () {
+            Swal.fire({
+                title: '',
+                width: 600,
+                padding: '17em',
+                color: '#716add',
+                background: ' url(https://lh3.googleusercontent.com/BmtxhqSHWWW9jklbEcAgMksZlOVmC7UfQT6HvrJjqpUWcSApn9mlaAp4xiBDENI5WbtbDMdIgGwvHc1DvR_mZf5JE09X8DGShug2D4zWXunhMitdKcJ9cZzQipVWs7Ie_d8vqw8esu_jncfpJC69CjkRbWEGQ73bsKpani4IjaCl-pvoUPt5ohYl881ZoCOtXdK1lmh2PwT0pEivG9f4NXsoZmP5BSBsB-tMasjtuGsUfJwVmSdUcVN0OjdGmvL9ZR9b4nfKslfJ89nz2zZp_G8qcBD2wFKO_gnggqx8eT2DYEWw5U_OCl9BsNJxiv_w4S8xQYf4bE6JiNC94aiZIsYiU1WqeGXmGjWACGOHEwH_mzaaZdVgZXS-BzLyf-nFbTYA3xfodlmYvKFhtftEIJAUlcJy8Pj4xg8-8nGEVTNzN4hjOq2AuFC7b2AYKU4Q7qr3WLMX1WClUqFUjEWCOo-qI5KhVGPwykC_1ZN-oDDS-eGCEwJdstSZqVPDFPzwTwHm9HOHSwn0JuD4HTFp704xbMtKQ5ca5xIBgj-ixYYeqJFtuDyjmMHqqZNv76nC60VgdiS97czOF-8mB6f5SaIipDpI_ACrj74LDvI7LxB1RPFPN9w05EEnyfYtiUNbJcs_hbTRQtgvU_H_l8pCqWjBrSAWwIUpqmPq5UuRrDfmzwlFRGjS2EZ7X3NH_ZmCAMT9Pa9XRAJCKJia6ocpNYKEzyLh0C5ZI-szmq4MQ-DNBMuaDgIQtgYJajKxJqGPs7q2L8qz-oDz2C5PYRq_YlMQ9wC4kDOs7UQUYctKMR8ahoX7AOFACQsGnVOTKVRyLW2KjO4BLQ=w567-h568-no?authuser=0)',
+                backdrop: `
+    rgba(0,0,123,0.4)
+    url("https://raw.githubusercontent.com/gist/T-Jedsada/dbee22959762fa6c0ccad8153830b51a/raw/8957088c2e31dba6d72ce86c615cb3c7bb7f0b0c/nyan-cat.gif")
+    left top
+    no-repeat
+  `
+            });
+        });
+        
+           
+            
+    </script>
 }

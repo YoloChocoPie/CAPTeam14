@@ -1,0 +1,675 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Site Metas -->
+    <title>Giảng Dạy và Phân Công</title>
+    <meta name="keywords" content="Team14">
+    <meta name="description" content="Website quản lý giảng dạy và phân công của giảng viên khoa Công Nghệ Thông Tin">
+    <meta name="author" content="Team14" />
+
+
+
+
+
+
+
+    <link rel="icon" href="~/assets/VanLang-Logo.png">
+
+
+
+    <!--Plugin cũ -->
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="@Url.Content("~/plugins/fontawesome-free/css/all.min.css")">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="@Url.Content("~/ContentTemplate/fontawesome-free/css/all.min.css")">
+    <!-- Ekko Lightbox -->
+    <link rel="stylesheet" href="@Url.Content("~/ContentTemplate/plugins/ekko-lightbox/ekko-lightbox.css")">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="@Url.Content("~/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css")">
+    <link rel="stylesheet" href="@Url.Content("~/plugins/datatables-responsive/css/responsive.bootstrap4.min.css")">
+    <link rel="stylesheet" href="@Url.Content("~/plugins/datatables-buttons/css/buttons.bootstrap4.min.css")">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="@Url.Content("~/plugins/overlayScrollbars/css/OverlayScrollbars.min.css")">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="@Url.Content("~/dist/css/adminlte.min.css")">
+    <!-- JQVMap -->
+    <link rel="stylesheet" href="@Url.Content("~/plugins/jqvmap/jqvmap.min.css")">
+    <!--ToastTR-->
+    <link rel="stylesheet" href="@Url.Content("~/ContentTemplate/plugins/toastr/toastr.css")">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="@Url.Content("~/plugins/daterangepicker/daterangepicker.css")">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!--jquery-confirm-css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.css" integrity="sha512-0V10q+b1Iumz67sVDL8LPFZEEavo6H/nBSyghr7mm9JEQkOAm91HNoZQRvQdjennBb/oEuW+8oZHVpIKq+d25g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- summernote -->
+    <link rel="stylesheet" href="@Url.Content("~/plugins/summernote/summernote-bs4.min.css")">
+    <style>
+        .loader {
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            background: url('https://lkp.dispendik.surabaya.go.id/assets/loading.gif') 50% 50% no-repeat rgb(249,249,249);
+        }
+    </style>
+
+
+    <!-- Tempusdominus Bootstrap 4 -->
+    @*  <link rel="stylesheet" href="@Url.Content("~/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css")">*@
+    <!-- iCheck -->
+    @*<link rel="stylesheet" href="@Url.Content("~/plugins/icheck-bootstrap/icheck-bootstrap.min.css")">*@
+
+    <!-- fullCalendar -->
+    <link rel="stylesheet" href="@Url.Content("~/plugins/fullcalendar/main.css")">
+
+
+
+    <!-- -->
+    <!-- -->
+    <!-- -->
+    <!--new css fỏ mainpage-->
+    <link href="@Url.Content("~/assets/Mainpage.css")" rel="stylesheet" />
+
+
+    <!-- TKB css-->
+    <link rel="stylesheet" href="@Url.Content("~/tkb/Yersin.css")">
+    @*     <link rel="stylesheet" href="@Url.Content("~/dist/css/bootstrap.css")">*@
+    <link rel="stylesheet" href="@Url.Content("~/tkb/bootstrap-datetimepicker.css")">
+    <link rel="stylesheet" href="@Url.Content("~/tkb/menu.css")">
+    <link rel="stylesheet" href="@Url.Content("~/tkb/select2_2.css")">
+    <link rel="stylesheet" href="@Url.Content("~/tkb/select2-bootstrap.css")">
+    @*<link rel="stylesheet" href="@Url.Content("~/dist/css/site.css")">
+    *@
+
+    <link rel="stylesheet" href="@Url.Content("~/tkb/main.css")">
+
+
+</head>
+    <body class="hold-transition sidebar-mini layout-fixed">
+        <div class="wrapper">
+
+            <!-- Preloader -->
+            @*<div class="preloader flex-column justify-content-center align-items-center">
+                    <img class="animation__shake" src="@Url.Content("~/dist/img/AdminLTELogo.png")" alt="AdminLTELogo" height="60" width="60">
+                </div>*@
+
+            <!-- Navbar -->
+            <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+                <!-- Left navbar links -->
+                <ul class="navbar-nav">
+                   @* <li class="nav-item">
+                        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                    </li>*@
+                    <li>
+                        <a href="#" class="nav-link"> <b>QUẢN LÝ PHÂN CÔNG GIẢNG DẠY VÀ KHỐI LƯỢNG GIẢNG DẠY CỦA GIẢNG VIÊN KHOA CNTT</b></a>
+                    </li>
+                </ul>
+
+                <!-- Right navbar links -->
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <b class="nav-link"> @Session["hoten"] (@Session["vaitro"])</b>
+
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+                            <i class="fas fa-expand-arrows-alt"></i>
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+            <!-- /.navbar -->
+            <!-- Main Sidebar Container -->
+            <aside class="main-sidebar sidebar-dark-primary elevation-4" id="bg-sidebar">
+                <!-- Brand Logo -->
+                <a href="~/Home/Index1" class="brand-link">
+                    <img src="@Url.Content("~/assets/logo_vanLang.png")" alt="vanLang-Logo" width="200px" ; height="100px"> </br>
+                    @*<span class="brand-text font-weight-light">Team 14</span>*@
+                </a>
+
+                <!-- Sidebar -->
+                <div class="sidebar">
+                    <!-- Sidebar user panel (optional) -->
+                    <!--<div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                        <div class="image">
+                            <img src="@Url.Content("~/dist/img/user2-160x160.jpg")" class="img-circle elevation-2" alt="User Image">
+                        </div>-->
+                    @*<div class="info">
+                    <a href="#" class="d-block">@Session["hoten"]</a>
+                    </div>*@
+                    <!--</div>-->
+                    <!-- SidebarSearch Form -->
+                    @*<div class="form-inline">
+                    <div class="input-group" data-widget="sidebar-search">
+                    <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+                    <div class="input-group-append">
+                    <button class="btn btn-sidebar">
+                    <i class="fas fa-search fa-fw"></i>
+                    </button>
+                    </div>
+                    </div>
+                    </div>*@
+
+                    <!-- Sidebar Menu -->
+                    <nav class="mt-2">
+                        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                            <!-- Add icons to the links using the .nav-icon class
+    with font-awesome or any other icon font library -->
+                            <!-- Quyền Admin-->
+                            @if ((int)Session["role"] == 1)
+                            {
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index1","Home")" class="nav-link" id="icon-text">
+                                        <i class="nav-icon fas fa-calendar-alt"></i>
+                                        <p>Trang chủ</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+
+                                    <a href="@Url.Action("Index","giangVien")" class="nav-link" id="icon-text">
+                                        <i class="fas fa-user-cog nav-icon"></i>
+                                        <p>Phân Quyền</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+
+                                    <a href="@Url.Action("Index","Contact")" class="nav-link" id="icon-text">
+                                        <i class="fas fa-user-cog nav-icon"></i>
+                                        <p>Phiếu báo cáo</p>
+                                    </a>
+                                </li>
+
+                                @*Hiển thị Tree List*@
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link" id="icon-text">
+                                        <i class="nav-icon fas fa-table"></i>
+                                        <p>
+                                            Quản lý danh mục
+                                            <i class="fas fa-angle-left right"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("Index","hocKy")" class="nav-link" id="icon-text">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Học Kì</p>
+                                            </a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("Index","monHoc")" class="nav-link" id="icon-text">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Môn Học</p>
+                                            </a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("Index","Nganh")" class="nav-link" id="icon-text">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Ngành học</p>
+                                            </a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("Index","lopHoc")" class="nav-link" id="icon-text">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Lớp học</p>
+                                            </a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("Index","dsGV")" class="nav-link" id="icon-text">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Danh sách giảng viên</p>
+                                            </a>
+                                        </li>
+                                        @*<li class="nav-item">
+                                            <a href="~/giangVien/Index2" class="nav-link" id="icon-text">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Danh sách tài khoản</p>
+                                            </a>
+                                        </li>*@
+                                    </ul>
+                                </li>
+
+
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Logout","Account")" class="nav-link">
+                                        <i class="nav-icon fas fa-sign-out-alt" id="icon-text"></i>
+                                        <p id="icon-text">
+                                            Đăng xuất
+                                        </p>
+                                    </a>
+                                </li>
+                            }
+
+
+                            <!-- Quyền Ban chủ nhiệm khoa-->
+                            @if ((int)Session["role"] == 2)
+                            {
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index1","Home")" class="nav-link" id="icon-text">
+                                        <i class="nav-icon fas fa-calendar-alt"></i>
+                                        <p>Trang chủ</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Create","Contact")" class="nav-link" id="icon-text">
+
+                                        <i class="nav-icon fas fa-calendar-alt"></i>
+                                        <p>Liên hệ Admin</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index","Contact")" class="nav-link" id="icon-text">
+
+                                        <i class="nav-icon fas fa-calendar-alt"></i>
+                                        <p>Phiếu báo cáo đã gửi</p>
+                                    </a>
+                                </li>
+                                @*Hiển thị Tree List*@
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link" id="icon-text">
+                                        <i class="nav-icon fas fa-table"></i>
+                                        <p>
+                                            Quản lý danh mục
+                                            <i class="fas fa-angle-left right"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("Index","hocKy")" class="nav-link" id="icon-text">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Học Kì</p>
+                                            </a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("Index","monHoc")" class="nav-link" id="icon-text">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Môn Học</p>
+                                            </a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("Index","Nganh")" class="nav-link" id="icon-text">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Ngành học</p>
+                                            </a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("Index","lopHoc")" class="nav-link" id="icon-text">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Lớp học</p>
+                                            </a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("Index","dsGV")" class="nav-link" id="icon-text">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Danh sách giảng viên</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Logout","Account")" class="nav-link">
+                                        <i class="nav-icon fas fa-sign-out-alt" id="icon-text"></i>
+                                        <p id="icon-text">
+                                            Đăng xuất
+                                        </p>
+                                    </a>
+                                </li>
+                            }
+
+                            <!-- Quyền Bộ môn-->
+                            @if ((int)Session["role"] == 3)
+                            {
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index1","Home")" class="nav-link" id="icon-text">
+                                        <i class="nav-icon fas fa-calendar-alt"></i>
+                                        <p>Trang chủ</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Create","Contact")" class="nav-link" id="icon-text">
+
+                                        <i class="nav-icon fas fa-calendar-alt"></i>
+                                        <p>Liên hệ Admin</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index","Contact")" class="nav-link" id="icon-text">
+
+                                        <i class="nav-icon fas fa-calendar-alt"></i>
+                                        <p>Phiếu báo cáo đã gửi</p>
+                                    </a>
+                                </li>
+                                @*Hiển thị Tree List*@
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link" id="icon-text">
+                                        <i class="nav-icon fas fa-table"></i>
+                                        <p>
+                                            Quản lý danh mục
+                                            <i class="fas fa-angle-left right"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("Index","hocKy")" class="nav-link" id="icon-text">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Học Kì</p>
+                                            </a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("Index","monHoc")" class="nav-link" id="icon-text">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Môn Học</p>
+                                            </a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("Index","Nganh")" class="nav-link" id="icon-text">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Ngành học</p>
+                                            </a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("Index","lopHoc")" class="nav-link" id="icon-text">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Lớp học</p>
+                                            </a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("Index","dsGV")" class="nav-link" id="icon-text">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Danh sách giảng viên</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Logout","Account")" class="nav-link">
+                                        <i class="nav-icon fas fa-sign-out-alt" id="icon-text"></i>
+                                        <p id="icon-text">
+                                            Đăng xuất
+                                        </p>
+                                    </a>
+                                </li>
+                            }
+
+                            <!-- Quyền Giảng viên-->
+                            @if ((int)Session["role"] == 4)
+                            {
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index1","Home")" class="nav-link" id="icon-text">
+
+                                        <i class="nav-icon fas fa-calendar-alt"></i>
+                                        <p>Trang chủ</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("DetailStatistic1","giangVien")" class="nav-link" id="icon-text">
+
+                                        <i class="nav-icon fas fa-calendar-alt"></i>
+                                        <p>Thống kê cá nhân</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Create","Contact")" class="nav-link" id="icon-text">
+
+                                        <i class="nav-icon fas fa-calendar-alt"></i>
+                                        <p>Liên hệ Admin</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index","Contact")" class="nav-link" id="icon-text">
+
+                                        <i class="nav-icon fas fa-calendar-alt"></i>
+                                        <p>Phiếu báo cáo đã gửi</p>
+                                    </a>
+                                </li>
+
+
+
+
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Logout","Account")" class="nav-link">
+                                        <i class="nav-icon fas fa-table" id="icon-text"></i>
+                                        <p id="icon-text">
+                                            Đăng xuất
+                                        </p>
+                                    </a>
+                                </li>
+                            }
+
+
+
+
+                        </ul>
+</nav>
+<!-- /.sidebar-menu -->
+</div>
+<!-- /.sidebar -->
+</aside>
+
+<!-- Content Wrapper. Contains page content -->
+
+@RenderBody()
+<!-- /.content-wrapper -->
+<footer class="main-footer">
+    <strong>Copyright &copy; 2020-2021 - TEAM 14.</strong>
+
+    <div class="float-right d-none d-sm-inline-block">
+        <b>CAPSTONE PROJECT.</b>
+    </div>
+</footer>
+
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+</aside>
+<!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+<!---->
+<!---->
+<!---->
+<!-- Script Cũ-->
+<!-- jQuery -->
+
+<script src="@Url.Content("~/plugins/jquery/jquery.min.js")"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="@Url.Content("~/plugins/jquery-ui/jquery-ui.min.js")"></script>
+<!-- Bootstrap 4 -->
+<script src="@Url.Content("~/plugins/bootstrap/js/bootstrap.bundle.min.js")"></script>
+<!-- Ekko Lightbox -->
+<script src="@Url.Content("~/ContentTemplate/plugins/ekko-lightbox/ekko-lightbox.min.js")"></script>
+<!-- overlayScrollbars -->
+<script src="@Url.Content("~/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js")"></script>
+<!-- DataTables  & Plugins -->
+<script src="@Url.Content("~/plugins/datatables/jquery.dataTables.min.js")"></script>
+<script src="@Url.Content("~/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js")"></script>
+<script src="@Url.Content("~/plugins/datatables-responsive/js/dataTables.responsive.min.js")"></script>
+<script src="@Url.Content("~/plugins/datatables-responsive/js/responsive.bootstrap4.min.js")"></script>
+<script src="@Url.Content("~/plugins/datatables-buttons/js/dataTables.buttons.min.js")"></script>
+<script src="@Url.Content("~/plugins/datatables-buttons/js/buttons.bootstrap4.min.js")"></script>
+<script src="@Url.Content("~/plugins/jszip/jszip.min.js")"></script>
+<script src="@Url.Content("~/plugins/pdfmake/pdfmake.min.js")"></script>
+<script src="@Url.Content("~/plugins/pdfmake/vfs_fonts.js")"></script>
+<script src="@Url.Content("~/plugins/datatables-buttons/js/buttons.html5.min.js")"></script>
+<script src="@Url.Content("~/plugins/datatables-buttons/js/buttons.print.min.js")"></script>
+<script src="@Url.Content("~/plugins/datatables-buttons/js/buttons.colVis.min.js")"></script>
+
+<!-- Page specific script -->
+<script>
+    $(function () {
+        $("#example1").DataTable({
+            "responsive": true, "lengthChange": false, "autoWidth": false,
+            "buttons": [{ extend: 'excel', title: '' }]
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
+    });
+
+    $(function () {
+        $("#example12").DataTable({
+            "responsive": true, "lengthChange": false, "autoWidth": false,
+           @* "buttons": ["copy", "csv", "pdf", "print"]*@
+        }).buttons().container().appendTo('#example12_wrapper .col-md-6:eq(0)');
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
+    });
+
+    $(function () {
+        $("#exampleBCN").DataTable({
+            "responsive": true, "lengthChange": false, "autoWidth": false,
+         @*   "buttons": ["copy", "csv", "excel", "pdf", "print"]*@
+        }).buttons().container().appendTo('#exampleBCN_wrapper .col-md-6:eq(0)');
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
+    });
+
+    $(function () {
+        $("#exampleBM").DataTable({
+            "responsive": true, "lengthChange": false, "autoWidth": false,
+         @*   "buttons": ["copy", "csv", "excel", "pdf", "print"]*@
+        }).buttons().container().appendTo('#exampleBM_wrapper .col-md-6:eq(0)');
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
+    });
+
+    $(function () {
+        $("#exampleGV").DataTable({
+            "responsive": true, "lengthChange": false, "autoWidth": false,
+            @*"buttons": ["copy", "csv", "excel", "pdf", "print"]*@
+        }).buttons().container().appendTo('#exampleGV_wrapper .col-md-6:eq(0)');
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
+    });
+
+    $(function () {
+        $("#exampleNULL").DataTable({
+            "responsive": true, "lengthChange": false, "autoWidth": false,
+           @* "buttons": ["copy", "csv", "excel", "pdf", "print"]*@
+        }).buttons().container().appendTo('#exampleNULL_wrapper .col-md-6:eq(0)');
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
+    });
+</script>
+
+<!-- bs-custom-file-input -->
+<script src="@Url.Content("~/ScriptsTemplate/bs-custom-file-input/bs-custom-file-input.min.js")"></script>
+<!--FullScreen-->
+<script src="@Url.Content("~/ContentTemplate/build/js/Fullscreen.js")"></script>
+<!--ToastTR-->
+<script src="@Url.Content("~/ContentTemplate/plugins/toastr/toastr.min.js")"></script>
+<!-- daterangepicker -->
+<script src="@Url.Content("~/plugins/moment/moment.min.js")"></script>
+<script src="@Url.Content("~/plugins/daterangepicker/daterangepicker.js")"></script>
+<!--Jquery-Confirm-JS-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.js" integrity="sha512-zP5W8791v1A6FToy+viyoyUUyjCzx+4K8XZCKzW28AnCoepPNIXecxh9mvGuy3Rt78OzEsU+VCvcObwAMvBAww==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- AdminLTE App -->
+<script src="@Url.Content("~/dist/js/adminlte.js")"></script>
+<script src="@Url.Content("~/PluginTemplate/sweetalert2/sweetalert2.min.js")"></script>
+<link rel="stylesheet" href="@Url.Content("~/PluginTemplate/sweetalert2/sweetalert2.min.css")">
+<!--summernote-->
+<script type="text/javascript" src="@Url.Content("~/PluginTemplate/summernote/summernote-bs4.min.js")"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="@Url.Content("~/dist/js/demo.js")"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<!--SignalR-->
+<script src="@Url.Content("~/ScriptsTemplate/jquery.signalR-2.4.2.js")"></script>
+<script src="@Url.Content("~/signalr/hubs")"></script>
+
+<!-- overlayScrollbars -->
+<script src="@Url.Content("~/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js")"></script>
+
+<!-- AdminLTE for demo purposes -->
+<script src="@Url.Content("~/dist/js/demo.js")"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="@Url.Content("~/dist/js/pages/dashboard.js")"></script>
+
+<!-- fullCalendar 2.2.5 -->
+<script src="@Url.Content("~/plugins/moment/moment.min.js")"></script>
+<script src="@Url.Content("~/plugins/fullcalendar/main.js")"></script>
+
+<!--SweetAlert-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+
+<!-- AdminLTE for demo purposes -->
+<!-- Page specific script -->
+
+
+@RenderSection("scripts", required: false)
+</body>
+</html>

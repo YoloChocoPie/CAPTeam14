@@ -1,0 +1,320 @@
+﻿@model CAPTeam14.Models.Contact
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutTemplate.cshtml";
+}
+
+
+
+
+
+
+@using (Html.BeginForm())
+{
+
+
+
+
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                             <li class="breadcrumb-item"><a href="@Url.Action("Index1","Home")">Trang chủ</a></li>
+                            <li class="breadcrumb-item active">Liên hệ admin</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-5">
+                        <div class="card">
+                            <form role="form">
+                                @Html.AntiForgeryToken()
+
+                                <div class="card-body">
+                                    <label>Gửi liên hệ</label><hr />
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    
+
+
+
+
+
+                                <div class="form-group">
+                                    <label>
+                                        Nội dung tóm tắt
+                                    </label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-envelope"></i></span>
+                                        </div>
+
+                                        @Html.EditorFor(model => model.tenTicket, new { htmlAttributes = new { @class = "form-control" } })
+
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.tenTicket, "", new { @class = "text-danger" })
+                                </div>
+
+                                    <div class="form-group">
+                                        <label>Nội dung chi tiết</label>
+                                        <div class="input-group" style="width: 500%">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-user"></i></span>
+                                            </div>
+                                            @Html.TextAreaFor(model => model.ndTicket, new { style = "width:360px ; height: 250px ; resize: none " })
+
+
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.ndTicket, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Vấn đề</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-user"></i></span>
+                                            </div>
+                                            @{
+                                                List<SelectListItem> listItems = new List<SelectListItem>();
+
+                                                listItems.Add(new SelectListItem
+                                                {
+                                                    Text = "Tài khoản",
+                                                    Value = "1",
+                                                });
+
+                                                listItems.Add(new SelectListItem
+                                                {
+                                                    Text = "Quyền",
+                                                    Value = "2",
+                                                });
+                                                listItems.Add(new SelectListItem
+                                                {
+                                                    Text = "Thời khóa biểu",
+                                                    Value = "3"
+                                                });
+                                                listItems.Add(new SelectListItem
+                                                {
+                                                    Text = "Lỗi hiển thị",
+                                                    Value = "4"
+                                                });
+                                                listItems.Add(new SelectListItem
+                                                {
+                                                    Text = "Khác",
+                                                    Value = "5"
+                                                });
+                                            }
+
+
+
+                                            @Html.DropDownListFor(model => model.ID_vande, listItems, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.ID_vande, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    @* <div class="form-group">
+            <label>Tên lớp</label>
+
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="far fa-user"></i></span>
+                </div>
+                @Html.DropDownList("ID_lop", new SelectList(ViewBag.tenlop, "ID", "maLop"), new { @class = "form-control" })
+
+
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Tên Ngành</label>
+
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="far fa-user"></i></span>
+                </div>
+
+                @Html.DropDownList("ID_nganh", new SelectList(ViewBag.tennganh, "ID", "tenNganh"), new { @class = "form-control" })
+
+
+                @Html.ValidationMessageFor(model => model.ID_nganh, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+
+
+
+
+
+
+
+
+                                    <div class="row">
+
+                                        <div class="col-6">
+                                            <button type="submit" value="Create" class="btn btn-success btn-block">Gửi</button>
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+                            </form>
+
+
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+}
+
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<h2>Create</h2>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Contact</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                    @Html.LabelFor(model => model.maTicket, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.maTicket, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.maTicket, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.tenTicket, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ndTicket, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ndTicket, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ndTicket, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.trangthai, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.trangthai, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.trangthai, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ID_vande, "ID_vande", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("ID_vande", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ID_vande, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                    @Html.LabelFor(model => model.admin, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.admin, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.admin, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            <div class="form-group">
+                    @Html.LabelFor(model => model.nguoigui, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.nguoigui, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.nguoigui, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }*@

@@ -1,0 +1,291 @@
+﻿@using CAPTeam14.Models;
+@{
+    ViewBag.Title = "DetailStatistic";
+    Layout = "~/Views/Shared/_LayoutTemplate.cshtml";
+
+    var db = new CP24Team14Entities();
+    List<int> Lsumclassweek = new List<int>();
+    List<int> Lsumgghk = new List<int>();
+    List<int> Lsumsubhk = new List<int>();
+    //List<int> st = new List<int>();
+    //List<int> at = new List<int>();
+    //List<int> fqt = new List<int>();
+    //var qtm = db.QUESTIONs.ToList();
+    //int result = Int32.Parse(ViewBag.year);
+    for (int i = 1; i <= 12; i++)
+    {
+        //var item1 = db.QUESTIONs.Where(x => x.DATE.Month == i && x.DATE.Year == result).ToList().Count;
+        //var item2 = db.QUESTIONs.Where(x => x.DATE.Month == i && x.DATE.Year == result && x.ANSWER != null).ToList().Count;
+        //var item3 = db.QUESTIONs.Where(x => x.DATE.Month == i && x.DATE.Year == result && x.ANSWER == null).ToList().Count;
+        //var item4 = db.STUDENTs.Where(x => x.DATE_CREATED.Value.Month == i && x.DATE_CREATED.Value.Year == result).ToList().Count;
+        //var item5 = db.ACCOUNTs.Where(x => x.DATE_OF_REGISTRATION.Value.Month == i && x.DATE_OF_REGISTRATION.Value.Year == result).ToList().Count;
+        //var item6 = db.FAVORITE_QUESTION.Where(x => x.DATE.Month == i && x.DATE.Year == result).ToList().Count;
+        //qt.Add(item1);
+        //qnat.Add(item2);
+        //qat.Add(item3);
+        //st.Add(item4);
+        //at.Add(item5);
+        //fqt.Add(item6);
+    }
+    double sogio = 0;
+    double kogv = 0;
+
+}
+
+<div class="content-wrapper text-sm">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2 mt-2">
+                <div class="col-12">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index","Statistics")">Thông tin thống kê</a></li>
+                        <li class="breadcrumb-item active">Thống kê </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                Dữ liệu thống kê của <strong>tất cả giảng viên</strong> trong <strong>@ViewBag.thk</strong>
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Mã giảng viên
+                                        </th>
+                                        <th>
+                                            Họ tên
+                                        </th>
+                                        <th>
+                                            Số giờ giảng trong học kỳ
+                                        </th>
+                                        <th>
+                                            Số lớp giảng cao nhất trong tuần
+                                        </th>
+                                        <th>
+                                            Số môn giảng trong học kỳ
+                                        </th>
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in db.danhsachGVs)
+                                    {
+
+
+
+
+
+
+
+                                        <tr>
+                                            <td> @item.maGV</td>
+                                            <td> @item.tenGV</td>
+                                            <td>
+
+
+                                                @{var dslg = db.TKBs.ToList().Where(x => x.ID_hocKy == (int)TempData["idhk"] && x.ID_GV == item.ID);
+                                                    foreach (var tuan in dslg.Select(x => x.tuanHoc.tuanHoc1))
+                                                    {
+
+                                                        string cc = string.Join(",", dslg.Select(x => x.tuanHoc.tuanHoc1));
+                                                        var cl = cc.Split(',', ';', ' ').Length;
+
+                                                        for (int i = 1; i < cl + 1; i++)
+                                                        {
+                                                            sogio = (double)2.5 * i;
+                                                        }
+                                                        @sogio
+                                                        break;
+
+                                                    };
+
+                                                }
+
+
+
+                                            </td>
+                                            <td>
+                                                @db.TKBs.ToList().Where(x => x.ID_GV == item.ID && x.ID_hocKy == (int)TempData["idhk"]).Count()
+                                            </td>
+                                            <td>
+                                                @db.TKBs.ToList().Where(x => x.ID_GV == item.ID && x.ID_hocKy == (int)TempData["idhk"]).Select(x => x.ID_monHoc).Distinct().Count()
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body" id="graph-container">
+                            <canvas id="myChart" class="h-100"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @*<div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <canvas id="myChartAll" class="h-auto"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+
+            @*<div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <canvas id="myChart6" class="h-50"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+        </div>
+    </section>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.4.0/chart.min.js" integrity="sha512-JxJpoAvmomz0MbIgw9mx+zZJLEvC6hIgQ6NcpFhVmbK1Uh5WynnRTTSGv3BTZMNBpPbocmdSJfldgV5lVnPtIw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $('#chonhk').on('change', function () {
+        var valur = $(this).val();
+        if (valur) {
+            $.ajax({
+            url: '@Url.Action("thongkeAll", "giangVien")',
+            type: 'GET',
+            contentType: 'application/json; charset=UTF-8',
+            dataType: 'html',
+                data: {
+                idgv: '@ViewBag.maid',
+                idhk: valur
+            },
+            success: function (r) {
+                //$('#idtbody').remove();
+                data = JSON.parse(r)
+                $('#cottongloptuan').append(data);
+            },
+            error: function (errormessage) {
+                Swal.fire({
+                    title: 'Thông báo',
+                    text: 'Hiện tại đang có lỗi. Vui lòng thử lại !!!',
+                    icon: 'error',
+                });
+            }
+            });
+        }
+
+    });
+</script>
+
+<!--<script>
+    $('#chonhk').on('change', function () {
+
+        var valur = $(this).val();
+        if (valur) {
+            $.ajax({
+            url: '@Url.Action("thongkeAll", "giangVien")',
+            type: 'GET',
+            contentType: 'application/json; charset=UTF-8',
+            dataType: 'html',
+                data: {-->
+                @*idgv: '@ViewBag.maid',*@
+                <!--idhk: valur
+            },
+            success: function (r) {
+                data = JSON.parse(r)
+                $('#myChart').remove(); // this is my <canvas> element
+                $('#graph-container').append('<canvas id="myChart" class="h-100"></canvas>');
+                var ctx = document.getElementById('myChart').getContext("2d");
+                var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: [
+                            'Số giờ giảng trong tuần',
+                            'Số lớp giảng cao nhất trong tuần',
+                            'Số môn giảng trong học kỳ',
+                            'Số môn giảng trong học kỳ',
+                            'Số môn giảng trong học kỳ',
+                            'Số môn giảng trong học kỳ',
+                            'Số môn giảng trong học kỳ',
+                            'Số môn giảng trong học kỳ',
+                            'Số môn giảng trong học kỳ',
+                            'Số môn giảng trong học kỳ',
+                            'Số môn giảng trong học kỳ',
+                            'Số môn giảng trong học kỳ',
+                            'Số môn giảng trong học kỳ',
+                            'Số môn giảng trong học kỳ',
+                            'Số môn giảng trong học kỳ',
+                            'Số môn giảng trong học kỳ',
+                            'Số môn giảng trong học kỳ',
+                            'Số môn giảng trong học kỳ',
+                            'Số môn giảng trong học kỳ',
+
+                        ],
+                        datasets: [{
+                            label: 'Bảng dữ liệu thống kê',-->
+                            @* data: [@ViewBag.sumclassweek, @ViewBag.sumgghk, @ViewBag.sumsubhk],*@
+                            <!--data: [data.tonggiohk, data.tongloptuan, data.tongmonhk],-->
+                            @* data: [@ViewBag.qt, @ViewBag.qa, @ViewBag.qna, @ViewBag.stu, @ViewBag.acc, @ViewBag.fq],*@
+                            <!--backgroundColor: [
+                                'rgba(255, 99, 132, 0.8)',
+                                'rgba(54, 162, 235, 0.8)',
+                                'rgba(255, 206, 86, 0.8)',
+
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                            ],
+                            borderWidth: 4
+
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        // Elements options apply to all of the options unless overridden in a dataset
+                        // In this case, we are setting the border of each horizontal bar to be 2px wide
+                        elements: {
+                            bar: {
+                                borderWidth: 2,
+                            }
+                        },
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'right',
+                            },
+                            title: {
+                                display: true,
+                                text: 'Chart.js Horizontal Bar Chart'
+                            }
+                        }
+                    },
+
+                });
+                myChart.render();
+            }
+            });
+        }
+    });
+</script>-->

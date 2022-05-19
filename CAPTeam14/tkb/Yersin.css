@@ -1,0 +1,72 @@
+
+.cus-stypewidth50{
+    width: 50px;
+}
+  .cus-linkchucnang{
+        font-size: 13px; 
+    }
+.cus-background-f{
+    background: #fff;
+}
+
+/*Ma mau cho lauyout 7a1214 */
+.stylecolor {
+    background-color: #0e86ee !important; /*#609810*/
+}
+
+
+.bgtitle {
+    border-radius: 3px;
+    background-color: #0e86ee;
+    color: #FFF;
+    font-weight: bold;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.menuhome{
+    background-color:#003768; /*218500*/
+}
+
+/*----------------------------------*/
+/*mau chu trang*/
+.word-color{
+    color:#fff !important;
+}
+
+/*mau chu ghi chu va mau chu ghi chu*/
+.style-color-note{
+    background-color:#ff0000  !important;/*#609810*/
+}
+
+.word-color-note{
+    color:#fff !important;
+}
+
+.magin-bottom-5px {
+    margin-bottom: 5px !important;
+}
+
+.config-alert {
+    padding:7px !important;
+    margin-bottom:10px !important;
+    margin-top:5px !important;
+}
+
+.max-width-100 {
+    max-width:100% !important;
+}
+
+.width-100 {
+    width:100% !important;
+}
+
+
+/*------------------ css respon--------------------*/
+@media (min-width: 768px) {
+    .width-70 {
+        width:70% !important;
+    }
+     .width-50 {
+        width:50% !important;
+    }
+}

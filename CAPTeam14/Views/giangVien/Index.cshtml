@@ -1,0 +1,1542 @@
+﻿@model IEnumerable<CAPTeam14.Models.nguoiDung>
+
+@{
+    ViewBag.Title = "phanQuyen";
+    Layout = "~/Views/Shared/_LayoutTemplate.cshtml";
+}
+
+
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                          <li class="breadcrumb-item"><a href="@Url.Action("Index1","Home")">Trang chủ</a></li>
+                        <li class="breadcrumb-item active">Phân Quyền</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <!--Admin-->
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-12">
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Danh sách Admin</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="example12" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Mã Giảng Viên
+                                        </th>
+                                        <th>
+                                            Tên Giảng Viên
+                                        </th>
+                                        <th>
+                                            Email
+                                        </th>
+                                        <th>
+                                            Vai Trò
+                                        </th>
+
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Where(m => m.role == 1))
+                                    {
+                                        <tr>
+
+                                            @if (item.role == null)
+                                            {
+                                                <td style="color:red">
+                                                    @Html.DisplayFor(modelItem => item.maGV)
+                                                </td>
+                                                <td style="color:red">
+
+                                                    @Html.DisplayFor(modelItem => item.tenGV)
+                                                </td>
+
+                                                <td style="color:red">
+                                                    @Html.DisplayFor(modelItem => item.AspNetUser.Email)
+                                                </td>
+
+                                                if (item.role == null)
+                                                {
+                                                    <td style="color:red">
+                                                        Chưa Kích Hoạt
+                                                    </td>
+                                                }
+                                                else if (item.role == 1)
+                                                {
+                                                    <td style="color:red">
+                                                        Admin
+                                                    </td>
+                                                }
+                                                else if (item.role == 2)
+                                                {
+                                                    <td style="color:red">
+                                                        Ban chủ nhiệm khoa
+                                                    </td>
+                                                }
+                                                else if (item.role == 3)
+                                                {
+                                                    <td style="color:red">
+                                                        Bộ môn
+                                                    </td>
+                                                }
+                                                else if (item.role == 4)
+                                                {
+                                                    <td style="color:red">
+                                                        Giảng viên
+                                                    </td>
+                                                }
+
+
+                                            }
+                                            else if (item.role == 0)
+                                            {
+                                                <td style="color:red">
+                                                    @Html.DisplayFor(modelItem => item.maGV)
+                                                </td>
+                                                <td style="color:red">
+
+                                                    @Html.DisplayFor(modelItem => item.tenGV)
+                                                </td>
+
+                                                <td style="color:red">
+                                                    @Html.DisplayFor(modelItem => item.AspNetUser.Email)
+                                                </td>
+
+                                                if (item.role == 0)
+                                                {
+                                                    <td style="color:red">
+                                                        Chưa Kích Hoạt
+                                                    </td>
+                                                }
+                                                else if (item.role == 1)
+                                                {
+                                                    <td style="color:red">
+                                                        Admin
+                                                    </td>
+                                                }
+                                                else if (item.role == 2)
+                                                {
+                                                    <td style="color:red">
+                                                        Ban chủ nhiệm khoa
+                                                    </td>
+                                                }
+                                                else if (item.role == 3)
+                                                {
+                                                    <td style="color:red">
+                                                        Bộ môn
+                                                    </td>
+                                                }
+                                                else if (item.role == 4)
+                                                {
+                                                    <td style="color:red">
+                                                        Giảng viên
+                                                    </td>
+                                                }
+
+
+                                            }
+                                            else
+                                            {
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.maGV)
+                                                </td>
+                                                <td>
+
+                                                    @Html.DisplayFor(modelItem => item.tenGV)
+                                                </td>
+
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.AspNetUser.Email)
+                                                </td>
+                                                if (item.role == null)
+                                                {
+                                                    <td>
+                                                        Chưa Kích Hoạt
+                                                    </td>
+                                                }
+                                                else if (item.role == 1)
+                                                {
+                                                    <td>
+                                                        Admin
+                                                    </td>
+                                                }
+                                                else if (item.role == 2)
+                                                {
+                                                    <td>
+                                                        Ban chủ nhiệm khoa
+                                                    </td>
+                                                }
+                                                else if (item.role == 3)
+                                                {
+                                                    <td>
+                                                        Bộ môn
+                                                    </td>
+                                                }
+                                                else if (item.role == 4)
+                                                {
+                                                    <td>
+                                                        Giảng viên
+                                                    </td>
+                                                }
+                                            }
+
+                                            <td>
+
+
+                                                <a class="btn btn-file detailBtn btn btn-info" title="Xem chi tiết" data-model-id="@Url.Action("Edit", "giangVien", new { id = item.ID })" data-id="@Url.Action("Details", "giangVien", new { id = item.ID })"><i class="fas fa-eye"></i></a>
+                                                
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- /.card-body -->
+                    </div>
+
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+
+        <!--Ban chủ nhiệm-->
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-12">
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Danh sách Ban Chủ nhiệm Khoa</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="exampleBCN" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Mã Giảng Viên
+                                        </th>
+                                        <th>
+                                            Tên Giảng Viên
+                                        </th>
+                                        <th>
+                                            Email
+                                        </th>
+                                        <th>
+                                            Vai Trò
+                                        </th>
+
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Where(m => m.role == 2))
+                                    {
+                                        <tr>
+
+                                            @if (item.role == null)
+                                            {
+                                                <td style="color:red">
+                                                    @Html.DisplayFor(modelItem => item.maGV)
+                                                </td>
+                                                <td style="color:red">
+
+                                                    @Html.DisplayFor(modelItem => item.tenGV)
+                                                </td>
+
+                                                <td style="color:red">
+                                                    @Html.DisplayFor(modelItem => item.AspNetUser.Email)
+                                                </td>
+
+                                                if (item.role == null)
+                                                {
+                                                    <td style="color:red">
+                                                        Chưa Kích Hoạt
+                                                    </td>
+                                                }
+                                                else if (item.role == 1)
+                                                {
+                                                    <td style="color:red">
+                                                        Admin
+                                                    </td>
+                                                }
+                                                else if (item.role == 2)
+                                                {
+                                                    <td style="color:red">
+                                                        Ban chủ nhiệm khoa
+                                                    </td>
+                                                }
+                                                else if (item.role == 3)
+                                                {
+                                                    <td style="color:red">
+                                                        Bộ môn
+                                                    </td>
+                                                }
+                                                else if (item.role == 4)
+                                                {
+                                                    <td style="color:red">
+                                                        Giảng viên
+                                                    </td>
+                                                }
+
+
+                                            }
+                                            else if (item.role == 0)
+                                            {
+                                                <td style="color:red">
+                                                    @Html.DisplayFor(modelItem => item.maGV)
+                                                </td>
+                                                <td style="color:red">
+
+                                                    @Html.DisplayFor(modelItem => item.tenGV)
+                                                </td>
+
+                                                <td style="color:red">
+                                                    @Html.DisplayFor(modelItem => item.AspNetUser.Email)
+                                                </td>
+
+                                                if (item.role == 0)
+                                                {
+                                                    <td style="color:red">
+                                                        Chưa Kích Hoạt
+                                                    </td>
+                                                }
+                                                else if (item.role == 1)
+                                                {
+                                                    <td style="color:red">
+                                                        Admin
+                                                    </td>
+                                                }
+                                                else if (item.role == 2)
+                                                {
+                                                    <td style="color:red">
+                                                        Ban chủ nhiệm khoa
+                                                    </td>
+                                                }
+                                                else if (item.role == 3)
+                                                {
+                                                    <td style="color:red">
+                                                        Bộ môn
+                                                    </td>
+                                                }
+                                                else if (item.role == 4)
+                                                {
+                                                    <td style="color:red">
+                                                        Giảng viên
+                                                    </td>
+                                                }
+
+
+                                            }
+                                            else
+                                            {
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.maGV)
+                                                </td>
+                                                <td>
+
+                                                    @Html.DisplayFor(modelItem => item.tenGV)
+                                                </td>
+
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.AspNetUser.Email)
+                                                </td>
+                                                if (item.role == null)
+                                                {
+                                                    <td>
+                                                        Chưa Kích Hoạt
+                                                    </td>
+                                                }
+                                                else if (item.role == 1)
+                                                {
+                                                    <td>
+                                                        Admin
+                                                    </td>
+                                                }
+                                                else if (item.role == 2)
+                                                {
+                                                    <td>
+                                                        Ban chủ nhiệm khoa
+                                                    </td>
+                                                }
+                                                else if (item.role == 3)
+                                                {
+                                                    <td>
+                                                        Bộ môn
+                                                    </td>
+                                                }
+                                                else if (item.role == 4)
+                                                {
+                                                    <td>
+                                                        Giảng viên
+                                                    </td>
+                                                }
+                                            }
+
+                                            <td>
+
+
+                                                <a class="btn btn-file detailBtn btn btn-info" title="Xem chi tiết" data-model-id="@Url.Action("Edit", "giangVien", new { id = item.ID })" data-id="@Url.Action("Details", "giangVien", new { id = item.ID })"><i class="fas fa-eye"></i></a>
+
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- /.card-body -->
+                    </div>
+
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+        </div>
+
+        <!--Bộ môn-->
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-12">
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Danh sách Bộ môn</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="exampleBM" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Mã Giảng Viên
+                                        </th>
+                                        <th>
+                                            Tên Giảng Viên
+                                        </th>
+                                        <th>
+                                            Email
+                                        </th>
+                                        <th>
+                                            Vai Trò
+                                        </th>
+
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Where(m => m.role == 3))
+                                    {
+                                        <tr>
+
+                                            @if (item.role == null)
+                                            {
+                                                <td style="color:red">
+                                                    @Html.DisplayFor(modelItem => item.maGV)
+                                                </td>
+                                                <td style="color:red">
+
+                                                    @Html.DisplayFor(modelItem => item.tenGV)
+                                                </td>
+
+                                                <td style="color:red">
+                                                    @Html.DisplayFor(modelItem => item.AspNetUser.Email)
+                                                </td>
+
+                                                if (item.role == null)
+                                                {
+                                                    <td style="color:red">
+                                                        Chưa Kích Hoạt
+                                                    </td>
+                                                }
+                                                else if (item.role == 1)
+                                                {
+                                                    <td style="color:red">
+                                                        Admin
+                                                    </td>
+                                                }
+                                                else if (item.role == 2)
+                                                {
+                                                    <td style="color:red">
+                                                        Ban chủ nhiệm khoa
+                                                    </td>
+                                                }
+                                                else if (item.role == 3)
+                                                {
+                                                    <td style="color:red">
+                                                        Bộ môn
+                                                    </td>
+                                                }
+                                                else if (item.role == 4)
+                                                {
+                                                    <td style="color:red">
+                                                        Giảng viên
+                                                    </td>
+                                                }
+
+
+                                            }
+                                            else if (item.role == 0)
+                                            {
+                                                <td style="color:red">
+                                                    @Html.DisplayFor(modelItem => item.maGV)
+                                                </td>
+                                                <td style="color:red">
+
+                                                    @Html.DisplayFor(modelItem => item.tenGV)
+                                                </td>
+
+                                                <td style="color:red">
+                                                    @Html.DisplayFor(modelItem => item.AspNetUser.Email)
+                                                </td>
+
+                                                if (item.role == 0)
+                                                {
+                                                    <td style="color:red">
+                                                        Chưa Kích Hoạt
+                                                    </td>
+                                                }
+                                                else if (item.role == 1)
+                                                {
+                                                    <td style="color:red">
+                                                        Admin
+                                                    </td>
+                                                }
+                                                else if (item.role == 2)
+                                                {
+                                                    <td style="color:red">
+                                                        Ban chủ nhiệm khoa
+                                                    </td>
+                                                }
+                                                else if (item.role == 3)
+                                                {
+                                                    <td style="color:red">
+                                                        Bộ môn
+                                                    </td>
+                                                }
+                                                else if (item.role == 4)
+                                                {
+                                                    <td style="color:red">
+                                                        Giảng viên
+                                                    </td>
+                                                }
+
+
+                                            }
+                                            else
+                                            {
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.maGV)
+                                                </td>
+                                                <td>
+
+                                                    @Html.DisplayFor(modelItem => item.tenGV)
+                                                </td>
+
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.AspNetUser.Email)
+                                                </td>
+                                                if (item.role == null)
+                                                {
+                                                    <td>
+                                                        Chưa Kích Hoạt
+                                                    </td>
+                                                }
+                                                else if (item.role == 1)
+                                                {
+                                                    <td>
+                                                        Admin
+                                                    </td>
+                                                }
+                                                else if (item.role == 2)
+                                                {
+                                                    <td>
+                                                        Ban chủ nhiệm khoa
+                                                    </td>
+                                                }
+                                                else if (item.role == 3)
+                                                {
+                                                    <td>
+                                                        Bộ môn
+                                                    </td>
+                                                }
+                                                else if (item.role == 4)
+                                                {
+                                                    <td>
+                                                        Giảng viên
+                                                    </td>
+                                                }
+                                            }
+
+                                            <td>
+
+
+                                                <a class="btn btn-file detailBtn btn btn-info" title="Xem chi tiết" data-model-id="@Url.Action("Edit", "giangVien", new { id = item.ID })" data-id="@Url.Action("Details", "giangVien", new { id = item.ID })"><i class="fas fa-eye"></i></a>
+
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- /.card-body -->
+                    </div>
+
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+        </div>
+
+        <!--Giảng viên-->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Danh sách Giảng viên</h3>
+                        </div>
+ 
+                        <div class="card-body">
+                            <table id="exampleGV" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Mã Giảng Viên
+                                        </th>
+                                        <th>
+                                            Tên Giảng Viên
+                                        </th>
+                                        <th>
+                                            Email
+                                        </th>
+                                        <th>
+                                            Vai Trò
+                                        </th>
+
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Where(m => m.role == 4))
+                                    {
+                                        <tr>
+
+                                            @if (item.role == null)
+                                            {
+                                                <td style="color:red">
+                                                    @Html.DisplayFor(modelItem => item.maGV)
+                                                </td>
+                                                <td style="color:red">
+
+                                                    @Html.DisplayFor(modelItem => item.tenGV)
+                                                </td>
+
+                                                <td style="color:red">
+                                                    @Html.DisplayFor(modelItem => item.AspNetUser.Email)
+                                                </td>
+
+                                                if (item.role == null)
+                                                {
+                                                    <td style="color:red">
+                                                        Chưa Kích Hoạt
+                                                    </td>
+                                                }
+                                                else if (item.role == 1)
+                                                {
+                                                    <td style="color:red">
+                                                        Admin
+                                                    </td>
+                                                }
+                                                else if (item.role == 2)
+                                                {
+                                                    <td style="color:red">
+                                                        Ban chủ nhiệm khoa
+                                                    </td>
+                                                }
+                                                else if (item.role == 3)
+                                                {
+                                                    <td style="color:red">
+                                                        Bộ môn
+                                                    </td>
+                                                }
+                                                else if (item.role == 4)
+                                                {
+                                                    <td style="color:red">
+                                                        Giảng viên
+                                                    </td>
+                                                }
+
+
+                                            }
+                                            else if (item.role == 0)
+                                            {
+                                                <td style="color:red">
+                                                    @Html.DisplayFor(modelItem => item.maGV)
+                                                </td>
+                                                <td style="color:red">
+
+                                                    @Html.DisplayFor(modelItem => item.tenGV)
+                                                </td>
+
+                                                <td style="color:red">
+                                                    @Html.DisplayFor(modelItem => item.AspNetUser.Email)
+                                                </td>
+
+                                                if (item.role == 0)
+                                                {
+                                                    <td style="color:red">
+                                                        Chưa Kích Hoạt
+                                                    </td>
+                                                }
+                                                else if (item.role == 1)
+                                                {
+                                                    <td style="color:red">
+                                                        Admin
+                                                    </td>
+                                                }
+                                                else if (item.role == 2)
+                                                {
+                                                    <td style="color:red">
+                                                        Ban chủ nhiệm khoa
+                                                    </td>
+                                                }
+                                                else if (item.role == 3)
+                                                {
+                                                    <td style="color:red">
+                                                        Bộ môn
+                                                    </td>
+                                                }
+                                                else if (item.role == 4)
+                                                {
+                                                    <td style="color:red">
+                                                        Giảng viên
+                                                    </td>
+                                                }
+
+
+                                            }
+                                            else
+                                            {
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.maGV)
+                                                </td>
+                                                <td>
+
+                                                    @Html.DisplayFor(modelItem => item.tenGV)
+                                                </td>
+
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.AspNetUser.Email)
+                                                </td>
+                                                if (item.role == null)
+                                                {
+                                                    <td>
+                                                        Chưa Kích Hoạt
+                                                    </td>
+                                                }
+                                                else if (item.role == 1)
+                                                {
+                                                    <td>
+                                                        Admin
+                                                    </td>
+                                                }
+                                                else if (item.role == 2)
+                                                {
+                                                    <td>
+                                                        Ban chủ nhiệm khoa
+                                                    </td>
+                                                }
+                                                else if (item.role == 3)
+                                                {
+                                                    <td>
+                                                        Bộ môn
+                                                    </td>
+                                                }
+                                                else if (item.role == 4)
+                                                {
+                                                    <td>
+                                                        Giảng viên
+                                                    </td>
+                                                }
+                                            }
+
+                                            <td>
+                                                <a class="btn btn-file detailBtn btn btn-info" title="Xem chi tiết" data-model-id="@Url.Action("Edit", "giangVien", new { id = item.ID })" data-id="@Url.Action("Details", "giangVien", new { id = item.ID })"><i class="fas fa-eye"></i></a>
+
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!--User đang chờ phân quyền-->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title" style="color:red">Danh sách đang chờ kích hoạt</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="exampleNULL" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Mã Giảng Viên
+                                        </th>
+                                        <th>
+                                            Tên Giảng Viên
+                                        </th>
+                                        <th>
+                                            Email
+                                        </th>
+                                        <th>
+                                            Vai Trò
+                                        </th>
+
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Where(m => m.role == null || m.role == 0))
+                                    {
+                                        <tr>
+
+                                            @if (item.role == null)
+                                            {
+                                                <td style="color:red">
+                                                    @Html.DisplayFor(modelItem => item.maGV)
+                                                </td>
+                                                <td style="color:red">
+
+                                                    @Html.DisplayFor(modelItem => item.tenGV)
+                                                </td>
+
+                                                <td style="color:red">
+                                                    @Html.DisplayFor(modelItem => item.AspNetUser.Email)
+                                                </td>
+
+                                                if (item.role == null)
+                                                {
+                                                    <td style="color:red">
+                                                        Chưa Kích Hoạt
+                                                    </td>
+                                                }
+                                                else if (item.role == 1)
+                                                {
+                                                    <td style="color:red">
+                                                        Admin
+                                                    </td>
+                                                }
+                                                else if (item.role == 2)
+                                                {
+                                                    <td style="color:red">
+                                                        Ban chủ nhiệm khoa
+                                                    </td>
+                                                }
+                                                else if (item.role == 3)
+                                                {
+                                                    <td style="color:red">
+                                                        Bộ môn
+                                                    </td>
+                                                }
+                                                else if (item.role == 4)
+                                                {
+                                                    <td style="color:red">
+                                                        Giảng viên
+                                                    </td>
+                                                }
+
+
+                                            }
+                                            else if (item.role == 0)
+                                            {
+                                                <td style="color:red">
+                                                    @Html.DisplayFor(modelItem => item.maGV)
+                                                </td>
+                                                <td style="color:red">
+
+                                                    @Html.DisplayFor(modelItem => item.tenGV)
+                                                </td>
+
+                                                <td style="color:red">
+                                                    @Html.DisplayFor(modelItem => item.AspNetUser.Email)
+                                                </td>
+
+                                                if (item.role == 0)
+                                                {
+                                                    <td style="color:red">
+                                                        Chưa Kích Hoạt
+                                                    </td>
+                                                }
+                                                else if (item.role == 1)
+                                                {
+                                                    <td style="color:red">
+                                                        Admin
+                                                    </td>
+                                                }
+                                                else if (item.role == 2)
+                                                {
+                                                    <td style="color:red">
+                                                        Ban chủ nhiệm khoa
+                                                    </td>
+                                                }
+                                                else if (item.role == 3)
+                                                {
+                                                    <td style="color:red">
+                                                        Bộ môn
+                                                    </td>
+                                                }
+                                                else if (item.role == 4)
+                                                {
+                                                    <td style="color:red">
+                                                        Giảng viên
+                                                    </td>
+                                                }
+
+
+                                            }
+                                            else
+                                            {
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.maGV)
+                                                </td>
+                                                <td>
+
+                                                    @Html.DisplayFor(modelItem => item.tenGV)
+                                                </td>
+
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.AspNetUser.Email)
+                                                </td>
+                                                if (item.role == null)
+                                                {
+                                                    <td>
+                                                        Chưa Kích Hoạt
+                                                    </td>
+                                                }
+                                                else if (item.role == 1)
+                                                {
+                                                    <td>
+                                                        Admin
+                                                    </td>
+                                                }
+                                                else if (item.role == 2)
+                                                {
+                                                    <td>
+                                                        Ban chủ nhiệm khoa
+                                                    </td>
+                                                }
+                                                else if (item.role == 3)
+                                                {
+                                                    <td>
+                                                        Bộ môn
+                                                    </td>
+                                                }
+                                                else if (item.role == 4)
+                                                {
+                                                    <td>
+                                                        Giảng viên
+                                                    </td>
+                                                }
+                                            }
+
+                                            <td>
+
+
+                                                <a class="btn btn-file detailBtn btn btn-info" title="Xem chi tiết" data-model-id="@Url.Action("Edit", "giangVien", new { id = item.ID })" data-id="@Url.Action("Details", "giangVien", new { id = item.ID })"><i class="fas fa-eye"></i></a>
+
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- /.card-body -->
+                    </div>
+
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+
+</div>
+<!-- /.content-wrapper -->
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+@if (TempData["phanquyen"] != null)
+{
+    <script type="text/javascript">
+        $(function () {
+            Swal.fire({
+                title: 'Thông báo',
+                text: 'Bạn đã phân quyền tài khoản thành công !!!',
+                icon: 'success',
+                showConfirmButton: true,
+                timer: 1500,
+            });
+        });
+    </script>
+}
+@if (TempData["phanquyen1"] != null)
+{
+    <script type="text/javascript">
+        $(function () {
+            Swal.fire({
+
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Bạn không thể tự thay đổi vai trò của bản thân !!',
+
+
+            });
+        });
+    </script>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+
+            $('#example12').on('click', '.detailBtn', function () {
+                var button = $(this);
+                var s_id = button.data("id");
+                var url = button.data("model-id");
+                $.ajax({
+                    url: s_id,
+                    typr: "GET",
+                    contentType: "application/json;charset=UTF-8",
+                    dataType: "json",
+                    success: function (result) {
+                        $.confirm({
+                            columnClass: 'col-md-5',
+                            title: '<div class="text-center container"><p>Thông tin của ' + result.a + '</p></div>',
+                            content: '' +
+                                '<form action="" class="formName container">' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Họ Tên</label>' +
+                                '<input type="text" class="form-control" value="' + result.a + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Mã Giảng Viên</label>' +
+                                '<input type="text" class="form-control" value="' + result.b + '" readonly />' +
+
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Loại Giảng Viên</label>' +
+                                '<input type="text" class="form-control" value="' + result.c + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Vai trò</label>' +
+                                '<input type="text" class="form-control" value="' + result.d + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Khoa</label>' +
+                                '<input type="text" class="form-control" value="' + result.e + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Số điện thoại</label>' +
+                                '<input type="text" class="form-control" value="' + '0' + result.f + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Giới Tính</label>' +
+                                '<input type="text" class="form-control" value="' + result.g + '" readonly />' +
+
+
+
+
+                                '</form>',
+                            buttons: {
+                                confirm: {
+                                    text: 'Phân Quyền',
+                                    btnClass: 'btn-green',
+                                    action: function () {
+                                        window.location.assign(url);
+                                    }
+                                },
+                                cancel: {
+                                    text: 'Thoát',
+                                    btnClass: 'btn-red',
+                                    action: function () { }
+                                },
+                            },
+                        });
+                    },
+                    error: function (errormessage) {
+                        $.alert(errormessage.responseText);
+                    }
+                });
+            });
+            $('#exampleBCN').on('click', '.detailBtn', function () {
+                var button = $(this);
+                var s_id = button.data("id");
+                var url = button.data("model-id");
+                $.ajax({
+                    url: s_id,
+                    typr: "GET",
+                    contentType: "application/json;charset=UTF-8",
+                    dataType: "json",
+                    success: function (result) {
+                        $.confirm({
+                            columnClass: 'col-md-5',
+                            title: '<div class="text-center container"><p>Thông tin của ' + result.a + '</p></div>',
+                            content: '' +
+                                '<form action="" class="formName container">' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Họ Tên</label>' +
+                                '<input type="text" class="form-control" value="' + result.a + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Mã Giảng Viên</label>' +
+                                '<input type="text" class="form-control" value="' + result.b + '" readonly />' +
+
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Loại Giảng Viên</label>' +
+                                '<input type="text" class="form-control" value="' + result.c + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Vai trò</label>' +
+                                '<input type="text" class="form-control" value="' + result.d + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Khoa</label>' +
+                                '<input type="text" class="form-control" value="' + result.e + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Số điện thoại</label>' +
+                                '<input type="text" class="form-control" value="' + '0' + result.f + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Giới Tính</label>' +
+                                '<input type="text" class="form-control" value="' + result.g + '" readonly />' +
+
+
+
+
+                                '</form>',
+                            buttons: {
+                                confirm: {
+                                    text: 'Phân Quyền',
+                                    btnClass: 'btn-green',
+                                    action: function () {
+                                        window.location.assign(url);
+                                    }
+                                },
+                                cancel: {
+                                    text: 'Thoát',
+                                    btnClass: 'btn-red',
+                                    action: function () { }
+                                },
+                            },
+                        });
+                    },
+                    error: function (errormessage) {
+                        $.alert(errormessage.responseText);
+                    }
+                });
+            });
+            $('#exampleGV').on('click', '.detailBtn', function () {
+                var button = $(this);
+                var s_id = button.data("id");
+                var url = button.data("model-id");
+                $.ajax({
+                    url: s_id,
+                    typr: "GET",
+                    contentType: "application/json;charset=UTF-8",
+                    dataType: "json",
+                    success: function (result) {
+                        $.confirm({
+                            columnClass: 'col-md-5',
+                            title: '<div class="text-center container"><p>Thông tin của ' + result.a + '</p></div>',
+                            content: '' +
+                                '<form action="" class="formName container">' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Họ Tên</label>' +
+                                '<input type="text" class="form-control" value="' + result.a + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Mã Giảng Viên</label>' +
+                                '<input type="text" class="form-control" value="' + result.b + '" readonly />' +
+
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Loại Giảng Viên</label>' +
+                                '<input type="text" class="form-control" value="' + result.c + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Vai trò</label>' +
+                                '<input type="text" class="form-control" value="' + result.d + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Khoa</label>' +
+                                '<input type="text" class="form-control" value="' + result.e + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Số điện thoại</label>' +
+                                '<input type="text" class="form-control" value="' + '0' + result.f + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Giới Tính</label>' +
+                                '<input type="text" class="form-control" value="' + result.g + '" readonly />' +
+
+
+
+
+                                '</form>',
+                            buttons: {
+                                confirm: {
+                                    text: 'Phân Quyền',
+                                    btnClass: 'btn-green',
+                                    action: function () {
+                                        window.location.assign(url);
+                                    }
+                                },
+                                cancel: {
+                                    text: 'Thoát',
+                                    btnClass: 'btn-red',
+                                    action: function () { }
+                                },
+                            },
+                        });
+                    },
+                    error: function (errormessage) {
+                        $.alert(errormessage.responseText);
+                    }
+                });
+            });
+            $('#exampleNULL').on('click', '.detailBtn', function () {
+                var button = $(this);
+                var s_id = button.data("id");
+                var url = button.data("model-id");
+                $.ajax({
+                    url: s_id,
+                    typr: "GET",
+                    contentType: "application/json;charset=UTF-8",
+                    dataType: "json",
+                    success: function (result) {
+                        $.confirm({
+                            columnClass: 'col-md-5',
+                            title: '<div class="text-center container"><p>Thông tin của ' + result.a + '</p></div>',
+                            content: '' +
+                                '<form action="" class="formName container">' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Họ Tên</label>' +
+                                '<input type="text" class="form-control" value="' + result.a + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Mã Giảng Viên</label>' +
+                                '<input type="text" class="form-control" value="' + result.b + '" readonly />' +
+
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Loại Giảng Viên</label>' +
+                                '<input type="text" class="form-control" value="' + result.c + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Vai trò</label>' +
+                                '<input type="text" class="form-control" value="' + result.d + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Khoa</label>' +
+                                '<input type="text" class="form-control" value="' + result.e + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Số điện thoại</label>' +
+                                '<input type="text" class="form-control" value="' + '0' + result.f + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Giới Tính</label>' +
+                                '<input type="text" class="form-control" value="' + result.g + '" readonly />' +
+
+
+
+
+                                '</form>',
+                            buttons: {
+                                confirm: {
+                                    text: 'Phân Quyền',
+                                    btnClass: 'btn-green',
+                                    action: function () {
+                                        window.location.assign(url);
+                                    }
+                                },
+                                cancel: {
+                                    text: 'Thoát',
+                                    btnClass: 'btn-red',
+                                    action: function () { }
+                                },
+                            },
+                        });
+                    },
+                    error: function (errormessage) {
+                        $.alert(errormessage.responseText);
+                    }
+                });
+            });
+            $('#exampleBM').on('click', '.detailBtn', function () {
+                var button = $(this);
+                var s_id = button.data("id");
+                var url = button.data("model-id");
+                $.ajax({
+                    url: s_id,
+                    typr: "GET",
+                    contentType: "application/json;charset=UTF-8",
+                    dataType: "json",
+                    success: function (result) {
+                        $.confirm({
+                            columnClass: 'col-md-5',
+                            title: '<div class="text-center container"><p>Thông tin của ' + result.a + '</p></div>',
+                            content: '' +
+                                '<form action="" class="formName container">' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Họ Tên</label>' +
+                                '<input type="text" class="form-control" value="' + result.a + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Mã Giảng Viên</label>' +
+                                '<input type="text" class="form-control" value="' + result.b + '" readonly />' +
+
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Loại Giảng Viên</label>' +
+                                '<input type="text" class="form-control" value="' + result.c + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Vai trò</label>' +
+                                '<input type="text" class="form-control" value="' + result.d + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Khoa</label>' +
+                                '<input type="text" class="form-control" value="' + result.e + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Số điện thoại</label>' +
+                                '<input type="text" class="form-control" value="' + result.f + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Giới Tính</label>' +
+                                '<input type="text" class="form-control" value="' + result.g + '" readonly />' +
+
+
+
+
+                                '</form>',
+                            buttons: {
+                                confirm: {
+                                    text: 'Phân Quyền',
+                                    btnClass: 'btn-green',
+                                    action: function () {
+                                        window.location.assign(url);
+                                    }
+                                },
+                                cancel: {
+                                    text: 'Thoát',
+                                    btnClass: 'btn-red',
+                                    action: function () { }
+                                },
+                            },
+                        });
+                    },
+                    error: function (errormessage) {
+                        $.alert(errormessage.responseText);
+                    }
+                });
+            });
+        });
+
+       
+    </script>
+
+   
+
+}

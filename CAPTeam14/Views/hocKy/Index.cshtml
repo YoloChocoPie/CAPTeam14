@@ -1,0 +1,268 @@
+﻿@model IEnumerable<CAPTeam14.Models.hocKy>
+
+@{
+    ViewBag.Title = "Học Kì";
+    Layout = "~/Views/Shared/_LayoutTemplate.cshtml";
+}
+
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                          <li class="breadcrumb-item"><a href="@Url.Action("Index1","Home")">Trang chủ</a></li>
+                        <li class="breadcrumb-item active">Học Kỳ</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+
+                    <div class="card">
+                        <div class="card-header">
+
+                            <a class="btn btn-file createBtn1 btn btn-info" title="Thêm học kì" href="@Url.Action("Create", "hocKy")">Thêm học kì</a>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="example12" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Tên học kỳ
+                                        </th>
+                                        <th>
+                                            Năm bắt đầu
+                                        </th>
+                                        <th>
+                                            Năm kết thúc
+                                        </th>
+                                        <th>
+                                            Tên lớp
+                                        </th>
+                                        <th>
+                                            Tên ngành
+                                        </th>
+
+
+
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                    <tr>
+
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.tenHK)
+                                        </td>
+                                        <td>
+
+                                            @Html.DisplayFor(modelItem => item.namBD)
+                                        </td>
+                                        <td>
+
+                                            @Html.DisplayFor(modelItem => item.namKT)
+                                        </td>
+                                        @if (item.ID_lop == null)
+                                        {
+                                            <td>
+                                                Không có
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td>
+
+                                                @Html.DisplayFor(modelItem => item.lopHoc.maLop)
+                                            </td>
+                                        }
+                                        @if (item.ID_nganh == null)
+                                        {
+                                            <td>
+                                                Không có
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td>
+
+                                                @Html.DisplayFor(modelItem => item.Nganh.tenNganh)
+                                            </td>
+                                        }
+
+
+
+
+
+
+                                        <td>
+
+                                            <a class="btn btn-file detailBtn1 btn btn-info" title="Xem chi tiết" data-model-id1="@Url.Action("Edit", "hocKy", new { id = item.ID })" data-id1="@Url.Action("Details", "hocKy", new { id = item.ID })"><i class="fas fa-eye"></i></a>
+
+                                        </td>
+                                    </tr>
+                                    }
+
+                                </tbody>
+                                @*<tfoot>
+                                        <tr>
+                                            <th>Rendering engine</th>
+                                            <th>Browser</th>
+                                            <th>Platform(s)</th>
+                                            <th>Engine version</th>
+                                            <th>CSS grade</th>
+                                        </tr>
+                                    </tfoot>*@
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+@if (TempData["taoHK"] != null)
+{
+    <script type="text/javascript">
+        $(function () {
+            Swal.fire({
+                title: 'Thông báo',
+                text: 'Bạn đã thêm học kỳ thành công !!!',
+                icon: 'success',
+                showConfirmButton: true,
+                timer: 1500,
+            });
+        });
+    </script>
+}
+
+@if (TempData["EditHK"] != null)
+{
+    <script type="text/javascript">
+        $(function () {
+            Swal.fire({
+                title: 'Thông báo',
+                text: 'Bạn đã Cập nhật học kì thành công !!!',
+                icon: 'success',
+                showConfirmButton: true,
+                timer: 1500,
+            });
+        });
+    </script>
+}
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+
+            $('#example12').on('click', '.detailBtn1', function () {
+                var button = $(this);
+                var s_id = button.data("id1");
+                var url = button.data("model-id1");
+                $.ajax({
+                    url: s_id,
+                    typr: "GET",
+                    contentType: "application/json;charset=UTF-8",
+                    dataType: "json",
+                    success: function (result) {
+                        $.confirm({
+                            columnClass: 'col-md-5',
+                            title: '<div class="text-center container"><p>Thông tin của học kỳ  ' + result.a + '</p></div>',
+                            content: '' +
+                                '<form action="" class="formName container">' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Tên học kỳ</label>' +
+                                '<input type="text" class="form-control" value="' + result.a + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Năm bắt đầu</label>' +
+                                '<input type="text" class="form-control" value="' + result.b + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                '<label>Năm kết thúc</label>' +
+                                '<input type="text" class="form-control" value="' + result.c + '" readonly />' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                               
+
+
+
+                                '</form>',
+                            buttons: {
+                                confirm: {
+                                    text: 'Cập nhật',
+                                    btnClass: 'btn-green',
+                                    action: function () {
+                                        window.location.assign(url);
+                                    }
+                                },
+                                cancel: {
+                                    text: 'Thoát',
+                                    btnClass: 'btn-red',
+                                    action: function () { }
+                                },
+                            },
+                        });
+                    },
+                    error: function (errormessage) {
+                        $.alert(errormessage.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+
+}
