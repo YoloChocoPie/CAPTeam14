@@ -42,7 +42,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="example1" class="table table-bordered table-striped" hidden="hidden">
+                            <table id="exampleTEST" class="table table-bordered table-striped" hidden="hidden" >
                                 <thead>
                                     <tr>
 
@@ -269,24 +269,12 @@
 </div>
 <!-- /.content-wrapper -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<script>
+    $(function () {
+        $("#exampleTEST").DataTable({
+            "responsive": true, "lengthChange": false, "autoWidth": false, "searching": false, "paging": false,
+            "buttons": [{ extend: 'excel', title: '' }]
+        }).buttons().container().appendTo('#exampleTEST_wrapper .col-md-6:eq(0)');
+       
+    });
+</script>

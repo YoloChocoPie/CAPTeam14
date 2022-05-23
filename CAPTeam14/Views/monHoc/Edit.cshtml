@@ -44,7 +44,7 @@
                                 <div class="card-body">
                                     <label>Cập nhật môn học</label>
                                     <hr />
-                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                  
                              
                                    
 
@@ -81,7 +81,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-envelope"></i></span>
                                             </div>
-                                            @Html.EditorFor(model => model.tinChi, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.EditorFor(model => model.tinChi, new { htmlAttributes = new { @class = "form-control" , @type = "number" } })
 
                                         </div>
                                         @Html.ValidationMessageFor(model => model.tinChi, "", new { @class = "text-danger" })

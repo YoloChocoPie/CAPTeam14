@@ -153,7 +153,7 @@ namespace CAPTeam14.Controllers
                     //Test case kiểm tra kí tự đặc biệt
                     if (Kytudacbiet(mon.tinChi.ToString().Trim()) == true)
                     {
-                        ModelState.AddModelError("sdt", "Số điện thoại không được có ký tự đặc biệt");
+                        ModelState.AddModelError("tinChỉ", "Số tín chỉ không được có ký tự đặc biệt");
                     }
                 }
             }
@@ -220,7 +220,7 @@ namespace CAPTeam14.Controllers
                     //Test case kiểm tra kí tự đặc biệt
                     if (Kytudacbiet(mon.tinChi.ToString().Trim()) == true)
                     {
-                        ModelState.AddModelError("sdt", "Số điện thoại không được có ký tự đặc biệt");
+                        ModelState.AddModelError("tinChi", "Số tín chỉ không được có ký tự đặc biệt");
                     }
                 }
             }

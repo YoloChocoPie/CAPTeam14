@@ -281,7 +281,7 @@
                                 <li class="nav-item">
                                     <a href="@Url.Action("Index","Contact")" class="nav-link" id="icon-text">
 
-                                        <i class="nav-icon fas fa-calendar-alt"></i>
+                                        <i class="fas fa-user-cog nav-icon"></i>
                                         <p>Phiếu báo cáo đã gửi</p>
                                     </a>
                                 </li>
@@ -363,7 +363,7 @@
                                 <li class="nav-item">
                                     <a href="@Url.Action("Index","Contact")" class="nav-link" id="icon-text">
 
-                                        <i class="nav-icon fas fa-calendar-alt"></i>
+                                        <i class="fas fa-user-cog nav-icon"></i>
                                         <p>Phiếu báo cáo đã gửi</p>
                                     </a>
                                 </li>
@@ -452,7 +452,7 @@
                                 <li class="nav-item">
                                     <a href="@Url.Action("Index","Contact")" class="nav-link" id="icon-text">
 
-                                        <i class="nav-icon fas fa-calendar-alt"></i>
+                                        <i class="fas fa-user-cog nav-icon"></i>
                                         <p>Phiếu báo cáo đã gửi</p>
                                     </a>
                                 </li>
@@ -530,100 +530,46 @@
 
 <!-- Page specific script -->
 <script>
-    $(function () {
-        $("#example1").DataTable({
-            "responsive": true, "lengthChange": false, "autoWidth": false,
-            "buttons": [{ extend: 'excel', title: '' }]
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-        });
-    });
+    
 
     $(function () {
         $("#example12").DataTable({
-            "responsive": true, "lengthChange": false, "autoWidth": false,
+            "responsive": true, "lengthChange": false, "autoWidth": false, "ordering": true, "info": true, "searching": true,
            @* "buttons": ["copy", "csv", "pdf", "print"]*@
         }).buttons().container().appendTo('#example12_wrapper .col-md-6:eq(0)');
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-        });
+       
     });
 
     $(function () {
         $("#exampleBCN").DataTable({
-            "responsive": true, "lengthChange": false, "autoWidth": false,
+            "responsive": true, "lengthChange": false, "autoWidth": false, "ordering": true, "info": true, "searching": true,
          @*   "buttons": ["copy", "csv", "excel", "pdf", "print"]*@
         }).buttons().container().appendTo('#exampleBCN_wrapper .col-md-6:eq(0)');
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-        });
+       
     });
 
     $(function () {
         $("#exampleBM").DataTable({
-            "responsive": true, "lengthChange": false, "autoWidth": false,
+            "responsive": true, "lengthChange": false, "autoWidth": false, "ordering": true, "info": true, "searching": true,
          @*   "buttons": ["copy", "csv", "excel", "pdf", "print"]*@
         }).buttons().container().appendTo('#exampleBM_wrapper .col-md-6:eq(0)');
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-        });
+       
     });
 
     $(function () {
         $("#exampleGV").DataTable({
-            "responsive": true, "lengthChange": false, "autoWidth": false,
+            "responsive": true, "lengthChange": false, "autoWidth": false, "ordering": true, "info": true, "searching": true,
             @*"buttons": ["copy", "csv", "excel", "pdf", "print"]*@
         }).buttons().container().appendTo('#exampleGV_wrapper .col-md-6:eq(0)');
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-        });
+       
     });
 
     $(function () {
         $("#exampleNULL").DataTable({
-            "responsive": true, "lengthChange": false, "autoWidth": false,
+            "responsive": true, "lengthChange": false, "autoWidth": false, "ordering": true, "info": true, "searching": true,
            @* "buttons": ["copy", "csv", "excel", "pdf", "print"]*@
         }).buttons().container().appendTo('#exampleNULL_wrapper .col-md-6:eq(0)');
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-        });
+       
     });
 </script>
 

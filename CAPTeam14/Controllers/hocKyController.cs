@@ -244,6 +244,13 @@ namespace CAPTeam14.Controllers
                         {
                             ModelState.AddModelError("namKT", "Vui lòng nhập số hợp lệ");
                         }
+                        else
+                        {
+                            if (Convert.ToInt32(hk.namBD) > Convert.ToInt32(hk.namKT))
+                            {
+                                ModelState.AddModelError("namKT", "Năm kết thúc không được nhỏ hơn năm bắt đầu");
+                            }
+                        }
                     }
                     /* //Test case kiểm tra kí tự đặc biệt
                      if (Kytudacbiet(hk.namKT.Trim()) == true)
@@ -253,10 +260,7 @@ namespace CAPTeam14.Controllers
                 }
 
             }
-            if (Convert.ToInt32(hk.namBD) > Convert.ToInt32(hk.namKT) )
-            {
-                ModelState.AddModelError("namKT", "Năm kết thúc không được nhỏ hơn năm bắt đầu");
-            }
+           
           
         }
 
@@ -346,16 +350,20 @@ namespace CAPTeam14.Controllers
                         {
                             ModelState.AddModelError("namKT", "Vui lòng nhập số hợp lệ");
                         }
+                        else
+                        {
+                            if (Convert.ToInt32(hk.namBD) > Convert.ToInt32(hk.namKT))
+                            {
+                                ModelState.AddModelError("namKT", "Năm kết thúc không được nhỏ hơn năm bắt đầu");
+                            }
+                        }
                     }
                     /* //Test case kiểm tra kí tự đặc biệt
                      if (Kytudacbiet(hk.namKT.Trim()) == true)
                      {
                          ModelState.AddModelError("namKT", "Không được nhập ký tự");
                      }*/
-                    if (Convert.ToInt32(hk.namBD) > Convert.ToInt32(hk.namKT))
-                    {
-                        ModelState.AddModelError("namKT", "Năm kết thúc không được nhỏ hơn năm bắt đầu");
-                    }
+                   
                 }
 
             }
