@@ -14,16 +14,7 @@
     <meta name="keywords" content="Team14">
     <meta name="description" content="Website quản lý giảng dạy và phân công của giảng viên khoa Công Nghệ Thông Tin">
     <meta name="author" content="Team14" />
-
-
-
-
-
-
-
     <link rel="icon" href="~/assets/VanLang-Logo.png">
-
-
 
     <!--Plugin cũ -->
     <!-- Google Font: Source Sans Pro -->
@@ -189,9 +180,16 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
+                                    <a href="@Url.Action("DetailStatistic1","giangVien")" class="nav-link" id="icon-text">
+
+                                        <i class="fas fa-chart-bar nav-icon"></i>
+                                        <p>Thống kê cá nhân</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
 
                                     <a href="@Url.Action("Index","Contact")" class="nav-link" id="icon-text">
-                                        <i class="fas fa-user-cog nav-icon"></i>
+                                        <i class="nav-icon fas fa-exclamation"></i>
                                         <p>Phiếu báo cáo</p>
                                     </a>
                                 </li>
@@ -242,11 +240,11 @@
                                             </a>
                                         </li>
                                         @*<li class="nav-item">
-                                            <a href="~/giangVien/Index2" class="nav-link" id="icon-text">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Danh sách tài khoản</p>
-                                            </a>
-                                        </li>*@
+                        <a href="~/giangVien/Index2" class="nav-link" id="icon-text">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Danh sách tài khoản</p>
+                        </a>
+                    </li>*@
                                     </ul>
                                 </li>
 
@@ -272,16 +270,23 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
+                                    <a href="@Url.Action("DetailStatistic1","giangVien")" class="nav-link" id="icon-text">
+
+                                        <i class="fas fa-chart-bar nav-icon"></i>
+                                        <p>Thống kê cá nhân</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
                                     <a href="@Url.Action("Create","Contact")" class="nav-link" id="icon-text">
 
-                                        <i class="nav-icon fas fa-calendar-alt"></i>
+                                        <i class="nav-icon fas fa-exclamation"></i>
                                         <p>Liên hệ Admin</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="@Url.Action("Index","Contact")" class="nav-link" id="icon-text">
 
-                                        <i class="fas fa-user-cog nav-icon"></i>
+                                        <i class="fas fa-paper-plane nav-icon"></i>
                                         <p>Phiếu báo cáo đã gửi</p>
                                     </a>
                                 </li>
@@ -354,16 +359,23 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
+                                    <a href="@Url.Action("DetailStatistic1","giangVien")" class="nav-link" id="icon-text">
+
+                                        <i class="fas fa-chart-bar nav-icon"></i>
+                                        <p>Thống kê cá nhân</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
                                     <a href="@Url.Action("Create","Contact")" class="nav-link" id="icon-text">
 
-                                        <i class="nav-icon fas fa-calendar-alt"></i>
+                                        <i class="nav-icon fas fa-exclamation"></i>
                                         <p>Liên hệ Admin</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="@Url.Action("Index","Contact")" class="nav-link" id="icon-text">
 
-                                        <i class="fas fa-user-cog nav-icon"></i>
+                                        <i class="fas fa-paper-plane nav-icon"></i>
                                         <p>Phiếu báo cáo đã gửi</p>
                                     </a>
                                 </li>
@@ -438,31 +450,28 @@
                                 <li class="nav-item">
                                     <a href="@Url.Action("DetailStatistic1","giangVien")" class="nav-link" id="icon-text">
 
-                                        <i class="nav-icon fas fa-calendar-alt"></i>
+                                        <i class="fas fa-chart-bar nav-icon"></i>
                                         <p>Thống kê cá nhân</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="@Url.Action("Create","Contact")" class="nav-link" id="icon-text">
 
-                                        <i class="nav-icon fas fa-calendar-alt"></i>
+                                        <i class="nav-icon fas fa-exclamation"></i>
                                         <p>Liên hệ Admin</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="@Url.Action("Index","Contact")" class="nav-link" id="icon-text">
 
-                                        <i class="fas fa-user-cog nav-icon"></i>
+                                        <i class="fas fa-paper-plane nav-icon"></i>
                                         <p>Phiếu báo cáo đã gửi</p>
                                     </a>
                                 </li>
 
-
-
-
                                 <li class="nav-item">
                                     <a href="@Url.Action("Logout","Account")" class="nav-link">
-                                        <i class="nav-icon fas fa-table" id="icon-text"></i>
+                                        <i class="nav-icon fas fa-sign-out-alt" id="icon-text"></i>
                                         <p id="icon-text">
                                             Đăng xuất
                                         </p>
