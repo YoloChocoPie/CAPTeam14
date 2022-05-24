@@ -21,7 +21,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                           <li class="breadcrumb-item"><a href="@Url.Action("Index1","Home")">Trang chủ</a></li>
-                        <li class="breadcrumb-item active">Lớp học</li>
+                        <li class="breadcrumb-item active">Export</li>
                     </ol>
                 </div>
             </div>
@@ -272,7 +272,7 @@
 <script>
     $(function () {
         $("#exampleTEST").DataTable({
-            "responsive": true, "lengthChange": false, "autoWidth": false, "searching": false, "paging": false,
+            "responsive": true, "lengthChange": false, "autoWidth": false, "searching": false, "paging": false, "info" : false,
             "buttons": [{ extend: 'excel', title: '' }]
         }).buttons().container().appendTo('#exampleTEST_wrapper .col-md-6:eq(0)');
        
