@@ -707,7 +707,7 @@ namespace CAPTeam14.Controllers
                             model.TKBs.Add(tkbTong);
                             model.SaveChanges();
 
-                            var giangvien1 = model.danhsachGVs.FirstOrDefault(x => x.ID == tkbTong.ID_GV);
+                            /*var giangvien1 = model.danhsachGVs.FirstOrDefault(x => x.ID == tkbTong.ID_GV);
                             var hk1 = model.hocKies.FirstOrDefault(x => x.ID == tkbTong.ID_hocKy);
                             var mon1 = model.monHocs.FirstOrDefault(x => x.ID == tkbTong.ID_monHoc);
                             var tuan1 = model.tuanHocs.FirstOrDefault(x => x.ID == tkbTong.ID_Tuan);
@@ -726,7 +726,7 @@ namespace CAPTeam14.Controllers
                             else
                             {
 
-                            }
+                            }*/
 
                         }
 
@@ -1074,11 +1074,29 @@ namespace CAPTeam14.Controllers
 
             return View();
         }
-        public ActionResult Test()
+        public ActionResult Test(int? id)
         {
-            ViewBag.Message = "Your contact page.";
+            foreach (var item in model.TKBs.OrderBy(x=> x.ID_hocKy == id))
+            {
+                if (item.ID_GV != null)
+                {
+                    var giangvien = model.danhsachGVs.FirstOrDefault(x => x.ID == item.ID_GV);
+                    var hk = model.hocKies.FirstOrDefault(x => x.ID == item.ID_hocKy);
+                    var mon = model.monHocs.FirstOrDefault(x => x.ID == item.ID_monHoc);
+                    var tuan = model.tuanHocs.FirstOrDefault(x => x.ID == item.ID_Tuan);
 
-            return View();
+                    SendEmailToUser(giangvien.Email, hk.tenHK, mon.tenMon, tuan.tuanHoc1);
+
+                   
+                    
+                }
+                else
+                {
+
+                }
+            }
+            TempData["cancel"] = 1;
+            return Redirect(Request.UrlReferrer.ToString());
         }
 
 
@@ -1095,7 +1113,7 @@ namespace CAPTeam14.Controllers
                 
                 tt.ID_GV = tkb.ID_GV;
                 model.SaveChanges();
-                var giangvien = model.danhsachGVs.FirstOrDefault(x => x.ID == tt.ID_GV);
+                /*var giangvien = model.danhsachGVs.FirstOrDefault(x => x.ID == tt.ID_GV);
                 var hk = model.hocKies.FirstOrDefault(x => x.ID == tt.ID_hocKy);
                 var mon = model.monHocs.FirstOrDefault(x => x.ID == tt.ID_monHoc);
                 var tuan = model.tuanHocs.FirstOrDefault(x => x.ID == tt.ID_Tuan);
@@ -1106,7 +1124,7 @@ namespace CAPTeam14.Controllers
                 else
                 {
 
-                }
+                }*/
                 return Json(new { resp = true });
 
             }
@@ -1115,7 +1133,7 @@ namespace CAPTeam14.Controllers
             {
                 tt.ID_GV = tkb.ID_GV;
                 model.SaveChanges();
-                var giangvien = model.danhsachGVs.FirstOrDefault(x => x.ID == tt.ID_GV);
+                /*var giangvien = model.danhsachGVs.FirstOrDefault(x => x.ID == tt.ID_GV);
                 var hk = model.hocKies.FirstOrDefault(x => x.ID == tt.ID_hocKy);
                 var mon = model.monHocs.FirstOrDefault(x => x.ID == tt.ID_monHoc);
                 var tuan = model.tuanHocs.FirstOrDefault(x => x.ID == tt.ID_Tuan);
@@ -1126,7 +1144,7 @@ namespace CAPTeam14.Controllers
                 else
                 {
 
-                }
+                }*/
                 return Json(new { result = true });
 
             }

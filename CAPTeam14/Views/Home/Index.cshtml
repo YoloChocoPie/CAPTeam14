@@ -74,14 +74,14 @@
                     <div>
                         <div class="clearfix"></div>
                         <div class="alert alert-warning smallTxt config-alert">
-                            @*@if (ViewBag.lockstat == 1)
-                                {
+                            @if (ViewBag.lockstat == 1)
+                            {
+                                <a class="btn btn-file cancelall btn btn-danger" style="text-decoration: none" title="Hủy toàn bộ phân công" href="@Url.Action("Test", "Home", new { id = ViewBag.test3 })">Gửi Email</a>
+                            }
+                            else if (ViewBag.lockstat == 2)
+                            {
 
-                                }
-                                else if (ViewBag.lockstat == 2)
-                                {
-                                    <a class="btn btn-file cancelall btn btn-danger" style="text-decoration: none" title="Hủy toàn bộ phân công" href="@Url.Action("CancelAll", "Home", new { id = ViewBag.test3 })">Hủy toàn bộ phân công</a>
-                                }*@
+                            }
 
                         </div>
                         <div>
@@ -3921,7 +3921,7 @@
         $('.cancelall').on('click', function (e) {
             e.preventDefault();
             Swal.fire({
-                title: 'Bạn có muốn hủy tất cả phân công ?',
+                title: 'Bạn có muốn gửi Email đến các giảng viên ?',
                 //text: "You won't be able to revert this!",
                 icon: 'warning',
                 showCancelButton: true,
@@ -3973,6 +3973,9 @@
             });
         });
 
+        $('.seeTT').click(function (e) {
+            sessionStorage.clear();
+        });
     </script>
 
     <!-- /.content -->
@@ -3999,7 +4002,7 @@
         $(function () {
             Swal.fire({
                 title: 'Thông báo',
-                text: 'Đã hủy phân công thành công',
+                text: 'Đã Gửi email đến các giảng viên thành công',
                 icon: 'success',
                 showConfirmButton: true,
             });
