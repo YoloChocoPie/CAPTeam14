@@ -1,0 +1,1 @@
+﻿update tkb set id_gv = null

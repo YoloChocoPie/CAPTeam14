@@ -172,9 +172,13 @@ namespace CAPTeam14
 
             routes.MapRoute(
             name: "Create",
-            url: "taotaikhoan/{userid}",
+            url: "taotaikhoanvanlang/{userid}",
             defaults: new { controller = "Account", action = "Create", userid = UrlParameter.Optional }, namespaces: new[] { string.Format("{0}.Controllers", typeof(RouteConfig).Namespace) });
 
+            routes.MapRoute(
+           name: "Create1",
+           url: "taotaikhoangmail/{userid}",
+           defaults: new { controller = "Account", action = "Create1", userid = UrlParameter.Optional }, namespaces: new[] { string.Format("{0}.Controllers", typeof(RouteConfig).Namespace) });
             //
             routes.MapRoute(
                 name: "Default",

@@ -133,7 +133,7 @@ namespace CAPTeam14.Controllers
             //hiển thị tên học kì đã chọn
             ViewBag.test2 = tkb1.tenHK;
             ViewBag.test3 = tkb1.ID;
-            TempData["test"] = tkb1.ID;
+            TempData["Test"] = id;
            
             
          

@@ -141,6 +141,7 @@ namespace CAPTeam14.Controllers
                     {
                         ModelState.AddModelError("maLop", "Không được nhập khoảng trắng");
                     }
+                    
                 
 
 

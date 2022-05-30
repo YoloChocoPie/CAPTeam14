@@ -96,7 +96,7 @@
                                                     Text = "Giảng viên thỉnh giảng",
                                                     Value = "Giảng viên thỉnh giảng",
                                                 });
-                                               
+
                                             }
                                             @Html.DropDownListFor(model => model.loaiGV, listItems, new { @class = "form-control" })
                                             @Html.ValidationMessageFor(model => model.loaiGV, "", new { @class = "text-danger" })
@@ -122,6 +122,18 @@
                                             }
                                             @Html.DropDownListFor(model => model.khoa, listItems1, new { @class = "form-control" })
                                             @Html.ValidationMessageFor(model => model.khoa, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-user"></i></span>
+                                            </div>
+                                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @type = "email" } })
+                                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+
                                         </div>
                                     </div>
 

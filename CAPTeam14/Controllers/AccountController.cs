@@ -348,7 +348,7 @@ namespace CAPTeam14.Controllers
         //
         // GET: /Account/ExternalLoginCallback
         [AllowAnonymous]
-        public async Task<ActionResult> ExternalLoginCallback(string returnUrl, string email)
+        public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
            
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync2();
@@ -443,7 +443,21 @@ namespace CAPTeam14.Controllers
                     }
                     else 
                     {
-                        return RedirectToAction("Create");
+                        if (user.Email.Contains("gmail.com"))
+                        {
+                            return RedirectToAction("Create1");
+                        }
+                        else if (user.Email.Contains("vlu.edu.vn"))
+                        {
+                            return RedirectToAction("Create");
+                        }
+                        else if (user.Email.Contains("vanlanguni.vn"))
+                        {
+                            return RedirectToAction("Create");
+                        }
+                        TempData["error1"] = 1;
+                        return View("Login");
+
                     }
 
 
@@ -484,6 +498,7 @@ namespace CAPTeam14.Controllers
             {
                 // Get the information about the user from the external login provider
                 var info = await AuthenticationManager.GetExternalLoginInfoAsync();
+                
                 // Lưu thông tin vô database
                 var user = new ApplicationUser
                 {
@@ -499,9 +514,21 @@ namespace CAPTeam14.Controllers
                     if (result.Succeeded)
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                        
+
                         // Nếu lưu thành công, thì chuyển người dùng tới Action Create - Tạo tài khoản
-                        return RedirectToAction("Create");
+                        if (user.Email.Contains("google.com"))
+                        {
+                            
+                        }
+                        else if (user.Email.Contains("vlu.edu.vn"))
+                        {
+                            return RedirectToAction("Create");
+                        }
+                        else if (user.Email.Contains("vanlanguni.vn"))
+                        {
+                            return RedirectToAction("Create");
+                        }
+                        
                     }
                 }
                 AddErrors(result);
@@ -542,62 +569,35 @@ namespace CAPTeam14.Controllers
                     taikhoan.loaiGV = acc.loaiGV;
                     taikhoan.khoa = "Khoa Công Nghệ Thông Tin";
                     taikhoan.gioiTinh = acc.gioiTinh;
-                    taikhoan.role = acc.role;
+                    taikhoan.role = 4;
                     taikhoan.sdt = acc.sdt;
                     // kiểm tra nếu mã giảng viên có đúng với dữ liệu mã giảng viên thực tế
                     // nếu đúng thì lưu thông tin profile
-                    var gv1 = model.danhsachGVs.FirstOrDefault(x => x.maGV == taikhoan.maGV);
-                    var gv2 = model.danhsachGVs.FirstOrDefault(x => x.maGV == taikhoan.maGV || x.Email == name);
+                    var gv1 = model.danhsachGVs.FirstOrDefault(x => x.maGV == taikhoan.maGV && x.tenGV == taikhoan.tenGV);
+                    var gv2 = model.danhsachGVs.FirstOrDefault(x => x.maGV == taikhoan.maGV && x.Email == name && x.tenGV == taikhoan.tenGV);
                     var gv3 = model.danhsachGVs.FirstOrDefault(x => x.Email == name);
 
-                    //1 Nếu mã giảng viên đã tồn tại trong dsgv => cho phép đăng kí bình thường 
-                    //2 Nếu chưa tồn tại => Nếu cả email và mã chưa tồn tại trong dsgv => tạo mới danh sách giảng viên => cho phép đăng kí => PASSED
-                    //3 Trường hợp email tồn tại mà mã không tồn tại => (không thể xảy ra) => chỉ xảy ra khi mã hết hạn => hiển thị " Thông tin đã được sử dụng " => PASSED 
-                    //4 Trường hợp email không tồn tại mà mã tồn tại => thêm email và quay về 1 => PASSED
-
-                    if (gv1 != null)
+                    //
+                    if (gv2 != null)
                     {
-                        if (gv1.Email == null)
-                        {
-                            gv1.Email = name;
-                            model.SaveChanges();
-                        }
-                        taikhoan.ID_dsGV = gv1.ID;
+                        taikhoan.ID_dsGV = gv2.ID;
                         model.nguoiDungs.Add(taikhoan);
                         model.SaveChanges();
 
                         TempData["ThongBao1"] = 1;
+
+
                     }
                     else
                     {
-                        if (gv2 == null && gv3 == null)
-                        {
-                            
-
-                            //
-                            var giangvien = new danhsachGV();
-                            giangvien.Email = name;
-                            giangvien.tenGV = taikhoan.tenGV;
-                            giangvien.maGV = taikhoan.maGV;
-                            model.danhsachGVs.Add(giangvien);
-                            model.SaveChanges();
-
-                            taikhoan.ID_dsGV = giangvien.ID;
-                            model.nguoiDungs.Add(taikhoan);
-                            model.SaveChanges();
-
-                            TempData["ThongBao1"] = 1;
-                        }
-                        else
-                        {
-                            ModelState.AddModelError("maGV", "Thông tin giảng viên đã được sử dụng");
-                            return View(acc);
-                        }
-                       
+                        ModelState.AddModelError("", "Vui lòng kiểm tra lại thông tin bản thân !");
+                        return View(acc);
                     }
-                  
 
-                    
+                   
+
+
+
                     //
 
 
@@ -626,7 +626,92 @@ namespace CAPTeam14.Controllers
             
         }
 
-        
+
+        //Đăng kí
+        // khởi tạo view
+        [HttpGet]
+        public ActionResult Create1()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create1(nguoiDung acc, danhsachGV gv)
+        {
+            // khởi tạo hàm string lấy ID của người dùng hiện tại
+            string checkID = User.Identity.GetUserId();
+            string name = User.Identity.GetUserName();
+            xacThuc1(acc);
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var taikhoan = new nguoiDung();
+                    taikhoan.userID = checkID;
+                    taikhoan.tenGV = acc.tenGV;
+                    
+                    taikhoan.loaiGV = acc.loaiGV;
+                    taikhoan.khoa = "Khoa Công Nghệ Thông Tin";
+                    taikhoan.gioiTinh = acc.gioiTinh;
+                    taikhoan.role = acc.role;
+                    taikhoan.sdt = acc.sdt;
+                    // kiểm tra nếu mã giảng viên có đúng với dữ liệu mã giảng viên thực tế
+                    // nếu đúng thì lưu thông tin profile
+                 
+                    var gv2 = model.danhsachGVs.FirstOrDefault(x => x.tenGV == taikhoan.tenGV);
+                    var gv3 = model.danhsachGVs.FirstOrDefault(x => x.Email == name);
+
+                    //
+                    if (gv2 != null)
+                    {
+                        taikhoan.ID_dsGV = gv2.ID;
+                        model.nguoiDungs.Add(taikhoan);
+                        model.SaveChanges();
+
+                        TempData["ThongBao1"] = 1;
+
+
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Không tồn tại giảng viên này !");
+                        return View(acc);
+                    }
+
+
+
+
+
+                    //
+
+
+                    // sau khi xác nhận thông tin thành công. Trước khi quay về trang chủ phải xóa hết mọi hoạt động
+                    Session.Abandon();
+                    Request.Cookies.Clear();
+                    AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                    //
+
+
+                    return RedirectToAction("Login");
+                }
+                else
+                {
+                    string messages = string.Join("; ", ModelState.Values
+                                        .SelectMany(x => x.Errors)
+                                        .Select(x => x.ErrorMessage));
+                    ModelState.AddModelError("", messages);
+                }
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "Không thể thực hiện hành động này, vui lòng kiểm tra lại các trường thông tin");
+            }
+            return View(acc);
+
+        }
+
+
 
         //Hàm kiểm tra ký tự đặc biệt
         public static bool Kytudacbiet(string str)
@@ -723,6 +808,84 @@ namespace CAPTeam14.Controllers
 
                 }
             }
+
+            ////
+            //Test case bỏ trống sdt
+            if (acc.sdt == null)
+            {
+                ModelState.AddModelError("sdt", "Vui lòng nhập số điện thoại");
+            }
+            else
+            {
+                // Test case nhập khoảng trắng
+                if (acc.sdt.ToString().Trim() == "")
+                {
+                    ModelState.AddModelError("sdt", "Không được nhập khoảng trắng");
+                }
+                else
+                {
+                    //Test Case nhập quá 10 kí tự
+                    if (acc.sdt.ToString().Length > 10)
+                    {
+                        ModelState.AddModelError("sdt", "Số điện thoại không vượt quá 10 kí tự");
+                    }
+                    //Test case nhập ít hơn 09 kí tự
+                    if (acc.sdt.ToString().Length < 9)
+                    {
+                        ModelState.AddModelError("sdt", "Số điện thoại không được ít hơn 10 kí tự");
+                    }
+                    else
+                    {
+                        //Test case kiểm tra kí tự đặc biệt
+                        if (Kytudacbiet(acc.sdt.ToString().Trim()) == true)
+                        {
+                            ModelState.AddModelError("sdt", "Số điện thoại không được có ký tự đặc biệt");
+                        }
+                    }
+                }
+            }
+        }
+        //
+
+        //
+        private void xacThuc1(nguoiDung acc)
+        {
+            var code = model.nguoiDungs.FirstOrDefault(d => d.maGV == acc.maGV);
+            var gv1 = model.danhsachGVs.FirstOrDefault(x => x.maGV == acc.maGV);
+            //Test case bỏ trống họ tên
+            if (acc.tenGV == null)
+            {
+                ModelState.AddModelError("tenGV", "Vui lòng nhập họ tên");
+            }
+            else
+            {
+                // Test case nhập khoảng trắng
+                if (acc.tenGV.Trim() == "")
+                {
+                    ModelState.AddModelError("tenGV", "Không được nhập khoảng trắng");
+                }
+                else
+                {
+                    //Test Case nhập quá 30 kí tự
+                    if (acc.tenGV.Length > 30)
+                    {
+                        ModelState.AddModelError("tenGV", "Họ tên không vượt quá 30 kí tự");
+                    }
+
+                    else
+                    {
+                        //Test case kiểm tra kí tự đặc biệt
+                        if (Kytudacbiet(acc.tenGV.Trim()) == true)
+                        {
+                            ModelState.AddModelError("tenGV", "Họ tên không được có ký tự đặc biệt");
+                        }
+                    }
+
+                }
+            }
+
+
+            
 
             ////
             //Test case bỏ trống sdt

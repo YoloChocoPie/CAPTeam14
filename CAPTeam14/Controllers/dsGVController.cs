@@ -3,6 +3,7 @@ using CAPTeam14.Models;
 using ExcelDataReader;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Linq;
 using System.Web;
@@ -80,6 +81,7 @@ namespace CAPTeam14.Controllers
                         String ngaysinh = cot[2].ToString(); // không dùng
                         String khoa = cot[3].ToString();
                         String loaiGV = cot[4].ToString();
+                        String Email = cot[5].ToString();
                         
 
                         // table hocPhans
@@ -105,6 +107,7 @@ namespace CAPTeam14.Controllers
                                     tenGV = tenGV,
                                     khoa = khoa,
                                     loaiGV = loaiGV,
+                                    Email = Email,
 
                                 };
                                 model.danhsachGVs.Add(dsgv);
@@ -179,7 +182,7 @@ namespace CAPTeam14.Controllers
             {
                 loaiGV1 = "Giảng viên thỉnh giảng";
             }
-            else if (ds.loaiGV == null)
+            else if (ds.loaiGV == null || ds.loaiGV == "")
             {
                 loaiGV1 = "Không có";
             }
@@ -189,14 +192,23 @@ namespace CAPTeam14.Controllers
             {
                 khoa1 = "Khoa Công nghệ thông tin";
             }
-            else if (ds.khoa == null)
+            else if (ds.khoa == null || ds.khoa == "")
             {
                 khoa1 = "Không có";
             }
 
+            string email = "";
+            if (ds.Email == null || ds.Email == "")
+            {
+                email = "Không có";
+            }
+            else if (ds.Email != null)
+            {
+                email = ds.Email;
+            }
 
-            var abcd = new { a = ten, b = maGV, c = loaiGV1, d = khoa1 };
-            return Json(abcd, JsonRequestBehavior.AllowGet);
+            var abcde = new { a = ten, b = maGV, c = loaiGV1, d = khoa1, e = email };
+            return Json(abcde, JsonRequestBehavior.AllowGet);
         }
 
 
@@ -211,6 +223,8 @@ namespace CAPTeam14.Controllers
         }
 
         [HttpPost]
+        
+        [DataType(DataType.EmailAddress)]
         public ActionResult Edit(int? id, danhsachGV ds)
         {
             try
@@ -223,6 +237,7 @@ namespace CAPTeam14.Controllers
                     ds1.loaiGV = ds.loaiGV;
                     ds1.maGV = ds.maGV;
                     ds1.tenGV = ds.tenGV;
+                    ds1.Email = ds.Email;
                     
                     model.SaveChanges();
                     TempData["EditDS"] = 1;

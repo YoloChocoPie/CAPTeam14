@@ -41,7 +41,7 @@
                     @using (Html.BeginForm())
                     {
                         @Html.AntiForgeryToken()
-
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
                         <div class="user-details">
 
                             <div class="input-box">

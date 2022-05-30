@@ -34,7 +34,16 @@ namespace CAPTeam14.Controllers
             model.Configuration.ProxyCreationEnabled = false;
             var giangvien = model.nguoiDungs.FirstOrDefault(x => x.ID == id);
             string ten = giangvien.tenGV;
-            string maGV = giangvien.maGV;
+
+            string maGV = "";
+            if (giangvien.maGV == null )
+            {
+                maGV = "Không có";
+            }
+            else
+            {
+                maGV = giangvien.maGV;
+            }
             string loaiGV = "";
             if (giangvien.loaiGV == true)
             {
@@ -61,7 +70,7 @@ namespace CAPTeam14.Controllers
             {
                 role = "Giảng viên";
             }
-            else if (giangvien.role == null)
+            else if (giangvien.role == null || giangvien.role == 0)
             {
                 role = "Chưa kích hoạt";
             }

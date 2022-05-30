@@ -4521,7 +4521,6 @@
     <Content Include="Content\bootstrap\variables.less" />
     <Content Include="Content\bootstrap\mixins.less" />
     <Content Include="Doc\Template.xlsx" />
-    <Content Include="Doc\DSGiangVien.xlsx" />
     <EntityDeploy Include="Models\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
@@ -4529,6 +4528,7 @@
     <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
+    <Content Include="Doc\DSGiangVien.xlsx" />
     <None Include="Properties\PublishProfiles\FTPProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FTPProfile1.pubxml" />
     <None Include="ScriptsTemplate\jquery-3.4.1.intellisense.js" />
@@ -4742,6 +4742,7 @@
     <Content Include="Views\giangVien\Index2.cshtml" />
     <Content Include="Views\Home\DetailStatisticAll.cshtml" />
     <Content Include="Views\Home\Catalog1.cshtml" />
+    <Content Include="Views\Account\Create1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
