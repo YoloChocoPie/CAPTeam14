@@ -1076,26 +1076,39 @@ namespace CAPTeam14.Controllers
         }
         public ActionResult Test(int? id)
         {
-            foreach (var item in model.TKBs.OrderBy(x=> x.ID_hocKy == id))
+            try
             {
-                if (item.ID_GV != null)
+                foreach (var item in model.TKBs.OrderBy(x => x.ID_hocKy == id))
                 {
-                    var giangvien = model.danhsachGVs.FirstOrDefault(x => x.ID == item.ID_GV);
-                    var hk = model.hocKies.FirstOrDefault(x => x.ID == item.ID_hocKy);
-                    var mon = model.monHocs.FirstOrDefault(x => x.ID == item.ID_monHoc);
-                    var tuan = model.tuanHocs.FirstOrDefault(x => x.ID == item.ID_Tuan);
+                    if (item.ID_GV != null)
+                    {
+                        var giangvien = model.danhsachGVs.FirstOrDefault(x => x.ID == item.ID_GV);
+                        if (giangvien.Email != null && giangvien.Email != "")
+                        {
+                            var hk = model.hocKies.FirstOrDefault(x => x.ID == item.ID_hocKy);
+                            var mon = model.monHocs.FirstOrDefault(x => x.ID == item.ID_monHoc);
+                            var tuan = model.tuanHocs.FirstOrDefault(x => x.ID == item.ID_Tuan);
 
-                    SendEmailToUser(giangvien.Email, hk.tenHK, mon.tenMon, tuan.tuanHoc1);
+                            SendEmailToUser(giangvien.Email, hk.tenHK, mon.tenMon, tuan.tuanHoc1);
+                        }
+                        else
+                        {
 
-                   
-                    
+                        }
+
+                    }
+                    else
+                    {
+
+                    }
                 }
-                else
-                {
-
-                }
+                TempData["cancel"] = 1;
+                return Redirect(Request.UrlReferrer.ToString());
             }
-            TempData["cancel"] = 1;
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "Không thể thực hiện hành động này, vui lòng kiểm tra lại thông tin");
+            }
             return Redirect(Request.UrlReferrer.ToString());
         }
 
